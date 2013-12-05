@@ -21,13 +21,13 @@
             <h:form>  
                 
                 <p:dataTable var="variable" value="#{asistenciaCursoMB.listCurso}">  
-        <p:column headerText="Nombre del colegio compare">  
+        <p:column headerText="Nombre del azul juanito">  
             <h:outputText value="#{variable.curso.asignatura.nombre}" />  
         </p:column>  
                     
         <p:column headerText="Alumnos">  
             <h:outputText value="#{variable.curso.alumnosPorCursoList.size() }" />  
-        </p:column> 
+        </p:column>
                     
         <p:column headerText="Código">  
             <h:outputText value="#{variable.curso.asignatura.idAsignatura}" />  
