@@ -16,11 +16,30 @@
     
     <h:body>
         <div id="content" class="center_content">
-            <h1 style="text-align: center;" > Profesor <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" /> </h1>
+            <h1 style="text-align: center;" > Profesor <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" />  <h:outputText value="#{asistenciaCursoMB.profesor.apellidop}" /> </h1>
             
-            <h:form>
+            <h:form>  
                 
-            </h:form>
+                <p:dataTable var="variable" value="#{asistenciaCursoMB.listCurso}">  
+        <p:column headerText="Asignatura">  
+            <h:outputText value="#{variable.curso.asignatura.nombre}" />  
+        </p:column>  
+  
+        <p:column headerText="Tipo">  
+            <h:outputText value="#{variable.curso.tipoAsignatura.nombre}" />  
+        </p:column>
+                    
+         <p:column headerText="Nombre Profesor">  
+             <h:outputText value="#{variable. profesor.nombre}" />  
+        </p:column>
+        
+        <p:column headerText="Apellido Profesor">  
+            <h:outputText value="#{variable.profesor.apellidop}" />  
+        </p:column>
+   
+    </p:dataTable>  
+</h:form> 
+            
             
         </div>
         

@@ -28,5 +28,5 @@ public interface ProfesoresPorCursoFacadeLocal {
     List<ProfesoresPorCurso> findRange(int[] range);
 
     int count();
-    
+      
 }

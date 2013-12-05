@@ -5,6 +5,7 @@
 package sessionBeans;
 
 import entity.ProfesoresPorCurso;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,5 +27,5 @@ public class ProfesoresPorCursoFacade extends AbstractFacade<ProfesoresPorCurso>
     public ProfesoresPorCursoFacade() {
         super(ProfesoresPorCurso.class);
     }
-    
+
 }
