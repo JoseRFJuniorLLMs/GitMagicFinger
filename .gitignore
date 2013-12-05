@@ -1,0 +1,15 @@
+/MagicFinger-war/build/
+/MagicFinger-war/dist/
+/MagicFinger-war/nbproject/private/
+/MagicFinger/build/
+/MagicFinger/dist/
+/MagicFinger/nbproject/private/
+/MagicFinger/MagicFinger-ejb/build/
+/MagicFinger/MagicFinger-ejb/dist/
+/MagicFinger/MagicFinger-ejb/nbproject/private/
+*.class
+# Package Files #
+#*.jar #Descartado para poder subir las bibliotecas
+*.war
+*.ear
+*.properties
