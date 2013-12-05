@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Facelets Template</title>
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+    </h:head>
+
+    <h:body>
+        <script>
+            function getStringTemplate(StringTemplate) {
+                document.getElementById('variableHuella').value = StringTemplate;
+                document.getElementById('buttons').click();
+            }
+        </script>
+        <div id="top">
+            <img src="img/MagicFinger.png" style="text-align: center;" />
+        </div>
+        <div id="content" class="center_content">
+
+            <h1 style="text-align: center;" > Registro de Asistencia de Alumnos </h1>
+
+            <h:form id="form" style="width: 45%; display: block; float: left; padding-top: 21px;"> 
+                <h:outputLabel value="Consultar Asignatura: " for="dd" />  
+                <p:autoComplete id="dd" dropdown="true" value="#{asistenciaMB.nombreAsignatura}"   
+                                completeMethod="#{asistenciaMB.completeAsignature}" />
+                <h:commandLink action="#{asistenciaMB.actulizarAlumnos}">
+                    <h:button value="Buscar"/>
+                </h:commandLink>
+            </h:form>
+            <div style="width: 45%; float: left ;display: block;">
+                <h4><span>Activar y desactivar registro de asistencia</span><applet archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27" />
+                </h4>
+            </div>
+            <h:form style="display: block">
+                <p:dataTable id="dataTable" var="variable" value="#{asistenciaMB.alumnosPorAsignatura}">  
+                    <p:column sortBy="nombre" headerText="Nombre">  
+                        <h:outputText value="#{variable.alumnoId.nombre}" />  
+                    </p:column>  
+
+                    <p:column sortBy="apellidop" headerText="Apellido Paterno">  
+                        <h:outputText value="#{variable.alumnoId.apellidop}" />  
+                    </p:column>  
+
+                    <p:column sortBy="apellidom" headerText="Apellido Materno">  
+                        <h:outputText value="#{variable.alumnoId.apellidom}" />  
+                    </p:column>  
+
+                    <p:column sortBy="Asistencia" headerText="Asistencia">  
+
+                    </p:column>  
+                </p:dataTable> 
+            </h:form>  
+        </div>
+        <div id="bottom">
+            Desarrollado por SOFTECK
+        </div>
+        <h:form prependId="false">
+            <p:growl id="growl" showDetail="true" sticky="true" />  
+            <h:inputHidden id="variableHuella" value="#{asistenciaMB.huellaEnString}"/>
+            <p:commandButton id="buttons" value="Save" actionListener="#{asistenciaMB.capturoHuella}" update="growl" style="display:none">
+                <f:ajax execute="@form" />
+            </p:commandButton>
+        </h:form>
+
+    </h:body>
+
+
+</html>
