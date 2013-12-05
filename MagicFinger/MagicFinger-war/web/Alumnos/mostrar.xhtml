@@ -16,14 +16,26 @@
     
     <h:body>
         <div id="content" class="center_content">
-            <h1 style="text-align: center;" > Profesor <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" /> </h1>
+            <h1 style="text-align: center;" > Registro de Asistencia de Alumnos </h1>
             
             <h:form>
                 
+                <p:dataTable id="dataTable" var="variable" value="#{alumnosListMB.listaAlumnos}"> 
+                        <p:column sortBy="nombre" headerText="Nombre">
+                            <h:outputText value="#{variable.nombre}" />
+                        </p:column>
+
+                        <p:column sortBy="apellidop" headerText="Apellido Paterno">  
+                            <h:outputText value="#{variable.apellidop}" />  
+                        </p:column>  
+
+                        <p:column sortBy="apellidom" headerText="Apellido Materno">  
+                            <h:outputText value="#{variable.apellidom}" />  
+                        </p:column>  
+                    </p:dataTable> 
             </h:form>
             
         </div>
         
-    </h:body>
+          </h:body>
 </html>
-
