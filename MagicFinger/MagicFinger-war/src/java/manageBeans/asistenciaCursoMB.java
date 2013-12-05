@@ -1,6 +1,8 @@
 
 package manageBeans;
 
+import entity.AlumnosPorCurso;
+import entity.Curso;
 import entity.Profesor;
 import entity.ProfesoresPorCurso;
 import java.util.List;
@@ -8,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import sessionBeans.AlumnosPorCursoFacadeLocal;
 import sessionBeans.ProfesorFacadeLocal;
 import sessionBeans.asignaturas.ProfesorPorCursoLocal;
 
@@ -20,21 +23,25 @@ import sessionBeans.asignaturas.ProfesorPorCursoLocal;
 @RequestScoped
 public class asistenciaCursoMB {   
     @EJB
+    private AlumnosPorCursoFacadeLocal alumnosPorCursoFacade;
+    @EJB
     private ProfesorPorCursoLocal profesorPorCurso;
     @EJB
     private ProfesorFacadeLocal profesorFacade;
+    
     
     private List<ProfesoresPorCurso> ListCurso;
     private Profesor profesor;
     
     @PostConstruct
     public void init(){
-        profesor = profesorFacade.find(6);
+        profesor = profesorFacade.find(1);
         ListCurso = profesorPorCurso.findByProfesor(profesor.getIdProfesor());
         System.out.println("tamaño_______" + ListCurso.size());
         System.out.println("asdfasd-____" + ListCurso.toString());
     }
 
+            
     public List<ProfesoresPorCurso> getListCurso() {
         return ListCurso;
     }

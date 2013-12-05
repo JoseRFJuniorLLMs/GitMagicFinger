@@ -21,21 +21,24 @@
             <h:form>  
                 
                 <p:dataTable var="variable" value="#{asistenciaCursoMB.listCurso}">  
-        <p:column headerText="Asignatura">  
+        <p:column headerText="Nombre del curso">  
             <h:outputText value="#{variable.curso.asignatura.nombre}" />  
         </p:column>  
-  
+                    
+        <p:column headerText="Alumnos">  
+            <h:outputText value="#{variable.curso.alumnosPorCursoList.size() }" />  
+        </p:column> 
+                    
+        <p:column headerText="Código">  
+            <h:outputText value="#{variable.curso.asignatura.idAsignatura}" />  
+        </p:column>  
+                    
         <p:column headerText="Tipo">  
             <h:outputText value="#{variable.curso.tipoAsignatura.nombre}" />  
         </p:column>
-                    
-         <p:column headerText="Nombre Profesor">  
-             <h:outputText value="#{variable. profesor.nombre}" />  
-        </p:column>
         
-        <p:column headerText="Apellido Profesor">  
-            <h:outputText value="#{variable.profesor.apellidop}" />  
-        </p:column>
+       
+                    
    
     </p:dataTable>  
 </h:form> 
