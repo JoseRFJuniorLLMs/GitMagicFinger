@@ -1,4 +1,3 @@
-
 package manageBeans;
 
 import entity.Profesor;
@@ -29,7 +28,7 @@ public class asistenciaCursoMB {
     
     @PostConstruct
     public void init(){
-        profesor = profesorFacade.find(6);
+        profesor = profesorFacade.find(1);
         ListCurso = profesorPorCurso.findByProfesor(profesor.getIdProfesor());
         System.out.println("tamaño_______" + ListCurso.size());
         System.out.println("asdfasd-____" + ListCurso.toString());
