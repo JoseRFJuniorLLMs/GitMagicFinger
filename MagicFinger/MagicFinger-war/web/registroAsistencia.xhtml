@@ -31,7 +31,7 @@
                 <h3> Profesor: </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
                 </div>
                            
-                <div id="acciones" class="sinSalto" style="float: left; display: inline">
+                <div id="acciones" class="sinSalto" style="float: left; display: inline;margin-bottom: 20px;">
                     <div id="fecha" style="display: inline">
                         <h:form id="form" style="display: inline">
                             <h:outputLabel style="color: #036fab" value="Fecha: "/>
@@ -61,6 +61,24 @@
                         <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>                  
                     </div>
                 </div>
+            <p:dataTable style="margin-top: 50px" var="variable" value="">  
+                <p:column headerText="Usuarios del sistema">  
+                    <h:outputText value="#" />  
+                </p:column>  
+
+                <p:column headerText="RUT">  
+                    <h:outputText value="#" />
+                </p:column>
+
+                <p:column headerText="Correo">  
+                    <h:outputText value="#" />
+                     
+                </p:column>  
+
+                <p:column headerText="Tipo de usuario">  
+                    <h:outputText value="#" />  
+                </p:column>
+            </p:dataTable>
         </div>
     </h:body>
 </html>
