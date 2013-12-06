@@ -21,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,6 +30,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "carrera")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Carrera.findAll", query = "SELECT c FROM Carrera c"),
     @NamedQuery(name = "Carrera.findByIdCarr", query = "SELECT c FROM Carrera c WHERE c.idCarr = :idCarr")})
@@ -42,11 +45,11 @@ public class Carrera implements Serializable {
     @Size(max = 65535)
     @Column(name = "NOMBRE_CARRERA")
     private String nombreCarrera;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "carreraId")
+    private List<Malla> mallaList;
     @JoinColumn(name = "DEPARTAMENTO_ID", referencedColumnName = "ID_DEPARTAMENTO")
     @ManyToOne(optional = false)
     private Departamento departamentoId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "carreraId")
-    private List<Malla> mallaList;
 
     public Carrera() {
     }
@@ -71,20 +74,21 @@ public class Carrera implements Serializable {
         this.nombreCarrera = nombreCarrera;
     }
 
-    public Departamento getDepartamentoId() {
-        return departamentoId;
-    }
-
-    public void setDepartamentoId(Departamento departamentoId) {
-        this.departamentoId = departamentoId;
-    }
-
+    @XmlTransient
     public List<Malla> getMallaList() {
         return mallaList;
     }
 
     public void setMallaList(List<Malla> mallaList) {
         this.mallaList = mallaList;
+    }
+
+    public Departamento getDepartamentoId() {
+        return departamentoId;
+    }
+
+    public void setDepartamentoId(Departamento departamentoId) {
+        this.departamentoId = departamentoId;
     }
 
     @Override

@@ -16,9 +16,7 @@ import javax.inject.Named;
 @RequestScoped
 public class cursos {
     String pass;
-    /**
-     * Creates a new instance of cursos
-     */
+    
     public cursos() {
         
     }

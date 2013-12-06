@@ -26,33 +26,50 @@
         </div>
         <div id="content" class="center_content">
             <h1 style="text-align: center;" > Profesor <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" />  <h:outputText value="#{asistenciaCursoMB.profesor.apellidop}" /> </h1>
+            <h1 style="text-align: center;" > Curso <h:outputText value="#{asistenciaCursoMB.curso.asignatura.nombre}" /> - <h:outputText value="#{asistenciaCursoMB.curso.tipoAsignatura.nombre}" /> </h1>
+            <h:form>  
+                <p:dataTable var="variable" value="#{asistenciaCursoMB.listCurso}">  
+                <p:column headerText="Nombre asignatura">  
+                    <h:outputText value="#{variable.asignatura.nombre}" />  
+                </p:column>  
+
+              
+
+                <p:column headerText="Código">  
+                    <h:outputText value="#{variable.asignatura.idAsignatura}" />  
+                </p:column>  
+
+                <p:column headerText="Tipo">  
+                    <h:outputText value="#{variable.tipoAsignatura.nombre}" />  
+                </p:column>
+                </p:dataTable>
+            </h:form>
             
             <h:form>  
-                
-                <p:dataTable var="variable" value="#{asistenciaCursoMB.listCurso}">  
-        <p:column headerText="Nombre asignatura">  
-            <h:outputText value="#{variable.curso.asignatura.nombre}" />  
-        </p:column>  
-                    
-        <p:column headerText="Alumnos">  
-            <h:outputText value="#{variable.curso.alumnosPorCursoList.size() }" />  
-        </p:column>
-                    
-        <p:column headerText="Código">  
-            <h:outputText value="#{variable.curso.asignatura.idAsignatura}" />  
-        </p:column>  
-                    
-        <p:column headerText="Tipo">  
-            <h:outputText value="#{variable.curso.tipoAsignatura.nombre}" />  
-        </p:column>
-        
-       
-                    
-   
-    </p:dataTable>  
-</h:form> 
-            
-            
+                <p:dataTable var="variable2" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
+                <p:column headerText="Nombre" >  
+                    <h:outputText value="#{variable2.alumno.nombre}" />  
+                </p:column>  
+                <p:column headerText="Apellido">  
+                    <h:outputText value="#{variable2.alumno.apellidop}" />  
+                </p:column>
+                </p:dataTable>  
+            </h:form> 
+            <h1>Bloques de clases</h1>
+            <h:form>  
+                <p:dataTable var="variable" value="#{asistenciaCursoMB.curso.bloqueClaseList}">  
+                <p:column headerText="Nombre" >  
+                    <h:outputText value="#{variable.bloque}" />  
+                </p:column>  
+                <p:column headerText="Apellido">  
+                    <h:outputText value="#{variable.diaSemana}" />  
+                </p:column>
+                </p:dataTable>  
+            </h:form>
+            <h5> considerando bloque <h:outputText value="#{asistenciaCursoMB.bloqueClase.bloque}" /> del dia 
+                <h:outputText value="#{asistenciaCursoMB.bloqueClase.diaSemana}" /> </h5>
+            <h5> el alumno <h:outputText value="#{asistenciaCursoMB.alumnoPorClase.alumno.nombre}" /> </h5>
+            <h:outputFormat value="#{asistenciaCursoMB.valor}" />
         </div>
         
     </h:body>

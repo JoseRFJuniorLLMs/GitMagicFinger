@@ -13,12 +13,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,10 +30,13 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "alumno")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Alumno.findAll", query = "SELECT a FROM Alumno a"),
     @NamedQuery(name = "Alumno.findByIdAlumno", query = "SELECT a FROM Alumno a WHERE a.idAlumno = :idAlumno"),
-    @NamedQuery(name = "Alumno.findByTelefono", query = "SELECT a FROM Alumno a WHERE a.telefono = :telefono")})
+    @NamedQuery(name = "Alumno.findByHuella1", query = "SELECT a FROM Alumno a WHERE a.huella1 = :huella1"),
+    @NamedQuery(name = "Alumno.findByTelefono", query = "SELECT a FROM Alumno a WHERE a.telefono = :telefono"),
+    @NamedQuery(name = "Alumno.findByHuella2", query = "SELECT a FROM Alumno a WHERE a.huella2 = :huella2")})
 public class Alumno implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,20 +60,23 @@ public class Alumno implements Serializable {
     @Size(max = 65535)
     @Column(name = "APELLIDOM")
     private String apellidom;
-    @Lob
     @Column(name = "HUELLA1")
-    private byte[] huella1;
+    private Short huella1;
     @Column(name = "TELEFONO")
     private Integer telefono;
     @Lob
     @Size(max = 65535)
     @Column(name = "CORREO")
     private String correo;
-    @Lob
     @Column(name = "HUELLA2")
-    private byte[] huella2;
+    private Short huella2;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private User userId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumno")
-    private List<AlumnosPorCurso> alumnosPorCursoList;
+    private List<AlumnosDelCurso> alumnosDelCursoList;
+    @OneToMany(mappedBy = "alumnoId")
+    private List<User> userList;
 
     public Alumno() {
     }
@@ -115,11 +125,11 @@ public class Alumno implements Serializable {
         this.apellidom = apellidom;
     }
 
-    public byte[] getHuella1() {
+    public Short getHuella1() {
         return huella1;
     }
 
-    public void setHuella1(byte[] huella1) {
+    public void setHuella1(Short huella1) {
         this.huella1 = huella1;
     }
 
@@ -139,20 +149,38 @@ public class Alumno implements Serializable {
         this.correo = correo;
     }
 
-    public byte[] getHuella2() {
+    public Short getHuella2() {
         return huella2;
     }
 
-    public void setHuella2(byte[] huella2) {
+    public void setHuella2(Short huella2) {
         this.huella2 = huella2;
     }
 
-    public List<AlumnosPorCurso> getAlumnosPorCursoList() {
-        return alumnosPorCursoList;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setAlumnosPorCursoList(List<AlumnosPorCurso> alumnosPorCursoList) {
-        this.alumnosPorCursoList = alumnosPorCursoList;
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    @XmlTransient
+    public List<AlumnosDelCurso> getAlumnosDelCursoList() {
+        return alumnosDelCursoList;
+    }
+
+    public void setAlumnosDelCursoList(List<AlumnosDelCurso> alumnosDelCursoList) {
+        this.alumnosDelCursoList = alumnosDelCursoList;
+    }
+
+    @XmlTransient
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
     @Override
