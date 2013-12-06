@@ -4,6 +4,7 @@ import entity.AlumnosDelCurso;
 import entity.BloqueClase;
 import entity.Curso;
 import entity.Profesor;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -11,6 +12,7 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import sessionBeans.AsistenciaFacadeLocal;
 import sessionBeans.ProfesorFacadeLocal;
+import sessionBeans.asignaturas.asistenciaSBLocal;
 
 
 /**
@@ -20,6 +22,8 @@ import sessionBeans.ProfesorFacadeLocal;
 @Named(value = "asistenciaCursoMB")
 @RequestScoped
 public class asistenciaCursoMB {   
+    @EJB
+    private asistenciaSBLocal asistenciaSB;
     @EJB
     private AsistenciaFacadeLocal asistenciaFacade;
     @EJB
@@ -44,9 +48,8 @@ public class asistenciaCursoMB {
                 curso = ListCurso.get(0);
                 alumnoPorClase = curso.getAlumnosDelCursoList().get(0);
                 bloqueClase = curso.getBloqueClaseList().get(0);
-                
-               
-                valor = -1;
+                Date fecha = new Date();
+                valor = asistenciaSB.alumnoAsiste( alumnoPorClase , bloqueClase, fecha);
             }
         }
     }
