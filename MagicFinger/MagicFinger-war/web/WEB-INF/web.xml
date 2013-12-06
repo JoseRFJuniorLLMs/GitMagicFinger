@@ -21,4 +21,73 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <security-constraint>
+        <display-name>Admin_pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>paginas administrativas</web-resource-name>
+            <description>paginas</description>
+            <url-pattern>faces/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Paginas administrador</description>
+            <role-name>Administrador</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Profesor_pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>paginas profesores</web-resource-name>
+            <description>paginas profesor</description>
+            <url-pattern>faces/profesor/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>Paginas Profesor</description>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Alumno_pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>paginas alumnos</web-resource-name>
+            <description>paginas alumno</description>
+            <url-pattern>faces/alumno/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>paginas alumno</description>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Secretaria_pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>paginas secretaria</web-resource-name>
+            <description>paginas secretaria</description>
+            <url-pattern>faces/secretaria/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description>paginas secretaria</description>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>jdbcRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/index.xhtml</form-login-page>
+            <form-error-page>/index2.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>Administrador</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Profesor</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Alumno</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>Secretaria</role-name>
+    </security-role>
 </web-app>
