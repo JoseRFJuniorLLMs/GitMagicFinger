@@ -34,7 +34,7 @@
                 <div id="acciones" class="sinSalto" style="float: left; display: inline">
                     <div id="fecha" style="display: inline">
                         <h:form id="form" style="display: inline">
-                            <h:outputLabel style="color: #036fab" value="Fecha: " for="f"/>
+                            <h:outputLabel style="color: #036fab" value="Fecha: "/>
                             <p:calendar value="#{calendarBean.date3}" id="f" showOn="button" /> 
                             <p:commandButton value="Ir" update="display" oncomplete="PF('dialog').show()" />  
                             <p:dialog header="Selected Dates" widgetVar="dialog" showEffect="fade" hideEffect="fade">  
@@ -47,7 +47,7 @@
                             </p:dialog>
                         </h:form> 
                     </div>
-                    <div id="bloque" style="display: inline">
+                    <div id="bloque" style="display: inline;padding-left: 135px">
                         <h:outputLabel value ="Bloque: " style="color: #036fab"/>
                         <p:selectOneMenu value="#{buttonBean.number}" style="vertical-align: middle">  
                         <f:selectItem itemLabel="Select One" itemValue="" />  
@@ -55,19 +55,12 @@
                         <f:selectItem itemLabel="Option 2" itemValue="2" />  
                         <f:selectItem itemLabel="Option 3" itemValue="3" />  
                         </p:selectOneMenu>
-                        </div>
-                    
-                    
+                    </div>
+                    <div id="activacion" style="display: inline;padding-left: 135px">
+                        <h:outputLabel value ="Activación de registro de asistencia: " style="color: #036fab;paddin-left:140px;display:inline"/>
+                        <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>                  
+                    </div>
                 </div>
-            
-                
-                
-                    
-                              
-                         
-            
-                
-            
         </div>
     </h:body>
 </html>
