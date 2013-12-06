@@ -4,21 +4,15 @@
  */
 package sessionBeans.asignaturas;
 
-import entity.Alumno;
 import entity.AlumnosDelCurso;
-import entity.Asignatura;
+import entity.Asistencia;
 import entity.BloqueClase;
-import entity.TipoAsignatura;
 import java.util.Date;
 import javax.ejb.Local;
 
-/**
- *
- * @author chevo
- */
+
 @Local
 public interface asistenciaSBLocal {
-
-    int alumnoAsiste(AlumnosDelCurso alumnosDelCurso, BloqueClase bloque, Date fecha);
+    Asistencia alumnoAsiste(AlumnosDelCurso alumnosDelCurso, BloqueClase bloque, Date fecha);
 
 }

@@ -19,7 +19,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/login.xhtml</welcome-file>
+        <welcome-file>faces/agregarAlumno.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
         <display-name>Admin_pages</display-name>

@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Facelets Template</title>
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+    </h:head>
+    
+    <h:body>
+        <script>
+            var i=0;
+            function getStringTemplate(StringTemplate) {
+                if(i==0){    
+                    document.getElementById('variableHuella1').value = StringTemplate;
+                    document.getElementById('estado1').innerHTML = "INGRESADA";
+                    i++;
+                }
+                else{
+                    document.getElementById('variableHuella2').value = StringTemplate;
+                    document.getElementById('estado2').innerHTML = "INGRESADA";
+                    i++;
+                }
+            }
+        </script>
+        
+        <div id="content" class="center_content">
+            <h1 style="text-align: center;" > Registro de Asistencia de Alumnos </h1>
+            <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/> 
+            
+            <h:form id="form" prependId="false">  
+                <p:panel id="panel" header="New Person">  
+                    <p:messages id="msgs"/>  
+                    <h:panelGrid columns="3">  
+                        <h:outputLabel value="Rut: *" />  
+                        <p:inputText id="Rut" value="#{alumnoMB.rut}" required="true" label="Rut">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="Rut" display="icon"/>  
+
+                        <h:outputLabel value="Nombre: *" />  
+                        <p:inputText id="Nombre" value="#{alumnoMB.nombre}" required="true" label="Nombre">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="Nombre" display="icon"/>  
+
+                        <h:outputLabel value="Apellido paterno: *" />  
+                        <p:inputText id="ApellidoP" value="#{alumnoMB.apellidoP}" required="true" label="Apellido paterno">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="ApellidoP" display="icon"/>  
+
+                        <h:outputLabel value="Apellido materno: *" />  
+                        <p:inputText id="ApellidoM" value="#{alumnoMB.apellidoM}" required="true" label="Apellido materno">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="ApellidoM" display="icon"/>  
+
+                        <h:outputLabel value="Telefono: *" />  
+                        <p:inputText  id="Telefono" value="#{alumnoMB.telefono}" required="true" label="Telefono:">  
+                        </p:inputText>
+                        <p:message for="Telefono" display="icon"/>  
+
+                        <h:outputLabel value="Correo: *" />  
+                        <p:inputText id="Correo" value="#{alumnoMB.correo}" required="true" label="Correo">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="Correo" display="icon"/>  
+                        
+                        <h:outputLabel id="variableHuella1TXT" value="Huella 1:" />
+                        <p:outputLabel id="estado1" value="NO INGRESADA"></p:outputLabel> <br />
+                        <h:outputLabel id="variableHuella2TXT" value="Huella 2:" /> 
+                        <p:outputLabel id="estado2" value="NO INGRESADA"></p:outputLabel>
+                        
+                        <h:inputHidden id="variableHuella1" value="#{alumnoMB.huellaEnString1}"/>
+                        <h:inputHidden id="variableHuella2" value="#{alumnoMB.huellaEnString2}"/>
+                        
+                    </h:panelGrid>
+                    <p:commandButton id="btn" value="Save" update="panel" actionListener="#{alumnoMB.savePerson}"/>  
+                </p:panel>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

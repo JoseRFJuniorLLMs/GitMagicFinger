@@ -1,6 +1,7 @@
 package manageBeans;
 
 import entity.AlumnosDelCurso;
+import entity.Asistencia;
 import entity.BloqueClase;
 import entity.Curso;
 import entity.Profesor;
@@ -49,11 +50,28 @@ public class asistenciaCursoMB {
                 alumnoPorClase = curso.getAlumnosDelCursoList().get(0);
                 bloqueClase = curso.getBloqueClaseList().get(0);
                 Date fecha = new Date();
-                valor = asistenciaSB.alumnoAsiste( alumnoPorClase , bloqueClase, fecha);
+                Asistencia asis= asistenciaSB.alumnoAsiste( alumnoPorClase , bloqueClase, fecha);
+                if(asis!=null){
+                   valor = asis.getEstado(); 
+                }
+                else
+                   valor = -1;
             }
         }
     }
 
+    public String estadoAsistencia(AlumnosDelCurso alumnoClase){
+        Date fecha = new Date();
+        Asistencia asis= asistenciaSB.alumnoAsiste( alumnoClase , bloqueClase, fecha);
+        if(asis!=null){
+           if(asis.getEstado()==1)
+             return "Presente";
+           else{
+             return "Justificado";
+           } 
+        }
+        return "Ausente";
+    }
     public Profesor getProfesor() {
         return profesor;
     }
