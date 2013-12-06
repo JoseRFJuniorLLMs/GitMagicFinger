@@ -14,13 +14,21 @@ html{
 h1 {
     font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     border-bottom: 1px solid #AFAFAF; 
-    font-size:  16px;
+    font-size:  24px;
     font-weight: bold;
-    margin: 0px;
+    margin-top:10px;
     padding: 0px;
-    color: #D20005;
+    color: black;
 }
 
+h3 {
+    color: #036fab;
+}
+
+.sinSalto{
+    display: block;
+    text-align: left;
+}
 a:link, a:visited {
   color: #045491;
   font-weight : bold;
