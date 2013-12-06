@@ -15,10 +15,21 @@ import javax.inject.Named;
 @Named(value = "cursos")
 @RequestScoped
 public class cursos {
-
+    String pass;
     /**
      * Creates a new instance of cursos
      */
     public cursos() {
+        
     }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+
 }

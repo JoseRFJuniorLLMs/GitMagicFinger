@@ -21,6 +21,12 @@ h1 {
     color: #D20005;
 }
 
+h3{
+    font-size:  100px;
+    font-weight: bold;
+    
+}
+
 a:link, a:visited {
   color: #045491;
   font-weight : bold;
