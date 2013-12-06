@@ -33,7 +33,6 @@
                     <h:outputText value="#{variable.asignatura.nombre}" />  
                 </p:column>  
 
-              
 
                 <p:column headerText="Código">  
                     <h:outputText value="#{variable.asignatura.idAsignatura}" />  
@@ -52,6 +51,10 @@
                 </p:column>  
                 <p:column headerText="Apellido">  
                     <h:outputText value="#{variable2.alumno.apellidop}" />  
+                </p:column>
+                 
+                <p:column headerText="Asistencia">  
+                    <h:outputText value="#{asistenciaCursoMB.estadoAsistencia(variable2)}" />  
                 </p:column>
                 </p:dataTable>  
             </h:form> 
