@@ -25,13 +25,13 @@
             <img src="img/MagicFinger.png" style="margin-left: 20px;" height="40" width="150"/>
         </div>
         <div id="content" class="center_content">
-            <div id="header" >
-                <h1 style="text-align: center;" > Registro de asistencia de alumnos </h1>
-                <h3 > Asignatura: </h3> <!--AQUI PONER EL PROFESOR QUE VIENE DESDE LA VISTA PRINCIPAL DEL PROFE --><br /><br />
+            <h1 style="text-align: center;" > Registro de asistencia de alumnos </h1>
+            <div id="header" style="margin-top: 40px" >
+                <h3> Asignatura: </h3> <!--AQUI PONER EL PROFESOR QUE VIENE DESDE LA VISTA PRINCIPAL DEL PROFE --><br /><br />
                 <h3> Profesor: </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
                 </div>
                            
-                <div id="acciones" class="sinSalto" style="float: left; display: inline">
+                <div id="acciones" class="sinSalto" style="float: left; display: inline; margin-bottom: 25px">
                     <div id="fecha" style="display: inline">
                         <h:form id="form" style="display: inline">
                             <h:outputLabel style="color: #036fab" value="Fecha: "/>
@@ -61,6 +61,20 @@
                         <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>                  
                     </div>
                 </div>
+                <p:dataTable var="variable" value="">  
+                    <p:column headerText="Nombre del alumno">  
+                        <h:outputText value="#" />  
+                    </p:column>  
+
+                    <p:column headerText="RUT">  
+                        <h:outputText value="#" />
+                    </p:column>
+
+                    <p:column headerText="Asistencia">  
+                        <h:outputText value="#" />
+
+                    </p:column>  
+                </p:dataTable>
         </div>
     </h:body>
 </html>
