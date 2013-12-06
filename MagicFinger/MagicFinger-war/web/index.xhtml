@@ -21,13 +21,23 @@
                 document.getElementById('buttons').click();
             }
         </script>
+        
+        <h:form prependId="false">
+            <p:growl id="growl" showDetail="true" sticky="true" />  
+            <h:inputHidden id="variableHuella" value="#{buscaAlumnoMB.huellaEnString}"/>
+            <p:commandButton id="buttons" value="Save" actionListener="#{buscaAlumnoMB.buscaPersona}" update="growl" style="display:none">
+                <f:ajax execute="@form" />
+            </p:commandButton>
+        </h:form>
+        
         <div id="top">
             <img src="img/MagicFinger.png" style="text-align: center;" height="70" width="245" />
+            <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/> 
         </div>
         <div id="content" class="center_content">
             <h1 style="text-align: center;" > Profesor <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" />  <h:outputText value="#{asistenciaCursoMB.profesor.apellidop}" /> </h1>
             <h1 style="text-align: center;" > Curso <h:outputText value="#{asistenciaCursoMB.curso.asignatura.nombre}" /> - <h:outputText value="#{asistenciaCursoMB.curso.tipoAsignatura.nombre}" /> </h1>
-            <h:form>  
+            <h:form>
                 <p:dataTable var="variable" value="#{asistenciaCursoMB.listCurso}">  
                 <p:column headerText="Nombre asignatura">  
                     <h:outputText value="#{variable.asignatura.nombre}" />  

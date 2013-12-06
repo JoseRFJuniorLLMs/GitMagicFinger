@@ -20,9 +20,11 @@
                 document.getElementById('variableHuella').value = StringTemplate;
                 document.getElementById('buttons').click();
             }
+            
         </script>
         <div id="top">
             <img src="img/MagicFinger.png" style="text-align: center;" />
+            <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/> 
         </div>
         <div id="content" class="center_content">
 
@@ -54,11 +56,10 @@
         </div>
         <h:form prependId="false">
             <p:growl id="growl" showDetail="true" sticky="true" />  
-            <h:inputHidden id="variableHuella" value="#{asistenciaMB.huellaEnString}"/>
-            <p:commandButton id="buttons" value="Save" actionListener="#{asistenciaMB.capturoHuella}" update="growl" style="display:none">
+            <h:inputHidden id="variableHuella" value="#{buscaAlumnoMB.huellaEnString}"/>
+            <p:commandButton id="buttons" value="Save" actionListener="#{buscaAlumnoMB.buscaPersona}" update="growl" style="display:none">
                 <f:ajax execute="@form" />
             </p:commandButton>
         </h:form>
-
     </h:body>
 </html>
