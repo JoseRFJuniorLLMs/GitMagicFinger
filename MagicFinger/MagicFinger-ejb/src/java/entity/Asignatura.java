@@ -21,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,6 +30,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "asignatura")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Asignatura.findAll", query = "SELECT a FROM Asignatura a"),
     @NamedQuery(name = "Asignatura.findByIdAsignatura", query = "SELECT a FROM Asignatura a WHERE a.idAsignatura = :idAsignatura")})
@@ -42,10 +45,6 @@ public class Asignatura implements Serializable {
     @Size(max = 65535)
     @Column(name = "NOMBRE")
     private String nombre;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "TIPO")
-    private String tipo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignatura")
     private List<Curso> cursoList;
     @JoinColumn(name = "MALLA_ID", referencedColumnName = "ID_CARRERA")
@@ -75,14 +74,7 @@ public class Asignatura implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
+    @XmlTransient
     public List<Curso> getCursoList() {
         return cursoList;
     }

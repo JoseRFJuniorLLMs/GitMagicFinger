@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @author chevo
  */
 @Embeddable
-public class AlumnosPorCursoPK implements Serializable {
+public class AlumnosDelCursoPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "CURSO_ID2")
@@ -29,10 +29,10 @@ public class AlumnosPorCursoPK implements Serializable {
     @Column(name = "ALUMNO_ID")
     private int alumnoId;
 
-    public AlumnosPorCursoPK() {
+    public AlumnosDelCursoPK() {
     }
 
-    public AlumnosPorCursoPK(int cursoId2, int cursoId, int alumnoId) {
+    public AlumnosDelCursoPK(int cursoId2, int cursoId, int alumnoId) {
         this.cursoId2 = cursoId2;
         this.cursoId = cursoId;
         this.alumnoId = alumnoId;
@@ -74,10 +74,10 @@ public class AlumnosPorCursoPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AlumnosPorCursoPK)) {
+        if (!(object instanceof AlumnosDelCursoPK)) {
             return false;
         }
-        AlumnosPorCursoPK other = (AlumnosPorCursoPK) object;
+        AlumnosDelCursoPK other = (AlumnosDelCursoPK) object;
         if (this.cursoId2 != other.cursoId2) {
             return false;
         }
@@ -92,7 +92,7 @@ public class AlumnosPorCursoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.AlumnosPorCursoPK[ cursoId2=" + cursoId2 + ", cursoId=" + cursoId + ", alumnoId=" + alumnoId + " ]";
+        return "entity.AlumnosDelCursoPK[ cursoId2=" + cursoId2 + ", cursoId=" + cursoId + ", alumnoId=" + alumnoId + " ]";
     }
     
 }

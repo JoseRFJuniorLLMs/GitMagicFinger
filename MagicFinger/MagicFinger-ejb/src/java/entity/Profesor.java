@@ -7,20 +7,23 @@ package entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,10 +31,13 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "profesor")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Profesor.findAll", query = "SELECT p FROM Profesor p"),
     @NamedQuery(name = "Profesor.findByIdProfesor", query = "SELECT p FROM Profesor p WHERE p.idProfesor = :idProfesor"),
-    @NamedQuery(name = "Profesor.findByTelefono", query = "SELECT p FROM Profesor p WHERE p.telefono = :telefono")})
+    @NamedQuery(name = "Profesor.findByHuella1", query = "SELECT p FROM Profesor p WHERE p.huella1 = :huella1"),
+    @NamedQuery(name = "Profesor.findByTelefono", query = "SELECT p FROM Profesor p WHERE p.telefono = :telefono"),
+    @NamedQuery(name = "Profesor.findByHuella2", query = "SELECT p FROM Profesor p WHERE p.huella2 = :huella2")})
 public class Profesor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,23 +61,30 @@ public class Profesor implements Serializable {
     @Size(max = 65535)
     @Column(name = "APELLIDOM")
     private String apellidom;
-    @Lob
     @Column(name = "HUELLA1")
-    private byte[] huella1;
+    private Short huella1;
     @Column(name = "TELEFONO")
     private Integer telefono;
     @Lob
     @Size(max = 65535)
     @Column(name = "CORREO")
     private String correo;
-    @Lob
     @Column(name = "HUELLA2")
-    private byte[] huella2;
+    private Short huella2;
+    @JoinTable(name = "profesores_por_curso", joinColumns = {
+        @JoinColumn(name = "PROFESOR_ID", referencedColumnName = "ID_PROFESOR")}, inverseJoinColumns = {
+        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "ASIGNATURA_ID"),
+        @JoinColumn(name = "CURSO_ID", referencedColumnName = "TIPO_ASIGNATURA_ID")})
+    @ManyToMany
+    private List<Curso> cursoList;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private User userId;
     @JoinColumn(name = "DEPARTAMENTO_ID", referencedColumnName = "ID_DEPARTAMENTO")
     @ManyToOne(optional = false)
     private Departamento departamentoId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor")
-    private List<ProfesoresPorCurso> profesoresPorCursoList;
+    @OneToMany(mappedBy = "profesorId")
+    private List<User> userList;
 
     public Profesor() {
     }
@@ -120,11 +133,11 @@ public class Profesor implements Serializable {
         this.apellidom = apellidom;
     }
 
-    public byte[] getHuella1() {
+    public Short getHuella1() {
         return huella1;
     }
 
-    public void setHuella1(byte[] huella1) {
+    public void setHuella1(Short huella1) {
         this.huella1 = huella1;
     }
 
@@ -144,12 +157,29 @@ public class Profesor implements Serializable {
         this.correo = correo;
     }
 
-    public byte[] getHuella2() {
+    public Short getHuella2() {
         return huella2;
     }
 
-    public void setHuella2(byte[] huella2) {
+    public void setHuella2(Short huella2) {
         this.huella2 = huella2;
+    }
+
+    @XmlTransient
+    public List<Curso> getCursoList() {
+        return cursoList;
+    }
+
+    public void setCursoList(List<Curso> cursoList) {
+        this.cursoList = cursoList;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     public Departamento getDepartamentoId() {
@@ -160,12 +190,13 @@ public class Profesor implements Serializable {
         this.departamentoId = departamentoId;
     }
 
-    public List<ProfesoresPorCurso> getProfesoresPorCursoList() {
-        return profesoresPorCursoList;
+    @XmlTransient
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setProfesoresPorCursoList(List<ProfesoresPorCurso> profesoresPorCursoList) {
-        this.profesoresPorCursoList = profesoresPorCursoList;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
     @Override

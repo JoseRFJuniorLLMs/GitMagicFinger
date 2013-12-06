@@ -21,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,6 +30,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "departamento")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d"),
     @NamedQuery(name = "Departamento.findByIdDepartamento", query = "SELECT d FROM Departamento d WHERE d.idDepartamento = :idDepartamento")})
@@ -43,9 +46,9 @@ public class Departamento implements Serializable {
     @Column(name = "NOMBRE")
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamentoId")
-    private List<Carrera> carreraList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamentoId")
     private List<Profesor> profesorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamentoId")
+    private List<Carrera> carreraList;
     @JoinColumn(name = "FACULTAD_ID", referencedColumnName = "ID_FACULTAD")
     @ManyToOne(optional = false)
     private Facultad facultadId;
@@ -73,20 +76,22 @@ public class Departamento implements Serializable {
         this.nombre = nombre;
     }
 
-    public List<Carrera> getCarreraList() {
-        return carreraList;
-    }
-
-    public void setCarreraList(List<Carrera> carreraList) {
-        this.carreraList = carreraList;
-    }
-
+    @XmlTransient
     public List<Profesor> getProfesorList() {
         return profesorList;
     }
 
     public void setProfesorList(List<Profesor> profesorList) {
         this.profesorList = profesorList;
+    }
+
+    @XmlTransient
+    public List<Carrera> getCarreraList() {
+        return carreraList;
+    }
+
+    public void setCarreraList(List<Carrera> carreraList) {
+        this.carreraList = carreraList;
     }
 
     public Facultad getFacultadId() {

@@ -1,6 +1,6 @@
 /*
  * To change this template, choose Tools | Templates
- * and open the template in the editor.d
+ * and open the template in the editor.
  */
 package entity;
 
@@ -22,6 +22,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,6 +31,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "bloque_clase")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "BloqueClase.findAll", query = "SELECT b FROM BloqueClase b"),
     @NamedQuery(name = "BloqueClase.findByIdBloque", query = "SELECT b FROM BloqueClase b WHERE b.idBloque = :idBloque"),
@@ -46,15 +49,7 @@ public class BloqueClase implements Serializable {
     @Size(max = 65535)
     @Column(name = "DIA_SEMANA")
     private String diaSemana;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "HORA_INICIO")
-    private String horaInicio;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "HORA_TERMINO")
-    private String horaTermino;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bloqueClase")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bloqueClaseId")
     private List<Asistencia> asistenciaList;
     @JoinColumns({
         @JoinColumn(name = "CURSO_ID2", referencedColumnName = "ASIGNATURA_ID"),
@@ -93,22 +88,7 @@ public class BloqueClase implements Serializable {
         this.diaSemana = diaSemana;
     }
 
-    public String getHoraInicio() {
-        return horaInicio;
-    }
-
-    public void setHoraInicio(String horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public String getHoraTermino() {
-        return horaTermino;
-    }
-
-    public void setHoraTermino(String horaTermino) {
-        this.horaTermino = horaTermino;
-    }
-
+    @XmlTransient
     public List<Asistencia> getAsistenciaList() {
         return asistenciaList;
     }
