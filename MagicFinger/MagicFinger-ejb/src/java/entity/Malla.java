@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,6 +23,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,6 +33,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "malla")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Malla.findAll", query = "SELECT m FROM Malla m"),
     @NamedQuery(name = "Malla.findByIdCarrera", query = "SELECT m FROM Malla m WHERE m.idCarrera = :idCarrera"),
@@ -43,11 +48,15 @@ public class Malla implements Serializable {
     @Column(name = "FECHA")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mallaId")
-    private List<Asignatura> asignaturaList;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "DESCRIPCION")
+    private String descripcion;
     @JoinColumn(name = "CARRERA_ID", referencedColumnName = "ID_CARR")
     @ManyToOne(optional = false)
     private Carrera carreraId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mallaId")
+    private List<Asignatura> asignaturaList;
 
     public Malla() {
     }
@@ -72,12 +81,12 @@ public class Malla implements Serializable {
         this.fecha = fecha;
     }
 
-    public List<Asignatura> getAsignaturaList() {
-        return asignaturaList;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setAsignaturaList(List<Asignatura> asignaturaList) {
-        this.asignaturaList = asignaturaList;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Carrera getCarreraId() {
@@ -86,6 +95,15 @@ public class Malla implements Serializable {
 
     public void setCarreraId(Carrera carreraId) {
         this.carreraId = carreraId;
+    }
+
+    @XmlTransient
+    public List<Asignatura> getAsignaturaList() {
+        return asignaturaList;
+    }
+
+    public void setAsignaturaList(List<Asignatura> asignaturaList) {
+        this.asignaturaList = asignaturaList;
     }
 
     @Override

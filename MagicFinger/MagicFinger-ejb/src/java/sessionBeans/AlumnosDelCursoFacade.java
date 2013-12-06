@@ -4,7 +4,7 @@
  */
 package sessionBeans;
 
-import entity.AlumnosPorCurso;
+import entity.AlumnosDelCurso;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  * @author chevo
  */
 @Stateless
-public class AlumnosPorCursoFacade extends AbstractFacade<AlumnosPorCurso> implements AlumnosPorCursoFacadeLocal {
+public class AlumnosDelCursoFacade extends AbstractFacade<AlumnosDelCurso> implements AlumnosDelCursoFacadeLocal {
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
@@ -23,8 +23,8 @@ public class AlumnosPorCursoFacade extends AbstractFacade<AlumnosPorCurso> imple
         return em;
     }
 
-    public AlumnosPorCursoFacade() {
-        super(AlumnosPorCurso.class);
+    public AlumnosDelCursoFacade() {
+        super(AlumnosDelCurso.class);
     }
     
 }
