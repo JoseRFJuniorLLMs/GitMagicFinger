@@ -45,17 +45,17 @@
                 <div>
                     <h4> Nombre de usuario: </h4>
                     <p:inputText style="text-align: center; margin-left: auto; margin-right: auto; display: block;
-                                 margin-bottom: 20px; padding: 4px; width: 250px" > 
+                                 margin-bottom: 20px; padding: 4px; width: 250px" value="#{loginMB.user}"> 
                     </p:inputText>
                     <h4> Contraseña: </h4>
                 
                     <p:password style="text-align: center; margin-left: auto; margin-right: auto; display: block;
-                                     margin-bottom: 10px; padding: 4px; width: 250px" value="#{cursos.pass}">
+                                     margin-bottom: 10px; padding: 4px; width: 250px" value="#{loginMB.password}">
                     </p:password>
             
                 
                     <p:commandButton value="Ingresar" style="text-align: center; margin-left: auto; margin-right: auto; display: block;
-                                 margin-bottom: 10px;margin-top: 28px; padding: 0px; width: 100px"/>
+                                 margin-bottom: 10px;margin-top: 28px; padding: 0px; width: 100px" type="submit" action="#{loginMB.login()}"/>
                 </div>
              
             </h:form>

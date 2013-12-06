@@ -58,10 +58,21 @@ public class User implements Serializable {
     @JoinColumn(name = "PROFESOR_ID", referencedColumnName = "ID_PROFESOR")
     @ManyToOne
     private Profesor profesorId;
-
+    @ManyToOne
+    private UserRol userRol;
+    
     public User() {
     }
 
+    public UserRol getUserRol() {
+        return userRol;
+    }
+
+    public void setUserRol(UserRol userRol) {
+        this.userRol = userRol;
+    }
+
+    
     public User(Integer id) {
         this.id = id;
     }

@@ -26,10 +26,10 @@
         <web-resource-collection>
             <web-resource-name>paginas administrativas</web-resource-name>
             <description>paginas</description>
-            <url-pattern>faces/admin/*</url-pattern>
+            <url-pattern>/faces/admin/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <description>Paginas administrador</description>
+            <description/>
             <role-name>Administrador</role-name>
         </auth-constraint>
     </security-constraint>
@@ -38,10 +38,11 @@
         <web-resource-collection>
             <web-resource-name>paginas profesores</web-resource-name>
             <description>paginas profesor</description>
-            <url-pattern>faces/profesor/*</url-pattern>
+            <url-pattern>/faces/profesor/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <description>Paginas Profesor</description>
+            <description/>
+            <role-name>Profesor</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -49,10 +50,11 @@
         <web-resource-collection>
             <web-resource-name>paginas alumnos</web-resource-name>
             <description>paginas alumno</description>
-            <url-pattern>faces/alumno/*</url-pattern>
+            <url-pattern>/faces/alumno/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <description>paginas alumno</description>
+            <description/>
+            <role-name>Alumno</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -60,17 +62,18 @@
         <web-resource-collection>
             <web-resource-name>paginas secretaria</web-resource-name>
             <description>paginas secretaria</description>
-            <url-pattern>faces/secretaria/*</url-pattern>
+            <url-pattern>/faces/secretaria/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <description>paginas secretaria</description>
+            <description/>
+            <role-name>Secretaria</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>jdbcRealm</realm-name>
+        <realm-name>magicRealm</realm-name>
         <form-login-config>
-            <form-login-page>/index.xhtml</form-login-page>
+            <form-login-page>/login2.xhtml</form-login-page>
             <form-error-page>/index2.xhtml</form-error-page>
         </form-login-config>
     </login-config>

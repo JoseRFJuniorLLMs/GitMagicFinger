@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Login Form</title>
+        <h:outputStylesheet library="css" name="login.css" />
+    </h:head>
+    <h:body>
+        <h:form class="prueba">
+            
+            <table columns="2" role="presentation"> 
+                <tr>
+                    <td><h:outputLabel for="username" 
+                                       value="Please type your user name:"/></td>
+                    <td><h:inputText id="username" autocomplete="off" 
+                                     size="20" value="#{loginMB.user}" /></td>
+                </tr>
+                <tr>
+                    <td><h:outputLabel for="password" 
+                                       value="Please type your password:"/></td>
+                    <td><h:inputSecret id="password" autocomplete="off" 
+                                       size="20" value="#{loginMB.password}"/></td>
+                </tr>
+            </table>
+            <p>
+                <h:commandButton type="submit" value="Submit" action="#{loginMB.login()}"/>
+                <h:commandButton type="reset" value="Reset"/>
+            </p>
+        </h:form>
+    </h:body>
+</html>
+
