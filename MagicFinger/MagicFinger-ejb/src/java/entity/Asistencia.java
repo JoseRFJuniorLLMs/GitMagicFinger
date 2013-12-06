@@ -6,9 +6,12 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -17,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -24,50 +28,48 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "asistencia")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Asistencia.findAll", query = "SELECT a FROM Asistencia a"),
-    @NamedQuery(name = "Asistencia.findByAlumnosDelCursoId2", query = "SELECT a FROM Asistencia a WHERE a.asistenciaPK.alumnosDelCursoId2 = :alumnosDelCursoId2"),
-    @NamedQuery(name = "Asistencia.findByAlumnosDelCursoId3", query = "SELECT a FROM Asistencia a WHERE a.asistenciaPK.alumnosDelCursoId3 = :alumnosDelCursoId3"),
-    @NamedQuery(name = "Asistencia.findByAlumnosDelCursoId", query = "SELECT a FROM Asistencia a WHERE a.asistenciaPK.alumnosDelCursoId = :alumnosDelCursoId"),
-    @NamedQuery(name = "Asistencia.findByBloqueClaseId", query = "SELECT a FROM Asistencia a WHERE a.asistenciaPK.bloqueClaseId = :bloqueClaseId"),
+    @NamedQuery(name = "Asistencia.findByIdAsistencia", query = "SELECT a FROM Asistencia a WHERE a.idAsistencia = :idAsistencia"),
     @NamedQuery(name = "Asistencia.findByFecha", query = "SELECT a FROM Asistencia a WHERE a.fecha = :fecha"),
+    @NamedQuery(name = "Asistencia.findAsistencia", query = "SELECT a FROM Asistencia a WHERE a.alumnosDelCurso = :AlumnosDelCurso AND a.bloqueClaseId.idBloque = :bloqueClaseId AND a.fecha = :fecha"),
     @NamedQuery(name = "Asistencia.findByEstado", query = "SELECT a FROM Asistencia a WHERE a.estado = :estado")})
 public class Asistencia implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AsistenciaPK asistenciaPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID_ASISTENCIA")
+    private Integer idAsistencia;
     @Column(name = "FECHA")
     @Temporal(TemporalType.DATE)
     private Date fecha;
     @Column(name = "ESTADO")
     private Integer estado;
     @JoinColumns({
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID2", referencedColumnName = "CURSO_ID2", insertable = false, updatable = false),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID3", referencedColumnName = "CURSO_ID", insertable = false, updatable = false),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID", referencedColumnName = "ALUMNO_ID", insertable = false, updatable = false)})
+        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID2", referencedColumnName = "CURSO_ID2"),
+        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID3", referencedColumnName = "CURSO_ID"),
+        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID", referencedColumnName = "ALUMNO_ID")})
     @ManyToOne(optional = false)
-    private AlumnosPorCurso alumnosPorCurso;
-    @JoinColumn(name = "BLOQUE_CLASE_ID", referencedColumnName = "ID_BLOQUE", insertable = false, updatable = false)
+    private AlumnosDelCurso alumnosDelCurso;
+    @JoinColumn(name = "BLOQUE_CLASE_ID", referencedColumnName = "ID_BLOQUE")
     @ManyToOne(optional = false)
-    private BloqueClase bloqueClase;
+    private BloqueClase bloqueClaseId;
 
     public Asistencia() {
     }
 
-    public Asistencia(AsistenciaPK asistenciaPK) {
-        this.asistenciaPK = asistenciaPK;
+    public Asistencia(Integer idAsistencia) {
+        this.idAsistencia = idAsistencia;
     }
 
-    public Asistencia(int alumnosDelCursoId2, int alumnosDelCursoId3, int alumnosDelCursoId, int bloqueClaseId) {
-        this.asistenciaPK = new AsistenciaPK(alumnosDelCursoId2, alumnosDelCursoId3, alumnosDelCursoId, bloqueClaseId);
+    public Integer getIdAsistencia() {
+        return idAsistencia;
     }
 
-    public AsistenciaPK getAsistenciaPK() {
-        return asistenciaPK;
-    }
-
-    public void setAsistenciaPK(AsistenciaPK asistenciaPK) {
-        this.asistenciaPK = asistenciaPK;
+    public void setIdAsistencia(Integer idAsistencia) {
+        this.idAsistencia = idAsistencia;
     }
 
     public Date getFecha() {
@@ -86,26 +88,26 @@ public class Asistencia implements Serializable {
         this.estado = estado;
     }
 
-    public AlumnosPorCurso getAlumnosPorCurso() {
-        return alumnosPorCurso;
+    public AlumnosDelCurso getAlumnosDelCurso() {
+        return alumnosDelCurso;
     }
 
-    public void setAlumnosPorCurso(AlumnosPorCurso alumnosPorCurso) {
-        this.alumnosPorCurso = alumnosPorCurso;
+    public void setAlumnosDelCurso(AlumnosDelCurso alumnosDelCurso) {
+        this.alumnosDelCurso = alumnosDelCurso;
     }
 
-    public BloqueClase getBloqueClase() {
-        return bloqueClase;
+    public BloqueClase getBloqueClaseId() {
+        return bloqueClaseId;
     }
 
-    public void setBloqueClase(BloqueClase bloqueClase) {
-        this.bloqueClase = bloqueClase;
+    public void setBloqueClaseId(BloqueClase bloqueClaseId) {
+        this.bloqueClaseId = bloqueClaseId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (asistenciaPK != null ? asistenciaPK.hashCode() : 0);
+        hash += (idAsistencia != null ? idAsistencia.hashCode() : 0);
         return hash;
     }
 
@@ -116,7 +118,7 @@ public class Asistencia implements Serializable {
             return false;
         }
         Asistencia other = (Asistencia) object;
-        if ((this.asistenciaPK == null && other.asistenciaPK != null) || (this.asistenciaPK != null && !this.asistenciaPK.equals(other.asistenciaPK))) {
+        if ((this.idAsistencia == null && other.idAsistencia != null) || (this.idAsistencia != null && !this.idAsistencia.equals(other.idAsistencia))) {
             return false;
         }
         return true;
@@ -124,7 +126,7 @@ public class Asistencia implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Asistencia[ asistenciaPK=" + asistenciaPK + " ]";
+        return "entity.Asistencia[ idAsistencia=" + idAsistencia + " ]";
     }
     
 }

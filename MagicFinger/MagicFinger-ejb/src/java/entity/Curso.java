@@ -11,11 +11,14 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,6 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "curso")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
     @NamedQuery(name = "Curso.findByAsignaturaId", query = "SELECT c FROM Curso c WHERE c.cursoPK.asignaturaId = :asignaturaId"),
@@ -37,16 +41,16 @@ public class Curso implements Serializable {
     private Integer porcenteajeAprobacion;
     @Column(name = "TERMINO")
     private Integer termino;
+    @ManyToMany(mappedBy = "cursoList")
+    private List<Profesor> profesorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
-    private List<ProfesoresPorCurso> profesoresPorCursoList;
-    @JoinColumn(name = "TIPO_ASIGNATURA_ID", referencedColumnName = "ID_TIPO_ASIGNATURA", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private TipoAsignatura tipoAsignatura;
+    private List<AlumnosDelCurso> alumnosDelCursoList;
     @JoinColumn(name = "ASIGNATURA_ID", referencedColumnName = "ID_ASIGNATURA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Asignatura asignatura;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
-    private List<AlumnosPorCurso> alumnosPorCursoList;
+    @JoinColumn(name = "TIPO_ASIGNATURA_ID", referencedColumnName = "ID_TIPO_ASIGNATURA", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private TipoAsignatura tipoAsignatura;
     @OneToMany(mappedBy = "curso")
     private List<BloqueClase> bloqueClaseList;
 
@@ -85,20 +89,22 @@ public class Curso implements Serializable {
         this.termino = termino;
     }
 
-    public List<ProfesoresPorCurso> getProfesoresPorCursoList() {
-        return profesoresPorCursoList;
+    @XmlTransient
+    public List<Profesor> getProfesorList() {
+        return profesorList;
     }
 
-    public void setProfesoresPorCursoList(List<ProfesoresPorCurso> profesoresPorCursoList) {
-        this.profesoresPorCursoList = profesoresPorCursoList;
+    public void setProfesorList(List<Profesor> profesorList) {
+        this.profesorList = profesorList;
     }
 
-    public TipoAsignatura getTipoAsignatura() {
-        return tipoAsignatura;
+    @XmlTransient
+    public List<AlumnosDelCurso> getAlumnosDelCursoList() {
+        return alumnosDelCursoList;
     }
 
-    public void setTipoAsignatura(TipoAsignatura tipoAsignatura) {
-        this.tipoAsignatura = tipoAsignatura;
+    public void setAlumnosDelCursoList(List<AlumnosDelCurso> alumnosDelCursoList) {
+        this.alumnosDelCursoList = alumnosDelCursoList;
     }
 
     public Asignatura getAsignatura() {
@@ -109,14 +115,15 @@ public class Curso implements Serializable {
         this.asignatura = asignatura;
     }
 
-    public List<AlumnosPorCurso> getAlumnosPorCursoList() {
-        return alumnosPorCursoList;
+    public TipoAsignatura getTipoAsignatura() {
+        return tipoAsignatura;
     }
 
-    public void setAlumnosPorCursoList(List<AlumnosPorCurso> alumnosPorCursoList) {
-        this.alumnosPorCursoList = alumnosPorCursoList;
+    public void setTipoAsignatura(TipoAsignatura tipoAsignatura) {
+        this.tipoAsignatura = tipoAsignatura;
     }
 
+    @XmlTransient
     public List<BloqueClase> getBloqueClaseList() {
         return bloqueClaseList;
     }
