@@ -19,10 +19,10 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/agregarAlumno.xhtml</welcome-file>
+        <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
-        <display-name>Admin_pages</display-name>
+        <display-name>admin</display-name>
         <web-resource-collection>
             <web-resource-name>paginas administrativas</web-resource-name>
             <description>paginas</description>
@@ -73,7 +73,7 @@
         <auth-method>FORM</auth-method>
         <realm-name>magicRealm</realm-name>
         <form-login-config>
-            <form-login-page>/login2.xhtml</form-login-page>
+            <form-login-page>/login.xhtml</form-login-page>
             <form-error-page>/index2.xhtml</form-error-page>
         </form-login-config>
     </login-config>
