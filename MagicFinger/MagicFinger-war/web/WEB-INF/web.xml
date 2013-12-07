@@ -73,7 +73,7 @@
         <auth-method>FORM</auth-method>
         <realm-name>magicRealm</realm-name>
         <form-login-config>
-            <form-login-page>/login2.xhtml</form-login-page>
+            <form-login-page>/login.xhtml</form-login-page>
             <form-error-page>/index2.xhtml</form-error-page>
         </form-login-config>
     </login-config>
