@@ -22,14 +22,7 @@
             }
         </script>
         
-        <h:form prependId="false">
-            <p:growl id="growl" showDetail="true" sticky="true" />  
-            <h:inputHidden id="variableHuella" value="#{buscaAlumnoMB.huellaEnString}"/>
-            <p:commandButton id="buttons" value="Save" actionListener="#{buscaAlumnoMB.buscaPersona}" update="growl" style="display:none">
-                <f:ajax execute="@form" />
-            </p:commandButton>
-        </h:form>
-        
+             
         <div id="top">
             <img src="img/MagicFinger.png" style="text-align: center;" height="70" width="245" />
             <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/> 
@@ -43,7 +36,6 @@
                     <h:outputText value="#{variable.asignatura.nombre}" />  
                 </p:column>  
 
-
                 <p:column headerText="Código">  
                     <h:outputText value="#{variable.asignatura.idAsignatura}" />  
                 </p:column>  
@@ -54,11 +46,15 @@
                 </p:dataTable>
             </h:form>
             
-            <h:form>  
-                <p:dataTable var="variable2" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
+            
+            <h:form prependId="false">
+                <p:growl id="grow1" showDetail="true" sticky="true" />  
+                <h:inputHidden id="variableHuella" value="#{asistenciaCursoMB.huellaEnString}"/>
+            
+                <p:dataTable var="variable2" id="grow2" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
                 <p:column headerText="Nombre" >  
-                    <h:outputText value="#{variable2.alumno.nombre}" />  
-                </p:column>  
+                    <h:outputText value="#{variable2.alumno.toString}" />  
+                </p:column>
                 <p:column headerText="Apellido">  
                     <h:outputText value="#{variable2.alumno.apellidop}" />  
                 </p:column>
@@ -66,8 +62,13 @@
                 <p:column headerText="Asistencia">  
                     <h:outputText value="#{asistenciaCursoMB.estadoAsistencia(variable2)}" />  
                 </p:column>
-                </p:dataTable>  
+                </p:dataTable> 
+                
+                <p:commandButton id="buttons" value="Save" actionListener="#{asistenciaCursoMB.agregaPersona}" update="grow1,grow2" style="display:none">
+                <f:ajax execute="@form" />
+                </p:commandButton>
             </h:form> 
+            
             <h1>Bloques de clases</h1>
             <h:form>  
                 <p:dataTable var="variable" value="#{asistenciaCursoMB.curso.bloqueClaseList}">  

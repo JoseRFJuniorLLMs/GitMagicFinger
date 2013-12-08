@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package manageBeans;
 
 import com.sun.jersey.core.util.Base64;
@@ -32,8 +28,6 @@ public class alumnoMB {
     private String huellaEnString2;
     private int telefono;
     private String correo;
-    private String huellaEstado1 = "NO INGRESADO";
-    private String huellaEstado2 = "NO INGRESADO";
         
     public void savePerson(ActionEvent actionEvent) {
         
@@ -45,6 +39,8 @@ public class alumnoMB {
                  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Huella 2 vacía"));
              }
             else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("necesito agregar a" + nombre + " " + apellidoP ));
+       
                 Alumno nuevo = new Alumno();
                 nuevo.setNombre(nombre);
                 nuevo.setRut(rut);
@@ -52,15 +48,13 @@ public class alumnoMB {
                 nuevo.setApellidom(apellidoM);
                 nuevo.setTelefono(telefono);
                 nuevo.setCorreo(correo);
-                
                 byte[] templeByte1 = Base64.decode(huellaEnString1);
                 nuevo.setHuella1(templeByte1);
-
+                
                 byte[] templeByte2 = Base64.decode(huellaEnString2);
                 nuevo.setHuella2(templeByte2);
-                
                 alumnoFacade.create(nuevo);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("agregar " + nombre + " " + apellidoP ));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se haagregar " + nombre + " " + apellidoP ));
             }
         }    
     }   
@@ -129,21 +123,4 @@ public class alumnoMB {
     public void setHuellaEnString2(String huellaEnString2) {
         this.huellaEnString2 = huellaEnString2;
     }
-
-    public String getHuellaEstado1() {
-        return huellaEstado1;
-    }
-
-    public void setHuellaEstado1(String huellaEstado1) {
-        this.huellaEstado1 = huellaEstado1;
-    }
-
-    public String getHuellaEstado2() {
-        return huellaEstado2;
-    }
-
-    public void setHuellaEstado2(String huellaEstado2) {
-        this.huellaEstado2 = huellaEstado2;
-    }
-    
 }
