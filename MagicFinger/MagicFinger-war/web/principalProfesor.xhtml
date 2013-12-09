@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Facelets Template</title>
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+    </h:head>
+
+    <h:body>
+        <script>
+            function getStringTemplate(StringTemplate) {
+                document.getElementById('variableHuella').value = StringTemplate;
+                document.getElementById('buttons').click();
+            }
+        </script>
+        <div id="top">
+            <img src="img/MagicFinger.png" style="margin-left: 20px;" height="40" width="150"/>
+        </div>
+        <div id="content" class="center_content">
+            <h1 style="text-align: center;" > Bienvenido {NOMBRE PROFESOR} </h1>
+            
+            <div id="cursos" style="margin-top: 40px;width: 500px;background-color: black" >
+                <h3>Mis cursos</h3>
+                
+                <p:dataTable id="Tabla" var="variable" value="" style="width:100%">  
+                    <p:column headerText="Nombre del curso" style="max-width:2px">  
+                        <h:outputLabel  value="jcasdaksjdlkasjdklasjalksjdaklsjdjaklsasjdksadhajkshdkjashkjasdkhe" />  
+                    </p:column>  
+
+                    <p:column headerText="Alumnos">  
+                        <h:outputText value="30" />
+                    </p:column>
+
+                    <p:column headerText="Tipo">  
+                        <h:outputText value="Cátedra" />
+                    </p:column>  
+                    <p:column headerText="Código">  
+                        <h:outputText value="13003" />
+                    </p:column>  
+                </p:dataTable>
+            </div>
+            
+        </div>
+        
+    </h:body>
+</html>
+
