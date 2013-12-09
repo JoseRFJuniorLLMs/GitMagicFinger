@@ -7,6 +7,7 @@ package sessionBeans.asignaturas;
 import entity.Alumno;
 import entity.AlumnosDelCurso;
 import entity.Asignatura;
+import entity.Asistencia;
 import entity.BloqueClase;
 import entity.TipoAsignatura;
 import java.util.Date;
@@ -26,10 +27,13 @@ public class asistenciaSB implements asistenciaSBLocal {
     private EntityManager em;
 
     @Override
-    public int alumnoAsiste(AlumnosDelCurso AlumnosDelCurso, BloqueClase bloque, Date fecha ) {
+    public Asistencia alumnoAsiste(AlumnosDelCurso AlumnosDelCurso, BloqueClase bloque, Date fecha ) {
         Query q= em.createNamedQuery("Asistencia.findAsistencia").setParameter("AlumnosDelCurso", AlumnosDelCurso ).setParameter("bloqueClaseId", bloque.getIdBloque()).setParameter("fecha", fecha);
-        List<asistenciaSB> listado = q.getResultList();
-        return listado.size();
+        List<Asistencia> listado = q.getResultList();
+        if(!listado.isEmpty()){
+            return listado.get(0);
+        }
+        return null;
     }
 
     // Add business logic below. (Right-click in editor and choose
@@ -38,6 +42,5 @@ public class asistenciaSB implements asistenciaSBLocal {
     public void persist(Object object) {
         em.persist(object);
     }
-    
 
 }

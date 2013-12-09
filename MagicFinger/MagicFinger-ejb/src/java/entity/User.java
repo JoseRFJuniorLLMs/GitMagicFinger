@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")})
+    @NamedQuery(name = "User.findByUsuario", query = "SELECT u FROM User u Where u.usuario = :usuario")
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,10 +59,21 @@ public class User implements Serializable {
     @JoinColumn(name = "PROFESOR_ID", referencedColumnName = "ID_PROFESOR")
     @ManyToOne
     private Profesor profesorId;
-
+    @ManyToOne
+    private UserRol userRol;
+    
     public User() {
     }
 
+    public UserRol getUserRol() {
+        return userRol;
+    }
+
+    public void setUserRol(UserRol userRol) {
+        this.userRol = userRol;
+    }
+
+    
     public User(Integer id) {
         this.id = id;
     }
