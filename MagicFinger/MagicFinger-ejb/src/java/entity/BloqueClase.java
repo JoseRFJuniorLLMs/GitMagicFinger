@@ -127,7 +127,7 @@ public class BloqueClase implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.BloqueClase[ idBloque=" + idBloque + " ]";
+        return bloque +" - "+getDiaSemana().toString().toUpperCase() ;
     }
     
 }

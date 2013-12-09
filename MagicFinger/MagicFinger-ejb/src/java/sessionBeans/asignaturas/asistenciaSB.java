@@ -42,6 +42,5 @@ public class asistenciaSB implements asistenciaSBLocal {
     public void persist(Object object) {
         em.persist(object);
     }
-    
 
 }

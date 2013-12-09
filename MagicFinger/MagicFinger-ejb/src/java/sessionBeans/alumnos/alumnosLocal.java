@@ -5,6 +5,7 @@
 package sessionBeans.alumnos;
 
 import entity.Alumno;
+import entity.Curso;
 import javax.ejb.Local;
 
 /**
@@ -15,4 +16,5 @@ import javax.ejb.Local;
 public interface alumnosLocal {
     
      Alumno CompareFingerPrint(String StringHuella);
+     Alumno CompareFingerPrint(String StringHuella, Curso curso);
 }

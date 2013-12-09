@@ -54,7 +54,45 @@ public class GrFingerJava {
                 }
             }
 
+            public static synchronized void initializeCapture(IStatusEventListener istatuseventlistener) throws GrFingerJavaException, NullPointerException {
+/* 121*/        if (istatuseventlistener == null) {
+/* 122*/            throw new NullPointerException("statusEventListener is null.");
+                }
+/* 124*/        GrFingerJavaNative.setStatusCallBack(istatuseventlistener);
+/* 125*/        int i = GrFingerJavaNative.GrCapInitialize();
+/* 126*/        if (i < 0) {
+/* 127*/            throw new GrFingerJavaException(i);
+                } else {
+/* 128*/            return;
+                }
+            }
 
+            public static synchronized void finalizeCapture() throws GrFingerJavaException {
+/* 138*/        int i = GrFingerJavaNative.GrCapFinalize();
+/* 139*/        if (i < 0) {
+/* 140*/            throw new GrFingerJavaException(i);
+                } else {
+/* 141*/            GrFingerJavaNative.removeStatusCallBack();
+/* 142*/            return;
+                }
+            }
+
+            public static synchronized void startCapture(String s, IFingerEventListener ifingereventlistener, IImageEventListener iimageeventlistener) throws GrFingerJavaException {
+/* 170*/        if (ifingereventlistener == null) {
+/* 171*/            throw new NullPointerException("fingerEventListener is null.");
+                }
+/* 172*/        if (iimageeventlistener == null) {
+/* 173*/            throw new NullPointerException("imageEventListener is null.");
+                }
+/* 175*/        GrFingerJavaNative.setFingerCallBack(s, ifingereventlistener);
+/* 176*/        GrFingerJavaNative.setImageCallBack(s, iimageeventlistener);
+/* 178*/        int i = GrFingerJavaNative.GrCapStartCapture(s);
+/* 180*/        if (i < 0) {
+/* 181*/            throw new GrFingerJavaException(i);
+                } else {
+/* 182*/            return;
+                }
+            }
 
             public static synchronized void stopCapture(String s) throws GrFingerJavaException {
 /* 196*/        int i = GrFingerJavaNative.GrCapStopCapture(s);
