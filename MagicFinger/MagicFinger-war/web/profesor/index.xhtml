@@ -1,15 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello profesor
+        Hello profesor <h:outputText value="#{loginSessionMB.profesor.nombre}" />
         <h:form>
             <h:commandLink action="#{loginMB.logout()}" value="Cerrar sesión" />
+           
    </h:form>
+        <h:panelGrid columns="1" cellpadding="5">  
+    <p:commandButton id="basic" value="Basic" onclick="PF('dlg1').show();" type="button" />  
+  
+    <p:commandButton id="modalDialogButton" value="Modal" onclick="PF('dlg2').show();" type="button"/>  
+  
+    <p:commandButton id="effectsDialogButton" value="Effects" onclick="PF('dlg3').show();" type="button" />  
+</h:panelGrid>  
+  
+<p:dialog id="basicDialog" header="Basic Dialog" widgetVar="dlg1">  
+    <h:outputText value="Resistance to PrimeFaces is futile!" />  
+</p:dialog>  
+  
+<p:dialog id="modalDialog" header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">  
+    <h:outputText value="This is a Modal Dialog." />  
+</p:dialog>  
+  
+<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
+    <h:outputText value="This dialog has nice effects." />  
+</p:dialog>  
+              
+        
     </h:body>
 </html>
 

@@ -4,10 +4,17 @@
  */
 package manageBeans;
 
+import entity.Alumno;
+import entity.Profesor;
 import java.io.IOException;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import sessionBeans.AlumnoFacadeLocal;
+import sessionBeans.ProfesorFacadeLocal;
+import sessionBeans.UserFacadeLocal;
 
 /**
  *
@@ -16,15 +23,25 @@ import javax.inject.Inject;
 @Named(value = "loginMB")
 @RequestScoped
 public class LoginMB {
+    
     @Inject LoginSessionMB session;
     /**
      * Creates a new instance of LoginMB
      */
     private String user;
     private String password;
-    
     public LoginMB() {
     }
+    
+   
+
+    public LoginSessionMB getSession() {
+        return session;
+    }
+
+    public void setSession(LoginSessionMB session) {
+        this.session = session;
+    } 
     
     public void login() throws IOException{
         session.login(user, password);
