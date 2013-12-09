@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Facelets Template</title>
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+    </h:head>
+
+    <h:body>
+        <script>
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText : 'Todo el día'
+            }
+
+            
+            function getStringTemplate(StringTemplate) {
+                document.getElementById('variableHuella').value = StringTemplate;
+                document.getElementById('buttons').click();
+            }
+        </script>
+        
+        <div id="top">
+            <div style="display: inline-block; vertical-align: middle">
+                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="margin-left: 20px; vertical-align: middle" height="40" width="150"/>
+            </div>
+            <div style="display:inline-block;vertical-align: middle; margin-left: 450px">  
+                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
+            </div>
+            <div style="display: inline-block; vertical-align: middle; margin-left: 490px">
+                <p style="vertical-align: middle; display: inline-block">Usuario</p>
+                <img src="/MagicFinger-war/faces/img/usuario.png" style="display: inline-block; vertical-align: middle" height="35" width="35"/>
+            </div>
+        </div>
+        
+        <div id="content" class="center_content">
+            <h1 style="text-align: center;margin-bottom: 40px" > Bienvenido {NOMBRE PROFESOR} </h1>
+            <div>
+                <div id="cursos" style="display:inline-block; vertical-align: middle">
+                    <h3>Mis cursos</h3>
+                    <p:dataTable id="cursos" style="width: 480px;margin-top:20px" var="cursos" value="#{tableBean.carsSmall}">  
+                        <p:column headerText="Nombre del curso" style="width:40%">  
+                            <h:outputText value="#{car.model}" />  
+                        </p:column>
+                        <p:column style="width:4%">  
+                                <p:commandButton id="selectButton" update=":form:display" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">  
+                                <f:setPropertyActionListener value="#{car}" target="#{tableBean.selectedCar}" />  
+                            </p:commandButton>  
+                        </p:column>  
+                    </p:dataTable> 
+                    <p:commandButton id="boton_ir"  value="Ir a lista de asistencia"/>
+                </div>
+                
+                <div id="normas" style="display:inline-block;vertical-align:middle;margin-left: 35px;" >
+                    <h3 >Normas del curso</h3>
+                    <p:dataTable style="width: 480px;margin-top:20px" var="cursos" value="#{tableBean.carsSmall}">  
+
+                        <p:column headerText="Nombre del curso" style="width:40%">  
+                            <h:outputText value="#{car.model}" />  
+                        </p:column>
+
+                        <p:column style="width:4%">  
+                                <p:commandButton id="selectButton" update=":form:display" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">  
+                                <f:setPropertyActionListener value="#{car}" target="#{tableBean.selectedCar}" />  
+                            </p:commandButton>  
+                        </p:column>  
+
+                    </p:dataTable>                
+                    <p:commandButton style="float: right;margin-top: 10px" value="Editar normas"/>
+                </div>    
+            </div>
+            
+            <div style="margin-top: 30px">
+                <div id="horario" style="display:inline-block; vertical-align: middle">
+                    <h3>Mi horario</h3>
+                    <p:dataTable id="cursos" style="width: 480px;margin-top:20px" var="cursos" value="#{tableBean.carsSmall}">  
+                        <p:column headerText="Nombre del curso" style="width:40%">  
+                            <h:outputText value="#{car.model}" />  
+                        </p:column>
+                        <p:column style="width:4%">  
+                                <p:commandButton id="selectButton" update=":form:display" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">  
+                                <f:setPropertyActionListener value="#{car}" target="#{tableBean.selectedCar}" />  
+                            </p:commandButton>  
+                        </p:column>  
+                    </p:dataTable>                
+                </div>
+                
+                <div id="suspension" style="display:inline-block;vertical-align:middle;margin-left: 35px;" >
+                    <h3 >Suspensión de clases</h3><br></br>
+                    
+                    <div id="calendario" style="margin-top: 20px ">
+                        <p:growl id="grow" showDetail="true"/>  
+                        <p:calendar style="display:inline-block; vertical-align: middle" locale="es" effect="explode"  value="#{asistenciaCursoMB.fecha}" id="popupButtonCal" showOn="button">
+                            <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="grow" />  
+                        </p:calendar> 
+                        <p:commandButton style="margin-left: 124px;display:inline-block; vertical-align: middle" value="Suspensión de clases"/>
+                    </div>
+                    
+                    
+
+                </div>    
+            </div>
+            
+        </div>
+        
+    </h:body>
+</html>
+

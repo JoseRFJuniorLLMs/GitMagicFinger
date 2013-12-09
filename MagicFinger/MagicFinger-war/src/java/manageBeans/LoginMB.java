@@ -26,7 +26,7 @@ public class LoginMB {
     public LoginMB() {
     }
     
-    public void login(){
+    public void login() throws IOException{
         session.login(user, password);
     }
     
