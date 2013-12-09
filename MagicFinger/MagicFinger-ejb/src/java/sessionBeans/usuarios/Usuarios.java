@@ -25,10 +25,10 @@ public class Usuarios implements UsuariosLocal {
     }
 
     @Override
-    public String getRol(String nombre){
+    public User getRol(String nombre){
        Query q = em.createNamedQuery("User.findByUsuario").setParameter("usuario", nombre);
         List<User> listUsuario = q.getResultList();
-        return listUsuario.get(0).getUserRol().getName();
+        return listUsuario.get(0);
     }
 
 }
