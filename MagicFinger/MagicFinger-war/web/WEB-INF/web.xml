@@ -12,6 +12,7 @@
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -22,11 +23,11 @@
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
-        <display-name>admin</display-name>
+        <display-name>Administrador_pages</display-name>
         <web-resource-collection>
             <web-resource-name>paginas administrativas</web-resource-name>
             <description>paginas</description>
-            <url-pattern>/faces/admin/*</url-pattern>
+            <url-pattern>/faces/administrador/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
