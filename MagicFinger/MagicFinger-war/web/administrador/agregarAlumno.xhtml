@@ -30,63 +30,122 @@
                 }
             }
         </script>
-
-        <div id="content" class="center_content">
-            <h1 style="text-align: center;" > Registro de Asistencia de Alumnos </h1>
-            <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/> 
-
-            <h:form id="form" prependId="false">  
-                <p:panel id="panel" header="New Person">  
+        <div style="max-width: 600px">
+            <h1 style="text-align: center;" > Agregar usuario al sistema </h1>
+            
+            <applet style="display:inline;vertical-align: middle; margin-left: 50px; margin-top: 20px" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/> 
+            <h:form id="form" prependId="false"> 
+                        
                     <p:messages id="msgs"/>  
-                    <h:panelGrid columns="3">  
-                        <h:outputLabel value="Rut: *" /> 
-                        <p:inputText id="Rut" value="#{alumnoMB.rut}" required="true" label="Rut">  
-                            <f:validateLength minimum="2" />  
-                        </p:inputText>
-                        <p:message for="Rut" display="icon"/>  
+                    <p:tabView id="tabView" style="max-width: 500px; margin-left: 40px">  
+                      <p:tab id="tab1" title="Agregar alumno">  
+                          <h:panelGrid columns="3" cellpadding="10" style="text-align: left;margin-left: 60px">  
+                                    <h:outputLabel value="Rut: *" />  
+                                    <p:inputText id="Rut" value="#{alumnoMB.rut}" required="true" label="Rut">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="Rut" display="icon"/>  
 
-                        <h:outputLabel value="Nombre: *" />  
-                        <p:inputText id="Nombre" value="#{alumnoMB.nombre}" required="true" label="Nombre">  
-                            <f:validateLength minimum="2" />  
-                        </p:inputText>
-                        <p:message for="Nombre" display="icon"/>  
+                                    <h:outputLabel value="Nombre: *" />  
+                                    <p:inputText id="Nombre" value="#{alumnoMB.nombre}" required="true" label="Nombre">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="Nombre" display="icon"/>
+                                    
+                                    <h:outputLabel value="Apellido paterno: *" />  
+                                    <p:inputText id="ApellidoP" value="#{alumnoMB.apellidoP}" required="true" label="Apellido paterno">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="ApellidoP" display="icon"/>  
 
-                        <h:outputLabel value="Apellido paterno: *" />  
-                        <p:inputText id="ApellidoP" value="#{alumnoMB.apellidoP}" required="true" label="Apellido paterno">  
-                            <f:validateLength minimum="2" />  
-                        </p:inputText>
-                        <p:message for="ApellidoP" display="icon"/>  
+                                    <h:outputLabel value="Apellido materno: *" />  
+                                    <p:inputText id="ApellidoM" value="#{alumnoMB.apellidoM}" required="true" label="Apellido materno">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="ApellidoM" display="icon"/>  
 
-                        <h:outputLabel value="Apellido materno: *" />  
-                        <p:inputText id="ApellidoM" value="#{alumnoMB.apellidoM}" required="true" label="Apellido materno">  
-                            <f:validateLength minimum="2" />  
-                        </p:inputText>
-                        <p:message for="ApellidoM" display="icon"/>  
+                                    <h:outputLabel value="Telefono: *" />  
+                                    <p:inputText  id="Telefono" value="#{alumnoMB.telefono}" required="true" label="Telefono:">  
+                                    </p:inputText>
+                                    <p:message for="Telefono" display="icon"/>  
 
-                        <h:outputLabel value="Telefono: *" />  
-                        <p:inputText  id="Telefono" value="#{alumnoMB.telefono}" required="true" label="Telefono:">  
-                        </p:inputText>
-                        <p:message for="Telefono" display="icon"/>  
+                                    <h:outputLabel value="Correo: *" />  
+                                    <p:inputText id="Correo" value="#{alumnoMB.correo}" required="true" label="Correo">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="Correo" display="icon"/>  
 
-                        <h:outputLabel value="Correo: *" />  
-                        <p:inputText id="Correo" value="#{alumnoMB.correo}" required="true" label="Correo">  
-                            <f:validateLength minimum="2" />  
-                        </p:inputText>
-                        <p:message for="Correo" display="icon"/>  
+                                    <h:outputLabel id="variableHuella1TXT" value="Huella 1:" />
+                                    <h:inputText id="estado1" value="NO INGRESADA" /> <br />
+                                    <h:outputLabel id="variableHuella2TXT" value="Huella 2:" /> 
+                                    <h:inputText id="estado2" value="NO INGRESADA" />
 
-                        <h:outputLabel id="variableHuella1TXT" value="Huella 1:" />
-                        <p:outputLabel id="estado1" value="NO INGRESADA"></p:outputLabel> <br />
-                        <h:outputLabel id="variableHuella2TXT" value="Huella 2:" /> 
-                        <p:outputLabel id="estado2" value="NO INGRESADA"></p:outputLabel>
+                                    <h:inputHidden id="variableHuella1" value="#{alumnoMB.huellaEnString1}"/>
+                                    <h:inputHidden id="variableHuella2" value="#{alumnoMB.huellaEnString2}"/>
+                         </h:panelGrid> 
+                          <p:commandButton id="btn" value="Guardar" update="tabView" style="margin-left: 280px" actionListener="#{alumnoMB.savePerson}"/>
+                         </p:tab>  
 
-                        <h:inputHidden id="variableHuella1" value="#{alumnoMB.huellaEnString1}"/>
-                        <h:inputHidden id="variableHuella2" value="#{alumnoMB.huellaEnString2}"/>
+                         <p:tab id="tab2" title="Agregar profesor">  
+                             <h:panelGrid columns="3" cellpadding="10" style="text-align: left;margin-left: 60px">  
+                                    <h:outputLabel value="Rut: *" />  
+                                    <p:inputText id="Rut" value="#{alumnoMB.rut}" required="true" label="Rut">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="Rut" display="icon"/>  
 
-                    </h:panelGrid>
-                    <p:commandButton id="btn" value="Save" update="panel" actionListener="#{alumnoMB.savePerson}"/>  
-                </p:panel>
+                                    <h:outputLabel value="Nombre: *" />  
+                                    <p:inputText id="Nombre" value="#{alumnoMB.nombre}" required="true" label="Nombre">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="Nombre" display="icon"/>
+                                    
+                                    <h:outputLabel value="Apellido paterno: *" />  
+                                    <p:inputText id="ApellidoP" value="#{alumnoMB.apellidoP}" required="true" label="Apellido paterno">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="ApellidoP" display="icon"/>  
+
+                                    <h:outputLabel value="Apellido materno: *" />  
+                                    <p:inputText id="ApellidoM" value="#{alumnoMB.apellidoM}" required="true" label="Apellido materno">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="ApellidoM" display="icon"/>  
+
+                                    <h:outputLabel value="Telefono: *" />  
+                                    <p:inputText  id="Telefono" value="#{alumnoMB.telefono}" required="true" label="Telefono:">  
+                                    </p:inputText>
+                                    <p:message for="Telefono" display="icon"/>  
+
+                                    <h:outputLabel value="Correo: *" />  
+                                    <p:inputText id="Correo" value="#{alumnoMB.correo}" required="true" label="Correo">  
+                                        <f:validateLength minimum="2" />  
+                                    </p:inputText>
+                                    <p:message for="Correo" display="icon"/>  
+
+                                    <h:outputLabel id="variableHuella1TXT" value="Huella 1:" />
+                                    <h:inputText id="estado1" value="NO INGRESADA" /> <br />
+                                    <h:outputLabel id="variableHuella2TXT" value="Huella 2:" /> 
+                                    <h:inputText id="estado2" value="NO INGRESADA" />
+
+                                    <h:inputHidden id="variableHuella1" value="#{alumnoMB.huellaEnString1}"/>
+                                    <h:inputHidden id="variableHuella2" value="#{alumnoMB.huellaEnString2}"/>
+                         </h:panelGrid> 
+                          <p:commandButton id="btn" value="Guardar" update="tabView" style="margin-left: 280px" actionListener="#{alumnoMB.savePerson}"/>
+                           
+                        </p:tab>  
+
+                        <p:tab id="tab3" title="Agregar Secretaria">  
+                            <h:panelGrid columns="2" cellpadding="10">  
+                                <p:graphicImage id="tab3Img" value="/images/godfather/godfather3.jpg" />  
+                                <h:outputText id="tab3Text" value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.  
+                                    Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate."/>  
+                            </h:panelGrid>  
+                        </p:tab>  
+
+                    </p:tabView>
+         
             </h:form>
         </div>
     </h:body>
 </html>
-
