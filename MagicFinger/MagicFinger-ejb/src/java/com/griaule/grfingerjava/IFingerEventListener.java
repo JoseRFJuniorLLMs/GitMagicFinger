@@ -2,9 +2,7 @@
 // Jad home page: http://www.geocities.com/kpdus/jad.html
 // Decompiler options: packimports(5) braces fieldsfirst noctor nonlb space lnc 
 // Source File Name:   IFingerEventListener.java
-
 package com.griaule.grfingerjava;
-
 
 public interface IFingerEventListener {
 

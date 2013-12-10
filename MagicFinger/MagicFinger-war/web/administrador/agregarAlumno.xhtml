@@ -13,17 +13,17 @@
         <title>Facelets Template</title>
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
     </h:head>
-    
+
     <h:body>
         <script>
-            var i=0;
+            var i = 0;
             function getStringTemplate(StringTemplate) {
-                if(i==0){    
+                if (i == 0) {
                     document.getElementById('variableHuella1').value = StringTemplate;
                     document.getElementById('estado1').innerHTML = "INGRESADA";
                     i++;
                 }
-                else{
+                else {
                     document.getElementById('variableHuella2').value = StringTemplate;
                     document.getElementById('estado2').innerHTML = "INGRESADA";
                     i++;

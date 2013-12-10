@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class FacultadFacade extends AbstractFacade<Facultad> implements FacultadFacadeLocal {
+
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
@@ -26,5 +27,4 @@ public class FacultadFacade extends AbstractFacade<Facultad> implements Facultad
     public FacultadFacade() {
         super(Facultad.class);
     }
-    
 }

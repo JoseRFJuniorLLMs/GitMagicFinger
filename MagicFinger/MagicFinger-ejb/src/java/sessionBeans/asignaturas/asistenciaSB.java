@@ -23,14 +23,15 @@ import javax.persistence.Query;
  */
 @Stateless
 public class asistenciaSB implements asistenciaSBLocal {
+
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
     @Override
-    public Asistencia alumnoAsiste(AlumnosDelCurso AlumnosDelCurso, BloqueClase bloque, Date fecha ) {
-        Query q= em.createNamedQuery("Asistencia.findAsistencia").setParameter("AlumnosDelCurso", AlumnosDelCurso ).setParameter("bloqueClaseId", bloque.getIdBloque()).setParameter("fecha", fecha);
+    public Asistencia alumnoAsiste(AlumnosDelCurso AlumnosDelCurso, BloqueClase bloque, Date fecha) {
+        Query q = em.createNamedQuery("Asistencia.findAsistencia").setParameter("AlumnosDelCurso", AlumnosDelCurso).setParameter("bloqueClaseId", bloque.getIdBloque()).setParameter("fecha", fecha);
         List<Asistencia> listado = q.getResultList();
-        if(!listado.isEmpty()){
+        if (!listado.isEmpty()) {
             return listado.get(0);
         }
         return null;
@@ -38,9 +39,7 @@ public class asistenciaSB implements asistenciaSBLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-
     public void persist(Object object) {
         em.persist(object);
     }
-
 }

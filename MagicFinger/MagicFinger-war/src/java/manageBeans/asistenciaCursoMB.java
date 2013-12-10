@@ -25,7 +25,6 @@ import sessionBeans.ProfesorFacadeLocal;
 import sessionBeans.alumnos.alumnosLocal;
 import sessionBeans.asignaturas.asistenciaSBLocal;
 
-
 /**
  *
  * @author chevo
@@ -33,6 +32,7 @@ import sessionBeans.asignaturas.asistenciaSBLocal;
 @Named(value = "asistenciaCursoMB")
 @ApplicationScoped
 public class asistenciaCursoMB {
+
     @EJB
     private asistenciaSBLocal asistenciaSB;
     @EJB
@@ -41,111 +41,106 @@ public class asistenciaCursoMB {
     private ProfesorFacadeLocal profesorFacade;
     @EJB
     private alumnosLocal alumnos;
-    
     private String HuellaEnString;
-    
     private Profesor profesor;
     private List<Curso> ListCurso;
     private Curso curso;
-    
     private BloqueClase bloqueClase;
     private int valor;
-    
-    
     private Date fecha;
-    private Map<String,String> bloques = new HashMap<>();  
+    private Map<String, String> bloques = new HashMap<>();
     private List<BloqueClase> bloqueClaseList;
-    
+
     @PostConstruct
-    public void init(){
-        if(fecha==null){
+    public void init() {
+        if (fecha == null) {
             fecha = new Date();
         }
         profesor = profesorFacade.find(0);
-        if(profesor!=null){
+        if (profesor != null) {
             ListCurso = profesor.getCursoList();
-            if(!ListCurso.isEmpty()){
+            if (!ListCurso.isEmpty()) {
                 curso = ListCurso.get(0);
                 bloqueClaseList = curso.getBloqueClaseList();
-                
+
             }
         }
     }
-    
+
     public void buscaPersona(ActionEvent actionEvent) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("comparando la huella "+ HuellaEnString));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("comparando la huella " + HuellaEnString));
         Alumno encontrado = alumnos.CompareFingerPrint(HuellaEnString);
-        if(encontrado!=null){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ALUMNO ENCONTRADO", encontrado.getNombre() ));  
+        if (encontrado != null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ALUMNO ENCONTRADO", encontrado.getNombre()));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "alumno no encontrado"));
+
         }
-        else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "alumno no encontrado" )); 
-            
-        }
-    } 
-    
-    public void agregaPersona(ActionEvent actionEvent){
+    }
+
+    public void agregaPersona(ActionEvent actionEvent) {
         Alumno encontrado = alumnos.CompareFingerPrint(HuellaEnString, curso);
-        if(bloqueClase==null){
-            
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Debe seleccionar fecha y bloque" )); 
-          
-            return ;
+        if (bloqueClase == null) {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Debe seleccionar fecha y bloque"));
+
+            return;
         }
-        if(encontrado!=null){
+        if (encontrado != null) {
             AlumnosDelCurso tempAlumno = new AlumnosDelCurso(curso.getAsignatura().getIdAsignatura(), curso.getTipoAsignatura().getIdTipoAsignatura(), encontrado.getIdAlumno());
-            if(asistenciaSB.alumnoAsiste(tempAlumno, bloqueClase, new Date())==null){
+            if (asistenciaSB.alumnoAsiste(tempAlumno, bloqueClase, new Date()) == null) {
                 Asistencia nueva = new Asistencia();
                 nueva.setBloqueClaseId(bloqueClase);
                 nueva.setEstado(1);
                 nueva.setFecha(new Date());
                 nueva.setAlumnosDelCurso(tempAlumno);
                 asistenciaFacade.create(nueva);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Alumno Agregado" ,encontrado.getNombre() + " " + encontrado.getApellidop() + " " + encontrado.getApellidom() )); 
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno Agregado", encontrado.getNombre() + " " + encontrado.getApellidop() + " " + encontrado.getApellidom()));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "ya ingresado", encontrado.getNombre() + " " + encontrado.getApellidop() + " " + encontrado.getApellidom()));
             }
-            else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"ya ingresado" ,encontrado.getNombre() + " " + encontrado.getApellidop() + " " + encontrado.getApellidom() ));     
-            }           
-        }
-        else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Alumno no encontrado", "EL alumno no se encuentra matriculado en este curso"));  
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alumno no encontrado", "EL alumno no se encuentra matriculado en este curso"));
         }
     }
-    public String estadoAsistencia(AlumnosDelCurso alumnoClase){
-        if(fecha==null){
+
+    public String estadoAsistencia(AlumnosDelCurso alumnoClase) {
+        if (fecha == null) {
             fecha = new Date();
         }
-        if(bloqueClase==null){
+        if (bloqueClase == null) {
             return " ";
         }
 
-        Asistencia asis= asistenciaSB.alumnoAsiste(alumnoClase , bloqueClase, fecha);
-        if(asis!=null){
-           if(asis.getEstado()==1)
-             return "Presente";
-           else{
-             return "Justificado";
-           } 
+        Asistencia asis = asistenciaSB.alumnoAsiste(alumnoClase, bloqueClase, fecha);
+        if (asis != null) {
+            if (asis.getEstado() == 1) {
+                return "Presente";
+            } else {
+                return "Justificado";
+            }
         }
         return "Ausente";
     }
+
     public void handleDateSelect(SelectEvent event) {
-        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");  
+        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
         fecha = (Date) event.getObject();
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fecha seleccionada", format.format(event.getObject())));  
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fecha seleccionada", format.format(event.getObject())));
     }
-    
-    public void handleBloqueClaseChange(){
+
+    public void handleBloqueClaseChange() {
         for (BloqueClase bloq : curso.getBloqueClaseList()) {
-            if( bloq.getIdBloque() == valor){
+            if (bloq.getIdBloque() == valor) {
                 bloqueClase = bloq;
                 FacesContext facesContext = FacesContext.getCurrentInstance();
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bloque seleccionado", bloqueClase.toString() ));  
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bloque seleccionado", bloqueClase.toString()));
                 return;
             }
         }
         bloqueClase = null;
     }
+
     public Profesor getProfesor() {
         return profesor;
     }
@@ -185,7 +180,6 @@ public class asistenciaCursoMB {
     public void setValor(int valor) {
         this.valor = valor;
     }
-    
 
     public String getHuellaEnString() {
         return HuellaEnString;
@@ -212,7 +206,7 @@ public class asistenciaCursoMB {
     public void setBloques(Map<String, String> bloques) {
         this.bloques = bloques;
     }
-    
+
     public List<BloqueClase> getBloqueClaseList() {
         return bloqueClaseList;
     }
@@ -220,5 +214,4 @@ public class asistenciaCursoMB {
     public void setBloqueClaseList(List<BloqueClase> bloqueClaseList) {
         this.bloqueClaseList = bloqueClaseList;
     }
-    
 }

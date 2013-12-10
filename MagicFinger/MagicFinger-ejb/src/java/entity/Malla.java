@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Malla.findByIdCarrera", query = "SELECT m FROM Malla m WHERE m.idCarrera = :idCarrera"),
     @NamedQuery(name = "Malla.findByFecha", query = "SELECT m FROM Malla m WHERE m.fecha = :fecha")})
 public class Malla implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -130,5 +131,4 @@ public class Malla implements Serializable {
     public String toString() {
         return "entity.Malla[ idCarrera=" + idCarrera + " ]";
     }
-    
 }

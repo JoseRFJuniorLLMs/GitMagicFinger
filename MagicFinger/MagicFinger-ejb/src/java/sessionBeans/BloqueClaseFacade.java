@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class BloqueClaseFacade extends AbstractFacade<BloqueClase> implements BloqueClaseFacadeLocal {
+
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
@@ -26,5 +27,4 @@ public class BloqueClaseFacade extends AbstractFacade<BloqueClase> implements Bl
     public BloqueClaseFacade() {
         super(BloqueClase.class);
     }
-    
 }

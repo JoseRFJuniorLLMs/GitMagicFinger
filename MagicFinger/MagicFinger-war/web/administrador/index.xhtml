@@ -8,17 +8,17 @@
 
     <h:head>
         <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-     
-    <title>Facelets Template</title>
-        
-    <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
-    <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
-    <style>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <title>Facelets Template</title>
+
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+        <style>
         </style>
     </h:head>
 
@@ -30,35 +30,35 @@
             }
         </script>
         <div id="top" style="display: inline-block">
-           <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="margin-left: 20px" height="40" width="150" />
-           <h:form>
-               <h:commandLink style="float: right; display: inline-block; vertical-align: middle" action="#{loginMB.logout()}" value="Cerrar sesión" />
-   </h:form>
+            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="margin-left: 20px" height="40" width="150" />
+            <h:form>
+                <h:commandLink style="float: right; display: inline-block; vertical-align: middle" action="#{loginMB.logout()}" value="Cerrar sesión" />
+            </h:form>
         </div>
         <div class="center_content">
 
             <h1 style="text-align: center"> Bienvenido {NOMBRE ADMINISTRADOR}</h1>
-            
+
             <div id="acciones" class="sinSalto" style="float: left; display: inline-block; vertical-align: middle; margin-bottom: 5px">
                 <h3 style="margin-top: 30px;vertical-align: middle"> Usuarios del sistema </h3>
                 <div id="buscar" style="display: inline; padding-left: 30px">
                     <h:form id="form" style="display: inline">
-                    <h:outputLabel style="color: #036fab" value="Buscar:  " for="acSimple" />  
-                    <p:autoComplete id="acSimple" value="#{autoCompleteBean.txt1}"   
-                        completeMethod="#{autoCompleteBean.complete}"/> 
-                    <p:commandButton value="Ir" oncomplete="PF('dialog').show()" />
+                        <h:outputLabel style="color: #036fab" value="Buscar:  " for="acSimple" />  
+                        <p:autoComplete id="acSimple" value="#{autoCompleteBean.txt1}"   
+                                        completeMethod="#{autoCompleteBean.complete}"/> 
+                        <p:commandButton value="Ir" oncomplete="PF('dialog').show()" />
                     </h:form>
                 </div>
                 <div id="bloque" style="display: inline-block; padding-left: 20px">
                     <h:outputLabel value ="Filtrar por: " style="color: #036fab"/>
                     <p:selectOneMenu value="#" style="vertical-align: middle">  
-                    <f:selectItem itemLabel="Todos" itemValue="" />
-                    <f:selectItem itemLabel="Profesores" itemValue="1" />  
-                    <f:selectItem itemLabel="Alumnos" itemValue="2" />  
-                    <f:selectItem itemLabel="Secretarias" itemValue="3" />  
+                        <f:selectItem itemLabel="Todos" itemValue="" />
+                        <f:selectItem itemLabel="Profesores" itemValue="1" />  
+                        <f:selectItem itemLabel="Alumnos" itemValue="2" />  
+                        <f:selectItem itemLabel="Secretarias" itemValue="3" />  
                     </p:selectOneMenu>
                 </div>
-            
+
                 <div id="controlusuario" style="display: inline-block; vertical-align: middle;padding-bottom: 15px">
                     <div style="display: inline">
                         <ul style="list-style: none;display: inline-block; padding-left: 30px">
@@ -83,7 +83,7 @@
                                 Editar usuario
                             </li>
                         </ul>
-                         <ul style="list-style: none ;display: inline-block; padding-left: 10px">
+                        <ul style="list-style: none ;display: inline-block; padding-left: 10px">
                             <li>
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px" height="32" width="32" />
                             </li>
@@ -91,10 +91,10 @@
                                 Eliminar usuario
                             </li>
                         </ul>
-                        
+
                     </div>
                 </div>
-                
+
             </div>
             <p:dataTable var="variable" value="">  
                 <p:column headerText="Usuarios del sistema">  
@@ -107,20 +107,20 @@
 
                 <p:column headerText="Correo">  
                     <h:outputText value="#" />
-                     
+
                 </p:column>  
 
                 <p:column headerText="Tipo de usuario">  
                     <h:outputText value="#" />  
                 </p:column>
             </p:dataTable>
-            </div>
-            
-             
-           
+        </div>
 
-               
-        
+
+
+
+
+
     </h:body>
 </html>
 

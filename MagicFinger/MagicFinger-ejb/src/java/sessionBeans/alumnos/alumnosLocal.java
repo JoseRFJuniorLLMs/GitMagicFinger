@@ -14,7 +14,8 @@ import javax.ejb.Local;
  */
 @Local
 public interface alumnosLocal {
-    
-     Alumno CompareFingerPrint(String StringHuella);
-     Alumno CompareFingerPrint(String StringHuella, Curso curso);
+
+    Alumno CompareFingerPrint(String StringHuella);
+
+    Alumno CompareFingerPrint(String StringHuella, Curso curso);
 }

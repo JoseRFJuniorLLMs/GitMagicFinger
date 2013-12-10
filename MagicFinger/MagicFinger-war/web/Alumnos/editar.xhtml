@@ -13,64 +13,64 @@
         <title>Facelets Template</title>
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
     </h:head>
-    
+
     <h:body>
         <div id="content" class="center_content">
             <h1 style="text-align: center;" > Registro de Asistencia de Alumnos </h1>
-            
+
             <h:form id="form">  
-  
-    <p:panel id="panel" header="New Person"> 
-        <p:messages id="msgs"/>  
-  
-        <h:panelGrid columns="3">
-            <h:outputLabel value="Rut: *" />  
-            <p:inputText id="Rut" value="#{alumnoMB.rut}" required="true" label="Rut">  
-                <f:validateLength minimum="2" />  
-            </p:inputText>
-            <p:message for="Rut" display="icon"/>  
-            
-            <h:outputLabel value="Nombre: *" />  
-            <p:inputText id="Nombre" value="#{alumnoMB.nombre}" required="true" label="Nombre">  
-                <f:validateLength minimum="2" />  
-            </p:inputText>
-            <p:message for="Nombre" display="icon"/>  
-            
-            <h:outputLabel value="Apellido paterno: *" />  
-            <p:inputText id="ApellidoP" value="#{alumnoMB.apellidoP}" required="true" label="Apellido paterno">  
-                <f:validateLength minimum="2" />  
-            </p:inputText>
-            <p:message for="ApellidoP" display="icon"/>  
-            
-            <h:outputLabel value="Apellido materno: *" />  
-            <p:inputText id="ApellidoM" value="#{alumnoMB.apellidoM}" required="true" label="Apellido materno">  
-                <f:validateLength minimum="2" />  
-            </p:inputText>
-            <p:message for="ApellidoM" display="icon"/>  
-            
-            <h:outputLabel value="Telefono: *" />  
-            <p:inputText  id="Telefono" value="#{alumnoMB.telefono}" required="true" label="Telefono:">  
-            </p:inputText>
-            <p:message for="Telefono" display="icon"/>  
-            
-            <h:outputLabel value="Correo: *" />  
-            <p:inputText id="Correo" value="#{alumnoMB.correo}" required="true" label="Correo">  
-                <f:validateLength minimum="2" />  
-            </p:inputText>
-            <p:message for="Correo" display="icon"/>
-        </h:panelGrid>  
 
-        <p:commandButton id="btn" value="Save" update="panel" actionListener="#{alumnoMB.savePerson}"/>  
-    </p:panel>  
-  
-</h:form>  
-            
+                <p:panel id="panel" header="New Person"> 
+                    <p:messages id="msgs"/>  
 
-            
-            
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Rut: *" />  
+                        <p:inputText id="Rut" value="#{alumnoMB.rut}" required="true" label="Rut">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="Rut" display="icon"/>  
+
+                        <h:outputLabel value="Nombre: *" />  
+                        <p:inputText id="Nombre" value="#{alumnoMB.nombre}" required="true" label="Nombre">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="Nombre" display="icon"/>  
+
+                        <h:outputLabel value="Apellido paterno: *" />  
+                        <p:inputText id="ApellidoP" value="#{alumnoMB.apellidoP}" required="true" label="Apellido paterno">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="ApellidoP" display="icon"/>  
+
+                        <h:outputLabel value="Apellido materno: *" />  
+                        <p:inputText id="ApellidoM" value="#{alumnoMB.apellidoM}" required="true" label="Apellido materno">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="ApellidoM" display="icon"/>  
+
+                        <h:outputLabel value="Telefono: *" />  
+                        <p:inputText  id="Telefono" value="#{alumnoMB.telefono}" required="true" label="Telefono:">  
+                        </p:inputText>
+                        <p:message for="Telefono" display="icon"/>  
+
+                        <h:outputLabel value="Correo: *" />  
+                        <p:inputText id="Correo" value="#{alumnoMB.correo}" required="true" label="Correo">  
+                            <f:validateLength minimum="2" />  
+                        </p:inputText>
+                        <p:message for="Correo" display="icon"/>
+                    </h:panelGrid>  
+
+                    <p:commandButton id="btn" value="Save" update="panel" actionListener="#{alumnoMB.savePerson}"/>  
+                </p:panel>  
+
+            </h:form>  
+
+
+
+
         </div>
-        
-          </h:body>
+
+    </h:body>
 </html>
 
 

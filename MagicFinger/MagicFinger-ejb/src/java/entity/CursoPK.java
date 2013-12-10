@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
  */
 @Embeddable
 public class CursoPK implements Serializable {
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "ASIGNATURA_ID")
@@ -77,5 +78,4 @@ public class CursoPK implements Serializable {
     public String toString() {
         return "entity.CursoPK[ asignaturaId=" + asignaturaId + ", tipoAsignaturaId=" + tipoAsignaturaId + " ]";
     }
-    
 }

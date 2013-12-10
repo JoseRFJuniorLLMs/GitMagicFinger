@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "AlumnosDelCurso.findByCursoId", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.cursoId = :cursoId"),
     @NamedQuery(name = "AlumnosDelCurso.findByAlumnoId", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.alumnoId = :alumnoId")})
 public class AlumnosDelCurso implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AlumnosDelCursoPK alumnosDelCursoPK;
@@ -114,5 +115,4 @@ public class AlumnosDelCurso implements Serializable {
     public String toString() {
         return "entity.AlumnosDelCurso[ alumnosDelCursoPK=" + alumnosDelCursoPK + " ]";
     }
-    
 }

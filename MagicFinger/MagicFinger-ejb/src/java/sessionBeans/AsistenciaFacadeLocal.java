@@ -28,5 +28,4 @@ public interface AsistenciaFacadeLocal {
     List<Asistencia> findRange(int[] range);
 
     int count();
-    
 }

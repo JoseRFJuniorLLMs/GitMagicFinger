@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">  
+
+            <p:growl id="messages" showDetail="true"/>  
+
+            <p:contextMenu for="cars" widgetVar="cMenu">     
+                <p:menuitem value="Edit Cell" icon="ui-icon-search" onclick="PF('carsTable').showCellEditor();
+                        return false;"/>    
+                <p:menuitem value="Hide Menu" icon="ui-icon-close" onclick="PF('cMenu').hide();"/>    
+            </p:contextMenu>   
+
+            <p:dataTable id="cars" var="cur" value="#{asignaturaMB.listCurso}" editable="true" editMode="cell" widgetVar="carsTable">  
+
+                <f:facet name="header">  
+                    In-Cell Editing  
+                </f:facet>  
+
+                <p:ajax event="cellEdit" listener="#{asignaturaMB.onCellEdit}" update=":form:messages" />  
+
+                <p:column headerText="Year" style="width:25%">  
+                    <p:cellEditor>  
+                        <f:facet name="output"><h:outputText value="#{cur.porcenteajeAprobacion}" /></f:facet>  
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{cur.porcenteajeAprobacion}" style="width:96%"/></f:facet>  
+                    </p:cellEditor>  
+                </p:column>
+
+                <p:column headerText="Year" style="width:25%">  
+                    <p:cellEditor>  
+                        <f:facet name="output"><h:outputText value="#{cur.termino}" /></f:facet>  
+                        <f:facet name="input"><p:inputText value="#{cur.termino}" style="width:96%" /></f:facet>  
+                    </p:cellEditor>  
+                </p:column>  
+
+            </p:dataTable>  
+        </h:form>
+    </h:body>
+</html>
+
