@@ -122,7 +122,6 @@ public class asistenciaCursoMB {
         }
         return "Ausente";
     }
-
     public void handleDateSelect(SelectEvent event) {
         SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
         fecha = (Date) event.getObject();
