@@ -5,52 +5,67 @@ package manageBeans;
  * and open the template in the editor.
  */
 
+import entity.Curso;
+import entity.Profesor;
 import java.util.Date;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import sessionBeans.ProfesorFacadeLocal;
 
 /**
  *
  * @author Nacho
  */
-@Named(value = "asignatura")
+@Named(value = "asignaturaMB")
 @RequestScoped
 public class asignaturaMB {
-
-    private Date date1;  
-      
-    private Date date2;  
-      
-    private Date date3;  
-      
-    public Date getDate1() {  
-        return date1;  
-    }  
-  
-    public void setDate1(Date date1) {  
-        this.date1 = date1;  
-    }  
-  
-    public Date getDate2() {  
-        return date2;  
-    }  
-  
-    public void setDate2(Date date2) {  
-        this.date2 = date2;  
-    }  
-      
-    public Date getDate3() {  
-        return date3;  
-    }  
-  
-    public void setDate3(Date date3) {  
-        this.date3 = date3;  
-    }  
+    @EJB
+    private ProfesorFacadeLocal profesorFacade;
+    private Profesor profesor;
+    private List<Curso> ListCurso;
+    private Curso cursoSeleccionado;
     
-    /**
-     * Creates a new instance of asignatura
-     */
-    public asignaturaMB() {
+     @PostConstruct
+     public void init(){
+     profesor = profesorFacade.find(2);
+        if(profesor!=null){
+            ListCurso = profesor.getCursoList();
+        }
+     }
+
+    public ProfesorFacadeLocal getProfesorFacade() {
+        return profesorFacade;
+    }
+
+    public void setProfesorFacade(ProfesorFacadeLocal profesorFacade) {
+        this.profesorFacade = profesorFacade;
+    }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
+
+    public List<Curso> getListCurso() {
+        return ListCurso;
+    }
+
+    public void setListCurso(List<Curso> ListCurso) {
+        this.ListCurso = ListCurso;
+    }
+
+    public Curso getCursoSeleccionado() {
+        return cursoSeleccionado;
+    }
+
+    public void setCursoSeleccionado(Curso cursoSeleccionado) {
+        this.cursoSeleccionado = cursoSeleccionado;
     }
 }

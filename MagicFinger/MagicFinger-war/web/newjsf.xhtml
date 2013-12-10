@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <h:panelGrid columns="1" cellpadding="5">  
+    <p:commandButton id="basic" value="Basic" onclick="PF('dlg1').show();" type="button" />  
+  
+    <p:commandButton id="modalDialogButton" value="Modal" onclick="PF('dlg2').show();" type="button"/>  
+  
+    <p:commandButton id="effectsDialogButton" value="Effects" onclick="PF('dlg3').show();" type="button" />  
+</h:panelGrid>  
+  
+<p:dialog id="basicDialog" header="Basic Dialog" widgetVar="dlg1">  
+    <h:outputText value="Resistance to PrimeFaces is futile!" />  
+</p:dialog>  
+  
+<p:dialog id="modalDialog" header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">  
+    <h:outputText value="This is a Modal Dialog." />  
+</p:dialog>  
+  
+<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
+    <h:outputText value="This dialog has nice effects." />  
+</p:dialog>  
+        
+        
+        <h:form id="form">  
+  
+    <p:growl id="msgs" showDetail="true" />  
+    <p:dataTable id="curso" var="cur" value="#{asignaturaMB.listCurso}">  
+  
+        <p:column headerText="Nombre Asignatura" style="width:24%">  
+            <h:outputText value="#{cur.asignatura.nombre}"/>  
+        </p:column>
+  
+        <p:column style="width:4%">  
+            <p:commandButton id="selectButton" update=":form:display" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">  
+                <f:setPropertyActionListener value="#{cur}" target="#{asignaturaMB.cursoSeleccionado}" />  
+            </p:commandButton>  
+        </p:column>  
+  
+    </p:dataTable>  
+  
+    <p:dialog header="Car Detail" widgetVar="carDialog" resizable="false" id="carDlg"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+  
+        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+            <h:outputText value="Nombre asignatura:" />
+            <h:outputText value="#{asignaturaMB.cursoSeleccionado.asignatura.nombre}" style="font-weight:bold"/>
+            <h:outputText value="Código: " />
+            <h:outputText value="#{asignaturaMB.cursoSeleccionado.asignatura.idAsignatura}" style="font-weight:bold"/>
+            <h:outputText value="Tipo asignatura: " />
+            <h:outputText value="#{asignaturaMB.cursoSeleccionado.tipoAsignatura.nombre}" style="font-weight:bold"/>
+            <h:outputText value="Cantidad alumnos: " />
+            <h:outputText value="#{asignaturaMB.cursoSeleccionado.alumnosDelCursoList.size}" style="font-weight:bold"/>            
+        </h:panelGrid>  
+  
+    </p:dialog>  
+  
+</h:form>
+    </h:body>
+</html>
+
