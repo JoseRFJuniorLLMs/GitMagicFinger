@@ -68,8 +68,9 @@
                     <h:outputText value="#{loginSessionMB.profesor.nombre}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidop}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidom}" />
                 </h1>
                 <div> 
-                    <h:form id="form"> <p:growl id="grow1" showDetail="true" />
                     <div id="cursos" style="display:inline-block; vertical-align: middle">
+                        <h:form id="form"> <p:growl id="grow1" showDetail="true" />
+                    
                         <h3>Mis cursos</h3>
                         
                         <p:dataTable id="curso" 
@@ -105,12 +106,14 @@
                                 <h:outputText value="Cantidad alumnos: " />
                                 <h:outputText value="#{asignaturaMB.cursoSeleccionado.alumnosDelCursoList.size}" style="font-weight:bold"/>            
                             </h:panelGrid>
-                        </p:dialog>  
+                        </p:dialog> 
+                        
+                    </h:form>
                     </div>
                     
-                    </h:form>
-                    <h:form id="form2" style="display: inline-block"> 
+                    
                     <div id="normas" style="display:inline-block;vertical-align:middle;margin-left: 35px;" >
+                        <h:form id="form2" style="display: inline-block"> 
                         <h3 style="margin-bottom: 20px; text-align: center;">Normas del curso</h3>
                         <h4 style="text-align: left;"> Porcentaje aprobación:  </h4>
                         <p:inputText id ="txt1" style="margin-left: auto; margin-right: auto; display: block;
@@ -120,9 +123,10 @@
                        <p:inputText id="txt2" style=" margin-left: auto; margin-right: auto; display: block;
                                      margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.termino}"> 
                         </p:inputText>
-                        <p:commandButton update=":form:grow1" action="#{asignaturaMB.actualizarDatos()}" />  
+                        <p:commandButton id="normas2" value="Actualizar normas" update=":form:grow1" action="#{asignaturaMB.actualizarDatos()}" />  
+                        </h:form>
                     </div>
-                    </h:form>
+                    
 
                         
                 </div>

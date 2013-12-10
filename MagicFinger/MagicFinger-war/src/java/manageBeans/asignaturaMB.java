@@ -68,24 +68,8 @@ public class asignaturaMB {
     }
     
     public void actualizarDatos() {
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        System.out.println("actualizar datosssssssssssssssssssss");
-        FacesMessage msg = new FacesMessage("Los datos han sido actualizados", "Valor: " );
-    FacesContext.getCurrentInstance().addMessage(null, msg);
+        FacesMessage msg = new FacesMessage("Los datos han sido actualizados", "datos: " );
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     
     public void cambiarTermino(SlideEndEvent event) {  
