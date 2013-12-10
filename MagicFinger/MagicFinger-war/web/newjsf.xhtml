@@ -9,28 +9,7 @@
     </h:head>
     <h:body>
         
-        <h:panelGrid columns="1" cellpadding="5">  
-    <p:commandButton id="basic" value="Basic" onclick="PF('dlg1').show();" type="button" />  
-  
-    <p:commandButton id="modalDialogButton" value="Modal" onclick="PF('dlg2').show();" type="button"/>  
-  
-    <p:commandButton id="effectsDialogButton" value="Effects" onclick="PF('dlg3').show();" type="button" />  
-</h:panelGrid>  
-  
-<p:dialog id="basicDialog" header="Basic Dialog" widgetVar="dlg1">  
-    <h:outputText value="Resistance to PrimeFaces is futile!" />  
-</p:dialog>  
-  
-<p:dialog id="modalDialog" header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">  
-    <h:outputText value="This is a Modal Dialog." />  
-</p:dialog>  
-  
-<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
-    <h:outputText value="This dialog has nice effects." />  
-</p:dialog>  
-        
-        
-        <h:form id="form">  
+    <h:form id="form">  
   
     <p:growl id="msgs" showDetail="true" />  
     <p:dataTable id="curso" var="cur" value="#{asignaturaMB.listCurso}">  
