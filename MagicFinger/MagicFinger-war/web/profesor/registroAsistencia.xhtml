@@ -61,14 +61,14 @@
             <h:form id="form" prependId="false" style="display: inline">  
                 
                 <div id="acciones" class="sinSalto" style="float: left; display: inline; margin-bottom: 25px">
-                        <div id="fecha" style="display: inline">
-                            <h:outputLabel style="color: #036fab" value="Fecha: "/>
-                            
-                            <p:growl id="grow" showDetail="true"/>  
-                            
-                            <p:calendar locale="es" effect="explode"  value="#{asistenciaCursoMB.fecha}" id="popupButtonCal" showOn="button">
-                                <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="grow2,grow" />  
-                            </p:calendar> 
+                    <div id="fecha" style="display: inline">
+                        <h:outputLabel style="color: #036fab" value="Fecha: "/>
+
+                        <p:growl id="grow" showDetail="true"/>  
+
+                        <p:calendar locale="es" effect="explode"  value="#{asistenciaCursoMB.fecha}" id="popupButtonCal" showOn="button">
+                            <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="grow2,grow" />  
+                        </p:calendar> 
                                                         
                     </div>
                     <div id="bloque" style="display: inline;padding-left: 120px">

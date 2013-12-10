@@ -4,6 +4,7 @@
  */
 package sessionBeans.usuarios;
 
+import entity.User;
 import javax.ejb.Local;
 
 /**
@@ -13,6 +14,6 @@ import javax.ejb.Local;
 @Local
 public interface UsuariosLocal {
 
-    public String getRol(String nombre);
+    public User getRol(String nombre);
     
 }

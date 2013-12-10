@@ -1,5 +1,6 @@
 
 #top {
+    
     width: 100%;    
     position: relative;
     background-color: #036fab;
@@ -62,3 +63,10 @@
 }
 
 
+
+
+#boton_ir{
+    
+    float: right;
+    margin-top: 10px;
+}

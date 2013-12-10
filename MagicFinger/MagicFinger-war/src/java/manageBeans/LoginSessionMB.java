@@ -4,6 +4,9 @@
  */
 package manageBeans;
 
+import entity.Alumno;
+import entity.Profesor;
+import entity.User;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -13,9 +16,11 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import sessionBeans.ProfesorFacadeLocal;
 import sessionBeans.usuarios.UsuariosLocal;
 
 /**
@@ -27,11 +32,13 @@ import sessionBeans.usuarios.UsuariosLocal;
 public class LoginSessionMB implements Serializable {
     @EJB
     private UsuariosLocal usuarios;
-
+    
+    @Inject LoginMB login;
     /**
      * Creates a new instance of LoginSessionMB
      */
-    
+    private Profesor profesor;
+    private Alumno alumno;
     public LoginSessionMB() {
     }
     
@@ -77,15 +84,19 @@ public class LoginSessionMB implements Serializable {
     private void redireccionar( String nombre) throws IOException {
         
         ExternalContext context2 = FacesContext.getCurrentInstance().getExternalContext();
-        String rol = usuarios.getRol(nombre);
-        switch (rol) {
+        
+        User usuario = usuarios.getRol(nombre);
+        switch (usuario.getUserRol().getName()) {
             case "Administrador":
                 context2.redirect(context2.getRequestContextPath() + "/faces/administrador/index.xhtml");
                 break;
-            case "Profesor":
+            case "Profesor":               
+                profesor = usuario.getProfesorId();
+                System.out.println(profesor.getNombre());
                 context2.redirect(context2.getRequestContextPath() + "/faces/profesor/index.xhtml");
                 break;
             case "Alumno":
+                alumno = usuario.getAlumnoId();
                 context2.redirect(context2.getRequestContextPath() + "/faces/alumno/index.xhtml");
                 break;
             case "Secretaria":
@@ -95,4 +106,12 @@ public class LoginSessionMB implements Serializable {
         
     }
 
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
+    
 }
