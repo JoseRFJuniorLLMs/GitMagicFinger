@@ -56,7 +56,7 @@ public class asistenciaCursoMB {
         if (fecha == null) {
             fecha = new Date();
         }
-        profesor = profesorFacade.find(0);
+        profesor = profesorFacade.find(2);
         if (profesor != null) {
             ListCurso = profesor.getCursoList();
             if (!ListCurso.isEmpty()) {
