@@ -4,7 +4,6 @@
  */
 package sessionBeans.asignaturas;
 
-
 import com.griaule.grfingerjava.MatchingContext;
 import com.griaule.grfingerjava.Template;
 import entity.Alumno;
@@ -22,6 +21,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class Asignaturas implements AsignaturasLocal {
+
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
@@ -30,58 +30,58 @@ public class Asignaturas implements AsignaturasLocal {
     }
 }
 
-    /*
-    @Override
-    public List<Asignatura> ListAsignature() {
-        Query q= em.createNamedQuery("Asignatura.findAll");
-        List<Asignatura> ListAsignatura = q.getResultList();
-        return ListAsignatura;
-    }
+/*
+ @Override
+ public List<Asignatura> ListAsignature() {
+ Query q= em.createNamedQuery("Asignatura.findAll");
+ List<Asignatura> ListAsignatura = q.getResultList();
+ return ListAsignatura;
+ }
     
-    @Override
-    public List<AsignaturaAlumno> ListAlumnosPorAsignatura(Asignatura asignaturaId) {
-        Query q= em.createNamedQuery("AsignaturaAlumno.findByAsignaturaId").setParameter("asignaturaId", asignaturaId);
-        List<AsignaturaAlumno> ListaAsistencia = q.getResultList();
-        return ListaAsistencia;
-    }
+ @Override
+ public List<AsignaturaAlumno> ListAlumnosPorAsignatura(Asignatura asignaturaId) {
+ Query q= em.createNamedQuery("AsignaturaAlumno.findByAsignaturaId").setParameter("asignaturaId", asignaturaId);
+ List<AsignaturaAlumno> ListaAsistencia = q.getResultList();
+ return ListaAsistencia;
+ }
     
-    @Override
-    public void CrearAlumno(String StringHuella) {
-        Alumno nuevo =  new Alumno();
-        nuevo.setNombre("Sebastian");
-        nuevo.setApellidop("Araya");
-        byte[] templeByte = Base64.decode(StringHuella);
-        nuevo.setHuella(templeByte);
-        em.persist(nuevo);
-    }
+ @Override
+ public void CrearAlumno(String StringHuella) {
+ Alumno nuevo =  new Alumno();
+ nuevo.setNombre("Sebastian");
+ nuevo.setApellidop("Araya");
+ byte[] templeByte = Base64.decode(StringHuella);
+ nuevo.setHuella(templeByte);
+ em.persist(nuevo);
+ }
     
-    @Override
-    public Alumno CompareFingerPrint(String StringHuella) {
-            Query q= em.createNamedQuery("Alumno.findAll");
-            List<Alumno> listAlumno = q.getResultList();
+ @Override
+ public Alumno CompareFingerPrint(String StringHuella) {
+ Query q= em.createNamedQuery("Alumno.findAll");
+ List<Alumno> listAlumno = q.getResultList();
             
-            byte[] templeByte = Base64.decode(StringHuella);
-            for(int i=0;i<listAlumno.size();i++){
-                if(listAlumno.get(i).getHuella()!=null){
-                   try {
-                        Template template= new Template(templeByte);
-                        byte templateBuffer[] = listAlumno.get(i).getHuella();
-                        Template referenceTemplate = new Template(templateBuffer);
-                        MatchingContext fingerprintSDK = new MatchingContext();
-                        boolean coinciden = fingerprintSDK.verify(template,referenceTemplate);
-                        if(coinciden){
-                           System.out.println("----------> "+listAlumno.get(i));
-                           return listAlumno.get(i);
-                        }
+ byte[] templeByte = Base64.decode(StringHuella);
+ for(int i=0;i<listAlumno.size();i++){
+ if(listAlumno.get(i).getHuella()!=null){
+ try {
+ Template template= new Template(templeByte);
+ byte templateBuffer[] = listAlumno.get(i).getHuella();
+ Template referenceTemplate = new Template(templateBuffer);
+ MatchingContext fingerprintSDK = new MatchingContext();
+ boolean coinciden = fingerprintSDK.verify(template,referenceTemplate);
+ if(coinciden){
+ System.out.println("----------> "+listAlumno.get(i));
+ return listAlumno.get(i);
+ }
                         
-                    } catch (Exception ex) {}
-                }
-            }System.out.println("---------->for<");
-           //CrearAlumno(StringHuella);
-        return null;
+ } catch (Exception ex) {}
+ }
+ }System.out.println("---------->for<");
+ //CrearAlumno(StringHuella);
+ return null;
     
-    }
-   */ 
+ }
+ */
 //    @Override
 //    @TransactionAttribute(TransactionAttributeType.REQUIRED)
 //    public void marcarAsistencia(Asignatura asignatura, Alumno alumno){
@@ -97,7 +97,6 @@ public class Asignaturas implements AsignaturasLocal {
 //            em.persist(nuevo);
 //        }
 //    }
-    
 //    @Override
 //    @TransactionAttribute(TransactionAttributeType.REQUIRED)
 //    public Alumno CompareFingerPrint(String StringHuella, Asignatura asignature) {

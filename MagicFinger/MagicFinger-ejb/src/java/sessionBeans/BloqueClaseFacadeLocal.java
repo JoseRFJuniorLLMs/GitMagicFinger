@@ -28,5 +28,4 @@ public interface BloqueClaseFacadeLocal {
     List<BloqueClase> findRange(int[] range);
 
     int count();
-    
 }

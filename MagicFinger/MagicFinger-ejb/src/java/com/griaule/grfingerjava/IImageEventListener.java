@@ -2,13 +2,10 @@
 // Jad home page: http://www.geocities.com/kpdus/jad.html
 // Decompiler options: packimports(5) braces fieldsfirst noctor nonlb space lnc 
 // Source File Name:   IImageEventListener.java
-
 package com.griaule.grfingerjava;
-
 
 // Referenced classes of package com.griaule.grfingerjava:
 //            FingerprintImage
-
 public interface IImageEventListener {
 
     public abstract void onImageAcquired(String s, FingerprintImage fingerprintimage);

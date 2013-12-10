@@ -28,5 +28,4 @@ public interface AlumnosDelCursoFacadeLocal {
     List<AlumnosDelCurso> findRange(int[] range);
 
     int count();
-    
 }

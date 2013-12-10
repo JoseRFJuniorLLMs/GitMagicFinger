@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Alumno.findByTelefono", query = "SELECT a FROM Alumno a WHERE a.telefono = :telefono"),
     @NamedQuery(name = "Alumno.findByHuella2", query = "SELECT a FROM Alumno a WHERE a.huella2 = :huella2")})
 public class Alumno implements Serializable {
+
     @Lob
     @Column(name = "HUELLA1")
     private byte[] huella1;
@@ -209,5 +210,4 @@ public class Alumno implements Serializable {
     public void setHuella2(byte[] huella2) {
         this.huella2 = huella2;
     }
-    
 }

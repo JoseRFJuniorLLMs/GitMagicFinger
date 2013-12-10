@@ -22,22 +22,21 @@ import sessionBeans.alumnos.alumnosLocal;
 @Named(value = "buscaAlumnoMB")
 @RequestScoped
 public class buscaAlumnoMB {
+
     @EJB
     private alumnosLocal alumnos;
-    
     private String HuellaEnString;
-    
+
     public void buscaPersona(ActionEvent actionEvent) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("comparando la huella "+ HuellaEnString));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("comparando la huella " + HuellaEnString));
         Alumno encontrado = alumnos.CompareFingerPrint(HuellaEnString);
-        if(encontrado!=null){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Alumno "+ encontrado.getNombre() )); 
+        if (encontrado != null) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Alumno " + encontrado.getNombre()));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Alumno no encontrado"));
         }
-        else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Alumno no encontrado" )); 
-        }
-    } 
-    
+    }
+
     public String getHuellaEnString() {
         return HuellaEnString;
     }
@@ -45,5 +44,4 @@ public class buscaAlumnoMB {
     public void setHuellaEnString(String HuellaEnString) {
         this.HuellaEnString = HuellaEnString;
     }
-    
 }

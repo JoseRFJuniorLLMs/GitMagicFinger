@@ -28,5 +28,4 @@ public interface AlumnoFacadeLocal {
     List<Alumno> findRange(int[] range);
 
     int count();
-    
 }

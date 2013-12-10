@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "BloqueClase.findByIdBloque", query = "SELECT b FROM BloqueClase b WHERE b.idBloque = :idBloque"),
     @NamedQuery(name = "BloqueClase.findByBloque", query = "SELECT b FROM BloqueClase b WHERE b.bloque = :bloque")})
 public class BloqueClase implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -127,7 +128,6 @@ public class BloqueClase implements Serializable {
 
     @Override
     public String toString() {
-        return bloque +" - "+getDiaSemana().toString().toUpperCase() ;
+        return bloque + " - " + getDiaSemana().toString().toUpperCase();
     }
-    
 }

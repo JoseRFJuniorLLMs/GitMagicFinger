@@ -17,6 +17,7 @@ import javax.persistence.Query;
  */
 @Stateless
 public class Usuarios implements UsuariosLocal {
+
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
@@ -25,10 +26,9 @@ public class Usuarios implements UsuariosLocal {
     }
 
     @Override
-    public User getRol(String nombre){
-       Query q = em.createNamedQuery("User.findByUsuario").setParameter("usuario", nombre);
+    public User getRol(String nombre) {
+        Query q = em.createNamedQuery("User.findByUsuario").setParameter("usuario", nombre);
         List<User> listUsuario = q.getResultList();
         return listUsuario.get(0);
     }
-
 }

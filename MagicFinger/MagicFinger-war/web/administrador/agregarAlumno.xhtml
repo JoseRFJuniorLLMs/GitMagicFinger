@@ -13,28 +13,28 @@
         <title>Facelets Template</title>
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
     </h:head>
-    
+
     <h:body>
         <script>
-            var i=0;
+            var i = 0;
             function getStringTemplate(StringTemplate) {
-                if(i==0){    
+                if (i == 0) {
                     document.getElementById('variableHuella1').value = StringTemplate;
                     document.getElementById('estado1').innerHTML = "INGRESADA";
                     i++;
                 }
-                else{
+                else {
                     document.getElementById('variableHuella2').value = StringTemplate;
                     document.getElementById('estado2').innerHTML = "INGRESADA";
                     i++;
                 }
             }
         </script>
-        
+
         <div id="content" class="center_content">
             <h1 style="text-align: center;" > Registro de Asistencia de Alumnos </h1>
             <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/> 
-            
+
             <h:form id="form" prependId="false">  
                 <p:panel id="panel" header="New Person">  
                     <p:messages id="msgs"/>  
@@ -73,15 +73,15 @@
                             <f:validateLength minimum="2" />  
                         </p:inputText>
                         <p:message for="Correo" display="icon"/>  
-                        
+
                         <h:outputLabel id="variableHuella1TXT" value="Huella 1:" />
                         <p:outputLabel id="estado1" value="NO INGRESADA"></p:outputLabel> <br />
                         <h:outputLabel id="variableHuella2TXT" value="Huella 2:" /> 
                         <p:outputLabel id="estado2" value="NO INGRESADA"></p:outputLabel>
-                        
+
                         <h:inputHidden id="variableHuella1" value="#{alumnoMB.huellaEnString1}"/>
                         <h:inputHidden id="variableHuella2" value="#{alumnoMB.huellaEnString2}"/>
-                        
+
                     </h:panelGrid>
                     <p:commandButton id="btn" value="Save" update="panel" actionListener="#{alumnoMB.savePerson}"/>  
                 </p:panel>

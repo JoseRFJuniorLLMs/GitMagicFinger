@@ -28,5 +28,4 @@ public interface CarreraFacadeLocal {
     List<Carrera> findRange(int[] range);
 
     int count();
-    
 }

@@ -10,9 +10,8 @@ import entity.BloqueClase;
 import java.util.Date;
 import javax.ejb.Local;
 
-
 @Local
 public interface asistenciaSBLocal {
-    Asistencia alumnoAsiste(AlumnosDelCurso alumnosDelCurso, BloqueClase bloque, Date fecha);
 
+    Asistencia alumnoAsiste(AlumnosDelCurso alumnosDelCurso, BloqueClase bloque, Date fecha);
 }

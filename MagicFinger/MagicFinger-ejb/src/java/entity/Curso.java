@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Curso.findByPorcenteajeAprobacion", query = "SELECT c FROM Curso c WHERE c.porcenteajeAprobacion = :porcenteajeAprobacion"),
     @NamedQuery(name = "Curso.findByTermino", query = "SELECT c FROM Curso c WHERE c.termino = :termino")})
 public class Curso implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CursoPK cursoPK;
@@ -154,7 +155,6 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return asignatura.getNombre()+ " (" + this.tipoAsignatura.getNombre() + ")";
+        return asignatura.getNombre() + " (" + this.tipoAsignatura.getNombre() + ")";
     }
-    
 }

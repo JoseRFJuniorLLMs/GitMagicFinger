@@ -4,7 +4,6 @@ package manageBeans;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import entity.Curso;
 import entity.Profesor;
 import java.util.Date;
@@ -28,41 +27,42 @@ import sessionBeans.ProfesorFacadeLocal;
 @Named(value = "asignaturaMB")
 @RequestScoped
 public class asignaturaMB {
+
     @EJB
     private ProfesorFacadeLocal profesorFacade;
     private Profesor profesor;
     private List<Curso> ListCurso;
     private asignaturaDataModel ListaCursoData;
     private Curso cursoSeleccionado;
-    
-     @PostConstruct
-     public void init(){
-     profesor = profesorFacade.find(2);
-        if(profesor!=null){
+
+    @PostConstruct
+    public void init() {
+        profesor = profesorFacade.find(2);
+        if (profesor != null) {
             ListCurso = profesor.getCursoList();
             ListaCursoData = new asignaturaDataModel(ListCurso);
         }
-     }
+    }
 
     public ProfesorFacadeLocal getProfesorFacade() {
         return profesorFacade;
     }
 
-    public void onRowSelect(SelectEvent event) {  
+    public void onRowSelect(SelectEvent event) {
         FacesMessage msg = new FacesMessage("Curso Seleccionado", cursoSeleccionado.toString());
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-    }  
-  
-     public void onCellEdit(CellEditEvent event) {  
-        Object oldValue = event.getOldValue();  
-        Object newValue = event.getNewValue();  
-          
-        if(newValue != null && !newValue.equals(oldValue)) {  
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed"," Old: " + oldValue + ", New:" + newValue);  
-            FacesContext.getCurrentInstance().addMessage(null, msg);  
-        }  
-    }  
-    
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onCellEdit(CellEditEvent event) {
+        Object oldValue = event.getOldValue();
+        Object newValue = event.getNewValue();
+
+        if (newValue != null && !newValue.equals(oldValue)) {
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed", " Old: " + oldValue + ", New:" + newValue);
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
+
     public void setProfesorFacade(ProfesorFacadeLocal profesorFacade) {
         this.profesorFacade = profesorFacade;
     }
@@ -98,5 +98,4 @@ public class asignaturaMB {
     public void setListaCursoData(asignaturaDataModel ListaCursoData) {
         this.ListaCursoData = ListaCursoData;
     }
-    
 }

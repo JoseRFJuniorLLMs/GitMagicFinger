@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class AlumnosDelCursoFacade extends AbstractFacade<AlumnosDelCurso> implements AlumnosDelCursoFacadeLocal {
+
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
@@ -26,5 +27,4 @@ public class AlumnosDelCursoFacade extends AbstractFacade<AlumnosDelCurso> imple
     public AlumnosDelCursoFacade() {
         super(AlumnosDelCurso.class);
     }
-    
 }
