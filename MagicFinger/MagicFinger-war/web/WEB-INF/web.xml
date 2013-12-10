@@ -12,6 +12,7 @@
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -19,14 +20,14 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/agregarAlumno.xhtml</welcome-file>
+        <welcome-file>faces/registroAsistencia.xhtm</welcome-file>
     </welcome-file-list>
     <security-constraint>
-        <display-name>Admin_pages</display-name>
+        <display-name>Administrador_pages</display-name>
         <web-resource-collection>
             <web-resource-name>paginas administrativas</web-resource-name>
             <description>paginas</description>
-            <url-pattern>/faces/admin/*</url-pattern>
+            <url-pattern>/faces/administrador/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -73,7 +74,7 @@
         <auth-method>FORM</auth-method>
         <realm-name>magicRealm</realm-name>
         <form-login-config>
-            <form-login-page>/login2.xhtml</form-login-page>
+            <form-login-page>/login.xhtml</form-login-page>
             <form-error-page>/index2.xhtml</form-error-page>
         </form-login-config>
     </login-config>

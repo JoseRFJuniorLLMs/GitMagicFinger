@@ -15,8 +15,8 @@
      
     <title>Facelets Template</title>
         
-    <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
-    <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+    <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
     <style>
         </style>
@@ -29,8 +29,11 @@
                 document.getElementById('buttons').click();
             }
         </script>
-        <div id="top">
-           <img src="img/MagicFinger.png" style="margin-left: 20px" height="40" width="150" />        
+        <div id="top" style="display: inline-block">
+           <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="margin-left: 20px" height="40" width="150" />
+           <h:form>
+               <h:commandLink style="float: right; display: inline-block; vertical-align: middle" action="#{loginMB.logout()}" value="Cerrar sesión" />
+   </h:form>
         </div>
         <div class="center_content">
 
@@ -60,11 +63,7 @@
                     <div style="display: inline">
                         <ul style="list-style: none;display: inline-block; padding-left: 30px">
                             <li>
-                                <p:lightBox iframe="true">  
-                                <h:outputLink value="/MagicFinger-war/faces/agregarAlumno.xhtml" title="Agregar usuario">  
-                                     <img src="img/agregar.png" style="margin-left: 30px" height="32" width="32" />
-                                </h:outputLink>  
-                                </p:lightBox>  
+                                <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 30px" height="32" width="32" />
                             </li>
                             <li>
                                 Agregar usuario
@@ -72,7 +71,7 @@
                         </ul>
                         <ul style="list-style: none ;display: inline-block; padding-left: 10px">
                             <li>
-                                <img src="img/editar.png" style="margin-left: 30px" height="32" width="32" />
+                                <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="32" width="32" />
                             </li>
                             <li>
                                 Editar usuario
@@ -80,7 +79,7 @@
                         </ul>
                          <ul style="list-style: none ;display: inline-block; padding-left: 10px">
                             <li>
-                                <img src="img/eliminar.png" style="margin-left: 30px" height="32" width="32" />
+                                <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px" height="32" width="32" />
                             </li>
                             <li>
                                 Eliminar usuario

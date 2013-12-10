@@ -4,6 +4,7 @@
  */
 package manageBeans;
 
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -27,6 +28,10 @@ public class LoginMB {
     
     public void login(){
         session.login(user, password);
+    }
+    
+    public void logout() throws IOException{
+        session.logout();
     }
     
     public String getUser() {

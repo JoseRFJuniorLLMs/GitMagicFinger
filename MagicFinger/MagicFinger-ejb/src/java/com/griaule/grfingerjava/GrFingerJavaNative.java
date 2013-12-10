@@ -13,10 +13,11 @@ import java.util.TreeMap;
 //            FingerprintImage, IImageEventListener, IFingerEventListener, GrFingerJava, 
 //            IStatusEventListener
 
-final class GrFingerJavaNative {
+public final class GrFingerJavaNative {
 
             private static Map imageCallBackMap = new TreeMap();
             private static Map fingerCallBackMap = new TreeMap();
+            private static IStatusEventListener statusCallBack;
             private static final int GR_PLUG = 21;
             private static final int GR_UNPLUG = 20;
             private static final int GR_FINGER_DOWN = 11;
@@ -60,7 +61,7 @@ final class GrFingerJavaNative {
 
             static native int GrDestroyContext(int i);
 
-            static native int GrVerify(byte abyte0[], byte abyte1[], int ai[], int i);
+            public static native int GrVerify(byte abyte0[], byte abyte1[], int ai[], int i);
 
             static native int GrIdentifyPrepare(byte abyte0[], int i);
 
@@ -84,6 +85,13 @@ final class GrFingerJavaNative {
 
             static native int GrSetLicenseFolder(byte abyte0[]);
 
+            static void setFingerCallBack(String s, IFingerEventListener ifingereventlistener) {
+/* 120*/        fingerCallBackMap.put(s, ifingereventlistener);
+            }
+
+            static void setImageCallBack(String s, IImageEventListener iimageeventlistener) {
+/* 130*/        imageCallBackMap.put(s, iimageeventlistener);
+            }
 
             static void removeFingerCallBack(String s) {
 /* 137*/        fingerCallBackMap.remove(s);
@@ -93,7 +101,43 @@ final class GrFingerJavaNative {
 /* 145*/        imageCallBackMap.remove(s);
             }
 
- 
+            private static void callbackImage(String s, int i, int j, byte abyte0[], int k) {
+/* 150*/        FingerprintImage fingerprintimage = new FingerprintImage(abyte0, i, j, k);
+/* 152*/        ((IImageEventListener)imageCallBackMap.get(s)).onImageAcquired(s, fingerprintimage);
+            }
+
+            private static void callbackStatus(String s, int i) {
+/* 157*/        switch (i) {
+/* 159*/        case 21: // '\025'
+/* 159*/            statusCallBack.onSensorPlug(s);
+                    break;
+
+/* 162*/        case 20: // '\024'
+/* 162*/            statusCallBack.onSensorUnplug(s);
+                    break;
+                }
+            }
+
+            private static void callbackFinger(String s, int i) {
+/* 168*/        IFingerEventListener ifingereventlistener = (IFingerEventListener)fingerCallBackMap.get(s);
+/* 170*/        switch (i) {
+/* 172*/        case 11: // '\013'
+/* 172*/            ifingereventlistener.onFingerDown(s);
+                    break;
+
+/* 175*/        case 10: // '\n'
+/* 175*/            ifingereventlistener.onFingerUp(s);
+                    break;
+                }
+            }
+
+            static void setStatusCallBack(IStatusEventListener istatuseventlistener) {
+/* 185*/        statusCallBack = istatuseventlistener;
+            }
+
+            static void removeStatusCallBack() {
+/* 193*/        statusCallBack = null;
+            }
 
             static  {
 /*  24*/        String s = System.getProperty("os.name");

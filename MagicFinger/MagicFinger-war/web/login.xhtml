@@ -15,8 +15,8 @@
      
     <title>Facelets Template</title>
         
-    <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
-    <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+    <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
     <style>
         </style>
@@ -30,16 +30,16 @@
             }
         </script>
         <div id="top">
-           <img src="img/MagicFinger.png" style="margin-left: 20px" height="40" width="150" />
+           <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="margin-left: 20px" height="40" width="150" />
         </div>
         <div class="center_content">
 
             <h1 style="text-align: center"> Ingreso al sistema MagicFinger </h1>
              
-            <h:form class="form-signin">
+            <h:form>
                
                 <div>
-                    <img src="img/udesantiago.png" style="margin-left: auto; margin-right: auto; display: block;
+                    <img src="/MagicFinger-war/faces/img/udesantiago.png" style="margin-left: auto; margin-right: auto; display: block;
                          margin-top: 40px; margin-bottom: 30px "  height="150" width="120" />
                 </div>
                 <div>
@@ -54,8 +54,8 @@
                     </p:password>
             
                 
-                    <p:commandButton value="Ingresar" style="text-align: center; margin-left: auto; margin-right: auto; display: block;
-                                 margin-bottom: 10px;margin-top: 28px; padding: 0px; width: 100px" type="submit" action="#{loginMB.login()}"/>
+                    <p:commandButton type="submit" value="Ingresar" style="text-align: center; margin-left: auto; margin-right: auto; display: block;
+                                 margin-bottom: 10px;margin-top: 28px; padding: 0px; width: 100px" action="#{loginMB.login()}"/>
                 </div>
              
             </h:form>

@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Facelets Template</title>
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+    </h:head>
+
+    <h:body>
+        <script>
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText : 'Todo el día'
+            }
+
+            function getStringTemplate(StringTemplate) {
+                document.getElementById('variableHuella').value = StringTemplate;
+                document.getElementById('buttons').click();
+            }
+        </script>
+        <div id="top">
+            <img src="img/MagicFinger.png" style="margin-left: 20px;" height="40" width="150"/>
+        </div>
+        <div id="content" class="center_content">
+            <h1 style="text-align: center;" > Registro de asistencia de alumnos </h1>
+            <div id="header" style="margin-top: 40px" >
+                <h3> Asignatura: <h:outputText value="#{asistenciaCursoMB.curso.asignatura.nombre}" /> - <h:outputText value="#{asistenciaCursoMB.curso.tipoAsignatura.nombre}" /></h3> <!--AQUI PONER EL PROFESOR QUE VIENE DESDE LA VISTA PRINCIPAL DEL PROFE --><br /><br />
+                <h3> Profesor: <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" /> &nbsp;<h:outputText value="#{asistenciaCursoMB.profesor.apellidop}" /> </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
+                </div>
+                
+            <h:form id="form" prependId="false" style="display: inline">  
+                
+                <div id="acciones" class="sinSalto" style="float: left; display: inline; margin-bottom: 25px">
+                        <div id="fecha" style="display: inline">
+                            <h:outputLabel style="color: #036fab" value="Fecha: "/>
+                            
+                            <p:growl id="grow" showDetail="true"/>  
+                            
+                            <p:calendar locale="es" effect="explode"  value="#{asistenciaCursoMB.fecha}" id="popupButtonCal" showOn="button">
+                                <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="grow2,grow" />  
+                            </p:calendar> 
+                                                        
+                    </div>
+                    <div id="bloque" style="display: inline;padding-left: 120px">
+                        <h:outputLabel value ="Bloque: " style="color: #036fab"/>
+                        <p:selectOneMenu value="#{asistenciaCursoMB.valor}">  
+                            <f:selectItem itemLabel="Seleccione bloque" itemValue="0" />  
+                            <f:selectItems var="blo" value="#{asistenciaCursoMB.curso.bloqueClaseList}" itemLabel="#{blo.toString()}" itemValue="#{blo.idBloque}"/>  
+                            <p:ajax update="grow2,grow" listener="#{asistenciaCursoMB.handleBloqueClaseChange}" />
+                        </p:selectOneMenu>  
+                    </div>
+                    <div id="activacion" style="display: inline;padding-left: 120px">
+                        <h:outputLabel value ="Activación de registro de asistencia: " style="color: #036fab;display:inline"/>
+                        <applet style="display:inline;vertical-align: middle" archive="Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>                  
+                    </div>
+                </div>
+            
+                <h:inputHidden id="variableHuella" value="#{asistenciaCursoMB.huellaEnString}"/>
+            
+                <p:dataTable var="variable2" id="grow2" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
+                    <p:column headerText="Nombre del alumno" >  
+                        <h:outputText value="#{variable2.alumno.toString()}" />  
+                    </p:column>  
+                    <p:column headerText="Rut">  
+                        <h:outputText value="#{variable2.alumno.rut}" />  
+                    </p:column>
+
+                    <p:column headerText="Asistencia">  
+                        <h:outputText value="#{asistenciaCursoMB.estadoAsistencia(variable2)}" />  
+                    </p:column>
+                </p:dataTable> 
+                
+                <p:commandButton id="buttons" value="Save" actionListener="#{asistenciaCursoMB.agregaPersona}" update="grow,grow2" style="display:none">
+                <f:ajax execute="@form" />
+                </p:commandButton>
+            </h:form> 
+        </div>
+    </h:body>
+</html>
+
+

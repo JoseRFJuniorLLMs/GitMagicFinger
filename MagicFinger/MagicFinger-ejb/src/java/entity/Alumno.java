@@ -191,7 +191,7 @@ public class Alumno implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Alumno[ idAlumno=" + idAlumno + " ]";
+        return nombre + " " + this.apellidop + " " + this.apellidom;
     }
 
     public byte[] getHuella1() {
