@@ -58,28 +58,31 @@
                 <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
             </div>
             <div style="display: inline-block; vertical-align: middle; margin-left: 490px">
+                <h:form>
+                    <h:commandLink style="float: right; display: inline-block; vertical-align: middle" action="#{loginMB.logout()}" value="Cerrar sesión" />
+                </h:form>
                 <p style="vertical-align: middle; display: inline-block">Usuario</p>
                 <img src="/MagicFinger-war/faces/img/usuario.png" style="display: inline-block; vertical-align: middle" height="35" width="35"/>
             </div>
         </div>
-         
-            <div id="content" class="center_content">
-                <h1 style="text-align: center;margin-bottom: 40px" > Bienvenido 
-                    <h:outputText value="#{loginSessionMB.profesor.nombre}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidop}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidom}" />
-                </h1>
-                <div> 
-                    <div id="cursos" style="display:inline-block; vertical-align: middle">
-                        <h:form id="form"> <p:growl id="grow1" showDetail="true" />
-                    
+
+        <div id="content" class="center_content">
+            <h1 style="text-align: center;margin-bottom: 40px" > Bienvenido 
+                <h:outputText value="#{loginSessionMB.profesor.nombre}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidop}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidom}" />
+            </h1>
+            <div> 
+                <div id="cursos" style="display:inline-block; vertical-align: middle">
+                    <h:form id="form"> <p:growl id="grow1" showDetail="true" />
+
                         <h3>Mis cursos</h3>
-                        
+
                         <p:dataTable id="curso" 
                                      style="width: 480px;margin-top:20px" 
                                      var="cur" value="#{asignaturaMB.listaCursoData}" 
                                      selection ="#{asignaturaMB.cursoSeleccionado}"
                                      selectionMode="single"
                                      >  
-                            <p:ajax event="rowSelect" listener="#{asignaturaMB.onRowSelect}"   
+                            <p:ajax event="rowSelect" listener="#{asignaturaMB.onRowSelect}"
                                     update=":form:grow1 :form2:txt1 :form2:txt2" /> 
 
                             <p:column headerText="Nombre Asignatura" style="width:24%" >  
@@ -93,7 +96,7 @@
                             </p:column>  
 
                         </p:dataTable>  
-                        <p:commandButton id="boton_ir"  value="Ir a lista de asistencia"/>
+                       
                         <p:dialog header="Detalle del curso" widgetVar="curDialog" resizable="false" id="carDlg"  
                                   showEffect="fade" hideEffect="explode" modal="true">  
                             <h:panelGrid id="display1" columns="2" cellpadding="4" style="margin:0 auto;">  
@@ -103,66 +106,77 @@
                                 <h:outputText value="#{asignaturaMB.cursoSeleccionado.asignatura.idAsignatura}" style="font-weight:bold"/>
                                 <h:outputText value="Tipo asignatura: " />
                                 <h:outputText value="#{asignaturaMB.cursoSeleccionado.tipoAsignatura.nombre}" style="font-weight:bold"/>
-                                <h:outputText value="Cantidad alumnos: " />
-                                <h:outputText value="#{asignaturaMB.cursoSeleccionado.alumnosDelCursoList.size}" style="font-weight:bold"/>            
+
                             </h:panelGrid>
                         </p:dialog> 
-                        
+
                     </h:form>
-                    </div>
-                    
-                    
-                    <div id="normas" style="display:inline-block;vertical-align:middle;margin-left: 35px;" >
-                        <h:form id="form2" style="display: inline-block"> 
+                </div>
+
+
+                <div id="normas" style="display:inline-block;vertical-align:middle;margin-left: 35px;" >
+                    <h:form id="form2" style="display: inline-block"> 
                         <h3 style="margin-bottom: 20px; text-align: center;">Normas del curso</h3>
-                        <h4 style="text-align: left;"> Porcentaje aprobación:  </h4>
+                        <h5 style="text-align: left;"> Porcentaje aprobación:  </h5>
                         <p:inputText id ="txt1" style="margin-left: auto; margin-right: auto; display: block;
                                      margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.porcenteajeAprobacion}"> 
                         </p:inputText>
-                        <h4 style="text-align: left;"> Limite asistencia:  </h4>
-                       <p:inputText id="txt2" style=" margin-left: auto; margin-right: auto; display: block;
+                        <h5 style="text-align: left;"> Limite asistencia:  </h5>
+                        <p:inputText id="txt2" style=" margin-left: auto; margin-right: auto; display: block;
                                      margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.termino}"> 
                         </p:inputText>
                         <p:commandButton id="normas2" value="Actualizar normas" update=":form:grow1" action="#{asignaturaMB.actualizarDatos()}" />  
-                        </h:form>
-                    </div>
-                    
-
-                        
+                    </h:form>
                 </div>
 
-                <div style="margin-top: 30px">
-                    <div id="horario" style="display:inline-block; vertical-align: middle">
-                        <h3>Mi horario</h3>
-                        <p:dataTable id="cursos" style="width: 480px;margin-top:20px" var="cursos" value="#{tableBean.carsSmall}">  
-                            <p:column headerText="Nombre del curso" style="width:40%">  
-                                <h:outputText value="#{car.model}" />  
-                            </p:column>
-                            <p:column style="width:4%">  
-                                <p:commandButton id="selectButton" update=":form:display" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">  
-                                    <f:setPropertyActionListener value="#{car}" target="#{tableBean.selectedCar}" />  
-                                </p:commandButton>  
-                            </p:column>  
-                        </p:dataTable>                
-                    </div>
 
-                    <div id="suspension" style="display:inline-block;vertical-align:middle;margin-left: 35px;" >
-                        <h3 >Suspensión de clases</h3><br></br>
-
-                        <div id="calendario" style="margin-top: 20px ">
-                            <p:growl id="grow" showDetail="true"/>  
-                            <p:calendar style="display:inline-block; vertical-align: middle" locale="es" effect="explode"  value="#{asistenciaCursoMB.fecha}" id="popupButtonCal" showOn="button">
-                                <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="grow" />  
-                            </p:calendar> 
-                            <p:commandButton style="margin-left: 124px;display:inline-block; vertical-align: middle" value="Suspensión de clases"/>
-                        </div>
-
-
-
-                    </div>    
-                </div>
 
             </div>
+            <br />
+            <br />
+            <h:form id="formAsistencia" prependId="false" style="display: inline">  
+                <div id="acciones" class="sinSalto" style="float: left; display: inline; margin-bottom: 25px">
+                    <div id="fecha" style="display: inline">
+                        <h:outputLabel style="color: #036fab" value="Fecha: "/>
+                        <p:growl id="growAsistencia" showDetail="true"/>
+                        <p:calendar locale="es" effect="explode"  value="#{asistenciaCursoMB.fecha}" id="popupButtonCal" showOn="button">
+                            <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="grow2Asistencia,growAsistencia" />  
+                        </p:calendar> 
+                    </div>
+                    <div id="bloque" style="display: inline;padding-left: 120px">
+                        <h:outputLabel value ="Bloque: " style="color: #036fab"/>
+                        <p:selectOneMenu value="#{asistenciaCursoMB.valor}">  
+                            <f:selectItem itemLabel="Seleccione bloque" itemValue="0" />  
+                            <f:selectItems var="blo" value="#{asistenciaCursoMB.curso.bloqueClaseList}" itemLabel="#{blo.toString()}" itemValue="#{blo.idBloque}"/>  
+                            <p:ajax update="grow2Asistencia,growAsistencia" listener="#{asistenciaCursoMB.handleBloqueClaseChange}" />
+                        </p:selectOneMenu>  
+                    </div>
+                    <div id="activacion" style="display: inline;padding-left: 120px">
+                        <h:outputLabel value ="Activación de registro de asistencia: " style="color: #036fab;display:inline"/>
+                        <applet style="display:inline;vertical-align: middle" archive="/MagicFinger-war/faces/Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>                  
+                    </div>
+                </div>
+
+                <h:inputHidden id="variableHuella" value="#{asistenciaCursoMB.huellaEnString}"/>
+
+                <p:dataTable var="variable2" id="grow2Asistencia" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
+                    <p:column headerText="Nombre del alumno" >  
+                        <h:outputText value="#{variable2.alumno.toString()}" />  
+                    </p:column>  
+                    <p:column headerText="Rut">  
+                        <h:outputText value="#{variable2.alumno.rut}" />  
+                    </p:column>
+
+                    <p:column headerText="Asistencia">  
+                        <h:outputText value="#{asistenciaCursoMB.estadoAsistencia(variable2)}" />  
+                    </p:column>
+                </p:dataTable> 
+
+                <p:commandButton id="buttons" value="Save" actionListener="#{asistenciaCursoMB.agregaPersona}" update="growAsistencia,grow2Asistencia" style="display:none">
+                    <f:ajax execute="@form" />
+                </p:commandButton>
+            </h:form>
+        </div>
     </h:body>
 </html>
 

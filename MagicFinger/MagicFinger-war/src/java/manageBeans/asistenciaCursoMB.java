@@ -122,6 +122,7 @@ public class asistenciaCursoMB {
         }
         return "Ausente";
     }
+
     public void handleDateSelect(SelectEvent event) {
         SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
         fecha = (Date) event.getObject();
@@ -189,12 +190,10 @@ public class asistenciaCursoMB {
     }
 
     public Date getFecha() {
-        System.out.println("hola__________________" + fecha.toString());
         return fecha;
     }
 
     public void setFecha(Date fecha) {
-        System.out.println("ads-FASFASD__________________-" + fecha.toString());
         this.fecha = fecha;
     }
 

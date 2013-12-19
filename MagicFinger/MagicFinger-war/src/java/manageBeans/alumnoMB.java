@@ -17,9 +17,9 @@ import sessionBeans.AlumnoFacadeLocal;
 @Named(value = "alumnoMB")
 @RequestScoped
 public class alumnoMB {
+
     @EJB
     private AlumnoFacadeLocal alumnoFacade;
-    
     private String rut;
     private String nombre;
     private String apellidoP;
@@ -28,19 +28,16 @@ public class alumnoMB {
     private String huellaEnString2;
     private int telefono;
     private String correo;
-        
+
     public void savePerson(ActionEvent actionEvent) {
-        
-        if(huellaEnString1.isEmpty()){
-             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Huella 1 vacía"));
-        }
-        else{
-            if(huellaEnString2.isEmpty()){
-                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Huella 2 vacía"));
-             }
-            else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("necesito agregar a" + nombre + " " + apellidoP ));
-       
+
+        if (huellaEnString1.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Huella 1 vacía"));
+        } else {
+            if (huellaEnString2.isEmpty()) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Huella 2 vacía"));
+            } else {
+                
                 Alumno nuevo = new Alumno();
                 nuevo.setNombre(nombre);
                 nuevo.setRut(rut);
@@ -50,16 +47,15 @@ public class alumnoMB {
                 nuevo.setCorreo(correo);
                 byte[] templeByte1 = Base64.decode(huellaEnString1);
                 nuevo.setHuella1(templeByte1);
-                
+
                 byte[] templeByte2 = Base64.decode(huellaEnString2);
                 nuevo.setHuella2(templeByte2);
                 alumnoFacade.create(nuevo);
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se haagregar " + nombre + " " + apellidoP ));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se ha agregado a" + nombre + " " + apellidoP));
             }
-        }    
-    }   
-      
-    
+        }
+    }
+
     public String getRut() {
         return rut;
     }
