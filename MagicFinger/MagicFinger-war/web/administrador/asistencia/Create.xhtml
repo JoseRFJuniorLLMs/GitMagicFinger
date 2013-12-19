@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAsistenciaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAsistenciaLabel_idAsistencia}" for="idAsistencia" />
+                    <h:inputText id="idAsistencia" value="#{asistenciaController.selected.idAsistencia}" title="#{bundle.CreateAsistenciaTitle_idAsistencia}" required="true" requiredMessage="#{bundle.CreateAsistenciaRequiredMessage_idAsistencia}"/>
+                    <h:outputLabel value="#{bundle.CreateAsistenciaLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{asistenciaController.selected.fecha}" title="#{bundle.CreateAsistenciaTitle_fecha}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateAsistenciaLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{asistenciaController.selected.estado}" title="#{bundle.CreateAsistenciaTitle_estado}" />
+                    <h:outputLabel value="#{bundle.CreateAsistenciaLabel_alumnosDelCurso}" for="alumnosDelCurso" />
+                    <h:selectOneMenu id="alumnosDelCurso" value="#{asistenciaController.selected.alumnosDelCurso}" title="#{bundle.CreateAsistenciaTitle_alumnosDelCurso}" required="true" requiredMessage="#{bundle.CreateAsistenciaRequiredMessage_alumnosDelCurso}">
+                        <f:selectItems value="#{alumnosDelCursoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateAsistenciaLabel_bloqueClaseId}" for="bloqueClaseId" />
+                    <h:selectOneMenu id="bloqueClaseId" value="#{asistenciaController.selected.bloqueClaseId}" title="#{bundle.CreateAsistenciaTitle_bloqueClaseId}" required="true" requiredMessage="#{bundle.CreateAsistenciaRequiredMessage_bloqueClaseId}">
+                        <f:selectItems value="#{bloqueClaseController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{asistenciaController.create}" value="#{bundle.CreateAsistenciaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{asistenciaController.prepareList}" value="#{bundle.CreateAsistenciaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAsistenciaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
