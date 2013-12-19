@@ -3,13 +3,12 @@ package manageBeans.mantenedores;
 import entity.Asistencia;
 import manageBeans.mantenedores.util.JsfUtil;
 import manageBeans.mantenedores.util.PaginationHelper;
-import sessionBeans.AsistenciaFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,7 +19,7 @@ import javax.faces.model.SelectItem;
 import sessionBeans.AsistenciaFacadeLocal;
 
 @Named("asistenciaController")
-@SessionScoped
+@RequestScoped
 public class AsistenciaController implements Serializable {
 
     private Asistencia current;

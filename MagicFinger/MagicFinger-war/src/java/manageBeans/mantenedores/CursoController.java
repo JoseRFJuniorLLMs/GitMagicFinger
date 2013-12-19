@@ -3,13 +3,12 @@ package manageBeans.mantenedores;
 import entity.Curso;
 import manageBeans.mantenedores.util.JsfUtil;
 import manageBeans.mantenedores.util.PaginationHelper;
-import sessionBeans.CursoFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,7 +19,7 @@ import javax.faces.model.SelectItem;
 import sessionBeans.CursoFacadeLocal;
 
 @Named("cursoController")
-@SessionScoped
+@RequestScoped
 public class CursoController implements Serializable {
 
     private Curso current;
