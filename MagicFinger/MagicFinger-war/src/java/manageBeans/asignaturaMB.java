@@ -6,19 +6,19 @@ package manageBeans;
  */
 import entity.Curso;
 import entity.Profesor;
-import java.util.Date;
+import java.io.IOException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.SlideEndEvent;
-import org.primefaces.event.UnselectEvent;
 import sessionBeans.CursoFacadeLocal;
 import sessionBeans.ProfesorFacadeLocal;
 
@@ -29,19 +29,23 @@ import sessionBeans.ProfesorFacadeLocal;
 @Named(value = "asignaturaMB")
 @RequestScoped
 public class asignaturaMB {
-
     @EJB
     private CursoFacadeLocal cursoFacade;
     @EJB
     private ProfesorFacadeLocal profesorFacade;
+    
     private Profesor profesor;
     private List<Curso> ListCurso;
     private asignaturaDataModel ListaCursoData;
     private Curso cursoSeleccionado;
 
+    @Inject 
+    private TomaAsistenciaConversation conversation;
+    @Inject
+    LoginSessionMB profesorLogin;
     @PostConstruct
     public void init() {
-        profesor = profesorFacade.find(2);
+        profesor = profesorLogin.getProfesor();
         if (profesor != null) {
             ListCurso = profesor.getCursoList();
             ListaCursoData = new asignaturaDataModel(ListCurso);
@@ -51,7 +55,23 @@ public class asignaturaMB {
     public ProfesorFacadeLocal getProfesorFacade() {
         return profesorFacade;
     }
-
+    public void redireccionar(String pagina){
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+       try {
+           externalContext.redirect(externalContext.getRequestContextPath() + pagina);
+       }
+       catch (IOException e) {
+           System.out.println(e.getMessage());
+       }
+    }
+    public void envioDatos(){
+        conversation.beginConversation();
+         System.out.println("El de asignatura imprime " + cursoSeleccionado.getTipoAsignatura().getNombre());
+        conversation.setCurso(cursoSeleccionado);
+        conversation.setProfesor(profesor);
+        redireccionar("/faces/profesor/registrarAsistencia.xhtml?cid=".concat(this.conversation.getConversation().getId()));
+        
+    }
     public void onRowSelect(SelectEvent event) {
         FacesMessage msg = new FacesMessage("Curso Seleccionado", cursoSeleccionado.toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);

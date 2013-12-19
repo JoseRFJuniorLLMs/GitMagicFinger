@@ -19,6 +19,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
 import sessionBeans.AsistenciaFacadeLocal;
 import sessionBeans.ProfesorFacadeLocal;
@@ -30,7 +31,7 @@ import sessionBeans.asignaturas.asistenciaSBLocal;
  * @author chevo
  */
 @Named(value = "asistenciaCursoMB")
-@ApplicationScoped
+@RequestScoped
 public class asistenciaCursoMB {
 
     @EJB
@@ -41,6 +42,11 @@ public class asistenciaCursoMB {
     private ProfesorFacadeLocal profesorFacade;
     @EJB
     private alumnosLocal alumnos;
+    
+    @Inject 
+    private TomaAsistenciaConversation conversation;
+    
+    
     private String HuellaEnString;
     private Profesor profesor;
     private List<Curso> ListCurso;
@@ -56,13 +62,16 @@ public class asistenciaCursoMB {
         if (fecha == null) {
             fecha = new Date();
         }
-        profesor = profesorFacade.find(2);
+        System.out.println("entro");
+        profesor = conversation.getProfesor();
         if (profesor != null) {
+            System.out.println("entro2");
             ListCurso = profesor.getCursoList();
             if (!ListCurso.isEmpty()) {
-                curso = ListCurso.get(0);
-                bloqueClaseList = curso.getBloqueClaseList();
-
+                curso = conversation.getCurso();
+                System.out.println("el de asistencia imprime " + curso.getTipoAsignatura());
+                if(curso!=null)
+                    bloqueClaseList = curso.getBloqueClaseList();
             }
         }
     }
@@ -81,9 +90,7 @@ public class asistenciaCursoMB {
     public void agregaPersona(ActionEvent actionEvent) {
         Alumno encontrado = alumnos.CompareFingerPrint(HuellaEnString, curso);
         if (bloqueClase == null) {
-
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "Debe seleccionar fecha y bloque"));
-
             return;
         }
         if (encontrado != null) {
