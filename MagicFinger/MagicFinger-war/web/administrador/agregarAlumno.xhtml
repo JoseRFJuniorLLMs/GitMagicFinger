@@ -39,7 +39,8 @@
                     <p:messages id="msgs"/>  
                     <h:panelGrid columns="3">  
                         <h:outputLabel value="Rut: *" />  
-                        <p:inputText id="Rut" value="#{alumnoMB.rut}" required="true" label="Rut">  
+                        <p:inputText id="Rut" value="#{alumnoMB.rut}" required="true" label="Rut"> 
+                            
                             <f:validateLength minimum="2" />  
                         </p:inputText>
                         <p:message for="Rut" display="icon"/>  

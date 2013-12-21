@@ -45,6 +45,7 @@ public class asignaturaMB {
     LoginSessionMB profesorLogin;
     @PostConstruct
     public void init() {
+        System.out.println("init omg");
         profesor = profesorLogin.getProfesor();
         if (profesor != null) {
             ListCurso = profesor.getCursoList();
