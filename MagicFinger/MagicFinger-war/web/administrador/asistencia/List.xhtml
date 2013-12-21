@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:body>
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAsistenciaEmpty}" rendered="#{asistenciaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{asistenciaController.items.rowCount > 0}">
+                    <h:outputText value="#{asistenciaController.pagination.pageFirstItem + 1}..#{asistenciaController.pagination.pageLastItem + 1}/#{asistenciaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{asistenciaController.previous}" value="#{bundle.Previous} #{asistenciaController.pagination.pageSize}" rendered="#{asistenciaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{asistenciaController.next}" value="#{bundle.Next} #{asistenciaController.pagination.pageSize}" rendered="#{asistenciaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{asistenciaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsistenciaTitle_idAsistencia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idAsistencia}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsistenciaTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsistenciaTitle_estado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estado}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsistenciaTitle_alumnosDelCurso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alumnosDelCurso}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAsistenciaTitle_bloqueClaseId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.bloqueClaseId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{asistenciaController.prepareView}" value="#{bundle.ListAsistenciaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{asistenciaController.prepareEdit}" value="#{bundle.ListAsistenciaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{asistenciaController.destroy}" value="#{bundle.ListAsistenciaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{asistenciaController.prepareCreate}" value="#{bundle.ListAsistenciaCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAsistenciaIndexLink}"/>
+            </h:form>
+    </h:body>
+
+</html>
