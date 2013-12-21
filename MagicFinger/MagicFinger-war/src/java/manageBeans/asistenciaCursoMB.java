@@ -54,8 +54,6 @@ public class asistenciaCursoMB {
     
     @PostConstruct
     public void init() {
-        restriccionAsistencia = true;
-           
         fecha = conversation.getFecha();
         profesor = conversation.getProfesor();
         curso = conversation.getCurso();
@@ -69,9 +67,8 @@ public class asistenciaCursoMB {
             if(temp!=null){
                 bloqueClase = temp;
                 valor = bloqueClase.getIdBloque();
-            } 
+            }
         }
-        
     }
 
     public void buscaPersona(ActionEvent actionEvent) {
