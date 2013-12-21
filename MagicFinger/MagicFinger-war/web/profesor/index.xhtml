@@ -43,11 +43,6 @@
                 allDayText: 'Todo el día'
             }
 
-
-            function getStringTemplate(StringTemplate) {
-                document.getElementById('variableHuella').value = StringTemplate;
-                document.getElementById('buttons').click();
-            }
         </script>
 
         <div id="top">
@@ -86,7 +81,7 @@
                                     update=":form:grow1 :form2:txt1 :form2:txt2" /> 
 
                             <p:column headerText="Nombre Asignatura" style="width:24%" >  
-                                <h:outputText value="#{cur}" />  
+                                <h:outputText value="#{cur.toString()}" />  
                             </p:column>
 
                             <p:column style="width:4%">  
@@ -116,24 +111,22 @@
 
                 <div id="normas" style="display:inline-block;vertical-align:middle;margin-left: 35px;" >
                     <h:form id="form2" style="display: inline-block"> 
-                        
-                        
                         <h3 style="margin-bottom: 20px; text-align: center;">Normas del curso</h3>
                         <h5 style="text-align: left;"> Porcentaje aprobación:  </h5>
                         
                         <p:inplace id ="txt1" editor="true">
-                        <p:inputText  style="margin-left: auto; margin-right: auto; display: inline;
-                                     margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.porcenteajeAprobacion}"> 
-                        </p:inputText>
+                            <p:ajax event="save" listener="#{asignaturaMB.actualizarDatos}" update=":form:grow1"/>
+                             <p:spinner  min="0" max="100" style="margin-left: auto; margin-right: auto; display: inline;
+                                     margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.porcenteajeAprobacion}" /> 
                         </p:inplace>
+                        
                         <h5 style="text-align: left;"> Limite asistencia:  </h5>
-                        <p:inplace id="txt2"  editor="true">  
-                        <p:inputText style=" margin-left: auto; margin-right: auto; display: inline;
-                                     margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.termino}"> 
-                        </p:inputText>
+                        
+                        <p:inplace id="txt2"  editor="true">
+                            <p:ajax event="save" listener="#{asignaturaMB.actualizarDatos}" update=":form:grow1"/>
+                        <p:spinner  min="10" max="90" style=" margin-left: auto; margin-right: auto; display: inline;
+                                     margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.termino}" /> 
                         </p:inplace>  
-                        <br />
-                        <p:commandButton id="normas2" value="Actualizar normas" update=":form:grow1" action="#{asignaturaMB.actualizarDatos()}" />  
                     </h:form>
                 </div>
             </div>

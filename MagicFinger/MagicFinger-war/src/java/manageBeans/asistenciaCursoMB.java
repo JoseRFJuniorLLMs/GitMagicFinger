@@ -47,6 +47,7 @@ public class asistenciaCursoMB {
     private Curso curso;
     private BloqueClase bloqueClase;
     private int valor;
+    private int valor2;
     private Date fecha;
     private List<BloqueClase> bloqueClaseList;
     private List<BloqueClase> bloqueClasesAllList;
@@ -158,13 +159,15 @@ public class asistenciaCursoMB {
         }
         switch(asis.getEstado()){
             case 1:
-                System.out.println("busco estado en 1");
                 return "Presente";
             case 2:
-                System.out.println("busco estado en 2");
                 return "Justificado";
             case 3:
                 return "Atrasado";
+            case 4:
+                return "Suspendida";
+            case 5:
+                return "Ausente";
             default:
                 return "Ausente";
         }
@@ -263,5 +266,13 @@ public class asistenciaCursoMB {
         this.bloqueClaseList = bloqueClaseList;
     }
 
+    public int getValor2() {
+        return valor2;
+    }
+
+    public void setValor2(int valor2) {
+        this.valor2 = valor2;
+    }
+    
     
 }
