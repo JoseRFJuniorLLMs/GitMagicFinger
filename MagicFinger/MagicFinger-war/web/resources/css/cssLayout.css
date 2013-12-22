@@ -1,12 +1,12 @@
 
+#pagina{
+    width: 100%;
+}
 #top {
-
-    width: 100%;    
-    position: relative;
+    width: 100%;
+    min-width: 1000px;
     background-color: #036fab;
     color: white;
-    padding: 5px;
-    margin: 0px 0px 10px 0px;
 }
 
 #bottom {
@@ -32,10 +32,12 @@
 
 .center_content {
     margin: 0 auto;
-    width: 1000px;
+    position: fixed;
+    width: 75%;
+    min-width: 1000px;
     position: relative;
     background-color: #FFFFFF;
-    padding: 5px;
+    
 }
 
 .left_content {

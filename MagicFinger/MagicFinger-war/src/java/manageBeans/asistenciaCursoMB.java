@@ -30,7 +30,7 @@ import sessionBeans.asignaturas.asistenciaSBLocal;
  * @author chevo
  */
 @Named(value = "asistenciaCursoMB")
-@ApplicationScoped
+@RequestScoped
 public class asistenciaCursoMB {
 
     @EJB
@@ -53,10 +53,12 @@ public class asistenciaCursoMB {
 
     @PostConstruct
     public void init() {
+        System.out.println("entro aki");
+        
         if (fecha == null) {
             fecha = new Date();
         }
-        profesor = profesorFacade.find(2);
+        profesor = profesorFacade.find(1);
         if (profesor != null) {
             ListCurso = profesor.getCursoList();
             if (!ListCurso.isEmpty()) {
