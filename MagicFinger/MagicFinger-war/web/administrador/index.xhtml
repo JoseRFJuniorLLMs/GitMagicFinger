@@ -43,7 +43,10 @@
                     </h:form>
               </div>
             </div>
-            <div class="center_content">
+            <p:dataTable var="item" value="#{userController.items}">  
+                <p:column headerText="Usuarios del sistema">  
+                    <h:outputText value="#{item.usuario}" />  
+                </p:column>  
 
                 <h1 style="text-align: center"> Bienvenido administrador</h1>
 
@@ -77,55 +80,10 @@
                                         </h:outputLink>  
                                     </p:lightBox>   
 
-
-                                </li>
-                                <li>
-                                    Agregar usuario
-                                </li>
-                            </ul>
-                            <ul style="list-style: none ;display: inline-block; padding-left: 10px">
-                                <li>
-                                    <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="32" width="32" />
-                                </li>
-                                <li>
-                                    Editar usuario
-                                </li>
-                            </ul>
-                            <ul style="list-style: none ;display: inline-block; padding-left: 10px">
-                                <li>
-                                    <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px" height="32" width="32" />
-                                </li>
-                                <li>
-                                    Eliminar usuario
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div style="float: left; width: 100%">
-                    <p:dataTable var="variable" value="">  
-                        <p:column headerText="Usuarios del sistema">  
-                            <h:outputText value="#" />  
-                        </p:column>  
-
-                        <p:column headerText="RUT">  
-                            <h:outputText value="#" />
-                        </p:column>
-
-                        <p:column headerText="Correo">  
-                            <h:outputText value="#" />
-
-                        </p:column>  
-
-                        <p:column headerText="Tipo de usuario">  
-                            <h:outputText value="#" />  
-                        </p:column>
-                    </p:dataTable>
-
-                </div>
-            </div>
+                <p:column headerText="Tipo de usuario">  
+                    <h:outputText value="#{item.userRol}" />  
+                </p:column>
+            </p:dataTable>
         </div>
     </h:body>
 </html>
