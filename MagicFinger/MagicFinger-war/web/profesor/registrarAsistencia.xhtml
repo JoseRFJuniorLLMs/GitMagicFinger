@@ -58,30 +58,31 @@
                 <h3> Profesor: <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" /> &nbsp;<h:outputText value="#{asistenciaCursoMB.profesor.apellidop}" /> </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
             </div>
 
-            <h:form id="formAsistencia" prependId="false" style="display: inline">  
+            <h:form id="formAsistencia" prependId="false" style="vertical-align: middle; display: inline">  
                 <div id="acciones" class="sinSalto" style="float: left; display: inline; margin-bottom: 25px">
-                    <div id="fecha" style="display: inline">
-                        <h:outputLabel style="color: #036fab" value="Fecha: "/>
+                    <div id="fecha" style="vertical-align: middle;display: inline">
+                        <h:outputLabel style="vertical-align: middle;display: inline; color: #036fab" value="Fecha: "/>
                         <p:growl id="growAsistencia" showDetail="true"/>  
 
-                        <p:calendar locale="es" effect="explode"  value="#{asistenciaCursoMB.fecha}" id="popupButtonCal" showOn="button">
-                            <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="grow2Asistencia,growAsistencia" />  
-                        </p:calendar> 
+                        <p:calendar style="vertical-align: middle;display: inline;" locale="es" effect="explode"  value="#{asistenciaCursoMB.fecha}" id="popupButtonCal" showOn="button">
+                            <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="bloqueGrup,grow2Asistencia,growAsistencia" />  
+                        </p:calendar>
                     </div>
-                    <div id="bloque" style="display: inline;padding-left: 120px">
-                        <h:outputLabel value ="Bloque: " style="color: #036fab"/>
-                        <p:selectOneMenu value="#{asistenciaCursoMB.valor}">  
-                            <f:selectItem itemLabel="Seleccione bloque" itemValue="0" />  
-                            <f:selectItems var="blo" value="#{asistenciaCursoMB.curso.bloqueClaseList}" itemLabel="#{blo.toString()}" itemValue="#{blo.idBloque}"/>  
+                    <div id="bloque" style="vertical-align: middle; display: inline; padding-left: 120px">
+                        <h:outputLabel value ="Bloque: " style="color: #036fab; vertical-align: middle"/>
+                        <p:selectOneMenu id="bloqueGrup" value="#{asistenciaCursoMB.valor}" style="vertical-align: middle">  
+                            <f:selectItem itemLabel="Seleccione bloque" itemValue="-1" /> 
+                            <f:selectItems var="blo" value="#{asistenciaCursoMB.bloqueClaseList}" itemLabel="#{blo.toString()}" itemValue="#{blo.idBloque}"/>  
+                            
                             <p:ajax update="grow2Asistencia,growAsistencia" listener="#{asistenciaCursoMB.handleBloqueClaseChange}" />
                         </p:selectOneMenu>  
                     </div>
                     <div id="activacion" style="display: inline;padding-left: 120px">
-                        <h:outputLabel value ="Activación de registro de asistencia: " style="color: #036fab;display:inline"/>
+                        <h:outputLabel value ="Registro de asistencia: " style="color: #036fab;display:inline"/>
                         <applet style="display:inline;vertical-align: middle" archive="/MagicFinger-war/faces/Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>                  
                     </div>
                 </div>
-
+    <!-- esto esta bueno http://www.primefaces.org/showcase/ui/dialogForm.jsf > -->
                 <h:inputHidden id="variableHuella" value="#{asistenciaCursoMB.huellaEnString}"/>
 
                 <p:dataTable var="variable2" id="grow2Asistencia" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
@@ -96,7 +97,6 @@
                         <h:outputText value="#{asistenciaCursoMB.estadoAsistencia(variable2)}" />  
                     </p:column>
                 </p:dataTable> 
-
                 <p:commandButton id="buttons" value="Save" actionListener="#{asistenciaCursoMB.agregaPersona}" update="growAsistencia,grow2Asistencia" style="display:none">
                     <f:ajax execute="@form" />
                 </p:commandButton>
