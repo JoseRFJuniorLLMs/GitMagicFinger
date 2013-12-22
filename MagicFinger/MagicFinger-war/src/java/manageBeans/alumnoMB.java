@@ -8,6 +8,9 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
 import sessionBeans.AlumnoFacadeLocal;
 
 /**
@@ -20,6 +23,8 @@ public class alumnoMB {
 
     @EJB
     private AlumnoFacadeLocal alumnoFacade;
+    
+    
     private String rut;
     private String nombre;
     private String apellidoP;
@@ -55,11 +60,13 @@ public class alumnoMB {
             }
         }
     }
-
+    @NotNull(message="Se debe especificar el tipo de imagen.")
+    @Enumerated(EnumType.STRING)
     public String getRut() {
         return rut;
     }
-
+    
+    
     public void setRut(String rut) {
         this.rut = rut;
     }
