@@ -18,14 +18,15 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import sessionBeans.CursoFacadeLocal;
 
+
 @Named("cursoController")
 @RequestScoped
 public class CursoController implements Serializable {
 
+
     private Curso current;
     private DataModel items = null;
-    @EJB
-    private CursoFacadeLocal ejbFacade;
+    @EJB private CursoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -44,10 +45,10 @@ public class CursoController implements Serializable {
     private CursoFacadeLocal getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
+
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
@@ -55,7 +56,7 @@ public class CursoController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -68,7 +69,7 @@ public class CursoController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Curso) getItems().getRowData();
+        current = (Curso)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -82,8 +83,8 @@ public class CursoController implements Serializable {
 
     public String create() {
         try {
-            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CursoCreated"));
             return prepareCreate();
@@ -94,15 +95,15 @@ public class CursoController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Curso) getItems().getRowData();
+        current = (Curso)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CursoUpdated"));
             return "View";
@@ -113,7 +114,7 @@ public class CursoController implements Serializable {
     }
 
     public String destroy() {
-        current = (Curso) getItems().getRowData();
+        current = (Curso)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -147,14 +148,14 @@ public class CursoController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -197,7 +198,7 @@ public class CursoController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Curso.class)
+    @FacesConverter(forClass=Curso.class)
     public static class CursoControllerConverter implements Converter {
 
         private static final String SEPARATOR = "#";
@@ -208,7 +209,7 @@ public class CursoController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CursoController controller = (CursoController) facesContext.getApplication().getELResolver().
+            CursoController controller = (CursoController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "cursoController");
             return controller.getCurso(getKey(value));
         }
@@ -239,8 +240,10 @@ public class CursoController implements Serializable {
                 Curso o = (Curso) object;
                 return getStringKey(o.getCursoPK());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Curso.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Curso.class.getName());
             }
         }
+
     }
+
 }

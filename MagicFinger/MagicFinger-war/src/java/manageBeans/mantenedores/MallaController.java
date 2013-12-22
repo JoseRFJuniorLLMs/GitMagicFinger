@@ -18,14 +18,15 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import sessionBeans.MallaFacadeLocal;
 
+
 @Named("mallaController")
 @RequestScoped
 public class MallaController implements Serializable {
 
+
     private Malla current;
     private DataModel items = null;
-    @EJB
-    private MallaFacadeLocal ejbFacade;
+    @EJB private MallaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -43,10 +44,10 @@ public class MallaController implements Serializable {
     private MallaFacadeLocal getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
+
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
@@ -54,7 +55,7 @@ public class MallaController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -67,7 +68,7 @@ public class MallaController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Malla) getItems().getRowData();
+        current = (Malla)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -90,7 +91,7 @@ public class MallaController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Malla) getItems().getRowData();
+        current = (Malla)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -107,7 +108,7 @@ public class MallaController implements Serializable {
     }
 
     public String destroy() {
-        current = (Malla) getItems().getRowData();
+        current = (Malla)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -141,14 +142,14 @@ public class MallaController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -191,7 +192,7 @@ public class MallaController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Malla.class)
+    @FacesConverter(forClass=Malla.class)
     public static class MallaControllerConverter implements Converter {
 
         @Override
@@ -199,7 +200,7 @@ public class MallaController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            MallaController controller = (MallaController) facesContext.getApplication().getELResolver().
+            MallaController controller = (MallaController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "mallaController");
             return controller.getMalla(getKey(value));
         }
@@ -225,8 +226,10 @@ public class MallaController implements Serializable {
                 Malla o = (Malla) object;
                 return getStringKey(o.getIdCarrera());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Malla.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Malla.class.getName());
             }
         }
+
     }
+
 }

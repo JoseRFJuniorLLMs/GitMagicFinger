@@ -18,14 +18,15 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import sessionBeans.AlumnosDelCursoFacadeLocal;
 
+
 @Named("alumnosDelCursoController")
 @RequestScoped
 public class AlumnosDelCursoController implements Serializable {
 
+
     private AlumnosDelCurso current;
     private DataModel items = null;
-    @EJB
-    private AlumnosDelCursoFacadeLocal ejbFacade;
+    @EJB private AlumnosDelCursoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -44,10 +45,10 @@ public class AlumnosDelCursoController implements Serializable {
     private AlumnosDelCursoFacadeLocal getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
+
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
@@ -55,7 +56,7 @@ public class AlumnosDelCursoController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -68,7 +69,7 @@ public class AlumnosDelCursoController implements Serializable {
     }
 
     public String prepareView() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+        current = (AlumnosDelCurso)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -83,8 +84,8 @@ public class AlumnosDelCursoController implements Serializable {
     public String create() {
         try {
             current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
-            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
             current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
+            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AlumnosDelCursoCreated"));
             return prepareCreate();
@@ -95,7 +96,7 @@ public class AlumnosDelCursoController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+        current = (AlumnosDelCurso)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -103,8 +104,8 @@ public class AlumnosDelCursoController implements Serializable {
     public String update() {
         try {
             current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
-            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
             current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
+            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AlumnosDelCursoUpdated"));
             return "View";
@@ -115,7 +116,7 @@ public class AlumnosDelCursoController implements Serializable {
     }
 
     public String destroy() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+        current = (AlumnosDelCurso)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -149,14 +150,14 @@ public class AlumnosDelCursoController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -199,7 +200,7 @@ public class AlumnosDelCursoController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = AlumnosDelCurso.class)
+    @FacesConverter(forClass=AlumnosDelCurso.class)
     public static class AlumnosDelCursoControllerConverter implements Converter {
 
         private static final String SEPARATOR = "#";
@@ -210,7 +211,7 @@ public class AlumnosDelCursoController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AlumnosDelCursoController controller = (AlumnosDelCursoController) facesContext.getApplication().getELResolver().
+            AlumnosDelCursoController controller = (AlumnosDelCursoController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "alumnosDelCursoController");
             return controller.getAlumnosDelCurso(getKey(value));
         }
@@ -244,8 +245,10 @@ public class AlumnosDelCursoController implements Serializable {
                 AlumnosDelCurso o = (AlumnosDelCurso) object;
                 return getStringKey(o.getAlumnosDelCursoPK());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + AlumnosDelCurso.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+AlumnosDelCurso.class.getName());
             }
         }
+
     }
+
 }

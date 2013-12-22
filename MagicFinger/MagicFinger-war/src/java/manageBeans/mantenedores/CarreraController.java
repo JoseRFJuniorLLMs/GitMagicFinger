@@ -3,14 +3,12 @@ package manageBeans.mantenedores;
 import entity.Carrera;
 import manageBeans.mantenedores.util.JsfUtil;
 import manageBeans.mantenedores.util.PaginationHelper;
-import sessionBeans.CarreraFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,14 +18,15 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import sessionBeans.CarreraFacadeLocal;
 
+
 @Named("carreraController")
 @RequestScoped
 public class CarreraController implements Serializable {
 
+
     private Carrera current;
     private DataModel items = null;
-    @EJB
-    private CarreraFacadeLocal ejbFacade;
+    @EJB private CarreraFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -45,10 +44,10 @@ public class CarreraController implements Serializable {
     private CarreraFacadeLocal getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
+
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
@@ -56,7 +55,7 @@ public class CarreraController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -69,7 +68,7 @@ public class CarreraController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Carrera) getItems().getRowData();
+        current = (Carrera)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -92,7 +91,7 @@ public class CarreraController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Carrera) getItems().getRowData();
+        current = (Carrera)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -109,7 +108,7 @@ public class CarreraController implements Serializable {
     }
 
     public String destroy() {
-        current = (Carrera) getItems().getRowData();
+        current = (Carrera)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -143,14 +142,14 @@ public class CarreraController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -193,7 +192,7 @@ public class CarreraController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Carrera.class)
+    @FacesConverter(forClass=Carrera.class)
     public static class CarreraControllerConverter implements Converter {
 
         @Override
@@ -201,7 +200,7 @@ public class CarreraController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CarreraController controller = (CarreraController) facesContext.getApplication().getELResolver().
+            CarreraController controller = (CarreraController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "carreraController");
             return controller.getCarrera(getKey(value));
         }
@@ -227,8 +226,10 @@ public class CarreraController implements Serializable {
                 Carrera o = (Carrera) object;
                 return getStringKey(o.getIdCarr());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Carrera.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Carrera.class.getName());
             }
         }
+
     }
+
 }

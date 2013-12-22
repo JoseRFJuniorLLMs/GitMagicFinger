@@ -18,14 +18,15 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import sessionBeans.TipoAsignaturaFacadeLocal;
 
+
 @Named("tipoAsignaturaController")
 @RequestScoped
 public class TipoAsignaturaController implements Serializable {
 
+
     private TipoAsignatura current;
     private DataModel items = null;
-    @EJB
-    private TipoAsignaturaFacadeLocal ejbFacade;
+    @EJB private TipoAsignaturaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -43,10 +44,10 @@ public class TipoAsignaturaController implements Serializable {
     private TipoAsignaturaFacadeLocal getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
+
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
@@ -54,7 +55,7 @@ public class TipoAsignaturaController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -67,7 +68,7 @@ public class TipoAsignaturaController implements Serializable {
     }
 
     public String prepareView() {
-        current = (TipoAsignatura) getItems().getRowData();
+        current = (TipoAsignatura)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -90,7 +91,7 @@ public class TipoAsignaturaController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (TipoAsignatura) getItems().getRowData();
+        current = (TipoAsignatura)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -107,7 +108,7 @@ public class TipoAsignaturaController implements Serializable {
     }
 
     public String destroy() {
-        current = (TipoAsignatura) getItems().getRowData();
+        current = (TipoAsignatura)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -141,14 +142,14 @@ public class TipoAsignaturaController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -191,7 +192,7 @@ public class TipoAsignaturaController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = TipoAsignatura.class)
+    @FacesConverter(forClass=TipoAsignatura.class)
     public static class TipoAsignaturaControllerConverter implements Converter {
 
         @Override
@@ -199,7 +200,7 @@ public class TipoAsignaturaController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TipoAsignaturaController controller = (TipoAsignaturaController) facesContext.getApplication().getELResolver().
+            TipoAsignaturaController controller = (TipoAsignaturaController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "tipoAsignaturaController");
             return controller.getTipoAsignatura(getKey(value));
         }
@@ -225,8 +226,10 @@ public class TipoAsignaturaController implements Serializable {
                 TipoAsignatura o = (TipoAsignatura) object;
                 return getStringKey(o.getIdTipoAsignatura());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + TipoAsignatura.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+TipoAsignatura.class.getName());
             }
         }
+
     }
+
 }

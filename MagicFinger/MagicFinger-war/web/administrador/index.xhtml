@@ -96,9 +96,9 @@
                 </div>
 
             </div>
-            <p:dataTable var="variable" value="">  
+            <p:dataTable var="item" value="#{userController.items}">  
                 <p:column headerText="Usuarios del sistema">  
-                    <h:outputText value="#" />  
+                    <h:outputText value="#{item.usuario}" />  
                 </p:column>  
 
                 <p:column headerText="RUT">  
@@ -111,7 +111,7 @@
                 </p:column>  
 
                 <p:column headerText="Tipo de usuario">  
-                    <h:outputText value="#" />  
+                    <h:outputText value="#{item.userRol}" />  
                 </p:column>
             </p:dataTable>
         </div>

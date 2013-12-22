@@ -3,7 +3,6 @@ package manageBeans.mantenedores;
 import entity.Asignatura;
 import manageBeans.mantenedores.util.JsfUtil;
 import manageBeans.mantenedores.util.PaginationHelper;
-import sessionBeans.AsignaturaFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -19,14 +18,15 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import sessionBeans.AsignaturaFacadeLocal;
 
+
 @Named("asignaturaController")
 @RequestScoped
 public class AsignaturaController implements Serializable {
 
+
     private Asignatura current;
     private DataModel items = null;
-    @EJB
-    private AsignaturaFacadeLocal ejbFacade;
+    @EJB private AsignaturaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -44,10 +44,10 @@ public class AsignaturaController implements Serializable {
     private AsignaturaFacadeLocal getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
+
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
@@ -55,7 +55,7 @@ public class AsignaturaController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -68,7 +68,7 @@ public class AsignaturaController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Asignatura) getItems().getRowData();
+        current = (Asignatura)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -91,7 +91,7 @@ public class AsignaturaController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Asignatura) getItems().getRowData();
+        current = (Asignatura)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -108,7 +108,7 @@ public class AsignaturaController implements Serializable {
     }
 
     public String destroy() {
-        current = (Asignatura) getItems().getRowData();
+        current = (Asignatura)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -142,14 +142,14 @@ public class AsignaturaController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -192,7 +192,7 @@ public class AsignaturaController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Asignatura.class)
+    @FacesConverter(forClass=Asignatura.class)
     public static class AsignaturaControllerConverter implements Converter {
 
         @Override
@@ -200,7 +200,7 @@ public class AsignaturaController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AsignaturaController controller = (AsignaturaController) facesContext.getApplication().getELResolver().
+            AsignaturaController controller = (AsignaturaController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "asignaturaController");
             return controller.getAsignatura(getKey(value));
         }
@@ -226,8 +226,10 @@ public class AsignaturaController implements Serializable {
                 Asignatura o = (Asignatura) object;
                 return getStringKey(o.getIdAsignatura());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Asignatura.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+Asignatura.class.getName());
             }
         }
+
     }
+
 }

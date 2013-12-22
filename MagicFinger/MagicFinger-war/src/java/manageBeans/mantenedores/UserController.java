@@ -1,6 +1,6 @@
 package manageBeans.mantenedores;
 
-import entity.Departamento;
+import entity.User;
 import manageBeans.mantenedores.util.JsfUtil;
 import manageBeans.mantenedores.util.PaginationHelper;
 
@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -16,37 +17,39 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.DepartamentoFacadeLocal;
+import sessionBeans.UserFacadeLocal;
 
-@Named("departamentoController")
+
+@Named("userController")
 @RequestScoped
-public class DepartamentoController implements Serializable {
+public class UserController implements Serializable {
 
-    private Departamento current;
+
+    private User current;
     private DataModel items = null;
-    @EJB
-    private DepartamentoFacadeLocal ejbFacade;
+    @EJB 
+    private UserFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public DepartamentoController() {
+    public UserController() {
     }
 
-    public Departamento getSelected() {
+    public User getSelected() {
         if (current == null) {
-            current = new Departamento();
+            current = new User();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private DepartamentoFacadeLocal getFacade() {
+    private UserFacadeLocal getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
+
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
@@ -54,7 +57,7 @@ public class DepartamentoController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -67,13 +70,13 @@ public class DepartamentoController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Departamento) getItems().getRowData();
+        current = (User)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Departamento();
+        current = new User();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -81,7 +84,7 @@ public class DepartamentoController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("DepartamentoCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -90,7 +93,7 @@ public class DepartamentoController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Departamento) getItems().getRowData();
+        current = (User)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -98,7 +101,7 @@ public class DepartamentoController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("DepartamentoUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -107,7 +110,7 @@ public class DepartamentoController implements Serializable {
     }
 
     public String destroy() {
-        current = (Departamento) getItems().getRowData();
+        current = (User)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -131,7 +134,7 @@ public class DepartamentoController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("DepartamentoDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UserDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -141,14 +144,14 @@ public class DepartamentoController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -187,21 +190,21 @@ public class DepartamentoController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Departamento getDepartamento(java.lang.Integer id) {
+    public User getUser(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Departamento.class)
-    public static class DepartamentoControllerConverter implements Converter {
+    @FacesConverter(forClass=User.class)
+    public static class UserControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DepartamentoController controller = (DepartamentoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "departamentoController");
-            return controller.getDepartamento(getKey(value));
+            UserController controller = (UserController)facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "userController");
+            return controller.getUser(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -221,12 +224,14 @@ public class DepartamentoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Departamento) {
-                Departamento o = (Departamento) object;
-                return getStringKey(o.getIdDepartamento());
+            if (object instanceof User) {
+                User o = (User) object;
+                return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Departamento.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+User.class.getName());
             }
         }
+
     }
+
 }

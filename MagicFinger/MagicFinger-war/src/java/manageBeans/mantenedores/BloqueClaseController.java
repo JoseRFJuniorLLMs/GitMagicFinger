@@ -18,14 +18,15 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import sessionBeans.BloqueClaseFacadeLocal;
 
+
 @Named("bloqueClaseController")
 @RequestScoped
 public class BloqueClaseController implements Serializable {
 
+
     private BloqueClase current;
     private DataModel items = null;
-    @EJB
-    private BloqueClaseFacadeLocal ejbFacade;
+    @EJB private BloqueClaseFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
@@ -43,10 +44,10 @@ public class BloqueClaseController implements Serializable {
     private BloqueClaseFacadeLocal getFacade() {
         return ejbFacade;
     }
-
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
+
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();
@@ -54,7 +55,7 @@ public class BloqueClaseController implements Serializable {
 
                 @Override
                 public DataModel createPageDataModel() {
-                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem() + getPageSize()}));
+                    return new ListDataModel(getFacade().findRange(new int[]{getPageFirstItem(), getPageFirstItem()+getPageSize()}));
                 }
             };
         }
@@ -67,7 +68,7 @@ public class BloqueClaseController implements Serializable {
     }
 
     public String prepareView() {
-        current = (BloqueClase) getItems().getRowData();
+        current = (BloqueClase)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
@@ -90,7 +91,7 @@ public class BloqueClaseController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (BloqueClase) getItems().getRowData();
+        current = (BloqueClase)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -107,7 +108,7 @@ public class BloqueClaseController implements Serializable {
     }
 
     public String destroy() {
-        current = (BloqueClase) getItems().getRowData();
+        current = (BloqueClase)getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -141,14 +142,14 @@ public class BloqueClaseController implements Serializable {
         int count = getFacade().count();
         if (selectedItemIndex >= count) {
             // selected index cannot be bigger than number of items:
-            selectedItemIndex = count - 1;
+            selectedItemIndex = count-1;
             // go to previous page if last page disappeared:
             if (pagination.getPageFirstItem() >= count) {
                 pagination.previousPage();
             }
         }
         if (selectedItemIndex >= 0) {
-            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+            current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex+1}).get(0);
         }
     }
 
@@ -191,7 +192,7 @@ public class BloqueClaseController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = BloqueClase.class)
+    @FacesConverter(forClass=BloqueClase.class)
     public static class BloqueClaseControllerConverter implements Converter {
 
         @Override
@@ -199,7 +200,7 @@ public class BloqueClaseController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            BloqueClaseController controller = (BloqueClaseController) facesContext.getApplication().getELResolver().
+            BloqueClaseController controller = (BloqueClaseController)facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "bloqueClaseController");
             return controller.getBloqueClase(getKey(value));
         }
@@ -225,8 +226,10 @@ public class BloqueClaseController implements Serializable {
                 BloqueClase o = (BloqueClase) object;
                 return getStringKey(o.getIdBloque());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + BloqueClase.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: "+BloqueClase.class.getName());
             }
         }
+
     }
+
 }

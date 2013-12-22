@@ -3,7 +3,6 @@ package manageBeans.mantenedores;
 import entity.Profesor;
 import manageBeans.mantenedores.util.JsfUtil;
 import manageBeans.mantenedores.util.PaginationHelper;
-import sessionBeans.ProfesorFacade;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
