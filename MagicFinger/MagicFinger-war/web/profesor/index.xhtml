@@ -116,19 +116,26 @@
 
                 <div id="normas" style="display:inline-block;vertical-align:middle;margin-left: 35px;" >
                     <h:form id="form2" style="display: inline-block"> 
+                        
+                        
                         <h3 style="margin-bottom: 20px; text-align: center;">Normas del curso</h3>
                         <h5 style="text-align: left;"> Porcentaje aprobación:  </h5>
-                        <p:inputText id ="txt1" style="margin-left: auto; margin-right: auto; display: block;
+                        
+                        <p:inplace id ="txt1" editor="true">
+                        <p:inputText  style="margin-left: auto; margin-right: auto; display: inline;
                                      margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.porcenteajeAprobacion}"> 
                         </p:inputText>
+                        </p:inplace>
                         <h5 style="text-align: left;"> Limite asistencia:  </h5>
-                        <p:inputText id="txt2" style=" margin-left: auto; margin-right: auto; display: block;
+                        <p:inplace id="txt2"  editor="true">  
+                        <p:inputText style=" margin-left: auto; margin-right: auto; display: inline;
                                      margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.termino}"> 
                         </p:inputText>
+                        </p:inplace>  
+                        <br />
                         <p:commandButton id="normas2" value="Actualizar normas" update=":form:grow1" action="#{asignaturaMB.actualizarDatos()}" />  
                     </h:form>
                 </div>
-
             </div>
             <br />
         </div>
