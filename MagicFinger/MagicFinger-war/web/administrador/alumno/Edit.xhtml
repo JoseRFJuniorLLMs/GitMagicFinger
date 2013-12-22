@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAlumnoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_idAlumno}" for="idAlumno" />
+                    <h:inputText id="idAlumno" value="#{alumnoController.selected.idAlumno}" title="#{bundle.EditAlumnoTitle_idAlumno}" required="true" requiredMessage="#{bundle.EditAlumnoRequiredMessage_idAlumno}"/>
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_rut}" for="rut" />
+                    <h:inputTextarea rows="4" cols="30" id="rut" value="#{alumnoController.selected.rut}" title="#{bundle.EditAlumnoTitle_rut}" />
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_nombre}" for="nombre" />
+                    <h:inputTextarea rows="4" cols="30" id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.EditAlumnoTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_apellidop}" for="apellidop" />
+                    <h:inputTextarea rows="4" cols="30" id="apellidop" value="#{alumnoController.selected.apellidop}" title="#{bundle.EditAlumnoTitle_apellidop}" />
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_apellidom}" for="apellidom" />
+                    <h:inputTextarea rows="4" cols="30" id="apellidom" value="#{alumnoController.selected.apellidom}" title="#{bundle.EditAlumnoTitle_apellidom}" />
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_telefono}" for="telefono" />
+                    <h:inputText id="telefono" value="#{alumnoController.selected.telefono}" title="#{bundle.EditAlumnoTitle_telefono}" />
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_correo}" for="correo" />
+                    <h:inputTextarea rows="4" cols="30" id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.EditAlumnoTitle_correo}" />
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_userId}" for="userId" />
+                    <h:selectOneMenu id="userId" value="#{alumnoController.selected.userId}" title="#{bundle.EditAlumnoTitle_userId}" >
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_huella1}" for="huella1" />
+                    <h:inputTextarea rows="4" cols="30" id="huella1" value="#{alumnoController.selected.huella1}" title="#{bundle.EditAlumnoTitle_huella1}" />
+                    <h:outputLabel value="#{bundle.EditAlumnoLabel_huella2}" for="huella2" />
+                    <h:inputTextarea rows="4" cols="30" id="huella2" value="#{alumnoController.selected.huella2}" title="#{bundle.EditAlumnoTitle_huella2}" />
+                </h:panelGrid>
+                <h:commandLink action="#{alumnoController.update}" value="#{bundle.EditAlumnoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditAlumnoViewLink}"/>
+                <br />
+                <h:commandLink action="#{alumnoController.prepareList}" value="#{bundle.EditAlumnoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditAlumnoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
