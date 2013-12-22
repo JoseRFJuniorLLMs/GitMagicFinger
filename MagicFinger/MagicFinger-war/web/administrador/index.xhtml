@@ -29,12 +29,21 @@
                 document.getElementById('buttons').click();
             }
         </script>
-        <div id="top" style="display: inline-block">
-            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="margin-left: 20px" height="40" width="150" />
-            <h:form>
-                <h:commandLink style="float: right; display: inline-block; vertical-align: middle" action="#{loginMB.logout()}" value="Cerrar sesión" />
-            </h:form>
+
+        <div id="top" style="display: inline-block; ">
+            <div id="logo" style="display: inline-block;vertical-align: middle;">
+                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+            </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
+                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
+            </div>
+            <div style="display: inline-block;float: right;margin-top:20px;margin-right: 10px">
+                <h:form>
+                <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
+                </h:form>
+            </div>    
         </div>
+        
         <div class="center_content">
 
             <h1 style="text-align: center"> Bienvenido administrador</h1>
