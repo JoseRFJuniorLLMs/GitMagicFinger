@@ -32,7 +32,6 @@
 
 .center_content {
     margin: 0 auto;
-    position: fixed;
     width: 75%;
     min-width: 1000px;
     position: relative;

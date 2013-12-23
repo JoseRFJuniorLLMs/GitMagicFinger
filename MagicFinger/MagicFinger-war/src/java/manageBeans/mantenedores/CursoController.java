@@ -23,7 +23,7 @@ import sessionBeans.CursoFacadeLocal;
 public class CursoController implements Serializable {
 
     private Curso current;
-    private DataModel items = null;
+    private DataModel<Curso> items = null;
     @EJB
     private CursoFacadeLocal ejbFacade;
     private PaginationHelper pagination;

@@ -3,42 +3,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListCarreraTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+    <h:head>
+        <title>Gestión de cursos</title>
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+    
+    </h:head>
+    <h:body>
+        <div id="top" style="display: inline-block; ">
+            <div id="logo" style="display: inline-block;vertical-align: middle;">
+                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+            </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
+                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
+            </div>
+            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
+                <h:form>
+                <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
+                </h:form>
+            </div>    
+        </div>
+        <div class="center_content">
+            <h1 style="text-align: center"> Gestión de carreras</h1>
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
                 <h:outputText escape="false" value="#{bundle.ListCarreraEmpty}" rendered="#{carreraController.items.rowCount == 0}"/>
                 <h:panelGroup rendered="#{carreraController.items.rowCount > 0}">
-                    <h:outputText value="#{carreraController.pagination.pageFirstItem + 1}..#{carreraController.pagination.pageLastItem + 1}/#{carreraController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{carreraController.previous}" value="#{bundle.Previous} #{carreraController.pagination.pageSize}" rendered="#{carreraController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{carreraController.next}" value="#{bundle.Next} #{carreraController.pagination.pageSize}" rendered="#{carreraController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{carreraController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
+                    
+                    <p:dataTable paginatorPosition="bottom" value="#{carreraController.items}" style="display: inline-block;margin-top:25px" var="item" paginator="true" rows="3">
+                        <f:facet name="header">
+                            Carreras del sistema
+                        </f:facet>
+                        
+                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCarreraTitle_idCarr}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idCarr}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCarreraTitle_nombreCarrera}"/>
+                                <h:outputText value="Nombre de la carrera"/>
                             </f:facet>
                             <h:outputText value="#{item.nombreCarrera}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCarreraTitle_departamentoId}"/>
                             </f:facet>
                             <h:outputText value="#{item.departamentoId}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
@@ -47,8 +62,8 @@
                             <h:commandLink action="#{carreraController.prepareEdit}" value="#{bundle.ListCarreraEditLink}"/>
                             <h:outputText value=" "/>
                             <h:commandLink action="#{carreraController.destroy}" value="#{bundle.ListCarreraDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
+                        </p:column>
+                    </p:dataTable>
                 </h:panelGroup>
                 <br />
                 <h:commandLink action="#{carreraController.prepareCreate}" value="#{bundle.ListCarreraCreateLink}"/>
@@ -56,7 +71,6 @@
                 <br />
                 <h:link outcome="/index" value="#{bundle.ListCarreraIndexLink}"/>
             </h:form>
-        </ui:define>
-    </ui:composition>
-
+        </div>
+    </h:body>
 </html>
