@@ -60,6 +60,9 @@ public class asistenciaCursoMB {
         curso = conversation.getCurso();
         bloqueClasesAllList = curso.getBloqueClaseList();
         
+        bloqueClase = conversation.getBloqueSelecionado();
+        valor = conversation.getValor();
+        
         bloqueClaseList = conversation.getBloqueClaseList();
         if(bloqueClaseList ==null){
             bloqueClaseList = bloqueDetectadoPorFecha();
@@ -68,8 +71,22 @@ public class asistenciaCursoMB {
             if(temp!=null){
                 bloqueClase = temp;
                 valor = bloqueClase.getIdBloque();
+                conversation.setBloqueSelecionado(bloqueClase);
+                conversation.setValor(valor);
             }
         }
+//        if(fecha!=null){
+//            System.out.println("init fcha: "+fecha);
+//        }
+//        else{
+//            System.out.println("init fecha: vacio");
+//        }
+//        if(bloqueClase!=null){
+//            System.out.println("init bloque: "+ bloqueClase.toString());
+//        }
+//        else{
+//            System.out.println("init bloque: vacio");
+//        }
     }
 
     public void buscaPersona(ActionEvent actionEvent) {
@@ -99,7 +116,6 @@ public class asistenciaCursoMB {
                 Date fecha[] = funcionesGenerales.buscaBloque(bloqueClaseActual.getBloque());
                 fecha[1] = funcionesGenerales.sumaMinutosFecha(fecha[0], curso.getTermino());
                 Date hoy = new Date();
-                System.out.println( "( "+bloqueClase.getBloque()+ " ) fecha inicio:" + fecha[0].toString() + "fecha fin:" + fecha[1].toString()+" respuesta: " +(hoy.after(fecha[0]) && hoy.before(fecha[1])) );
                 if( hoy.after(fecha[0]) && hoy.before(fecha[1]) )
                     nueva.setEstado(1);
                 else
@@ -138,10 +154,14 @@ public class asistenciaCursoMB {
         if(bloqueDetectado.size()>0){
             bloqueClase = bloqueDetectado.get(0);
             valor = bloqueDetectado.get(0).getIdBloque();
+            conversation.setBloqueSelecionado(bloqueClase);
+            conversation.setValor(valor);
         }
         else{
             bloqueClase=null;
             valor = -1;
+            conversation.setBloqueSelecionado(bloqueClase);
+            conversation.setValor(valor);
         }
         return bloqueDetectado;
     }
@@ -178,10 +198,9 @@ public class asistenciaCursoMB {
         SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
         conversation.setFecha((Date) event.getObject());
         fecha = (Date) event.getObject();
-        System.out.println("fecha seteada:"  + fecha  );
+        System.out.println("fecha seteada:"+fecha );
         bloqueClaseList = bloqueDetectadoPorFecha();
         conversation.setBloqueClaseList(bloqueClaseList);
-        
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fecha seleccionada ", funcionesGenerales.getDiaFecha(fecha)+" "+ format.format(event.getObject())));
     }
     
@@ -189,10 +208,11 @@ public class asistenciaCursoMB {
         FacesContext facesContext = FacesContext.getCurrentInstance();
                 
         if (valor != -1) {
-           
             for (BloqueClase bloq : curso.getBloqueClaseList()) {
                 if (bloq.getIdBloque() == valor) {
                     bloqueClase = bloq;
+                    conversation.setBloqueSelecionado(bloqueClase);
+                    conversation.setValor(valor);
                     facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bloque seleccionado", bloqueClase.toString()));
                     return;
                 }
@@ -200,6 +220,25 @@ public class asistenciaCursoMB {
         }
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Bloque", "Seleccione un bloque" ));
         bloqueClase = null;
+    }
+    public void handleBloqueClaseChangeAsistencia(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if( bloqueClase==null || fecha==null){
+             for (AlumnosDelCurso alumnoCurso : this.curso.getAlumnosDelCursoList()) {
+                Asistencia asistioCurso =  asistenciaSB.alumnoAsiste(alumnoCurso, bloqueClase, fecha);
+                if(asistioCurso==null){
+                
+                }
+                else{
+                   asistioCurso.setIdAsistencia(valor);
+                   asistenciaFacade.edit(asistioCurso);
+                }
+            }
+             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Seleccione bloque y fecha"));
+       }
+        else{
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", bloqueClase.toString()+"--"+fecha.toString() ));
+            }
     }
 
     public Profesor getProfesor() {
