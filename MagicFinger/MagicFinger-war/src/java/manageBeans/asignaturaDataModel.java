@@ -30,7 +30,7 @@ public class asignaturaDataModel extends ListDataModel<Curso> implements Selecta
     }
 
     @Override
-    public Object getRowKey(Curso car) {
+    public Curso getRowKey(Curso car) {
         return car;
     }
 }

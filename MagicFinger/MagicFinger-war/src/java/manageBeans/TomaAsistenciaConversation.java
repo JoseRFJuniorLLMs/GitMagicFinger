@@ -29,6 +29,8 @@ public class TomaAsistenciaConversation extends AbstractConversation implements 
     private Curso curso;
     private Date fecha;
     private List<BloqueClase> bloqueClaseList;
+    private BloqueClase bloqueSelecionado;
+    private int valor;
     
     public TomaAsistenciaConversation() {
         fecha = new Date();
@@ -66,6 +68,22 @@ public class TomaAsistenciaConversation extends AbstractConversation implements 
 
     public void setBloqueClaseList(List<BloqueClase> bloqueClaseList) {
         this.bloqueClaseList = bloqueClaseList;
+    }
+
+    public BloqueClase getBloqueSelecionado() {
+        return bloqueSelecionado;
+    }
+
+    public void setBloqueSelecionado(BloqueClase bloqueSelecionado) {
+        this.bloqueSelecionado = bloqueSelecionado;
+    }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
     }
     
     

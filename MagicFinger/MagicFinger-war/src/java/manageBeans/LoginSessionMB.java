@@ -5,6 +5,7 @@
 package manageBeans;
 
 import entity.Alumno;
+import entity.Curso;
 import entity.Profesor;
 import entity.User;
 import java.io.IOException;
@@ -35,13 +36,21 @@ public class LoginSessionMB implements Serializable {
     private UsuariosLocal usuarios;
     @Inject
     LoginMB login;
-    /**
-     * Creates a new instance of LoginSessionMB
-     */
+    
     private Profesor profesor;
     private Alumno alumno;
+    private Curso curso;
 
+         
     public LoginSessionMB() {
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
     public void login(String user, String password) throws IOException {
@@ -81,7 +90,6 @@ public class LoginSessionMB implements Serializable {
     }
 
     private void redireccionar(String nombre) throws IOException {
-
         ExternalContext context2 = FacesContext.getCurrentInstance().getExternalContext();
 
         User usuario = usuarios.getRol(nombre);

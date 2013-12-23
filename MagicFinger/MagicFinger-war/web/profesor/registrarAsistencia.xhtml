@@ -54,8 +54,11 @@
         <div id="content" class="center_content">
             <h1 style="text-align: center;" > Registro de asistencia de alumnos </h1>
             <div id="header" style="margin-top: 40px" >
+                  <applet style="display:inline; float: right" archive="/MagicFinger-war/faces/Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>                  
                 <h3> Asignatura: <h:outputText value="#{asistenciaCursoMB.curso.asignatura.nombre}" /> - <h:outputText value="#{asistenciaCursoMB.curso.tipoAsignatura.nombre}" /></h3> <!--AQUI PONER EL PROFESOR QUE VIENE DESDE LA VISTA PRINCIPAL DEL PROFE --><br /><br />
                 <h3> Profesor: <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" /> &nbsp;<h:outputText value="#{asistenciaCursoMB.profesor.apellidop}" /> </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
+            
+                   
             </div>
 
             <h:form id="formAsistencia" prependId="false" style="vertical-align: middle; display: inline">  
@@ -65,7 +68,7 @@
                         <p:growl id="growAsistencia" showDetail="true"/>  
 
                         <p:calendar style="vertical-align: middle;display: inline;" locale="es" effect="explode"  value="#{asistenciaCursoMB.fecha}" id="popupButtonCal" showOn="button">
-                            <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="bloqueGrup,grow2Asistencia,growAsistencia" />  
+                            <p:ajax event="dateSelect" listener="#{asistenciaCursoMB.handleDateSelect}" update="bloqueGrup,grow2Asistencia,cambioAsis,growAsistencia" />  
                         </p:calendar>
                     </div>
                     <div id="bloque" style="vertical-align: middle; display: inline; padding-left: 120px">
@@ -74,12 +77,19 @@
                             <f:selectItem itemLabel="Seleccione bloque" itemValue="-1" /> 
                             <f:selectItems var="blo" value="#{asistenciaCursoMB.bloqueClaseList}" itemLabel="#{blo.toString()}" itemValue="#{blo.idBloque}"/>  
                             
-                            <p:ajax update="grow2Asistencia,growAsistencia" listener="#{asistenciaCursoMB.handleBloqueClaseChange}" />
+                            <p:ajax update="grow2Asistencia,cambioAsis,growAsistencia" listener="#{asistenciaCursoMB.handleBloqueClaseChange}" />
                         </p:selectOneMenu>  
                     </div>
                     <div id="activacion" style="display: inline;padding-left: 120px">
-                        <h:outputLabel value ="Registro de asistencia: " style="color: #036fab;display:inline"/>
-                        <applet style="display:inline;vertical-align: middle" archive="/MagicFinger-war/faces/Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>                  
+                        <h:outputLabel value ="Marcar asistencia como : " style="color: #036fab;display:inline"/>
+                        <p:selectOneMenu id="cambioAsis" value="#{asistenciaCursoMB.valor2}" style="vertical-align: middle">  
+                            <f:selectItem itemLabel="Cambiar asistencia" itemValue=""/>
+                            <f:selectItem itemLabel="Ausente" itemValue="5" /> 
+                            <f:selectItem itemLabel="Presente" itemValue="1" /> 
+                            <f:selectItem itemLabel="Atrasado" itemValue="3" /> 
+                            <f:selectItem itemLabel="Suspendida" itemValue="4" /> 
+                            <p:ajax update="grow2Asistencia,growAsistencia" listener="#{asistenciaCursoMB.handleBloqueClaseChangeAsistencia}" />
+                        </p:selectOneMenu>  
                     </div>
                 </div>
     <!-- esto esta bueno http://www.primefaces.org/showcase/ui/dialogForm.jsf > -->

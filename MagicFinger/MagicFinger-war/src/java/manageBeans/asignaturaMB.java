@@ -45,7 +45,9 @@ public class asignaturaMB {
     LoginSessionMB profesorLogin;
     @PostConstruct
     public void init() {
-        System.out.println("init omg");
+        cursoSeleccionado = profesorLogin.getCurso();
+        
+        
         profesor = profesorLogin.getProfesor();
         if (profesor != null) {
             ListCurso = profesor.getCursoList();
@@ -74,6 +76,7 @@ public class asignaturaMB {
         
     }
     public void onRowSelect(SelectEvent event) {
+        profesorLogin.setCurso(cursoSeleccionado);
         FacesMessage msg = new FacesMessage("Curso Seleccionado", cursoSeleccionado.toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
@@ -89,14 +92,9 @@ public class asignaturaMB {
     }
 
     public void actualizarDatos() {
-        FacesMessage msg = new FacesMessage("Los datos han sido actualizados", "datos: ");
+        FacesMessage msg = new FacesMessage("Normas de curso actualizadas", "Porcentaje aprobación: " + cursoSeleccionado.getPorcenteajeAprobacion() + "\n Atrasados desde: "+ cursoSeleccionado.getTermino() );
         FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-
-    public void cambiarTermino(SlideEndEvent event) {
-        FacesMessage msg = new FacesMessage("Se ha cambiado el tiempo de termino", "Valor: " + event.getValue());
-        //  cursoSeleccionado.setTermino((Integer)event.getValue());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+        cursoFacade.edit(cursoSeleccionado);
     }
 
     public void setProfesorFacade(ProfesorFacadeLocal profesorFacade) {
