@@ -3,13 +3,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListFacultadTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <title>Facelets Template</title>
+
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+        <style>
+        </style>
+    </h:head>
+
+    
+    <h:body>
+        <div id="top" style="display: inline-block; ">
+            <div id="logo" style="display: inline-block;vertical-align: middle;">
+                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+            </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
+                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
+            </div>
+            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
+                <h:form>
+                <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
+                </h:form>
+            </div>    
+        </div>
             <h:form styleClass="jsfcrud_list_form">
                 <h:panelGroup id="messagePanel" layout="block">
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -50,7 +77,6 @@
                 <br />
                 <h:link outcome="/index" value="#{bundle.ListFacultadIndexLink}"/>
             </h:form>
-        </ui:define>
-    </ui:composition>
+    </h:body>
 
 </html>
