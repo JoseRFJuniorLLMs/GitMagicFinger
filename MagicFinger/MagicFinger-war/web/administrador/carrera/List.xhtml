@@ -29,16 +29,33 @@
         </div>
         <div class="center_content">
             <h1 style="text-align: center"> Gestión de carreras</h1>
+            
+            <div id="agregar" style="display: inline-block; width: 100%">
+                <p style="vertical-align: middle;display: inline-block">
+                    En esta vista usted puede gestionar las carreras inscritas en el sistema
+                </p>
+                <ul style="list-style: none;display: inline-block;vertical-align: middle;float: right">
+                    <li>
+                        <h:outputLink value="/MagicFinger-war/faces/administrador/carrera/Create.xhtml">
+                            <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 34px"/>
+                        </h:outputLink>
+                    </li>
+                    <li>
+                        <h:outputLink value="/MagicFinger-war/faces/administrador/curso/Create.xhtml">
+                            Agregar carrera
+                        </h:outputLink>
+                    </li>
+                </ul>
+
+            </div>
+            
+            
             <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
                 <h:outputText escape="false" value="#{bundle.ListCarreraEmpty}" rendered="#{carreraController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{carreraController.items.rowCount > 0}">
-                    
-                    <p:dataTable paginatorPosition="bottom" value="#{carreraController.items}" style="display: inline-block;margin-top:25px" var="item" paginator="true" rows="3">
+                <div style="text-align:center">
+                    <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" value="#{carreraController.items}" style="display: inline-block;margin-top:25px" var="item" paginator="true" rows="10">
                         <f:facet name="header">
-                            Carreras del sistema
+                            <h3 style="color:white">Carreras del sistema</h3>
                         </f:facet>
                         
                         <p:column>
@@ -49,27 +66,26 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCarreraTitle_departamentoId}"/>
+                                <h:outputText value="Departamento"/>
                             </f:facet>
-                            <h:outputText value="#{item.departamentoId}"/>
+                            <h:outputText value="#{item.departamentoId.toString()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="&nbsp;"/>
                             </f:facet>
-                            <h:commandLink action="#{carreraController.prepareView}" value="#{bundle.ListCarreraViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{carreraController.prepareEdit}" value="#{bundle.ListCarreraEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{carreraController.destroy}" value="#{bundle.ListCarreraDestroyLink}"/>
+                            <h:commandLink action="#{carreraController.prepareView}">
+                                <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
+                            </h:commandLink>
+                            <h:commandLink action="#{carreraController.prepareEdit}">
+                                <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
+                            </h:commandLink>                            
+                            <h:commandLink action="#{carreraController.destroy}">
+                                <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
+                            </h:commandLink>
                         </p:column>
                     </p:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{carreraController.prepareCreate}" value="#{bundle.ListCarreraCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListCarreraIndexLink}"/>
+                </div>
             </h:form>
         </div>
     </h:body>

@@ -3,33 +3,51 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Agregar Facultad</title>
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.CreateFacultadTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
+    </h:head>
+    <h:body>
+    <div id="top" style="display: inline-block; ">
+        <div id="logo" style="display: inline-block;vertical-align: middle;">
+            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+        </div>
+        <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
+            <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />
+        </div>
+        <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateFacultadLabel_idFacultad}" for="idFacultad" />
-                    <h:inputText id="idFacultad" value="#{facultadController.selected.idFacultad}" title="#{bundle.CreateFacultadTitle_idFacultad}" required="true" requiredMessage="#{bundle.CreateFacultadRequiredMessage_idFacultad}"/>
-                    <h:outputLabel value="#{bundle.CreateFacultadLabel_nombre}" for="nombre" />
-                    <h:inputTextarea rows="4" cols="30" id="nombre" value="#{facultadController.selected.nombre}" title="#{bundle.CreateFacultadTitle_nombre}" />
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{facultadController.create}" value="#{bundle.CreateFacultadSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{facultadController.prepareList}" value="#{bundle.CreateFacultadShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateFacultadIndexLink}"/>
+            <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
             </h:form>
-        </ui:define>
-    </ui:composition>
-
+        </div>
+    </div>      
+        <div class="center_content">
+            <h:form>
+                <div style="text-align:center">
+                    <h1 style="text-align: center;margin-bottom: 200px"> Agregar Facultad</h1>
+                    <h:outputLabel value="#{bundle.CreateFacultadLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{facultadController.selected.nombre}" title="#{bundle.CreateFacultadTitle_nombre}" />
+                    <ul style="list-style: none;display: block;float:center; padding:0px;margin-top: 20px">
+                        <li>
+                            <h:commandLink action="#{facultadController.create}">
+                                <img src="/MagicFinger-war/faces/img/ok.png" />
+                            </h:commandLink>
+                        </li>
+                        <li>
+                            <h:commandLink action="#{cursoController.create}">
+                                Guardar facultad
+                            </h:commandLink>
+                        </li>
+                    </ul>
+                    
+                    
+                </div>
+            </h:form>
+        </div>
+    </h:body>
 </html>

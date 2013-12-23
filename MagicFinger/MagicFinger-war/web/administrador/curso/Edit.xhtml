@@ -11,9 +11,7 @@
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
-    
     </h:head>
-
     <h:body>
         <div id="top" style="display: inline-block; ">
             <div id="logo" style="display: inline-block;vertical-align: middle;">
@@ -37,28 +35,34 @@
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditCursoLabel_porcenteajeAprobacion}" for="porcenteajeAprobacion" />
+                    <h:outputLabel value="Porcentaje de aprobación:" for="porcenteajeAprobacion" />
                     <h:inputText id="porcenteajeAprobacion" value="#{cursoController.selected.porcenteajeAprobacion}" title="#{bundle.EditCursoTitle_porcenteajeAprobacion}" />
-                    <h:outputLabel value="#{bundle.EditCursoLabel_termino}" for="termino" />
+                    <h:outputLabel value="Horario de atrasados tras:" for="termino" />
                     <h:inputText id="termino" value="#{cursoController.selected.termino}" title="#{bundle.EditCursoTitle_termino}" />
-                    <h:outputLabel value="#{bundle.EditCursoLabel_asignatura}" for="asignatura" />
+                    <h:outputLabel value="Asignatura:" for="asignatura" />
                     <h:selectOneMenu id="asignatura" value="#{cursoController.selected.asignatura}" title="#{bundle.EditCursoTitle_asignatura}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_asignatura}">
                         <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.EditCursoLabel_tipoAsignatura}" for="tipoAsignatura" />
+                    <h:outputLabel value="Tipo de asignatura:" for="tipoAsignatura" />
                     <h:selectOneMenu id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}" title="#{bundle.EditCursoTitle_tipoAsignatura}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_tipoAsignatura}">
                         <f:selectItems value="#{tipoAsignaturaController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
-                <h:commandLink action="#{cursoController.update}" value="#{bundle.EditCursoSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditCursoViewLink}"/>
-                <br />
-                <h:commandLink action="#{cursoController.prepareList}" value="#{bundle.EditCursoShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditCursoIndexLink}" />
+                
+                
+                <ul style="list-style: none;display: inline-block;vertical-align: middle;float: left">
+                    <li>
+                        <h:commandLink action="#{cursoController.update}">
+                            <img src="/MagicFinger-war/faces/img/ok.png" style="margin-left: 35px"/>
+                        </h:commandLink>
+                    </li>
+                    <li>
+                        <h:commandLink action="#{cursoController.update}">
+                            Guardar cambios
+                        </h:commandLink>
+                    </li>
+                </ul>
+
             </h:form>
         </div>
     </h:body>

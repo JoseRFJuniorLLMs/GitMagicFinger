@@ -125,6 +125,6 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Departamento[ idDepartamento=" + idDepartamento + " ]";
+        return nombre;
     }
 }
