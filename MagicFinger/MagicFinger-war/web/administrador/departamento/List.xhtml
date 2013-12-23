@@ -51,13 +51,13 @@
                         <f:facet name="header">
                             <h3 style="color:white">Departamentos del sistema</h3>
                         </f:facet>
-                        <p:column>
+                        <p:column sortBy="#{item.nombre}" filterBy="#{item.nombre}">
                             <f:facet name="header">
                                 <h:outputText value="Nombre del departamento"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column>
+                        <p:column sortBy="#{item.facultadId.nombre}" filterBy="#{item.facultadId.nombre}">
                             <f:facet name="header">
                                 <h:outputText value="Facultad"/>
                             </f:facet>
