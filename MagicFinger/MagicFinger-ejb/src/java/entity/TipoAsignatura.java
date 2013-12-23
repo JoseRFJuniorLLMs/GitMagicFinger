@@ -101,6 +101,6 @@ public class TipoAsignatura implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.TipoAsignatura[ idTipoAsignatura=" + idTipoAsignatura + " ]";
+        return nombre;
     }
 }
