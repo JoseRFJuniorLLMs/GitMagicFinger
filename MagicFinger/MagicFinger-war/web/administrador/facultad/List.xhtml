@@ -6,77 +6,83 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta name="description" content=""/>
-        <meta name="author" content=""/>
-
-        <title>Facelets Template</title>
-
+  <h:head>
+        <title>Gestión de facultades</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
-        <style>
-        </style>
-    </h:head>
 
-    
+    </h:head>
     <h:body>
-        <div id="top" style="display: inline-block; ">
+     <div id="top" style="display: inline-block; ">
             <div id="logo" style="display: inline-block;vertical-align: middle;">
                 <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
             </div>
             <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
-                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
+                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
                 <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
                 </h:form>
-            </div>    
+            </div>
+     </div>
+     <div class="center_content">
+        <h1 style="text-align: center"> Gestión de facultades</h1>
+        <div id="agregar" style="display: inline-block;width: 100%">
+            <p style="vertical-align: middle;display: inline-block">
+                En esta vista usted puede gestionar las facultades inscritas en el sistema
+            </p>
+            <ul style="list-style: none;display: inline-block;vertical-align: middle;float: right">
+                <li>
+                    <h:outputLink value="/MagicFinger-war/faces/administrador/facultad/Create.xhtml">
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 28px"/>
+                    </h:outputLink>
+                </li>
+                <li>
+                    <h:outputLink value="/MagicFinger-war/faces/administrador/facultad/Create.xhtml">
+                        Agregar facultad
+                    </h:outputLink>
+                </li>
+            </ul>
         </div>
-            <h:form styleClass="jsfcrud_list_form">
-                <h:panelGroup id="messagePanel" layout="block">
-                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-                </h:panelGroup>
-                <h:outputText escape="false" value="#{bundle.ListFacultadEmpty}" rendered="#{facultadController.items.rowCount == 0}"/>
-                <h:panelGroup rendered="#{facultadController.items.rowCount > 0}">
-                    <h:outputText value="#{facultadController.pagination.pageFirstItem + 1}..#{facultadController.pagination.pageLastItem + 1}/#{facultadController.pagination.itemsCount}"/>&nbsp;
-                    <h:commandLink action="#{facultadController.previous}" value="#{bundle.Previous} #{facultadController.pagination.pageSize}" rendered="#{facultadController.pagination.hasPreviousPage}"/>&nbsp;
-                    <h:commandLink action="#{facultadController.next}" value="#{bundle.Next} #{facultadController.pagination.pageSize}" rendered="#{facultadController.pagination.hasNextPage}"/>&nbsp;
-                    <h:dataTable value="#{facultadController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
-                        <h:column>
+        <h:form styleClass="jsfcrud_list_form">
+            <h:outputText escape="false" value="#{bundle.ListFacultadEmpty}" rendered="#{facultadController.items.rowCount == 0}"/>
+            <div style="text-align:center">
+                    <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{facultadController.items}" var="item" paginator="true" rows="3" >
+                        <f:facet name="header">
+                            <h3 style="color:white">Facultades del sistema</h3>
+                        </f:facet>
+                        
+                        <p:column  filterBy="#{item.nombre}" sortBy="#{item.nombre}">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacultadTitle_idFacultad}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idFacultad}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacultadTitle_nombre}"/>
+                                <h:outputText value="Nombre facultad"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
-                        </h:column>
-                        <h:column>
+                        </p:column>
+                        
+                        <p:column >
                             <f:facet name="header">
-                                <h:outputText value="&nbsp;"/>
+                                <h:outputText value="Acciones"/>
                             </f:facet>
-                            <h:commandLink action="#{facultadController.prepareView}" value="#{bundle.ListFacultadViewLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{facultadController.prepareEdit}" value="#{bundle.ListFacultadEditLink}"/>
-                            <h:outputText value=" "/>
-                            <h:commandLink action="#{facultadController.destroy}" value="#{bundle.ListFacultadDestroyLink}"/>
-                        </h:column>
-                    </h:dataTable>
-                </h:panelGroup>
-                <br />
-                <h:commandLink action="#{facultadController.prepareCreate}" value="#{bundle.ListFacultadCreateLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ListFacultadIndexLink}"/>
+                            <h:commandLink action="#{facultadController.prepareView}">
+                                <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
+                            </h:commandLink>
+                            <h:commandLink action="#{facultadController.prepareEdit}">
+                                <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
+                            </h:commandLink>
+                            <h:commandLink action="#{facultadController.destroy}">
+                                <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
+                            </h:commandLink>
+                        </p:column>
+                    
+                    </p:dataTable>
+           
+               </div>
+              
             </h:form>
+     </div>
+        
     </h:body>
 
 </html>
