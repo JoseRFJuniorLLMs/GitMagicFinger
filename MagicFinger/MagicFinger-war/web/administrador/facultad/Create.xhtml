@@ -27,15 +27,19 @@
         </div>
     </div>      
         <div class="center_content">
+            
             <h:form>
                 <div style="text-align:center">
-                    <h1 style="text-align: center;margin-bottom: 200px"> Agregar Facultad</h1>
+                    
+                    <h1 style="text-align: center;margin-bottom: 30px"> Agregar Facultad</h1>
+                    
+                    <p style="text-align: left">Para agregar una nueva facultadad, debe ingresar los siguientes campos:</p>  
                     <h:outputLabel value="#{bundle.CreateFacultadLabel_nombre}" for="nombre" />
                     <h:inputText id="nombre" value="#{facultadController.selected.nombre}" title="#{bundle.CreateFacultadTitle_nombre}" />
                     <ul style="list-style: none;display: block;float:center; padding:0px;margin-top: 20px">
                         <li>
                             <h:commandLink action="#{facultadController.create}">
-                                <img src="/MagicFinger-war/faces/img/ok.png" />
+                                <img src="/MagicFinger-war/faces/img/ad.png" />
                             </h:commandLink>
                         </li>
                         <li>

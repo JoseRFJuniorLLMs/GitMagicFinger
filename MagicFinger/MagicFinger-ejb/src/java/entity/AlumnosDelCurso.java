@@ -46,6 +46,16 @@ public class AlumnosDelCurso implements Serializable {
     private Alumno alumno;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnosDelCurso")
     private List<Asistencia> asistenciaList;
+    @ManyToOne
+    private Grupos grupos;
+
+    public Grupos getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(Grupos grupos) {
+        this.grupos = grupos;
+    }
 
     public AlumnosDelCurso() {
     }
