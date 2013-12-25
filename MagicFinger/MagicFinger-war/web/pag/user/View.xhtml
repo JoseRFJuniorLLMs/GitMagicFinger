@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewUserLabel_userRol}"/>
+                <h:outputText value="#{userController.selected.userRol}" title="#{bundle.ViewUserTitle_userRol}"/>
+                <h:outputText value="#{bundle.ViewUserLabel_id}"/>
+                <h:outputText value="#{userController.selected.id}" title="#{bundle.ViewUserTitle_id}"/>
+                <h:outputText value="#{bundle.ViewUserLabel_usuario}"/>
+                <h:outputText value="#{userController.selected.usuario}" title="#{bundle.ViewUserTitle_usuario}"/>
+                <h:outputText value="#{bundle.ViewUserLabel_password}"/>
+                <h:outputText value="#{userController.selected.password}" title="#{bundle.ViewUserTitle_password}"/>
+                <h:outputText value="#{bundle.ViewUserLabel_alumnoId}"/>
+                <h:outputText value="#{userController.selected.alumnoId}" title="#{bundle.ViewUserTitle_alumnoId}"/>
+                <h:outputText value="#{bundle.ViewUserLabel_profesorId}"/>
+                <h:outputText value="#{userController.selected.profesorId}" title="#{bundle.ViewUserTitle_profesorId}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{userController.destroyAndView}" value="#{bundle.ViewUserDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewUserEditLink}"/>
+            <br />
+            <h:commandLink action="#{userController.prepareCreate}" value="#{bundle.ViewUserCreateLink}" />
+            <br />
+            <h:commandLink action="#{userController.prepareList}" value="#{bundle.ViewUserShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewUserIndexLink}"/>
+
+        </h:form>
+    </h:body>
+</html>

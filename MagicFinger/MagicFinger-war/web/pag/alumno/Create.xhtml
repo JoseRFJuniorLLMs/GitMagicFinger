@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAlumnoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_idAlumno}" for="idAlumno" />
+                    <h:inputText id="idAlumno" value="#{alumnoController.selected.idAlumno}" title="#{bundle.CreateAlumnoTitle_idAlumno}" required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_idAlumno}"/>
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_rut}" for="rut" />
+                    <h:inputTextarea rows="4" cols="30" id="rut" value="#{alumnoController.selected.rut}" title="#{bundle.CreateAlumnoTitle_rut}" />
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_nombre}" for="nombre" />
+                    <h:inputTextarea rows="4" cols="30" id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.CreateAlumnoTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_apellidop}" for="apellidop" />
+                    <h:inputTextarea rows="4" cols="30" id="apellidop" value="#{alumnoController.selected.apellidop}" title="#{bundle.CreateAlumnoTitle_apellidop}" />
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_apellidom}" for="apellidom" />
+                    <h:inputTextarea rows="4" cols="30" id="apellidom" value="#{alumnoController.selected.apellidom}" title="#{bundle.CreateAlumnoTitle_apellidom}" />
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_telefono}" for="telefono" />
+                    <h:inputText id="telefono" value="#{alumnoController.selected.telefono}" title="#{bundle.CreateAlumnoTitle_telefono}" />
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_correo}" for="correo" />
+                    <h:inputTextarea rows="4" cols="30" id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.CreateAlumnoTitle_correo}" />
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_userId}" for="userId" />
+                    <h:selectOneMenu id="userId" value="#{alumnoController.selected.userId}" title="#{bundle.CreateAlumnoTitle_userId}" >
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_huella1}" for="huella1" />
+                    <h:inputTextarea rows="4" cols="30" id="huella1" value="#{alumnoController.selected.huella1}" title="#{bundle.CreateAlumnoTitle_huella1}" />
+                    <h:outputLabel value="#{bundle.CreateAlumnoLabel_huella2}" for="huella2" />
+                    <h:inputTextarea rows="4" cols="30" id="huella2" value="#{alumnoController.selected.huella2}" title="#{bundle.CreateAlumnoTitle_huella2}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{alumnoController.create}" value="#{bundle.CreateAlumnoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{alumnoController.prepareList}" value="#{bundle.CreateAlumnoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAlumnoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

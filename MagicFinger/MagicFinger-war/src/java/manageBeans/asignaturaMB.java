@@ -46,8 +46,6 @@ public class asignaturaMB {
     @PostConstruct
     public void init() {
         cursoSeleccionado = profesorLogin.getCurso();
-        
-        
         profesor = profesorLogin.getProfesor();
         if (profesor != null) {
             ListCurso = profesor.getCursoList();

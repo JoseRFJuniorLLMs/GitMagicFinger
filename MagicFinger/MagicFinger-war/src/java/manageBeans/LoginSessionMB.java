@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -67,7 +68,7 @@ public class LoginSessionMB implements Serializable {
                 // System.out.println(request.getContextPath()+"------------------------------------"+context.getExternalContext().getUserPrincipal());
             }
         } catch (ServletException e) {
-            System.out.println("error(loginMB-login): " + e.getMessage());
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de inicio", "Usuario o contraseña invalidos"));   
         }
     }
     private boolean error = false;

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:body>
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewProfesorLabel_idProfesor}"/>
+                <h:outputText value="#{profesorController.selected.idProfesor}" title="#{bundle.ViewProfesorTitle_idProfesor}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_rut}"/>
+                <h:outputText value="#{profesorController.selected.rut}" title="#{bundle.ViewProfesorTitle_rut}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_nombre}"/>
+                <h:outputText value="#{profesorController.selected.nombre}" title="#{bundle.ViewProfesorTitle_nombre}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_apellidop}"/>
+                <h:outputText value="#{profesorController.selected.apellidop}" title="#{bundle.ViewProfesorTitle_apellidop}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_apellidom}"/>
+                <h:outputText value="#{profesorController.selected.apellidom}" title="#{bundle.ViewProfesorTitle_apellidom}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_huella1}"/>
+                <h:outputText value="#{profesorController.selected.huella1}" title="#{bundle.ViewProfesorTitle_huella1}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_telefono}"/>
+                <h:outputText value="#{profesorController.selected.telefono}" title="#{bundle.ViewProfesorTitle_telefono}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_correo}"/>
+                <h:outputText value="#{profesorController.selected.correo}" title="#{bundle.ViewProfesorTitle_correo}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_huella2}"/>
+                <h:outputText value="#{profesorController.selected.huella2}" title="#{bundle.ViewProfesorTitle_huella2}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_userId}"/>
+                <h:outputText value="#{profesorController.selected.userId}" title="#{bundle.ViewProfesorTitle_userId}"/>
+                <h:outputText value="#{bundle.ViewProfesorLabel_departamentoId}"/>
+                <h:outputText value="#{profesorController.selected.departamentoId}" title="#{bundle.ViewProfesorTitle_departamentoId}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{profesorController.destroyAndView}" value="#{bundle.ViewProfesorDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewProfesorEditLink}"/>
+            <br />
+            <h:commandLink action="#{profesorController.prepareCreate}" value="#{bundle.ViewProfesorCreateLink}" />
+            <br />
+            <h:commandLink action="#{profesorController.prepareList}" value="#{bundle.ViewProfesorShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewProfesorIndexLink}"/>
+
+        </h:form>
+    </h:body>
+</html>
