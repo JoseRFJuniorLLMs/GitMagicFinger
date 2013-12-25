@@ -2,6 +2,7 @@ package manageBeans;
 
 import entity.Alumno;
 import entity.AlumnosDelCurso;
+import entity.Asignatura;
 import entity.Asistencia;
 import entity.BloqueClase;
 import entity.Curso;
@@ -75,18 +76,6 @@ public class asistenciaCursoMB {
                 conversation.setValor(valor);
             }
         }
-//        if(fecha!=null){
-//            System.out.println("init fcha: "+fecha);
-//        }
-//        else{
-//            System.out.println("init fecha: vacio");
-//        }
-//        if(bloqueClase!=null){
-//            System.out.println("init bloque: "+ bloqueClase.toString());
-//        }
-//        else{
-//            System.out.println("init bloque: vacio");
-//        }
     }
 
     public void buscaPersona(ActionEvent actionEvent) {
@@ -206,7 +195,6 @@ public class asistenciaCursoMB {
     
     public void handleBloqueClaseChange() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
-                
         if (valor != -1) {
             for (BloqueClase bloq : curso.getBloqueClaseList()) {
                 if (bloq.getIdBloque() == valor) {
@@ -223,21 +211,28 @@ public class asistenciaCursoMB {
     }
     public void handleBloqueClaseChangeAsistencia(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
-        if( bloqueClase==null || fecha==null){
-             for (AlumnosDelCurso alumnoCurso : this.curso.getAlumnosDelCursoList()) {
+        if( bloqueClase==null || fecha==null || valor2<1){
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Seleccione bloque y fecha"));
+       }
+       else{
+             for (AlumnosDelCurso alumnoCurso : curso.getAlumnosDelCursoList()) {
                 Asistencia asistioCurso =  asistenciaSB.alumnoAsiste(alumnoCurso, bloqueClase, fecha);
                 if(asistioCurso==null){
-                
+                    Asistencia nuevo = new Asistencia();
+                    nuevo.setAlumnosDelCurso(alumnoCurso);
+                    nuevo.setBloqueClaseId(bloqueClase);
+                    nuevo.setFecha(fecha);
+                    nuevo.setEstado(valor2);
+                    asistenciaFacade.create(nuevo);
+                    System.out.println("agregarlo");
                 }
                 else{
-                   asistioCurso.setIdAsistencia(valor);
+                   asistioCurso.setEstado(valor2);
                    asistenciaFacade.edit(asistioCurso);
                 }
             }
-             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Seleccione bloque y fecha"));
-       }
-        else{
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Ok", bloqueClase.toString()+"--"+fecha.toString() ));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cambio exitoso", "Se ha cambiado el estado de la asistencia" ));
             }
     }
 

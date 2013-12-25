@@ -4,11 +4,13 @@ import entity.AlumnosDelCurso;
 import manageBeans.mantenedores.util.JsfUtil;
 import manageBeans.mantenedores.util.PaginationHelper;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -19,7 +21,7 @@ import javax.faces.model.SelectItem;
 import sessionBeans.AlumnosDelCursoFacadeLocal;
 
 @Named("alumnosDelCursoController")
-@RequestScoped
+@SessionScoped
 public class AlumnosDelCursoController implements Serializable {
 
     private AlumnosDelCurso current;
@@ -82,14 +84,16 @@ public class AlumnosDelCursoController implements Serializable {
 
     public String create() {
         try {
-            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
             current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
             current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
+            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AlumnosDelCursoCreated"));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "AlumnosDelCurso creado", "Se ha creado una correctamente"));
             return prepareCreate();
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
@@ -102,14 +106,17 @@ public class AlumnosDelCursoController implements Serializable {
 
     public String update() {
         try {
-            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
             current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
             current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
+            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AlumnosDelCursoUpdated"));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "AlumnosDelCurso actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: AlumnosDelCurso no actualizado", "Lo sentimos, intentelo mas tarde"));
+
             return null;
         }
     }
@@ -139,9 +146,11 @@ public class AlumnosDelCursoController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AlumnosDelCursoDeleted"));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "AlumnosDelCurso eliminado", "Se ha eliminado una {entityClassName}"));
         } catch (Exception e) {
-            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
