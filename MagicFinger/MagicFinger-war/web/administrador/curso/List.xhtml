@@ -54,25 +54,14 @@
                         <f:facet name="header">
                             <h3 style="color:white">Cursos registrados</h3>
                         </f:facet>
-                        <p:column style="width: 20px" filterBy="#{item.porcenteajeAprobacion}" sortBy="#{item.porcenteajeAprobacion}" >
-                            <f:facet name="header">
-                                <h:outputText value="Porcentaje de aprobación"/>
-                            </f:facet>
-                            <h:outputText value="#{item.porcenteajeAprobacion}%"/>
-                        </p:column>
-                        <p:column style="width: 20px" filterBy="#{item.termino}" sortBy="#{item.termino}" >
-                            <f:facet name="header">
-                                <h:outputText value="Atrasados luego de"/>
-                            </f:facet>
-                            <h:outputText value="#{item.termino} min."/>
-                        </p:column>
-                        <p:column style="max-width: 420px" filterBy="#{item.asignatura}" sortBy="#{item.asignatura}" >
+                        
+                        <p:column style="max-width: 420px" filterBy="#{item.asignatura.nombre}" sortBy="#{item.asignatura.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="Asignatura"/>
                             </f:facet>
                             <h:outputText value="#{item.asignatura.nombre}"/>
                         </p:column>
-                        <p:column filterBy="#{item.tipoAsignatura}" sortBy="#{item.tipoAsignatura}" >
+                        <p:column filterBy="#{item.tipoAsignatura.nombre}" sortBy="#{item.tipoAsignatura.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="Tipo:"/>
                             </f:facet>
