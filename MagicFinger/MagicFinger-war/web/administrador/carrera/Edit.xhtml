@@ -41,7 +41,7 @@
                             <h:outputLabel value="#{bundle.EditCarreraLabel_idCarr}" for="idCarr" />
                             <h:inputText id="idCarr" value="#{carreraController.selected.idCarr}" title="#{bundle.EditCarreraTitle_idCarr}" required="true" requiredMessage="#{bundle.EditCarreraRequiredMessage_idCarr}"/>
                             <h:outputLabel value="#{bundle.EditCarreraLabel_nombreCarrera}" for="nombreCarrera" />
-                            <h:inputTextarea rows="4" cols="30" id="nombreCarrera" value="#{carreraController.selected.nombreCarrera}" title="#{bundle.EditCarreraTitle_nombreCarrera}" />
+                            <h:inputText id="nombreCarrera" value="#{carreraController.selected.nombreCarrera}" title="#{bundle.EditCarreraTitle_nombreCarrera}" />
                             <h:outputLabel value="#{bundle.EditCarreraLabel_departamentoId}" for="departamentoId" />
                             <h:selectOneMenu id="departamentoId" value="#{carreraController.selected.departamentoId}" title="#{bundle.EditCarreraTitle_departamentoId}" required="true" requiredMessage="#{bundle.EditCarreraRequiredMessage_departamentoId}">
                                 <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"/>

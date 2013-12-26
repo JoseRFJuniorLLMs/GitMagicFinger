@@ -41,7 +41,7 @@
                             <h:outputLabel value="#{bundle.EditTipoAsignaturaLabel_idTipoAsignatura}" for="idTipoAsignatura" />
                             <h:inputText id="idTipoAsignatura" value="#{tipoAsignaturaController.selected.idTipoAsignatura}" title="#{bundle.EditTipoAsignaturaTitle_idTipoAsignatura}" required="true" requiredMessage="#{bundle.EditTipoAsignaturaRequiredMessage_idTipoAsignatura}"/>
                             <h:outputLabel value="#{bundle.EditTipoAsignaturaLabel_nombre}" for="nombre" />
-                            <h:inputTextarea rows="4" cols="30" id="nombre" value="#{tipoAsignaturaController.selected.nombre}" title="#{bundle.EditTipoAsignaturaTitle_nombre}" />
+                            <h:inputText id="nombre" value="#{tipoAsignaturaController.selected.nombre}" title="#{bundle.EditTipoAsignaturaTitle_nombre}" />
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{tipoAsignaturaController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

@@ -41,7 +41,7 @@
                             <h:outputLabel value="#{bundle.EditDepartamentoLabel_idDepartamento}" for="idDepartamento" />
                             <h:inputText id="idDepartamento" value="#{departamentoController.selected.idDepartamento}" title="#{bundle.EditDepartamentoTitle_idDepartamento}" required="true" requiredMessage="#{bundle.EditDepartamentoRequiredMessage_idDepartamento}"/>
                             <h:outputLabel value="#{bundle.EditDepartamentoLabel_nombre}" for="nombre" />
-                            <h:inputTextarea rows="4" cols="30" id="nombre" value="#{departamentoController.selected.nombre}" title="#{bundle.EditDepartamentoTitle_nombre}" />
+                            <h:inputText id="nombre" value="#{departamentoController.selected.nombre}" title="#{bundle.EditDepartamentoTitle_nombre}" />
                             <h:outputLabel value="#{bundle.EditDepartamentoLabel_facultadId}" for="facultadId" />
                             <h:selectOneMenu id="facultadId" value="#{departamentoController.selected.facultadId}" title="#{bundle.EditDepartamentoTitle_facultadId}" required="true" requiredMessage="#{bundle.EditDepartamentoRequiredMessage_facultadId}">
                                 <f:selectItems value="#{facultadController.itemsAvailableSelectOne}"/>

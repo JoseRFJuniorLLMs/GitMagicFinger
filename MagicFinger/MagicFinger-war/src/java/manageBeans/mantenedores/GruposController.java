@@ -48,7 +48,7 @@ public class GruposController implements Serializable {
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
-            pagination = new PaginationHelper(10) {
+            pagination = new PaginationHelper(200) {
                 @Override
                 public int getItemsCount() {
                     return getFacade().count();

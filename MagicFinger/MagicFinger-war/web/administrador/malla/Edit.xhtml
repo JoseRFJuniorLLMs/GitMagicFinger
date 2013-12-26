@@ -45,7 +45,7 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:inputText>
                             <h:outputLabel value="#{bundle.EditMallaLabel_descripcion}" for="descripcion" />
-                            <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{mallaController.selected.descripcion}" title="#{bundle.EditMallaTitle_descripcion}" />
+                            <h:inputText id="descripcion" value="#{mallaController.selected.descripcion}" title="#{bundle.EditMallaTitle_descripcion}" />
                             <h:outputLabel value="#{bundle.EditMallaLabel_carreraId}" for="carreraId" />
                             <h:selectOneMenu id="carreraId" value="#{mallaController.selected.carreraId}" title="#{bundle.EditMallaTitle_carreraId}" required="true" requiredMessage="#{bundle.EditMallaRequiredMessage_carreraId}">
                                 <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"/>

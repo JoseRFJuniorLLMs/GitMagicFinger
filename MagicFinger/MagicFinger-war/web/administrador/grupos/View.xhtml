@@ -1,34 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Ver Grupos</title>
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
 
+    </h:head>
     <h:body>
-        <h:panelGroup id="messagePanel" layout="block">
-            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-        </h:panelGroup>
-        <h:form>
-            <h:panelGrid columns="2">
-                <h:outputText value="#{bundle.ViewGruposLabel_nombre}"/>
-                <h:outputText value="#{gruposController.selected.nombre}" title="#{bundle.ViewGruposTitle_nombre}"/>
-                <h:outputText value="#{bundle.ViewGruposLabel_id}"/>
-                <h:outputText value="#{gruposController.selected.id}" title="#{bundle.ViewGruposTitle_id}"/>
-            </h:panelGrid>
-            <br />
-            <h:commandLink action="#{gruposController.destroyAndView}" value="#{bundle.ViewGruposDestroyLink}"/>
-            <br />
-            <br />
-            <h:link outcome="Edit" value="#{bundle.ViewGruposEditLink}"/>
-            <br />
-            <h:commandLink action="#{gruposController.prepareCreate}" value="#{bundle.ViewGruposCreateLink}" />
-            <br />
-            <h:commandLink action="#{gruposController.prepareList}" value="#{bundle.ViewGruposShowAllLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ViewGruposIndexLink}"/>
+        <div id="top" style="display: inline-block; text-align: center">
+            <div id="logo" style="display: inline-block; float:left">
+                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+            </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
+                <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
+            </div>
+            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
+                <h:form>
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
+                </h:form>
+            </div>
+        </div>      
+        <div class="center_content">
 
-        </h:form>
+            <h:form><p:growl id="grow1" showDetail="true" />
+                <div style="text-align:center">
+                    <h1 style="text-align: center;margin-bottom: 20px "> Ver Grupos</h1>
+                    <div id="ver" style="display: inline-block;width: 100%;">
+                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
+                        <p style="float: left;display: inline-block">
+                            &nbsp;Para ver el Grupos, debe ingresar los siguientes campos:
+                        </p>  
+                    </div>
+                    <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
+                        <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_nombre}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.nombre}" title="#{bundle.ViewGruposTitle_nombre}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_id}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.id}" title="#{bundle.ViewGruposTitle_id}"/>
+                            </h4>
+                        </h:panelGrid>
+                        <h:commandLink style="display: inline-block;" action="#{gruposController.prepareList}" immediate="true">
+                            <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel>Volver </h:outputLabel>
+                        </h:commandLink>
+                        <br></br><br></br>
+                    </div>
+                </div>
+            </h:form>
+        </div>
     </h:body>
 </html>
+
+
+
+

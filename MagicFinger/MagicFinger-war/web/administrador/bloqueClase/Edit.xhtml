@@ -43,7 +43,7 @@
                             <h:outputLabel value="#{bundle.EditBloqueClaseLabel_bloque}" for="bloque" />
                             <h:inputText id="bloque" value="#{bloqueClaseController.selected.bloque}" title="#{bundle.EditBloqueClaseTitle_bloque}" />
                             <h:outputLabel value="#{bundle.EditBloqueClaseLabel_diaSemana}" for="diaSemana" />
-                            <h:inputTextarea rows="4" cols="30" id="diaSemana" value="#{bloqueClaseController.selected.diaSemana}" title="#{bundle.EditBloqueClaseTitle_diaSemana}" />
+                            <h:inputText id="diaSemana" value="#{bloqueClaseController.selected.diaSemana}" title="#{bundle.EditBloqueClaseTitle_diaSemana}" />
                             <h:outputLabel value="#{bundle.EditBloqueClaseLabel_curso}" for="curso" />
                             <h:selectOneMenu id="curso" value="#{bloqueClaseController.selected.curso}" title="#{bundle.EditBloqueClaseTitle_curso}" >
                                 <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>

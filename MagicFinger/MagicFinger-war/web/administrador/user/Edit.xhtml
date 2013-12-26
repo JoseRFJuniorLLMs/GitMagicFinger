@@ -45,9 +45,9 @@
                             <h:outputLabel value="#{bundle.EditUserLabel_id}" for="id" />
                             <h:inputText id="id" value="#{userController.selected.id}" title="#{bundle.EditUserTitle_id}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_id}"/>
                             <h:outputLabel value="#{bundle.EditUserLabel_usuario}" for="usuario" />
-                            <h:inputTextarea rows="4" cols="30" id="usuario" value="#{userController.selected.usuario}" title="#{bundle.EditUserTitle_usuario}" />
+                            <h:inputText id="usuario" value="#{userController.selected.usuario}" title="#{bundle.EditUserTitle_usuario}" />
                             <h:outputLabel value="#{bundle.EditUserLabel_password}" for="password" />
-                            <h:inputTextarea rows="4" cols="30" id="password" value="#{userController.selected.password}" title="#{bundle.EditUserTitle_password}" />
+                            <h:inputText id="password" value="#{userController.selected.password}" title="#{bundle.EditUserTitle_password}" />
                             <h:outputLabel value="#{bundle.EditUserLabel_alumnoId}" for="alumnoId" />
                             <h:selectOneMenu id="alumnoId" value="#{userController.selected.alumnoId}" title="#{bundle.EditUserTitle_alumnoId}" >
                                 <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"/>

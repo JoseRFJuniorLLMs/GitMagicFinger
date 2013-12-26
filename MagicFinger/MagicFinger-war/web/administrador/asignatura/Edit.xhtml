@@ -41,7 +41,7 @@
                             <h:outputLabel value="#{bundle.EditAsignaturaLabel_idAsignatura}" for="idAsignatura" />
                             <h:inputText id="idAsignatura" value="#{asignaturaController.selected.idAsignatura}" title="#{bundle.EditAsignaturaTitle_idAsignatura}" required="true" requiredMessage="#{bundle.EditAsignaturaRequiredMessage_idAsignatura}"/>
                             <h:outputLabel value="#{bundle.EditAsignaturaLabel_nombre}" for="nombre" />
-                            <h:inputTextarea rows="4" cols="30" id="nombre" value="#{asignaturaController.selected.nombre}" title="#{bundle.EditAsignaturaTitle_nombre}" />
+                            <h:inputText id="nombre" value="#{asignaturaController.selected.nombre}" title="#{bundle.EditAsignaturaTitle_nombre}" />
                             <h:outputLabel value="#{bundle.EditAsignaturaLabel_mallaId}" for="mallaId" />
                             <h:selectOneMenu id="mallaId" value="#{asignaturaController.selected.mallaId}" title="#{bundle.EditAsignaturaTitle_mallaId}" required="true" requiredMessage="#{bundle.EditAsignaturaRequiredMessage_mallaId}">
                                 <f:selectItems value="#{mallaController.itemsAvailableSelectOne}"/>
