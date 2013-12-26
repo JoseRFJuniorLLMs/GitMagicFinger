@@ -6,29 +6,29 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:body>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewFacultadLabel_idFacultad}"/>
-                    <h:outputText value="#{facultadController.selected.idFacultad}" title="#{bundle.ViewFacultadTitle_idFacultad}"/>
-                    <h:outputText value="#{bundle.ViewFacultadLabel_nombre}"/>
-                    <h:outputText value="#{facultadController.selected.nombre}" title="#{bundle.ViewFacultadTitle_nombre}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{facultadController.destroyAndView}" value="#{bundle.ViewFacultadDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewFacultadEditLink}"/>
-                <br />
-                <h:commandLink action="#{facultadController.prepareCreate}" value="#{bundle.ViewFacultadCreateLink}" />
-                <br />
-                <h:commandLink action="#{facultadController.prepareList}" value="#{bundle.ViewFacultadShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewFacultadIndexLink}"/>
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewFacultadLabel_idFacultad}"/>
+                <h:outputText value="#{facultadController.selected.idFacultad}" title="#{bundle.ViewFacultadTitle_idFacultad}"/>
+                <h:outputText value="#{bundle.ViewFacultadLabel_nombre}"/>
+                <h:outputText value="#{facultadController.selected.nombre}" title="#{bundle.ViewFacultadTitle_nombre}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{facultadController.destroyAndView}" value="#{bundle.ViewFacultadDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewFacultadEditLink}"/>
+            <br />
+            <h:commandLink action="#{facultadController.prepareCreate}" value="#{bundle.ViewFacultadCreateLink}" />
+            <br />
+            <h:commandLink action="#{facultadController.prepareList}" value="#{bundle.ViewFacultadShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewFacultadIndexLink}"/>
 
-            </h:form>
-        </h:body>
+        </h:form>
+    </h:body>
 </html>

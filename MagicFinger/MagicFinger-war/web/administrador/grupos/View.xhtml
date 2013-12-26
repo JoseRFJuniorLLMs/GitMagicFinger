@@ -6,29 +6,29 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:body>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewGruposLabel_nombre}"/>
-                    <h:outputText value="#{gruposController.selected.nombre}" title="#{bundle.ViewGruposTitle_nombre}"/>
-                    <h:outputText value="#{bundle.ViewGruposLabel_id}"/>
-                    <h:outputText value="#{gruposController.selected.id}" title="#{bundle.ViewGruposTitle_id}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{gruposController.destroyAndView}" value="#{bundle.ViewGruposDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewGruposEditLink}"/>
-                <br />
-                <h:commandLink action="#{gruposController.prepareCreate}" value="#{bundle.ViewGruposCreateLink}" />
-                <br />
-                <h:commandLink action="#{gruposController.prepareList}" value="#{bundle.ViewGruposShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewGruposIndexLink}"/>
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewGruposLabel_nombre}"/>
+                <h:outputText value="#{gruposController.selected.nombre}" title="#{bundle.ViewGruposTitle_nombre}"/>
+                <h:outputText value="#{bundle.ViewGruposLabel_id}"/>
+                <h:outputText value="#{gruposController.selected.id}" title="#{bundle.ViewGruposTitle_id}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{gruposController.destroyAndView}" value="#{bundle.ViewGruposDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewGruposEditLink}"/>
+            <br />
+            <h:commandLink action="#{gruposController.prepareCreate}" value="#{bundle.ViewGruposCreateLink}" />
+            <br />
+            <h:commandLink action="#{gruposController.prepareList}" value="#{bundle.ViewGruposShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewGruposIndexLink}"/>
 
-            </h:form>
-        </h:body>
+        </h:form>
+    </h:body>
 </html>

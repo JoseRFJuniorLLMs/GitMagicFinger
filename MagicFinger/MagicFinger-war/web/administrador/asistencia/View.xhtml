@@ -6,37 +6,37 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:body>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewAsistenciaLabel_idAsistencia}"/>
-                    <h:outputText value="#{asistenciaController.selected.idAsistencia}" title="#{bundle.ViewAsistenciaTitle_idAsistencia}"/>
-                    <h:outputText value="#{bundle.ViewAsistenciaLabel_fecha}"/>
-                    <h:outputText value="#{asistenciaController.selected.fecha}" title="#{bundle.ViewAsistenciaTitle_fecha}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                    <h:outputText value="#{bundle.ViewAsistenciaLabel_estado}"/>
-                    <h:outputText value="#{asistenciaController.selected.estado}" title="#{bundle.ViewAsistenciaTitle_estado}"/>
-                    <h:outputText value="#{bundle.ViewAsistenciaLabel_alumnosDelCurso}"/>
-                    <h:outputText value="#{asistenciaController.selected.alumnosDelCurso}" title="#{bundle.ViewAsistenciaTitle_alumnosDelCurso}"/>
-                    <h:outputText value="#{bundle.ViewAsistenciaLabel_bloqueClaseId}"/>
-                    <h:outputText value="#{asistenciaController.selected.bloqueClaseId}" title="#{bundle.ViewAsistenciaTitle_bloqueClaseId}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{asistenciaController.destroyAndView}" value="#{bundle.ViewAsistenciaDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewAsistenciaEditLink}"/>
-                <br />
-                <h:commandLink action="#{asistenciaController.prepareCreate}" value="#{bundle.ViewAsistenciaCreateLink}" />
-                <br />
-                <h:commandLink action="#{asistenciaController.prepareList}" value="#{bundle.ViewAsistenciaShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewAsistenciaIndexLink}"/>
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewAsistenciaLabel_idAsistencia}"/>
+                <h:outputText value="#{asistenciaController.selected.idAsistencia}" title="#{bundle.ViewAsistenciaTitle_idAsistencia}"/>
+                <h:outputText value="#{bundle.ViewAsistenciaLabel_fecha}"/>
+                <h:outputText value="#{asistenciaController.selected.fecha}" title="#{bundle.ViewAsistenciaTitle_fecha}">
+                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                </h:outputText>
+                <h:outputText value="#{bundle.ViewAsistenciaLabel_estado}"/>
+                <h:outputText value="#{asistenciaController.selected.estado}" title="#{bundle.ViewAsistenciaTitle_estado}"/>
+                <h:outputText value="#{bundle.ViewAsistenciaLabel_alumnosDelCurso}"/>
+                <h:outputText value="#{asistenciaController.selected.alumnosDelCurso}" title="#{bundle.ViewAsistenciaTitle_alumnosDelCurso}"/>
+                <h:outputText value="#{bundle.ViewAsistenciaLabel_bloqueClaseId}"/>
+                <h:outputText value="#{asistenciaController.selected.bloqueClaseId}" title="#{bundle.ViewAsistenciaTitle_bloqueClaseId}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{asistenciaController.destroyAndView}" value="#{bundle.ViewAsistenciaDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewAsistenciaEditLink}"/>
+            <br />
+            <h:commandLink action="#{asistenciaController.prepareCreate}" value="#{bundle.ViewAsistenciaCreateLink}" />
+            <br />
+            <h:commandLink action="#{asistenciaController.prepareList}" value="#{bundle.ViewAsistenciaShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewAsistenciaIndexLink}"/>
 
-            </h:form>
-        </h:body>
+        </h:form>
+    </h:body>
 </html>

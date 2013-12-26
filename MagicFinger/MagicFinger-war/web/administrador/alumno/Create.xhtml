@@ -21,12 +21,11 @@
         </div>
         <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
             <h:form>
-            <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
+            <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
             </h:form>
         </div>
     </div>      
         <div class="center_content">
-            
             <h:form><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
                     <h1 style="text-align: center;margin-bottom: 20px "> Agregar Alumno</h1>
@@ -84,9 +83,9 @@
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <h:outputLabel> Guardar facultad</h:outputLabel>
                         </h:commandLink>
-                        <h:commandLink style="display: inline-block;" action="#{alumnoController.prepareList}">
+                        <h:commandLink style="display: inline-block;" action="#{alumnoController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.PNG" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <h:outputLabel>Volver </h:outputLabel>
+                            <h:outputLabel>Volver</h:outputLabel>
                         </h:commandLink>
                         <br></br><br></br>
                     </div>

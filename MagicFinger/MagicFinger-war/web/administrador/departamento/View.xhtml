@@ -6,31 +6,31 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:body>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewDepartamentoLabel_idDepartamento}"/>
-                    <h:outputText value="#{departamentoController.selected.idDepartamento}" title="#{bundle.ViewDepartamentoTitle_idDepartamento}"/>
-                    <h:outputText value="#{bundle.ViewDepartamentoLabel_nombre}"/>
-                    <h:outputText value="#{departamentoController.selected.nombre}" title="#{bundle.ViewDepartamentoTitle_nombre}"/>
-                    <h:outputText value="#{bundle.ViewDepartamentoLabel_facultadId}"/>
-                    <h:outputText value="#{departamentoController.selected.facultadId}" title="#{bundle.ViewDepartamentoTitle_facultadId}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{departamentoController.destroyAndView}" value="#{bundle.ViewDepartamentoDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewDepartamentoEditLink}"/>
-                <br />
-                <h:commandLink action="#{departamentoController.prepareCreate}" value="#{bundle.ViewDepartamentoCreateLink}" />
-                <br />
-                <h:commandLink action="#{departamentoController.prepareList}" value="#{bundle.ViewDepartamentoShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewDepartamentoIndexLink}"/>
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewDepartamentoLabel_idDepartamento}"/>
+                <h:outputText value="#{departamentoController.selected.idDepartamento}" title="#{bundle.ViewDepartamentoTitle_idDepartamento}"/>
+                <h:outputText value="#{bundle.ViewDepartamentoLabel_nombre}"/>
+                <h:outputText value="#{departamentoController.selected.nombre}" title="#{bundle.ViewDepartamentoTitle_nombre}"/>
+                <h:outputText value="#{bundle.ViewDepartamentoLabel_facultadId}"/>
+                <h:outputText value="#{departamentoController.selected.facultadId}" title="#{bundle.ViewDepartamentoTitle_facultadId}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{departamentoController.destroyAndView}" value="#{bundle.ViewDepartamentoDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewDepartamentoEditLink}"/>
+            <br />
+            <h:commandLink action="#{departamentoController.prepareCreate}" value="#{bundle.ViewDepartamentoCreateLink}" />
+            <br />
+            <h:commandLink action="#{departamentoController.prepareList}" value="#{bundle.ViewDepartamentoShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewDepartamentoIndexLink}"/>
 
-            </h:form>
-        </h:body>
+        </h:form>
+    </h:body>
 </html>
