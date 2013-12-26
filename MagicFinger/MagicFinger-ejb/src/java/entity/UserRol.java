@@ -52,6 +52,6 @@ public class UserRol implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.UserRol[ id=" + name + " ]";
+        return name;
     }
 }

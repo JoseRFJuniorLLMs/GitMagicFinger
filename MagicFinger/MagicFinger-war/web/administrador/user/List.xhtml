@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>Gestion de User</title>
+        <title>Gestión de usuarios</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
@@ -36,7 +36,7 @@
                         <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
                         <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
                         <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
-                    </p:megaMenu>  
+                    </p:megaMenu> 
                 </div>
                 <div id="agregar" style="display: inline-block;width: 100%;">
                     <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px"/>
@@ -54,15 +54,9 @@
                         <f:facet name="header">
                             <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.userRol}" sortBy="#{item.userRol}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_userRol}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.userRol}"/>
-                        </p:column>
                         <p:column filterBy="#{item.id}" sortBy="#{item.id}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_id}"/>
+                                <h:outputText value="Código"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
@@ -72,24 +66,12 @@
                             </f:facet>
                             <h:outputText value="#{item.usuario}"/>
                         </p:column>
-                        <p:column filterBy="#{item.password}" sortBy="#{item.password}" >
+                        <p:column filterBy="#{item.userRol}" sortBy="#{item.userRol}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_password}"/>
+                                <h:outputText value="#{bundle.ListUserTitle_userRol}"/>
                             </f:facet>
-                            <h:outputText value="#{item.password}"/>
-                        </p:column>
-                        <p:column filterBy="#{item.alumnoId}" sortBy="#{item.alumnoId}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_alumnoId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.alumnoId}"/>
-                        </p:column>
-                        <p:column filterBy="#{item.profesorId}" sortBy="#{item.profesorId}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_profesorId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.profesorId}"/>
-                        </p:column>
+                            <h:outputText value="#{item.userRol}"/>
+                        </p:column>            
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Acciones"/>
