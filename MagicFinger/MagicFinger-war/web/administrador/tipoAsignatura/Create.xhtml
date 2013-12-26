@@ -1,35 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      <h:head>
+        <title>Agregar TipoAsignatura</title>
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.CreateTipoAsignaturaTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
+    </h:head>
+    <h:body>
+     <div id="top" style="display: inline-block; text-align: center">
+        <div id="logo" style="display: inline-block; float:left">
+            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+        </div>
+        <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
+            <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
+        </div>
+        <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateTipoAsignaturaLabel_idTipoAsignatura}" for="idTipoAsignatura" />
-                    <h:inputText id="idTipoAsignatura" value="#{tipoAsignaturaController.selected.idTipoAsignatura}" title="#{bundle.CreateTipoAsignaturaTitle_idTipoAsignatura}" required="true" requiredMessage="#{bundle.CreateTipoAsignaturaRequiredMessage_idTipoAsignatura}"/>
-                    <h:outputLabel value="#{bundle.CreateTipoAsignaturaLabel_nombre}" for="nombre" />
-                    <h:inputTextarea rows="4" cols="30" id="nombre" value="#{tipoAsignaturaController.selected.nombre}" title="#{bundle.CreateTipoAsignaturaTitle_nombre}" />
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{tipoAsignaturaController.create}" value="#{bundle.CreateTipoAsignaturaSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{tipoAsignaturaController.prepareList}" value="#{bundle.CreateTipoAsignaturaShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateTipoAsignaturaIndexLink}"/>
+            <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
             </h:form>
-        </ui:define>
-    </ui:composition>
-
+        </div>
+    </div>      
+        <div class="center_content">
+            
+            <h:form><p:growl id="grow1" showDetail="true" />
+                <div style="text-align:center">
+                    <h1 style="text-align: center;margin-bottom: 20px "> Agregar TipoAsignatura</h1>
+                    <div id="agregar" style="display: inline-block;width: 100%;">
+                        
+                        
+                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
+                        <p style="float: left;display: inline-block">
+                            &nbsp;Para agregar una nueva TipoAsignatura, debe ingresar los siguientes campos:
+                        </p>  
+                    </div>
+                    <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
+                    <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
+                    <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateTipoAsignaturaLabel_idTipoAsignatura}" for="idTipoAsignatura" />
+                    </h4>
+                    <h:inputText style="vertical-align: center" id="idTipoAsignatura" value="#{tipoAsignaturaController.selected.idTipoAsignatura}" title="#{bundle.CreateTipoAsignaturaTitle_idTipoAsignatura}" required="true" requiredMessage="#{bundle.CreateTipoAsignaturaRequiredMessage_idTipoAsignatura}"/>
+                    <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateTipoAsignaturaLabel_nombre}" for="nombre" />
+                    </h4>
+                    <h:inputText style="vertical-align: center" id="nombre" value="#{tipoAsignaturaController.selected.nombre}" title="#{bundle.CreateTipoAsignaturaTitle_nombre}"  />
+    
+                </h:panelGrid>
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{tipoAsignaturaController.create}">
+                            <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel> Guardar facultad</h:outputLabel>
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{tipoAsignaturaController.prepareList}">
+                            <img src="/MagicFinger-war/faces/img/atras.PNG" width="38" height="32" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel>Volver </h:outputLabel>
+                        </h:commandLink>
+                        <br></br><br></br>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
 </html>

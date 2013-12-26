@@ -5,11 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ViewCarreraTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+    <h:body>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
@@ -36,7 +32,5 @@
                 <h:link outcome="/index" value="#{bundle.ViewCarreraIndexLink}"/>
 
             </h:form>
-        </ui:define>
-    </ui:composition>
-
+        </h:body>
 </html>

@@ -5,16 +5,14 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ViewAlumnosDelCursoTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
+    <h:body>
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
                 <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewAlumnosDelCursoLabel_grupos}"/>
+                    <h:outputText value="#{alumnosDelCursoController.selected.grupos}" title="#{bundle.ViewAlumnosDelCursoTitle_grupos}"/>
                     <h:outputText value="#{bundle.ViewAlumnosDelCursoLabel_curso}"/>
                     <h:outputText value="#{alumnosDelCursoController.selected.curso}" title="#{bundle.ViewAlumnosDelCursoTitle_curso}"/>
                     <h:outputText value="#{bundle.ViewAlumnosDelCursoLabel_alumno}"/>
@@ -34,7 +32,5 @@
                 <h:link outcome="/index" value="#{bundle.ViewAlumnosDelCursoIndexLink}"/>
 
             </h:form>
-        </ui:define>
-    </ui:composition>
-
+        </h:body>
 </html>

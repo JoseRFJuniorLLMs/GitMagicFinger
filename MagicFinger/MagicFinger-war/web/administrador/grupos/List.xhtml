@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>GestionXXX de AlumnosDelCurso</title>
+        <title>Gestion de Grupos</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
@@ -28,52 +28,46 @@
         <h:form >
         <div class="center_content" style="padding-bottom: 40px;">
             <p:growl id="grow1" showDetail="true" />
-            <h1 style="text-align: center;margin-bottom: 20px"> Gestión de AlumnosDelCurso</h1>
+            <h1 style="text-align: center;margin-bottom: 20px"> Gestion de Grupos</h1>
             <div id="agregar" style="display: inline-block;width: 100%;">
             <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px"/>
             <p style="vertical-align: middle;display: inline-block;text-align: left">
                 En esta vista usted puede gestionar las facultades inscritas en el sistema
             </p>
-            <h:commandLink action="#{alumnosDelCursoController.prepareCreate}" style="display: inline-block;float: right">
+            <h:commandLink action="#{gruposController.prepareCreate}" style="display: inline-block;float: right">
                 <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 33px"/>
                 <br></br>
-                <h:outputLabel>Agregar AlumnosDelCurso</h:outputLabel>
+                <h:outputLabel>Agregar Grupos</h:outputLabel>
             </h:commandLink>            
         </div>
             <div style="text-align:center">
-             <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{alumnosDelCursoController.items}" var="item" paginator="true" rows="10">
+             <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{gruposController.items}" var="item" paginator="true" rows="10">
                         <f:facet name="header">
                             <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                    <p:column filterBy="#{item.grupos}" sortBy="#{item.grupos}" >
+                    <p:column filterBy="#{item.nombre}" sortBy="#{item.nombre}" >
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_grupos}"/>
+                            <h:outputText value="#{bundle.ListGruposTitle_nombre}"/>
                         </f:facet>
-                        <h:outputText value="#{item.grupos}"/>
+                        <h:outputText value="#{item.nombre}"/>
                     </p:column>
-                    <p:column filterBy="#{item.curso}" sortBy="#{item.curso}" >
+                    <p:column filterBy="#{item.id}" sortBy="#{item.id}" >
                         <f:facet name="header">
-                            <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_curso}"/>
+                            <h:outputText value="#{bundle.ListGruposTitle_id}"/>
                         </f:facet>
-                        <h:outputText value="#{item.curso}"/>
-                    </p:column>
-                    <p:column filterBy="#{item.alumno}" sortBy="#{item.alumno}" >
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_alumno}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.alumno}"/>
+                        <h:outputText value="#{item.id}"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Acciones"/>
                         </f:facet>
-                        <h:commandLink action="#{alumnosDelCursoController.prepareView}">
+                        <h:commandLink action="#{gruposController.prepareView}">
                                 <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
                         </h:commandLink>
-                        <h:commandLink action="#{alumnosDelCursoController.prepareEdit}">
+                        <h:commandLink action="#{gruposController.prepareEdit}">
                                  <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
                         </h:commandLink>
-                        <h:commandLink action="#{alumnosDelCursoController.destroy}">
+                        <h:commandLink action="#{gruposController.destroy}">
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
                         </h:commandLink>
                    </p:column>

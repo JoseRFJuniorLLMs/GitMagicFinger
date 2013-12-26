@@ -1,15 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
 
-    <h:body>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
+
+
                 <h:panelGrid columns="2">
                     <h:outputLabel value="#{bundle.EditProfesorLabel_idProfesor}" for="idProfesor" />
                     <h:inputText id="idProfesor" value="#{profesorController.selected.idProfesor}" title="#{bundle.EditProfesorTitle_idProfesor}" required="true" requiredMessage="#{bundle.EditProfesorRequiredMessage_idProfesor}"/>
@@ -38,16 +29,7 @@
                         <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
-                <h:commandLink action="#{profesorController.update}" value="#{bundle.EditProfesorSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditProfesorViewLink}"/>
-                <br />
-                <h:commandLink action="#{profesorController.prepareList}" value="#{bundle.EditProfesorShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditProfesorIndexLink}" />
-            </h:form>
-    </h:body>
 
-</html>
+
+                <h:commandLink action="#{profesorController.update}" value="#{bundle.EditProfesorSaveLink}"/>
+                <h:commandLink action="#{profesorController.prepareList}" value="#{bundle.EditProfesorShowAllLink}" immediate="true"/>

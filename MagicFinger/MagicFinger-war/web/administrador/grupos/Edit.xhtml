@@ -1,0 +1,13 @@
+
+
+
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditGruposLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{gruposController.selected.nombre}" title="#{bundle.EditGruposTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.EditGruposLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{gruposController.selected.id}" title="#{bundle.EditGruposTitle_id}" />
+                </h:panelGrid>
+
+
+                <h:commandLink action="#{gruposController.update}" value="#{bundle.EditGruposSaveLink}"/>
+                <h:commandLink action="#{gruposController.prepareList}" value="#{bundle.EditGruposShowAllLink}" immediate="true"/>

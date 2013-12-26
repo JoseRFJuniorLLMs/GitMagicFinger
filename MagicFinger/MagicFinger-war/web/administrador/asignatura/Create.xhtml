@@ -1,39 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      <h:head>
+        <title>Agregar Asignatura</title>
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
 
-    <ui:composition template="/template.xhtml">
-        <ui:define name="title">
-            <h:outputText value="#{bundle.CreateAsignaturaTitle}"></h:outputText>
-        </ui:define>
-        <ui:define name="body">
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
+    </h:head>
+    <h:body>
+     <div id="top" style="display: inline-block; text-align: center">
+        <div id="logo" style="display: inline-block; float:left">
+            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+        </div>
+        <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
+            <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
+        </div>
+        <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateAsignaturaLabel_idAsignatura}" for="idAsignatura" />
-                    <h:inputText id="idAsignatura" value="#{asignaturaController.selected.idAsignatura}" title="#{bundle.CreateAsignaturaTitle_idAsignatura}" required="true" requiredMessage="#{bundle.CreateAsignaturaRequiredMessage_idAsignatura}"/>
-                    <h:outputLabel value="#{bundle.CreateAsignaturaLabel_nombre}" for="nombre" />
-                    <h:inputTextarea rows="4" cols="30" id="nombre" value="#{asignaturaController.selected.nombre}" title="#{bundle.CreateAsignaturaTitle_nombre}" />
-                    <h:outputLabel value="#{bundle.CreateAsignaturaLabel_mallaId}" for="mallaId" />
-                    <h:selectOneMenu id="mallaId" value="#{asignaturaController.selected.mallaId}" title="#{bundle.CreateAsignaturaTitle_mallaId}" required="true" requiredMessage="#{bundle.CreateAsignaturaRequiredMessage_mallaId}">
+            <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
+            </h:form>
+        </div>
+    </div>      
+        <div class="center_content">
+            
+            <h:form><p:growl id="grow1" showDetail="true" />
+                <div style="text-align:center">
+                    <h1 style="text-align: center;margin-bottom: 20px "> Agregar Asignatura</h1>
+                    <div id="agregar" style="display: inline-block;width: 100%;">
+                        
+                        
+                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
+                        <p style="float: left;display: inline-block">
+                            &nbsp;Para agregar una nueva Asignatura, debe ingresar los siguientes campos:
+                        </p>  
+                    </div>
+                    <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
+                    <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
+                    <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAsignaturaLabel_idAsignatura}" for="idAsignatura" />
+                    </h4>
+                    <h:inputText style="vertical-align: center" id="idAsignatura" value="#{asignaturaController.selected.idAsignatura}" title="#{bundle.CreateAsignaturaTitle_idAsignatura}" required="true" requiredMessage="#{bundle.CreateAsignaturaRequiredMessage_idAsignatura}"/>
+                    <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAsignaturaLabel_nombre}" for="nombre" />
+                    </h4>
+                    <h:inputText style="vertical-align: center" id="nombre" value="#{asignaturaController.selected.nombre}" title="#{bundle.CreateAsignaturaTitle_nombre}"  />
+    
+                    <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAsignaturaLabel_mallaId}" for="mallaId" />
+                    </h4>
+                    <h:selectOneMenu style="vertical-align: center" id="mallaId" value="#{asignaturaController.selected.mallaId}" title="#{bundle.CreateAsignaturaTitle_mallaId}" required="true" requiredMessage="#{bundle.CreateAsignaturaRequiredMessage_mallaId}">
                         <f:selectItems value="#{mallaController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
-                <br />
-                <h:commandLink action="#{asignaturaController.create}" value="#{bundle.CreateAsignaturaSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{asignaturaController.prepareList}" value="#{bundle.CreateAsignaturaShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateAsignaturaIndexLink}"/>
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{asignaturaController.create}">
+                            <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel> Guardar facultad</h:outputLabel>
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{asignaturaController.prepareList}">
+                            <img src="/MagicFinger-war/faces/img/atras.PNG" width="38" height="32" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel>Volver </h:outputLabel>
+                        </h:commandLink>
+                        <br></br><br></br>
+                    </div>
+                </div>
             </h:form>
-        </ui:define>
-    </ui:composition>
-
+        </div>
+    </h:body>
 </html>
