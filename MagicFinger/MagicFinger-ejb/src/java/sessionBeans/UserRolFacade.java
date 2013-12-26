@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package manageBeans;
+package sessionBeans;
 
-import entity.BloqueClase;
+import entity.UserRol;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,8 +14,8 @@ import javax.persistence.PersistenceContext;
  * @author chevo
  */
 @Stateless
-public class BloqueClaseFacade extends AbstractFacade<BloqueClase> {
-    @PersistenceContext(unitName = "MagicFinger-warPU")
+public class UserRolFacade extends AbstractFacade<UserRol> implements UserRolFacadeLocal {
+    @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
     @Override
@@ -23,8 +23,8 @@ public class BloqueClaseFacade extends AbstractFacade<BloqueClase> {
         return em;
     }
 
-    public BloqueClaseFacade() {
-        super(BloqueClase.class);
+    public UserRolFacade() {
+        super(UserRol.class);
     }
     
 }

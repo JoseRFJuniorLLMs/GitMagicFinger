@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>Gestion de AlumnosDelCurso</title>
+        <title>Gestion de alumnos por curso</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
@@ -28,7 +28,7 @@
         <h:form >
             <div class="center_content" style="padding-bottom: 40px;">
                 <p:growl id="grow1" showDetail="true" />
-                <h1 style="text-align: center;margin-bottom: 20px"> Gestion de AlumnosDelCurso</h1>
+                <h1 style="text-align: center;margin-bottom: 20px"> Gestion de alumnos por curso</h1>
                 <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
                     <p:megaMenu style="display: inline-block;ext-align: center;">  
                         <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
@@ -41,7 +41,7 @@
                 <div id="agregar" style="display: inline-block;width: 100%;">
                     <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px"/>
                     <p style="vertical-align: middle;display: inline-block;text-align: left">
-                        En esta vista usted puede gestionar las facultades inscritas en el sistema
+                        En esta vista usted puede gestionar los alumnos inscritos para los diferentes cursos en el sistema
                     </p>
                     <h:commandLink action="#{alumnosDelCursoController.prepareCreate}" style="display: inline-block;float: right">
                         <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 33px"/>
@@ -54,23 +54,23 @@
                         <f:facet name="header">
                             <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.grupos}" sortBy="#{item.grupos}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_grupos}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.grupos}"/>
-                        </p:column>
-                        <p:column filterBy="#{item.curso}" sortBy="#{item.curso}" >
+                        <p:column filterBy="#{item.curso.asignatura.nombre}" sortBy="#{item.curso.asignatura.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_curso}"/>
                             </f:facet>
-                            <h:outputText value="#{item.curso}"/>
+                            <h:outputText value="#{item.curso.asignatura.nombre}"/>
                         </p:column>
-                        <p:column filterBy="#{item.alumno}" sortBy="#{item.alumno}" >
+                        <p:column filterBy="#{item.curso.tipoAsignatura.nombre}" sortBy="#{item.curso.tipoAsignatura.nombre}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_curso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.curso.tipoAsignatura.nombre}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.alumno.nombre}" sortBy="#{item.alumno.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_alumno}"/>
                             </f:facet>
-                            <h:outputText value="#{item.alumno}"/>
+                            <h:outputText value="#{item.alumno.nombre} #{item.alumno.apellidop}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

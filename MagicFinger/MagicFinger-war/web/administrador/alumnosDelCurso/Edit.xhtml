@@ -47,10 +47,7 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h:outputLabel value="#{bundle.EditAlumnosDelCursoLabel_grupos}" for="grupos" />
-                            <h:selectOneMenu id="grupos" value="#{alumnosDelCursoController.selected.grupos}" title="#{bundle.EditAlumnosDelCursoTitle_grupos}" >
-                                <f:selectItems value="#{gruposController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
+                            
                             <h:outputLabel value="#{bundle.EditAlumnosDelCursoLabel_curso}" for="curso" />
                             <h:selectOneMenu id="curso" value="#{alumnosDelCursoController.selected.curso}" title="#{bundle.EditAlumnosDelCursoTitle_curso}" required="true" requiredMessage="#{bundle.EditAlumnosDelCursoRequiredMessage_curso}">
                                 <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
