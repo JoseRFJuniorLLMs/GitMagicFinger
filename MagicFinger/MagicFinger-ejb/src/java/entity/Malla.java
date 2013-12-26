@@ -129,6 +129,6 @@ public class Malla implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Malla[ idCarrera=" + idCarrera + " ]";
+        return descripcion;
     }
 }

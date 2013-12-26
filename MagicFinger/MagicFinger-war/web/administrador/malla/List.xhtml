@@ -41,10 +41,10 @@
                 <div id="agregar" style="display: inline-block;width: 100%;">
                     <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px"/>
                     <p style="vertical-align: middle;display: inline-block;text-align: left">
-                        En esta vista usted puede gestionar las facultades inscritas en el sistema
+                        En esta vista usted puede gestionar las mallas inscritas en el sistema
                     </p>
                     <h:commandLink action="#{mallaController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 33px"/>
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 28px"/>
                         <br></br>
                         <h:outputLabel>Agregar Malla</h:outputLabel>
                     </h:commandLink>            
@@ -52,22 +52,15 @@
                 <div style="text-align:center">
                     <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{mallaController.items}" var="item" paginator="true" rows="10">
                         <f:facet name="header">
-                            <h3 style="color:white">XXX Registrados</h3>
+                            <h3 style="color:white">Mallas registradas</h3>
                         </f:facet>
                         <p:column filterBy="#{item.idCarrera}" sortBy="#{item.idCarrera}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMallaTitle_idCarrera}"/>
+                                <h:outputText value="Código"/>
                             </f:facet>
                             <h:outputText value="#{item.idCarrera}"/>
                         </p:column>
-                        <p:column filterBy="#{item.fecha}" sortBy="#{item.fecha}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMallaTitle_fecha}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fecha}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </p:column>
+                        
                         <p:column filterBy="#{item.descripcion}" sortBy="#{item.descripcion}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMallaTitle_descripcion}"/>
@@ -78,7 +71,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMallaTitle_carreraId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.carreraId}"/>
+                            <h:outputText value="#{item.carreraId.nombreCarrera}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
