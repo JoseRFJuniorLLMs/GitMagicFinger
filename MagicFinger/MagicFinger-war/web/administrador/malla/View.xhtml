@@ -47,22 +47,18 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewMallaLabel_idCarrera}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Código:"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{mallaController.selected.idCarrera}" title="#{bundle.ViewMallaTitle_idCarrera}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewMallaLabel_fecha}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"><h:outputText value="#{mallaController.selected.fecha}" title="#{bundle.ViewMallaTitle_fecha}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </h:outputText></h4>
+                            
                             <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewMallaLabel_descripcion}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{mallaController.selected.descripcion}" title="#{bundle.ViewMallaTitle_descripcion}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewMallaLabel_carreraId}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Carrera:"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{mallaController.selected.carreraId}" title="#{bundle.ViewMallaTitle_carreraId}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{mallaController.selected.carreraId.nombreCarrera}" title="#{bundle.ViewMallaTitle_carreraId}"/>
                             </h4>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{mallaController.prepareList}" immediate="true">
