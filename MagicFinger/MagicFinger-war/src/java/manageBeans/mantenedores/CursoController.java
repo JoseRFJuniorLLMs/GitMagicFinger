@@ -84,8 +84,8 @@ public class CursoController implements Serializable {
 
     public String create() {
         try {
-            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado una Curso correctamente"));
@@ -105,8 +105,8 @@ public class CursoController implements Serializable {
 
     public String update() {
         try {
-            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso actualizado", "Se ha actualizado correctamente"));

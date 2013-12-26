@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-      <h:head>
+    <h:head>
         <title>Ver Curso</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
@@ -12,21 +12,21 @@
 
     </h:head>
     <h:body>
-     <div id="top" style="display: inline-block; text-align: center">
-        <div id="logo" style="display: inline-block; float:left">
-            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
-        </div>
-        <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
-            <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
-        </div>
-        <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
-            <h:form>
-            <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
-            </h:form>
-        </div>
-    </div>      
+        <div id="top" style="display: inline-block; text-align: center">
+            <div id="logo" style="display: inline-block; float:left">
+                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+            </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
+                <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
+            </div>
+            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
+                <h:form>
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
+                </h:form>
+            </div>
+        </div>      
         <div class="center_content">
-            
+
             <h:form><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
                     <h1 style="text-align: center;margin-bottom: 20px "> Ver Curso</h1>
@@ -37,24 +37,24 @@
                         </p>  
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
-                    <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                     <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewCursoLabel_porcenteajeAprobacion}"/>
-                     </h4>
-                    <h4 style="display: inline-block;"> <h:outputText value="#{cursoController.selected.porcenteajeAprobacion}" title="#{bundle.ViewCursoTitle_porcenteajeAprobacion}"/>
-                    </h4>
-                     <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewCursoLabel_termino}"/>
-                     </h4>
-                    <h4 style="display: inline-block;"> <h:outputText value="#{cursoController.selected.termino}" title="#{bundle.ViewCursoTitle_termino}"/>
-                    </h4>
-                     <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewCursoLabel_asignatura}"/>
-                     </h4>
-                    <h4 style="display: inline-block;"> <h:outputText value="#{cursoController.selected.asignatura}" title="#{bundle.ViewCursoTitle_asignatura}"/>
-                    </h4>
-                     <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewCursoLabel_tipoAsignatura}"/>
-                     </h4>
-                    <h4 style="display: inline-block;"> <h:outputText value="#{cursoController.selected.tipoAsignatura}" title="#{bundle.ViewCursoTitle_tipoAsignatura}"/>
-                    </h4>
-                </h:panelGrid>
+                        <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewCursoLabel_porcenteajeAprobacion}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{cursoController.selected.porcenteajeAprobacion}" title="#{bundle.ViewCursoTitle_porcenteajeAprobacion}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewCursoLabel_termino}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{cursoController.selected.termino}" title="#{bundle.ViewCursoTitle_termino}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewCursoLabel_asignatura}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{cursoController.selected.asignatura}" title="#{bundle.ViewCursoTitle_asignatura}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewCursoLabel_tipoAsignatura}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{cursoController.selected.tipoAsignatura}" title="#{bundle.ViewCursoTitle_tipoAsignatura}"/>
+                            </h4>
+                        </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{cursoController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <h:outputLabel>Volver </h:outputLabel>
@@ -68,5 +68,5 @@
 </html>
 
 
-                
+
 

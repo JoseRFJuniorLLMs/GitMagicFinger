@@ -84,8 +84,8 @@ public class AlumnosDelCursoController implements Serializable {
 
     public String create() {
         try {
-            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
             current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
+            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
             current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -106,8 +106,8 @@ public class AlumnosDelCursoController implements Serializable {
 
     public String update() {
         try {
-            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
             current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
+            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
             current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
