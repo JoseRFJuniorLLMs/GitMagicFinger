@@ -104,7 +104,7 @@ public class TipoAsignaturaController implements Serializable {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "TipoAsignatura actualizado", "Se ha actualizado correctamente"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: TipoAsignatura no actualizado", "Lo sentimos, intentelo mas tarde"));

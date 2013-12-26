@@ -104,7 +104,7 @@ public class AsistenciaController implements Serializable {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asistencia actualizado", "Se ha actualizado correctamente"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Asistencia no actualizado", "Lo sentimos, intentelo mas tarde"));

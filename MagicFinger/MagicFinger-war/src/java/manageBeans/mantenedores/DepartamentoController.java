@@ -84,7 +84,7 @@ public class DepartamentoController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado una Departamento correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado un Departamento correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -104,7 +104,7 @@ public class DepartamentoController implements Serializable {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento actualizado", "Se ha actualizado correctamente"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, intentelo mas tarde"));

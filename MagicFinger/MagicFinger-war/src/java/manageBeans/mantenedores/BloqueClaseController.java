@@ -71,7 +71,7 @@ public class BloqueClaseController implements Serializable {
     public String prepareView() {
         current = (BloqueClase) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
-        return "View";
+        return "List";
     }
 
     public String prepareCreate() {
@@ -104,7 +104,7 @@ public class BloqueClaseController implements Serializable {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase actualizado", "Se ha actualizado correctamente"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: BloqueClase no actualizado", "Lo sentimos, intentelo mas tarde"));
