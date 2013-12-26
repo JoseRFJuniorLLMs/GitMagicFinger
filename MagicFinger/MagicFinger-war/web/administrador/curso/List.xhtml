@@ -32,7 +32,7 @@
                 <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
                     <p:megaMenu style="display: inline-block;ext-align: center;">  
                         <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
-                        <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/curso/List.xhtml"/>  
                         <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
                         <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
                         <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
@@ -41,10 +41,10 @@
                 <div id="agregar" style="display: inline-block;width: 100%;">
                     <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px"/>
                     <p style="vertical-align: middle;display: inline-block;text-align: left">
-                        En esta vista usted puede gestionar las facultades inscritas en el sistema
+                        En esta vista usted puede gestionar los cursos inscritos en el sistema
                     </p>
                     <h:commandLink action="#{cursoController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 33px"/>
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 28px"/>
                         <br></br>
                         <h:outputLabel>Agregar Curso</h:outputLabel>
                     </h:commandLink>            
@@ -52,31 +52,31 @@
                 <div style="text-align:center">
                     <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{cursoController.items}" var="item" paginator="true" rows="10">
                         <f:facet name="header">
-                            <h3 style="color:white">XXX Registrados</h3>
+                            <h3 style="color:white">Cursos registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.porcenteajeAprobacion}" sortBy="#{item.porcenteajeAprobacion}" >
+                        <p:column style="width: 20px" filterBy="#{item.porcenteajeAprobacion}" sortBy="#{item.porcenteajeAprobacion}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCursoTitle_porcenteajeAprobacion}"/>
+                                <h:outputText value="Porcentaje de aprobación"/>
                             </f:facet>
-                            <h:outputText value="#{item.porcenteajeAprobacion}"/>
+                            <h:outputText value="#{item.porcenteajeAprobacion}%"/>
                         </p:column>
-                        <p:column filterBy="#{item.termino}" sortBy="#{item.termino}" >
+                        <p:column style="width: 20px" filterBy="#{item.termino}" sortBy="#{item.termino}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCursoTitle_termino}"/>
+                                <h:outputText value="Atrasados luego de"/>
                             </f:facet>
-                            <h:outputText value="#{item.termino}"/>
+                            <h:outputText value="#{item.termino} min."/>
                         </p:column>
-                        <p:column filterBy="#{item.asignatura}" sortBy="#{item.asignatura}" >
+                        <p:column style="max-width: 420px" filterBy="#{item.asignatura}" sortBy="#{item.asignatura}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCursoTitle_asignatura}"/>
+                                <h:outputText value="Asignatura"/>
                             </f:facet>
-                            <h:outputText value="#{item.asignatura}"/>
+                            <h:outputText value="#{item.asignatura.nombre}"/>
                         </p:column>
                         <p:column filterBy="#{item.tipoAsignatura}" sortBy="#{item.tipoAsignatura}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCursoTitle_tipoAsignatura}"/>
+                                <h:outputText value="Tipo:"/>
                             </f:facet>
-                            <h:outputText value="#{item.tipoAsignatura}"/>
+                            <h:outputText value="#{item.tipoAsignatura.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
