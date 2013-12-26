@@ -104,7 +104,7 @@ public class FacultadController implements Serializable {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad actualizado", "Se ha actualizado correctamente"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Facultad no actualizado", "Lo sentimos, intentelo mas tarde"));
@@ -142,7 +142,7 @@ public class FacultadController implements Serializable {
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad eliminado", "Se ha eliminado una Facultad"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no eliminado", "Existen asociaciones para esta facultad"));
         }
     }
 

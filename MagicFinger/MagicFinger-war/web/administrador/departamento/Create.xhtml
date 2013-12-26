@@ -32,7 +32,7 @@
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
                         <p:megaMenu style="display: inline-block;ext-align: center;">  
                             <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/curso/List.xhtml.xhtml"/>  
                             <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
                             <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
                             <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
@@ -46,16 +46,14 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateDepartamentoLabel_idDepartamento}" for="idDepartamento" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="idDepartamento" value="#{departamentoController.selected.idDepartamento}" title="#{bundle.CreateDepartamentoTitle_idDepartamento}" required="true" requiredMessage="#{bundle.CreateDepartamentoRequiredMessage_idDepartamento}"/>
+                            
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateDepartamentoLabel_nombre}" for="nombre" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="nombre" value="#{departamentoController.selected.nombre}" title="#{bundle.CreateDepartamentoTitle_nombre}"  />
+                            <h:inputText style="vertical-align: center" id="nombre" value="#{departamentoController.selected.nombre}" title="#{bundle.CreateDepartamentoTitle_nombre}"  validator="#{funcionesMB.validarNombre}"/>
 
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateDepartamentoLabel_facultadId}" for="facultadId" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Facultad:" for="facultadId" />
                             </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="facultadId" value="#{departamentoController.selected.facultadId}" title="#{bundle.CreateDepartamentoTitle_facultadId}" required="true" requiredMessage="#{bundle.CreateDepartamentoRequiredMessage_facultadId}">
+                            <h:selectOneMenu style="vertical-align: center" id="facultadId" value="#{departamentoController.selected.facultadId}" title="#{bundle.CreateDepartamentoTitle_facultadId}" required="true" requiredMessage="Debe escoger una facultad">
                                 <f:selectItems value="#{facultadController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
                         </h:panelGrid>
