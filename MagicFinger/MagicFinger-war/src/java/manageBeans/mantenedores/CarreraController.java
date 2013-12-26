@@ -84,8 +84,8 @@ public class CarreraController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Carrera creado", "Se ha creado una correctamente"));
-            return prepareCreate();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera creado", "Se ha creado una Carrera correctamente"));
+            return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no creado", "Lo sentimos, intentelo mas tarde"));
@@ -103,7 +103,7 @@ public class CarreraController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Carrera actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -139,7 +139,7 @@ public class CarreraController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Carrera eliminado", "Se ha eliminado una {entityClassName}"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera eliminado", "Se ha eliminado una Carrera"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no eliminado", "Lo sentimos, intentelo mas tarde"));

@@ -84,8 +84,8 @@ public class BloqueClaseController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "BloqueClase creado", "Se ha creado una correctamente"));
-            return prepareCreate();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase creado", "Se ha creado una BloqueClase correctamente"));
+            return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: BloqueClase no creado", "Lo sentimos, intentelo mas tarde"));
@@ -103,7 +103,7 @@ public class BloqueClaseController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "BloqueClase actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -139,7 +139,7 @@ public class BloqueClaseController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "BloqueClase eliminado", "Se ha eliminado una {entityClassName}"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase eliminado", "Se ha eliminado una BloqueClase"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: BloqueClase no eliminado", "Lo sentimos, intentelo mas tarde"));

@@ -6,33 +6,33 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:body>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewCursoLabel_porcenteajeAprobacion}"/>
-                    <h:outputText value="#{cursoController.selected.porcenteajeAprobacion}" title="#{bundle.ViewCursoTitle_porcenteajeAprobacion}"/>
-                    <h:outputText value="#{bundle.ViewCursoLabel_termino}"/>
-                    <h:outputText value="#{cursoController.selected.termino}" title="#{bundle.ViewCursoTitle_termino}"/>
-                    <h:outputText value="#{bundle.ViewCursoLabel_asignatura}"/>
-                    <h:outputText value="#{cursoController.selected.asignatura}" title="#{bundle.ViewCursoTitle_asignatura}"/>
-                    <h:outputText value="#{bundle.ViewCursoLabel_tipoAsignatura}"/>
-                    <h:outputText value="#{cursoController.selected.tipoAsignatura}" title="#{bundle.ViewCursoTitle_tipoAsignatura}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{cursoController.destroyAndView}" value="#{bundle.ViewCursoDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewCursoEditLink}"/>
-                <br />
-                <h:commandLink action="#{cursoController.prepareCreate}" value="#{bundle.ViewCursoCreateLink}" />
-                <br />
-                <h:commandLink action="#{cursoController.prepareList}" value="#{bundle.ViewCursoShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewCursoIndexLink}"/>
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewCursoLabel_porcenteajeAprobacion}"/>
+                <h:outputText value="#{cursoController.selected.porcenteajeAprobacion}" title="#{bundle.ViewCursoTitle_porcenteajeAprobacion}"/>
+                <h:outputText value="#{bundle.ViewCursoLabel_termino}"/>
+                <h:outputText value="#{cursoController.selected.termino}" title="#{bundle.ViewCursoTitle_termino}"/>
+                <h:outputText value="#{bundle.ViewCursoLabel_asignatura}"/>
+                <h:outputText value="#{cursoController.selected.asignatura}" title="#{bundle.ViewCursoTitle_asignatura}"/>
+                <h:outputText value="#{bundle.ViewCursoLabel_tipoAsignatura}"/>
+                <h:outputText value="#{cursoController.selected.tipoAsignatura}" title="#{bundle.ViewCursoTitle_tipoAsignatura}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{cursoController.destroyAndView}" value="#{bundle.ViewCursoDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewCursoEditLink}"/>
+            <br />
+            <h:commandLink action="#{cursoController.prepareCreate}" value="#{bundle.ViewCursoCreateLink}" />
+            <br />
+            <h:commandLink action="#{cursoController.prepareList}" value="#{bundle.ViewCursoShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewCursoIndexLink}"/>
 
-            </h:form>
-        </h:body>
+        </h:form>
+    </h:body>
 </html>

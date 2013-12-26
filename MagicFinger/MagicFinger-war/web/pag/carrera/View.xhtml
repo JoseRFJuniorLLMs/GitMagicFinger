@@ -6,31 +6,31 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:body>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewCarreraLabel_idCarr}"/>
-                    <h:outputText value="#{carreraController.selected.idCarr}" title="#{bundle.ViewCarreraTitle_idCarr}"/>
-                    <h:outputText value="#{bundle.ViewCarreraLabel_nombreCarrera}"/>
-                    <h:outputText value="#{carreraController.selected.nombreCarrera}" title="#{bundle.ViewCarreraTitle_nombreCarrera}"/>
-                    <h:outputText value="#{bundle.ViewCarreraLabel_departamentoId}"/>
-                    <h:outputText value="#{carreraController.selected.departamentoId}" title="#{bundle.ViewCarreraTitle_departamentoId}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{carreraController.destroyAndView}" value="#{bundle.ViewCarreraDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewCarreraEditLink}"/>
-                <br />
-                <h:commandLink action="#{carreraController.prepareCreate}" value="#{bundle.ViewCarreraCreateLink}" />
-                <br />
-                <h:commandLink action="#{carreraController.prepareList}" value="#{bundle.ViewCarreraShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewCarreraIndexLink}"/>
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewCarreraLabel_idCarr}"/>
+                <h:outputText value="#{carreraController.selected.idCarr}" title="#{bundle.ViewCarreraTitle_idCarr}"/>
+                <h:outputText value="#{bundle.ViewCarreraLabel_nombreCarrera}"/>
+                <h:outputText value="#{carreraController.selected.nombreCarrera}" title="#{bundle.ViewCarreraTitle_nombreCarrera}"/>
+                <h:outputText value="#{bundle.ViewCarreraLabel_departamentoId}"/>
+                <h:outputText value="#{carreraController.selected.departamentoId}" title="#{bundle.ViewCarreraTitle_departamentoId}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{carreraController.destroyAndView}" value="#{bundle.ViewCarreraDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewCarreraEditLink}"/>
+            <br />
+            <h:commandLink action="#{carreraController.prepareCreate}" value="#{bundle.ViewCarreraCreateLink}" />
+            <br />
+            <h:commandLink action="#{carreraController.prepareList}" value="#{bundle.ViewCarreraShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewCarreraIndexLink}"/>
 
-            </h:form>
-        </h:body>
+        </h:form>
+    </h:body>
 </html>

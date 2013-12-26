@@ -6,29 +6,31 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <h:body>
-            <h:panelGroup id="messagePanel" layout="block">
-                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
-            </h:panelGroup>
-            <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewAlumnosDelCursoLabel_curso}"/>
-                    <h:outputText value="#{alumnosDelCursoController.selected.curso}" title="#{bundle.ViewAlumnosDelCursoTitle_curso}"/>
-                    <h:outputText value="#{bundle.ViewAlumnosDelCursoLabel_alumno}"/>
-                    <h:outputText value="#{alumnosDelCursoController.selected.alumno}" title="#{bundle.ViewAlumnosDelCursoTitle_alumno}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{alumnosDelCursoController.destroyAndView}" value="#{bundle.ViewAlumnosDelCursoDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewAlumnosDelCursoEditLink}"/>
-                <br />
-                <h:commandLink action="#{alumnosDelCursoController.prepareCreate}" value="#{bundle.ViewAlumnosDelCursoCreateLink}" />
-                <br />
-                <h:commandLink action="#{alumnosDelCursoController.prepareList}" value="#{bundle.ViewAlumnosDelCursoShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewAlumnosDelCursoIndexLink}"/>
+        <h:panelGroup id="messagePanel" layout="block">
+            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+        </h:panelGroup>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputText value="#{bundle.ViewAlumnosDelCursoLabel_grupos}"/>
+                <h:outputText value="#{alumnosDelCursoController.selected.grupos}" title="#{bundle.ViewAlumnosDelCursoTitle_grupos}"/>
+                <h:outputText value="#{bundle.ViewAlumnosDelCursoLabel_curso}"/>
+                <h:outputText value="#{alumnosDelCursoController.selected.curso}" title="#{bundle.ViewAlumnosDelCursoTitle_curso}"/>
+                <h:outputText value="#{bundle.ViewAlumnosDelCursoLabel_alumno}"/>
+                <h:outputText value="#{alumnosDelCursoController.selected.alumno}" title="#{bundle.ViewAlumnosDelCursoTitle_alumno}"/>
+            </h:panelGrid>
+            <br />
+            <h:commandLink action="#{alumnosDelCursoController.destroyAndView}" value="#{bundle.ViewAlumnosDelCursoDestroyLink}"/>
+            <br />
+            <br />
+            <h:link outcome="Edit" value="#{bundle.ViewAlumnosDelCursoEditLink}"/>
+            <br />
+            <h:commandLink action="#{alumnosDelCursoController.prepareCreate}" value="#{bundle.ViewAlumnosDelCursoCreateLink}" />
+            <br />
+            <h:commandLink action="#{alumnosDelCursoController.prepareList}" value="#{bundle.ViewAlumnosDelCursoShowAllLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ViewAlumnosDelCursoIndexLink}"/>
 
-            </h:form>
-        </h:body>
+        </h:form>
+    </h:body>
 </html>
