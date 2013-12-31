@@ -28,4 +28,5 @@ public interface FacultadFacadeLocal {
     List<Facultad> findRange(int[] range);
 
     int count();
+    
 }

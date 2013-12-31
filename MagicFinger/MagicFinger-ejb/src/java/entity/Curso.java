@@ -31,15 +31,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
     @NamedQuery(name = "Curso.findByAsignaturaId", query = "SELECT c FROM Curso c WHERE c.cursoPK.asignaturaId = :asignaturaId"),
     @NamedQuery(name = "Curso.findByTipoAsignaturaId", query = "SELECT c FROM Curso c WHERE c.cursoPK.tipoAsignaturaId = :tipoAsignaturaId"),
-    @NamedQuery(name = "Curso.findByPorcenteajeAprobacion", query = "SELECT c FROM Curso c WHERE c.porcenteajeAprobacion = :porcenteajeAprobacion"),
+    @NamedQuery(name = "Curso.findByPorcentajeAprobacion", query = "SELECT c FROM Curso c WHERE c.porcentajeAprobacion = :porcentajeAprobacion"),
     @NamedQuery(name = "Curso.findByTermino", query = "SELECT c FROM Curso c WHERE c.termino = :termino")})
 public class Curso implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CursoPK cursoPK;
-    @Column(name = "PORCENTEAJE_APROBACION")
-    private Integer porcenteajeAprobacion;
+    @Column(name = "PORCENTAJE_APROBACION")
+    private Integer porcentajeAprobacion;
     @Column(name = "TERMINO")
     private Integer termino;
     @ManyToMany(mappedBy = "cursoList")
@@ -49,11 +48,16 @@ public class Curso implements Serializable {
     @JoinColumn(name = "ASIGNATURA_ID", referencedColumnName = "ID_ASIGNATURA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Asignatura asignatura;
+    @JoinColumn(name = "SEMESTRE_ID", referencedColumnName = "ID_SEMESTRE")
+    @ManyToOne(optional = false)
+    private Semestre semestreId;
     @JoinColumn(name = "TIPO_ASIGNATURA_ID", referencedColumnName = "ID_TIPO_ASIGNATURA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TipoAsignatura tipoAsignatura;
     @OneToMany(mappedBy = "curso")
     private List<BloqueClase> bloqueClaseList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
+    private List<Grupos> gruposList;
 
     public Curso() {
     }
@@ -74,12 +78,12 @@ public class Curso implements Serializable {
         this.cursoPK = cursoPK;
     }
 
-    public Integer getPorcenteajeAprobacion() {
-        return porcenteajeAprobacion;
+    public Integer getPorcentajeAprobacion() {
+        return porcentajeAprobacion;
     }
 
-    public void setPorcenteajeAprobacion(Integer porcenteajeAprobacion) {
-        this.porcenteajeAprobacion = porcenteajeAprobacion;
+    public void setPorcentajeAprobacion(Integer porcentajeAprobacion) {
+        this.porcentajeAprobacion = porcentajeAprobacion;
     }
 
     public Integer getTermino() {
@@ -116,6 +120,14 @@ public class Curso implements Serializable {
         this.asignatura = asignatura;
     }
 
+    public Semestre getSemestreId() {
+        return semestreId;
+    }
+
+    public void setSemestreId(Semestre semestreId) {
+        this.semestreId = semestreId;
+    }
+
     public TipoAsignatura getTipoAsignatura() {
         return tipoAsignatura;
     }
@@ -131,6 +143,15 @@ public class Curso implements Serializable {
 
     public void setBloqueClaseList(List<BloqueClase> bloqueClaseList) {
         this.bloqueClaseList = bloqueClaseList;
+    }
+
+    @XmlTransient
+    public List<Grupos> getGruposList() {
+        return gruposList;
+    }
+
+    public void setGruposList(List<Grupos> gruposList) {
+        this.gruposList = gruposList;
     }
 
     @Override
@@ -155,6 +176,7 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return asignatura.getNombre() + " (" + this.tipoAsignatura.getNombre() + ")";
+        return "entity.Curso[ cursoPK=" + cursoPK + " ]";
     }
+    
 }

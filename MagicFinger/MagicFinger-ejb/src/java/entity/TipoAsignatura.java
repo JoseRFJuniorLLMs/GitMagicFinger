@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TipoAsignatura.findAll", query = "SELECT t FROM TipoAsignatura t"),
     @NamedQuery(name = "TipoAsignatura.findByIdTipoAsignatura", query = "SELECT t FROM TipoAsignatura t WHERE t.idTipoAsignatura = :idTipoAsignatura")})
 public class TipoAsignatura implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,6 +100,7 @@ public class TipoAsignatura implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "entity.TipoAsignatura[ idTipoAsignatura=" + idTipoAsignatura + " ]";
     }
+    
 }

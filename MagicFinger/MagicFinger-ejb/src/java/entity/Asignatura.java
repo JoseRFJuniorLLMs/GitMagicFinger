@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Asignatura.findAll", query = "SELECT a FROM Asignatura a"),
     @NamedQuery(name = "Asignatura.findByIdAsignatura", query = "SELECT a FROM Asignatura a WHERE a.idAsignatura = :idAsignatura")})
 public class Asignatura implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,6 +113,7 @@ public class Asignatura implements Serializable {
 
     @Override
     public String toString() {
-        return nombre ;
+        return "entity.Asignatura[ idAsignatura=" + idAsignatura + " ]";
     }
+    
 }

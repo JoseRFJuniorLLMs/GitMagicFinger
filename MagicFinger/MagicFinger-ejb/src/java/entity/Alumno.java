@@ -34,17 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Alumno.findAll", query = "SELECT a FROM Alumno a"),
     @NamedQuery(name = "Alumno.findByIdAlumno", query = "SELECT a FROM Alumno a WHERE a.idAlumno = :idAlumno"),
-    @NamedQuery(name = "Alumno.findByHuella1", query = "SELECT a FROM Alumno a WHERE a.huella1 = :huella1"),
-    @NamedQuery(name = "Alumno.findByTelefono", query = "SELECT a FROM Alumno a WHERE a.telefono = :telefono"),
-    @NamedQuery(name = "Alumno.findByHuella2", query = "SELECT a FROM Alumno a WHERE a.huella2 = :huella2")})
+    @NamedQuery(name = "Alumno.findByTelefono", query = "SELECT a FROM Alumno a WHERE a.telefono = :telefono")})
 public class Alumno implements Serializable {
-
-    @Lob
-    @Column(name = "HUELLA1")
-    private byte[] huella1;
-    @Lob
-    @Column(name = "HUELLA2")
-    private byte[] huella2;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,12 +58,18 @@ public class Alumno implements Serializable {
     @Size(max = 65535)
     @Column(name = "APELLIDOM")
     private String apellidom;
+    @Lob
+    @Column(name = "HUELLA1")
+    private byte[] huella1;
     @Column(name = "TELEFONO")
     private Integer telefono;
     @Lob
     @Size(max = 65535)
     @Column(name = "CORREO")
     private String correo;
+    @Lob
+    @Column(name = "HUELLA2")
+    private byte[] huella2;
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
     @ManyToOne
     private User userId;
@@ -128,6 +125,14 @@ public class Alumno implements Serializable {
         this.apellidom = apellidom;
     }
 
+    public byte[] getHuella1() {
+        return huella1;
+    }
+
+    public void setHuella1(byte[] huella1) {
+        this.huella1 = huella1;
+    }
+
     public Integer getTelefono() {
         return telefono;
     }
@@ -142,6 +147,14 @@ public class Alumno implements Serializable {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public byte[] getHuella2() {
+        return huella2;
+    }
+
+    public void setHuella2(byte[] huella2) {
+        this.huella2 = huella2;
     }
 
     public User getUserId() {
@@ -192,22 +205,7 @@ public class Alumno implements Serializable {
 
     @Override
     public String toString() {
-        return nombre + " " + this.apellidop + " " + this.apellidom;
+        return "entity.Alumno[ idAlumno=" + idAlumno + " ]";
     }
-
-    public byte[] getHuella1() {
-        return huella1;
-    }
-
-    public void setHuella1(byte[] huella1) {
-        this.huella1 = huella1;
-    }
-
-    public byte[] getHuella2() {
-        return huella2;
-    }
-
-    public void setHuella2(byte[] huella2) {
-        this.huella2 = huella2;
-    }
+    
 }

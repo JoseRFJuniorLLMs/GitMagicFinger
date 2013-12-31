@@ -37,7 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "BloqueClase.findByIdBloque", query = "SELECT b FROM BloqueClase b WHERE b.idBloque = :idBloque"),
     @NamedQuery(name = "BloqueClase.findByBloque", query = "SELECT b FROM BloqueClase b WHERE b.bloque = :bloque")})
 public class BloqueClase implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,6 +49,14 @@ public class BloqueClase implements Serializable {
     @Size(max = 65535)
     @Column(name = "DIA_SEMANA")
     private String diaSemana;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "HORA_INICIO")
+    private String horaInicio;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "HORA_TERMINO")
+    private String horaTermino;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bloqueClaseId")
     private List<Asistencia> asistenciaList;
     @JoinColumns({
@@ -87,6 +94,22 @@ public class BloqueClase implements Serializable {
 
     public void setDiaSemana(String diaSemana) {
         this.diaSemana = diaSemana;
+    }
+
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public String getHoraTermino() {
+        return horaTermino;
+    }
+
+    public void setHoraTermino(String horaTermino) {
+        this.horaTermino = horaTermino;
     }
 
     @XmlTransient
@@ -128,6 +151,7 @@ public class BloqueClase implements Serializable {
 
     @Override
     public String toString() {
-        return bloque + " - " + getDiaSemana().toString().toUpperCase();
+        return "entity.BloqueClase[ idBloque=" + idBloque + " ]";
     }
+    
 }

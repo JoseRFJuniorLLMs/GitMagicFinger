@@ -10,7 +10,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author lol
+ * @author chevo
  */
 @Local
 public interface GruposFacadeLocal {

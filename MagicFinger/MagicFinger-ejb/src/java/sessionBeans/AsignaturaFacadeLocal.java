@@ -28,4 +28,5 @@ public interface AsignaturaFacadeLocal {
     List<Asignatura> findRange(int[] range);
 
     int count();
+    
 }

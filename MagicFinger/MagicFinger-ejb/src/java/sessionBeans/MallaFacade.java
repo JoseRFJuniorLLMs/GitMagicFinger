@@ -15,7 +15,6 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class MallaFacade extends AbstractFacade<Malla> implements MallaFacadeLocal {
-
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
@@ -27,4 +26,5 @@ public class MallaFacade extends AbstractFacade<Malla> implements MallaFacadeLoc
     public MallaFacade() {
         super(Malla.class);
     }
+    
 }

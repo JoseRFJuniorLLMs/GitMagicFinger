@@ -90,7 +90,7 @@ public class asignaturaMB {
     }
 
     public void actualizarDatos() {
-        FacesMessage msg = new FacesMessage("Normas de curso actualizadas", "Porcentaje aprobación: " + cursoSeleccionado.getPorcenteajeAprobacion() + "\n Atrasados desde: "+ cursoSeleccionado.getTermino() );
+        FacesMessage msg = new FacesMessage("Normas de curso actualizadas", "Porcentaje aprobación: " + cursoSeleccionado.getPorcentajeAprobacion() + "\n Atrasados desde: "+ cursoSeleccionado.getTermino() );
         FacesContext.getCurrentInstance().addMessage(null, msg);
         cursoFacade.edit(cursoSeleccionado);
     }

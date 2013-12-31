@@ -15,7 +15,6 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class CarreraFacade extends AbstractFacade<Carrera> implements CarreraFacadeLocal {
-
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
@@ -27,4 +26,5 @@ public class CarreraFacade extends AbstractFacade<Carrera> implements CarreraFac
     public CarreraFacade() {
         super(Carrera.class);
     }
+    
 }

@@ -28,4 +28,5 @@ public interface MallaFacadeLocal {
     List<Malla> findRange(int[] range);
 
     int count();
+    
 }

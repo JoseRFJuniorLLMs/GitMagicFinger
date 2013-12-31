@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Agregar Curso</title>
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+
+    </h:head>
+    <h:body>
+        <div id="top" style="display: inline-block; text-align: center">
+            <div id="logo" style="display: inline-block; float:left">
+                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+            </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
+                <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
+            </div>
+            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
+                <h:form>
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
+                </h:form>
+            </div>
+        </div>      
+        <div class="center_content">
+            <h:form><p:growl id="grow1" showDetail="true" />
+                <div style="text-align:center">
+                    <h1 style="text-align: center;margin-bottom: 20px "> Agregar Curso</h1>
+                    <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
+                        <p:megaMenu style="display: inline-block;ext-align: center;">  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
+                        </p:megaMenu>  
+                    </div>
+                    <div id="agregar" style="display: inline-block;width: 100%;">       
+                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
+                        <p style="float: left;display: inline-block">
+                            &nbsp;Para agregar una nueva Curso, debe ingresar los siguientes campos:
+                        </p>  
+                    </div>
+                    <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
+                        <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_porcentajeAprobacion}" for="porcentajeAprobacion" />
+                            </h4>
+                            <h:inputText style="vertical-align: center" id="porcentajeAprobacion" value="#{cursoController.selected.porcentajeAprobacion}" title="#{bundle.CreateCursoTitle_porcentajeAprobacion}" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_termino}" for="termino" />
+                            </h4>
+                            <h:inputText style="vertical-align: center" id="termino" value="#{cursoController.selected.termino}" title="#{bundle.CreateCursoTitle_termino}" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_asignatura}" for="asignatura" />
+                            </h4>
+                            <h:selectOneMenu style="vertical-align: center" id="asignatura" value="#{cursoController.selected.asignatura}" title="#{bundle.CreateCursoTitle_asignatura}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_asignatura}">
+                                <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_semestreId}" for="semestreId" />
+                            </h4>
+                            <h:selectOneMenu style="vertical-align: center" id="semestreId" value="#{cursoController.selected.semestreId}" title="#{bundle.CreateCursoTitle_semestreId}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_semestreId}">
+                                <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_tipoAsignatura}" for="tipoAsignatura" />
+                            </h4>
+                            <h:selectOneMenu style="vertical-align: center" id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}" title="#{bundle.CreateCursoTitle_tipoAsignatura}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_tipoAsignatura}">
+                                <f:selectItems value="#{tipoAsignaturaController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{cursoController.create}">
+                            <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel> Guardar facultad</h:outputLabel>
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{cursoController.prepareList}" immediate="true">
+                            <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel>Volver</h:outputLabel>
+                        </h:commandLink>
+                        <br></br><br></br>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>

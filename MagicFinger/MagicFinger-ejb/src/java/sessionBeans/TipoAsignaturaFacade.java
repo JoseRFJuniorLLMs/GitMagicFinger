@@ -15,7 +15,6 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class TipoAsignaturaFacade extends AbstractFacade<TipoAsignatura> implements TipoAsignaturaFacadeLocal {
-
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
     private EntityManager em;
 
@@ -27,4 +26,5 @@ public class TipoAsignaturaFacade extends AbstractFacade<TipoAsignatura> impleme
     public TipoAsignaturaFacade() {
         super(TipoAsignatura.class);
     }
+    
 }

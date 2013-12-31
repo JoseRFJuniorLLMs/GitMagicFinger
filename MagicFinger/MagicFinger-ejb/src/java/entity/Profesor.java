@@ -35,11 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Profesor.findAll", query = "SELECT p FROM Profesor p"),
     @NamedQuery(name = "Profesor.findByIdProfesor", query = "SELECT p FROM Profesor p WHERE p.idProfesor = :idProfesor"),
-    @NamedQuery(name = "Profesor.findByHuella1", query = "SELECT p FROM Profesor p WHERE p.huella1 = :huella1"),
-    @NamedQuery(name = "Profesor.findByTelefono", query = "SELECT p FROM Profesor p WHERE p.telefono = :telefono"),
-    @NamedQuery(name = "Profesor.findByHuella2", query = "SELECT p FROM Profesor p WHERE p.huella2 = :huella2")})
+    @NamedQuery(name = "Profesor.findByTelefono", query = "SELECT p FROM Profesor p WHERE p.telefono = :telefono")})
 public class Profesor implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,28 +59,30 @@ public class Profesor implements Serializable {
     @Size(max = 65535)
     @Column(name = "APELLIDOM")
     private String apellidom;
+    @Lob
     @Column(name = "HUELLA1")
-    private Short huella1;
+    private byte[] huella1;
     @Column(name = "TELEFONO")
     private Integer telefono;
     @Lob
     @Size(max = 65535)
     @Column(name = "CORREO")
     private String correo;
+    @Lob
     @Column(name = "HUELLA2")
-    private Short huella2;
-    @JoinTable(name = "profesores_por_curso", joinColumns = {
+    private byte[] huella2;
+    @JoinTable(name = "profesores_por_cuso", joinColumns = {
         @JoinColumn(name = "PROFESOR_ID", referencedColumnName = "ID_PROFESOR")}, inverseJoinColumns = {
         @JoinColumn(name = "CURSO_ID2", referencedColumnName = "ASIGNATURA_ID"),
         @JoinColumn(name = "CURSO_ID", referencedColumnName = "TIPO_ASIGNATURA_ID")})
     @ManyToMany
     private List<Curso> cursoList;
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
-    @ManyToOne
-    private User userId;
     @JoinColumn(name = "DEPARTAMENTO_ID", referencedColumnName = "ID_DEPARTAMENTO")
     @ManyToOne(optional = false)
     private Departamento departamentoId;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    @ManyToOne
+    private User userId;
     @OneToMany(mappedBy = "profesorId")
     private List<User> userList;
 
@@ -134,11 +133,11 @@ public class Profesor implements Serializable {
         this.apellidom = apellidom;
     }
 
-    public Short getHuella1() {
+    public byte[] getHuella1() {
         return huella1;
     }
 
-    public void setHuella1(Short huella1) {
+    public void setHuella1(byte[] huella1) {
         this.huella1 = huella1;
     }
 
@@ -158,11 +157,11 @@ public class Profesor implements Serializable {
         this.correo = correo;
     }
 
-    public Short getHuella2() {
+    public byte[] getHuella2() {
         return huella2;
     }
 
-    public void setHuella2(Short huella2) {
+    public void setHuella2(byte[] huella2) {
         this.huella2 = huella2;
     }
 
@@ -175,20 +174,20 @@ public class Profesor implements Serializable {
         this.cursoList = cursoList;
     }
 
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
     public Departamento getDepartamentoId() {
         return departamentoId;
     }
 
     public void setDepartamentoId(Departamento departamentoId) {
         this.departamentoId = departamentoId;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @XmlTransient
@@ -222,6 +221,7 @@ public class Profesor implements Serializable {
 
     @Override
     public String toString() {
-        return this.nombre +" "+this.apellidop+" "+this.apellidom;
+        return "entity.Profesor[ idProfesor=" + idProfesor + " ]";
     }
+    
 }

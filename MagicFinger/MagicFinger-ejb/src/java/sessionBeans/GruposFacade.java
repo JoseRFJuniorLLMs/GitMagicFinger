@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author lol
+ * @author chevo
  */
 @Stateless
 public class GruposFacade extends AbstractFacade<Grupos> implements GruposFacadeLocal {

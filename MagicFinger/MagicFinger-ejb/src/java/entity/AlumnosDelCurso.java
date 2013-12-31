@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "AlumnosDelCurso.findByCursoId", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.cursoId = :cursoId"),
     @NamedQuery(name = "AlumnosDelCurso.findByAlumnoId", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.alumnoId = :alumnoId")})
 public class AlumnosDelCurso implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AlumnosDelCursoPK alumnosDelCursoPK;
@@ -46,16 +45,8 @@ public class AlumnosDelCurso implements Serializable {
     private Alumno alumno;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnosDelCurso")
     private List<Asistencia> asistenciaList;
-    @ManyToOne
-    private Grupos grupos;
-
-    public Grupos getGrupos() {
-        return grupos;
-    }
-
-    public void setGrupos(Grupos grupos) {
-        this.grupos = grupos;
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnosDelCurso")
+    private List<Grupos> gruposList;
 
     public AlumnosDelCurso() {
     }
@@ -101,6 +92,15 @@ public class AlumnosDelCurso implements Serializable {
         this.asistenciaList = asistenciaList;
     }
 
+    @XmlTransient
+    public List<Grupos> getGruposList() {
+        return gruposList;
+    }
+
+    public void setGruposList(List<Grupos> gruposList) {
+        this.gruposList = gruposList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -125,4 +125,5 @@ public class AlumnosDelCurso implements Serializable {
     public String toString() {
         return "entity.AlumnosDelCurso[ alumnosDelCursoPK=" + alumnosDelCursoPK + " ]";
     }
+    
 }
