@@ -1,4 +1,4 @@
-package manageBenas.crud.util;
+package manageBeans.crud.util;
 
 import java.util.List;
 import javax.faces.application.FacesMessage;

@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
-import entity.Grupos;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import entity.Profesor;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,32 +18,31 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.GruposFacadeLocal;
+import sessionBeans.ProfesorFacadeLocal;
 
-@Named("gruposController")
+@Named("profesorController")
 @SessionScoped
-public class GruposController implements Serializable {
+public class ProfesorController implements Serializable {
 
-    private Grupos current;
+    private Profesor current;
     private DataModel items = null;
     @EJB
-    private GruposFacadeLocal ejbFacade;
+    private ProfesorFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public GruposController() {
+    public ProfesorController() {
     }
 
-    public Grupos getSelected() {
+    public Profesor getSelected() {
         if (current == null) {
-            current = new Grupos();
-            current.setGruposPK(new entity.GruposPK());
+            current = new Profesor();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private GruposFacadeLocal getFacade() {
+    private ProfesorFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -70,63 +69,52 @@ public class GruposController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Grupos) getItems().getRowData();
+        current = (Profesor) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Grupos();
-        current.setGruposPK(new entity.GruposPK());
+        current = new Profesor();
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-            current.getGruposPK().setAlumnosDelCursoId2(current.getAlumnosDelCurso().getAlumnosDelCursoPK().getCursoId2());
-            current.getGruposPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
-            current.getGruposPK().setAlumnosDelCursoId(current.getAlumnosDelCurso().getAlumnosDelCursoPK().getAlumnoId());
-            current.getGruposPK().setAlumnosDelCursoId3(current.getAlumnosDelCurso().getAlumnosDelCursoPK().getCursoId());
-            current.getGruposPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos creado", "Se ha creado una Grupos correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor creado", "Se ha creado una Profesor correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Grupos no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Grupos) getItems().getRowData();
+        current = (Profesor) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            current.getGruposPK().setAlumnosDelCursoId2(current.getAlumnosDelCurso().getAlumnosDelCursoPK().getCursoId2());
-            current.getGruposPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
-            current.getGruposPK().setAlumnosDelCursoId(current.getAlumnosDelCurso().getAlumnosDelCursoPK().getAlumnoId());
-            current.getGruposPK().setAlumnosDelCursoId3(current.getAlumnosDelCurso().getAlumnosDelCursoPK().getCursoId());
-            current.getGruposPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Grupos no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Profesor no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
     public String destroy() {
-        current = (Grupos) getItems().getRowData();
+        current = (Profesor) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -151,10 +139,10 @@ public class GruposController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos eliminado", "Se ha eliminado una Grupos"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor eliminado", "Se ha eliminado una Profesor"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Grupos no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -208,49 +196,32 @@ public class GruposController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Grupos getGrupos(entity.GruposPK id) {
+    public Profesor getProfesor(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Grupos.class)
-    public static class GruposControllerConverter implements Converter {
-
-        private static final String SEPARATOR = "#";
-        private static final String SEPARATOR_ESCAPED = "\\#";
+    @FacesConverter(forClass = Profesor.class)
+    public static class ProfesorControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            GruposController controller = (GruposController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "gruposController");
-            return controller.getGrupos(getKey(value));
+            ProfesorController controller = (ProfesorController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "profesorController");
+            return controller.getProfesor(getKey(value));
         }
 
-        entity.GruposPK getKey(String value) {
-            entity.GruposPK key;
-            String values[] = value.split(SEPARATOR_ESCAPED);
-            key = new entity.GruposPK();
-            key.setCursoId2(Integer.parseInt(values[0]));
-            key.setCursoId(Integer.parseInt(values[1]));
-            key.setAlumnosDelCursoId2(Integer.parseInt(values[2]));
-            key.setAlumnosDelCursoId3(Integer.parseInt(values[3]));
-            key.setAlumnosDelCursoId(Integer.parseInt(values[4]));
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
             return key;
         }
 
-        String getStringKey(entity.GruposPK value) {
+        String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getCursoId2());
-            sb.append(SEPARATOR);
-            sb.append(value.getCursoId());
-            sb.append(SEPARATOR);
-            sb.append(value.getAlumnosDelCursoId2());
-            sb.append(SEPARATOR);
-            sb.append(value.getAlumnosDelCursoId3());
-            sb.append(SEPARATOR);
-            sb.append(value.getAlumnosDelCursoId());
+            sb.append(value);
             return sb.toString();
         }
 
@@ -259,11 +230,11 @@ public class GruposController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Grupos) {
-                Grupos o = (Grupos) object;
-                return getStringKey(o.getGruposPK());
+            if (object instanceof Profesor) {
+                Profesor o = (Profesor) object;
+                return getStringKey(o.getIdProfesor());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Grupos.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Profesor.class.getName());
             }
         }
     }

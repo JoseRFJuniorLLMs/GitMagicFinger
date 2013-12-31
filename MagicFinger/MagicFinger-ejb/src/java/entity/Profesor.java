@@ -71,10 +71,11 @@ public class Profesor implements Serializable {
     @Lob
     @Column(name = "HUELLA2")
     private byte[] huella2;
-    @JoinTable(name = "profesores_por_cuso", joinColumns = {
+    @JoinTable(name = "profesores_por_curso", joinColumns = {
         @JoinColumn(name = "PROFESOR_ID", referencedColumnName = "ID_PROFESOR")}, inverseJoinColumns = {
-        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "ASIGNATURA_ID"),
-        @JoinColumn(name = "CURSO_ID", referencedColumnName = "TIPO_ASIGNATURA_ID")})
+        @JoinColumn(name = "CURSO_ID3", referencedColumnName = "ASIGNATURA_ID"),
+        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "TIPO_ASIGNATURA_ID"),
+        @JoinColumn(name = "CURSO_ID", referencedColumnName = "SEMESTRE_ID")})
     @ManyToMany
     private List<Curso> cursoList;
     @JoinColumn(name = "DEPARTAMENTO_ID", referencedColumnName = "ID_DEPARTAMENTO")

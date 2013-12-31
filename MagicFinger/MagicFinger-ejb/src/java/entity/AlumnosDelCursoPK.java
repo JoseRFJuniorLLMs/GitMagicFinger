@@ -18,6 +18,10 @@ import javax.validation.constraints.NotNull;
 public class AlumnosDelCursoPK implements Serializable {
     @Basic(optional = false)
     @NotNull
+    @Column(name = "CURSO_ID3")
+    private int cursoId3;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "CURSO_ID2")
     private int cursoId2;
     @Basic(optional = false)
@@ -32,10 +36,19 @@ public class AlumnosDelCursoPK implements Serializable {
     public AlumnosDelCursoPK() {
     }
 
-    public AlumnosDelCursoPK(int cursoId2, int cursoId, int alumnoId) {
+    public AlumnosDelCursoPK(int cursoId3, int cursoId2, int cursoId, int alumnoId) {
+        this.cursoId3 = cursoId3;
         this.cursoId2 = cursoId2;
         this.cursoId = cursoId;
         this.alumnoId = alumnoId;
+    }
+
+    public int getCursoId3() {
+        return cursoId3;
+    }
+
+    public void setCursoId3(int cursoId3) {
+        this.cursoId3 = cursoId3;
     }
 
     public int getCursoId2() {
@@ -65,6 +78,7 @@ public class AlumnosDelCursoPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
+        hash += (int) cursoId3;
         hash += (int) cursoId2;
         hash += (int) cursoId;
         hash += (int) alumnoId;
@@ -78,6 +92,9 @@ public class AlumnosDelCursoPK implements Serializable {
             return false;
         }
         AlumnosDelCursoPK other = (AlumnosDelCursoPK) object;
+        if (this.cursoId3 != other.cursoId3) {
+            return false;
+        }
         if (this.cursoId2 != other.cursoId2) {
             return false;
         }
@@ -92,7 +109,7 @@ public class AlumnosDelCursoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.AlumnosDelCursoPK[ cursoId2=" + cursoId2 + ", cursoId=" + cursoId + ", alumnoId=" + alumnoId + " ]";
+        return "entity.AlumnosDelCursoPK[ cursoId3=" + cursoId3 + ", cursoId2=" + cursoId2 + ", cursoId=" + cursoId + ", alumnoId=" + alumnoId + " ]";
     }
     
 }

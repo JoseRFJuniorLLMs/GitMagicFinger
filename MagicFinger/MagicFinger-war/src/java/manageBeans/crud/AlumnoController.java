@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
-import entity.Facultad;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import entity.Alumno;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,31 +18,31 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.FacultadFacadeLocal;
+import sessionBeans.AlumnoFacadeLocal;
 
-@Named("facultadController")
+@Named("alumnoController")
 @SessionScoped
-public class FacultadController implements Serializable {
+public class AlumnoController implements Serializable {
 
-    private Facultad current;
+    private Alumno current;
     private DataModel items = null;
     @EJB
-    private FacultadFacadeLocal ejbFacade;
+    private AlumnoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public FacultadController() {
+    public AlumnoController() {
     }
 
-    public Facultad getSelected() {
+    public Alumno getSelected() {
         if (current == null) {
-            current = new Facultad();
+            current = new Alumno();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private FacultadFacadeLocal getFacade() {
+    private AlumnoFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -69,13 +69,13 @@ public class FacultadController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Facultad) getItems().getRowData();
+        current = (Alumno) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Facultad();
+        current = new Alumno();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -84,17 +84,17 @@ public class FacultadController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad creado", "Se ha creado una Facultad correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno creado", "Se ha creado una Alumno correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Facultad) getItems().getRowData();
+        current = (Alumno) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -103,18 +103,18 @@ public class FacultadController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Facultad no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Alumno no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
     public String destroy() {
-        current = (Facultad) getItems().getRowData();
+        current = (Alumno) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -139,10 +139,10 @@ public class FacultadController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad eliminado", "Se ha eliminado una Facultad"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno eliminado", "Se ha eliminado una Alumno"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -196,21 +196,21 @@ public class FacultadController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Facultad getFacultad(java.lang.Integer id) {
+    public Alumno getAlumno(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Facultad.class)
-    public static class FacultadControllerConverter implements Converter {
+    @FacesConverter(forClass = Alumno.class)
+    public static class AlumnoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            FacultadController controller = (FacultadController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "facultadController");
-            return controller.getFacultad(getKey(value));
+            AlumnoController controller = (AlumnoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "alumnoController");
+            return controller.getAlumno(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -230,11 +230,11 @@ public class FacultadController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Facultad) {
-                Facultad o = (Facultad) object;
-                return getStringKey(o.getIdFacultad());
+            if (object instanceof Alumno) {
+                Alumno o = (Alumno) object;
+                return getStringKey(o.getIdAlumno());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Facultad.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Alumno.class.getName());
             }
         }
     }

@@ -57,15 +57,20 @@
                             </h4>
                             <h:inputText style="vertical-align: center" id="password" value="#{userController.selected.password}" title="#{bundle.CreateUserTitle_password}"  />
 
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateUserLabel_profesorId}" for="profesorId" />
+                            </h4>
+                            <h:selectOneMenu style="vertical-align: center" id="profesorId" value="#{userController.selected.profesorId}" title="#{bundle.CreateUserTitle_profesorId}" >
+                                <f:selectItems value="#{profesorController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateUserLabel_alumnoId}" for="alumnoId" />
                             </h4>
                             <h:selectOneMenu style="vertical-align: center" id="alumnoId" value="#{userController.selected.alumnoId}" title="#{bundle.CreateUserTitle_alumnoId}" >
                                 <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateUserLabel_profesorId}" for="profesorId" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateUserLabel_userrolName}" for="userrolName" />
                             </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="profesorId" value="#{userController.selected.profesorId}" title="#{bundle.CreateUserTitle_profesorId}" >
-                                <f:selectItems value="#{profesorController.itemsAvailableSelectOne}"/>
+                            <h:selectOneMenu style="vertical-align: center" id="userrolName" value="#{userController.selected.userrolName}" title="#{bundle.CreateUserTitle_userrolName}" required="true" requiredMessage="#{bundle.CreateUserRequiredMessage_userrolName}">
+                                <f:selectItems value="#{userrolController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{userController.create}">

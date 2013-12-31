@@ -72,17 +72,23 @@
                             </f:facet>
                             <h:outputText value="#{item.password}"/>
                         </p:column>
+                        <p:column filterBy="#{item.profesorId}" sortBy="#{item.profesorId}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUserTitle_profesorId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.profesorId}"/>
+                        </p:column>
                         <p:column filterBy="#{item.alumnoId}" sortBy="#{item.alumnoId}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserTitle_alumnoId}"/>
                             </f:facet>
                             <h:outputText value="#{item.alumnoId}"/>
                         </p:column>
-                        <p:column filterBy="#{item.profesorId}" sortBy="#{item.profesorId}" >
+                        <p:column filterBy="#{item.userrolName}" sortBy="#{item.userrolName}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_profesorId}"/>
+                                <h:outputText value="#{bundle.ListUserTitle_userrolName}"/>
                             </f:facet>
-                            <h:outputText value="#{item.profesorId}"/>
+                            <h:outputText value="#{item.userrolName}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

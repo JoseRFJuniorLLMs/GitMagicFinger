@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
-import entity.TipoAsignatura;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import entity.Facultad;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,31 +18,31 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.TipoAsignaturaFacadeLocal;
+import sessionBeans.FacultadFacadeLocal;
 
-@Named("tipoAsignaturaController")
+@Named("facultadController")
 @SessionScoped
-public class TipoAsignaturaController implements Serializable {
+public class FacultadController implements Serializable {
 
-    private TipoAsignatura current;
+    private Facultad current;
     private DataModel items = null;
     @EJB
-    private TipoAsignaturaFacadeLocal ejbFacade;
+    private FacultadFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public TipoAsignaturaController() {
+    public FacultadController() {
     }
 
-    public TipoAsignatura getSelected() {
+    public Facultad getSelected() {
         if (current == null) {
-            current = new TipoAsignatura();
+            current = new Facultad();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private TipoAsignaturaFacadeLocal getFacade() {
+    private FacultadFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -69,13 +69,13 @@ public class TipoAsignaturaController implements Serializable {
     }
 
     public String prepareView() {
-        current = (TipoAsignatura) getItems().getRowData();
+        current = (Facultad) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new TipoAsignatura();
+        current = new Facultad();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -84,17 +84,17 @@ public class TipoAsignaturaController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "TipoAsignatura creado", "Se ha creado una TipoAsignatura correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad creado", "Se ha creado una Facultad correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: TipoAsignatura no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (TipoAsignatura) getItems().getRowData();
+        current = (Facultad) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -103,18 +103,18 @@ public class TipoAsignaturaController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "TipoAsignatura actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: TipoAsignatura no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Facultad no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
     public String destroy() {
-        current = (TipoAsignatura) getItems().getRowData();
+        current = (Facultad) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -139,10 +139,10 @@ public class TipoAsignaturaController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "TipoAsignatura eliminado", "Se ha eliminado una TipoAsignatura"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad eliminado", "Se ha eliminado una Facultad"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: TipoAsignatura no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -196,21 +196,21 @@ public class TipoAsignaturaController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public TipoAsignatura getTipoAsignatura(java.lang.Integer id) {
+    public Facultad getFacultad(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = TipoAsignatura.class)
-    public static class TipoAsignaturaControllerConverter implements Converter {
+    @FacesConverter(forClass = Facultad.class)
+    public static class FacultadControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            TipoAsignaturaController controller = (TipoAsignaturaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tipoAsignaturaController");
-            return controller.getTipoAsignatura(getKey(value));
+            FacultadController controller = (FacultadController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "facultadController");
+            return controller.getFacultad(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -230,11 +230,11 @@ public class TipoAsignaturaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof TipoAsignatura) {
-                TipoAsignatura o = (TipoAsignatura) object;
-                return getStringKey(o.getIdTipoAsignatura());
+            if (object instanceof Facultad) {
+                Facultad o = (Facultad) object;
+                return getStringKey(o.getIdFacultad());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + TipoAsignatura.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Facultad.class.getName());
             }
         }
     }

@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
 import entity.Curso;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -84,8 +84,9 @@ public class CursoController implements Serializable {
 
     public String create() {
         try {
-            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
+            current.getCursoPK().setSemestreId(current.getSemestre().getIdFecha());
             current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado una Curso correctamente"));
@@ -105,8 +106,9 @@ public class CursoController implements Serializable {
 
     public String update() {
         try {
-            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
+            current.getCursoPK().setSemestreId(current.getSemestre().getIdFecha());
             current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso actualizado", "Se ha actualizado correctamente"));
@@ -228,6 +230,7 @@ public class CursoController implements Serializable {
             key = new entity.CursoPK();
             key.setAsignaturaId(Integer.parseInt(values[0]));
             key.setTipoAsignaturaId(Integer.parseInt(values[1]));
+            key.setSemestreId(Integer.parseInt(values[2]));
             return key;
         }
 
@@ -236,6 +239,8 @@ public class CursoController implements Serializable {
             sb.append(value.getAsignaturaId());
             sb.append(SEPARATOR);
             sb.append(value.getTipoAsignaturaId());
+            sb.append(SEPARATOR);
+            sb.append(value.getSemestreId());
             return sb.toString();
         }
 

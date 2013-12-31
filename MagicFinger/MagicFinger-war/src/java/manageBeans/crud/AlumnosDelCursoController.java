@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
-import entity.Departamento;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import entity.AlumnosDelCurso;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,31 +18,32 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.DepartamentoFacadeLocal;
+import sessionBeans.AlumnosDelCursoFacadeLocal;
 
-@Named("departamentoController")
+@Named("alumnosDelCursoController")
 @SessionScoped
-public class DepartamentoController implements Serializable {
+public class AlumnosDelCursoController implements Serializable {
 
-    private Departamento current;
+    private AlumnosDelCurso current;
     private DataModel items = null;
     @EJB
-    private DepartamentoFacadeLocal ejbFacade;
+    private AlumnosDelCursoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public DepartamentoController() {
+    public AlumnosDelCursoController() {
     }
 
-    public Departamento getSelected() {
+    public AlumnosDelCurso getSelected() {
         if (current == null) {
-            current = new Departamento();
+            current = new AlumnosDelCurso();
+            current.setAlumnosDelCursoPK(new entity.AlumnosDelCursoPK());
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private DepartamentoFacadeLocal getFacade() {
+    private AlumnosDelCursoFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -69,52 +70,61 @@ public class DepartamentoController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Departamento) getItems().getRowData();
+        current = (AlumnosDelCurso) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Departamento();
+        current = new AlumnosDelCurso();
+        current.setAlumnosDelCursoPK(new entity.AlumnosDelCursoPK());
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
+            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getTipoAsignaturaId());
+            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
+            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getSemestreId());
+            current.getAlumnosDelCursoPK().setCursoId3(current.getCurso().getCursoPK().getAsignaturaId());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado una Departamento correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso creado", "Se ha creado una AlumnosDelCurso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Departamento) getItems().getRowData();
+        current = (AlumnosDelCurso) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
+            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getTipoAsignaturaId());
+            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
+            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getSemestreId());
+            current.getAlumnosDelCursoPK().setCursoId3(current.getCurso().getCursoPK().getAsignaturaId());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: AlumnosDelCurso no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
     public String destroy() {
-        current = (Departamento) getItems().getRowData();
+        current = (AlumnosDelCurso) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -139,10 +149,10 @@ public class DepartamentoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento eliminado", "Se ha eliminado una Departamento"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso eliminado", "Se ha eliminado una AlumnosDelCurso"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -196,32 +206,46 @@ public class DepartamentoController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Departamento getDepartamento(java.lang.Integer id) {
+    public AlumnosDelCurso getAlumnosDelCurso(entity.AlumnosDelCursoPK id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Departamento.class)
-    public static class DepartamentoControllerConverter implements Converter {
+    @FacesConverter(forClass = AlumnosDelCurso.class)
+    public static class AlumnosDelCursoControllerConverter implements Converter {
+
+        private static final String SEPARATOR = "#";
+        private static final String SEPARATOR_ESCAPED = "\\#";
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            DepartamentoController controller = (DepartamentoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "departamentoController");
-            return controller.getDepartamento(getKey(value));
+            AlumnosDelCursoController controller = (AlumnosDelCursoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "alumnosDelCursoController");
+            return controller.getAlumnosDelCurso(getKey(value));
         }
 
-        java.lang.Integer getKey(String value) {
-            java.lang.Integer key;
-            key = Integer.valueOf(value);
+        entity.AlumnosDelCursoPK getKey(String value) {
+            entity.AlumnosDelCursoPK key;
+            String values[] = value.split(SEPARATOR_ESCAPED);
+            key = new entity.AlumnosDelCursoPK();
+            key.setCursoId3(Integer.parseInt(values[0]));
+            key.setCursoId2(Integer.parseInt(values[1]));
+            key.setCursoId(Integer.parseInt(values[2]));
+            key.setAlumnoId(Integer.parseInt(values[3]));
             return key;
         }
 
-        String getStringKey(java.lang.Integer value) {
+        String getStringKey(entity.AlumnosDelCursoPK value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value);
+            sb.append(value.getCursoId3());
+            sb.append(SEPARATOR);
+            sb.append(value.getCursoId2());
+            sb.append(SEPARATOR);
+            sb.append(value.getCursoId());
+            sb.append(SEPARATOR);
+            sb.append(value.getAlumnoId());
             return sb.toString();
         }
 
@@ -230,11 +254,11 @@ public class DepartamentoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Departamento) {
-                Departamento o = (Departamento) object;
-                return getStringKey(o.getIdDepartamento());
+            if (object instanceof AlumnosDelCurso) {
+                AlumnosDelCurso o = (AlumnosDelCurso) object;
+                return getStringKey(o.getAlumnosDelCursoPK());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Departamento.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + AlumnosDelCurso.class.getName());
             }
         }
     }

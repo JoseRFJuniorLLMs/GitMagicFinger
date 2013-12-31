@@ -60,8 +60,9 @@ public class BloqueClase implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bloqueClaseId")
     private List<Asistencia> asistenciaList;
     @JoinColumns({
-        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "ASIGNATURA_ID"),
-        @JoinColumn(name = "CURSO_ID", referencedColumnName = "TIPO_ASIGNATURA_ID")})
+        @JoinColumn(name = "CURSO_ID3", referencedColumnName = "ASIGNATURA_ID"),
+        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "TIPO_ASIGNATURA_ID"),
+        @JoinColumn(name = "CURSO_ID", referencedColumnName = "SEMESTRE_ID")})
     @ManyToOne
     private Curso curso;
 

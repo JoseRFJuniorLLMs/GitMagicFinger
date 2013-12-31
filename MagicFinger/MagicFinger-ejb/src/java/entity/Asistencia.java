@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Asistencia.findAll", query = "SELECT a FROM Asistencia a"),
     @NamedQuery(name = "Asistencia.findByIdAsistencia", query = "SELECT a FROM Asistencia a WHERE a.idAsistencia = :idAsistencia"),
     @NamedQuery(name = "Asistencia.findByFecha", query = "SELECT a FROM Asistencia a WHERE a.fecha = :fecha"),
-    @NamedQuery(name = "Asistencia.findAsistencia", query = "SELECT a FROM Asistencia a WHERE a.alumnosDelCurso = :AlumnosDelCurso AND a.bloqueClaseId.idBloque = :bloqueClaseId AND a.fecha = :fecha"),
     @NamedQuery(name = "Asistencia.findByEstado", query = "SELECT a FROM Asistencia a WHERE a.estado = :estado")})
 public class Asistencia implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -48,8 +47,9 @@ public class Asistencia implements Serializable {
     @Column(name = "ESTADO")
     private Integer estado;
     @JoinColumns({
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID2", referencedColumnName = "CURSO_ID2"),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID3", referencedColumnName = "CURSO_ID"),
+        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID4", referencedColumnName = "CURSO_ID3"),
+        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID3", referencedColumnName = "CURSO_ID2"),
+        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID2", referencedColumnName = "CURSO_ID"),
         @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID", referencedColumnName = "ALUMNO_ID")})
     @ManyToOne(optional = false)
     private AlumnosDelCurso alumnosDelCurso;

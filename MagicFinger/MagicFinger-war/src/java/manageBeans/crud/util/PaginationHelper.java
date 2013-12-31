@@ -1,4 +1,4 @@
-package manageBenas.crud.util;
+package manageBeans.crud.util;
 
 import javax.faces.model.DataModel;
 

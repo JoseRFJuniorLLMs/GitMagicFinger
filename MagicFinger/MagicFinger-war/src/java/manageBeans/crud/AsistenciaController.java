@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
-import entity.Carrera;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import entity.Asistencia;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,31 +18,31 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.CarreraFacadeLocal;
+import sessionBeans.AsistenciaFacadeLocal;
 
-@Named("carreraController")
+@Named("asistenciaController")
 @SessionScoped
-public class CarreraController implements Serializable {
+public class AsistenciaController implements Serializable {
 
-    private Carrera current;
+    private Asistencia current;
     private DataModel items = null;
     @EJB
-    private CarreraFacadeLocal ejbFacade;
+    private AsistenciaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public CarreraController() {
+    public AsistenciaController() {
     }
 
-    public Carrera getSelected() {
+    public Asistencia getSelected() {
         if (current == null) {
-            current = new Carrera();
+            current = new Asistencia();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private CarreraFacadeLocal getFacade() {
+    private AsistenciaFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -69,13 +69,13 @@ public class CarreraController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Carrera) getItems().getRowData();
+        current = (Asistencia) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Carrera();
+        current = new Asistencia();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -84,17 +84,17 @@ public class CarreraController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera creado", "Se ha creado una Carrera correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asistencia creado", "Se ha creado una Asistencia correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asistencia no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Carrera) getItems().getRowData();
+        current = (Asistencia) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -103,18 +103,18 @@ public class CarreraController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asistencia actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Carrera no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Asistencia no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
     public String destroy() {
-        current = (Carrera) getItems().getRowData();
+        current = (Asistencia) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -139,10 +139,10 @@ public class CarreraController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera eliminado", "Se ha eliminado una Carrera"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asistencia eliminado", "Se ha eliminado una Asistencia"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asistencia no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -196,21 +196,21 @@ public class CarreraController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Carrera getCarrera(java.lang.Integer id) {
+    public Asistencia getAsistencia(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Carrera.class)
-    public static class CarreraControllerConverter implements Converter {
+    @FacesConverter(forClass = Asistencia.class)
+    public static class AsistenciaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CarreraController controller = (CarreraController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "carreraController");
-            return controller.getCarrera(getKey(value));
+            AsistenciaController controller = (AsistenciaController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "asistenciaController");
+            return controller.getAsistencia(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -230,11 +230,11 @@ public class CarreraController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Carrera) {
-                Carrera o = (Carrera) object;
-                return getStringKey(o.getIdCarr());
+            if (object instanceof Asistencia) {
+                Asistencia o = (Asistencia) object;
+                return getStringKey(o.getIdAsistencia());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Carrera.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Asistencia.class.getName());
             }
         }
     }

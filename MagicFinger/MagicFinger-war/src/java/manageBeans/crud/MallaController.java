@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
-import entity.AlumnosDelCurso;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import entity.Malla;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,32 +18,31 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.AlumnosDelCursoFacadeLocal;
+import sessionBeans.MallaFacadeLocal;
 
-@Named("alumnosDelCursoController")
+@Named("mallaController")
 @SessionScoped
-public class AlumnosDelCursoController implements Serializable {
+public class MallaController implements Serializable {
 
-    private AlumnosDelCurso current;
+    private Malla current;
     private DataModel items = null;
     @EJB
-    private AlumnosDelCursoFacadeLocal ejbFacade;
+    private MallaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public AlumnosDelCursoController() {
+    public MallaController() {
     }
 
-    public AlumnosDelCurso getSelected() {
+    public Malla getSelected() {
         if (current == null) {
-            current = new AlumnosDelCurso();
-            current.setAlumnosDelCursoPK(new entity.AlumnosDelCursoPK());
+            current = new Malla();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private AlumnosDelCursoFacadeLocal getFacade() {
+    private MallaFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -70,59 +69,52 @@ public class AlumnosDelCursoController implements Serializable {
     }
 
     public String prepareView() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+        current = (Malla) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new AlumnosDelCurso();
-        current.setAlumnosDelCursoPK(new entity.AlumnosDelCursoPK());
+        current = new Malla();
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
-            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
-            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso creado", "Se ha creado una AlumnosDelCurso correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Malla creado", "Se ha creado una Malla correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Malla no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+        current = (Malla) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getAsignaturaId());
-            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getTipoAsignaturaId());
-            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Malla actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: AlumnosDelCurso no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Malla no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
     public String destroy() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+        current = (Malla) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -147,10 +139,10 @@ public class AlumnosDelCursoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso eliminado", "Se ha eliminado una AlumnosDelCurso"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Malla eliminado", "Se ha eliminado una Malla"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Malla no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -204,43 +196,32 @@ public class AlumnosDelCursoController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public AlumnosDelCurso getAlumnosDelCurso(entity.AlumnosDelCursoPK id) {
+    public Malla getMalla(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = AlumnosDelCurso.class)
-    public static class AlumnosDelCursoControllerConverter implements Converter {
-
-        private static final String SEPARATOR = "#";
-        private static final String SEPARATOR_ESCAPED = "\\#";
+    @FacesConverter(forClass = Malla.class)
+    public static class MallaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AlumnosDelCursoController controller = (AlumnosDelCursoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "alumnosDelCursoController");
-            return controller.getAlumnosDelCurso(getKey(value));
+            MallaController controller = (MallaController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "mallaController");
+            return controller.getMalla(getKey(value));
         }
 
-        entity.AlumnosDelCursoPK getKey(String value) {
-            entity.AlumnosDelCursoPK key;
-            String values[] = value.split(SEPARATOR_ESCAPED);
-            key = new entity.AlumnosDelCursoPK();
-            key.setCursoId2(Integer.parseInt(values[0]));
-            key.setCursoId(Integer.parseInt(values[1]));
-            key.setAlumnoId(Integer.parseInt(values[2]));
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
             return key;
         }
 
-        String getStringKey(entity.AlumnosDelCursoPK value) {
+        String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getCursoId2());
-            sb.append(SEPARATOR);
-            sb.append(value.getCursoId());
-            sb.append(SEPARATOR);
-            sb.append(value.getAlumnoId());
+            sb.append(value);
             return sb.toString();
         }
 
@@ -249,11 +230,11 @@ public class AlumnosDelCursoController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof AlumnosDelCurso) {
-                AlumnosDelCurso o = (AlumnosDelCurso) object;
-                return getStringKey(o.getAlumnosDelCursoPK());
+            if (object instanceof Malla) {
+                Malla o = (Malla) object;
+                return getStringKey(o.getIdCarrera());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + AlumnosDelCurso.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Malla.class.getName());
             }
         }
     }

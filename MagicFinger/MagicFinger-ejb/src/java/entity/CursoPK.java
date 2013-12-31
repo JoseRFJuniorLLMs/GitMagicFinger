@@ -24,13 +24,18 @@ public class CursoPK implements Serializable {
     @NotNull
     @Column(name = "TIPO_ASIGNATURA_ID")
     private int tipoAsignaturaId;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "SEMESTRE_ID")
+    private int semestreId;
 
     public CursoPK() {
     }
 
-    public CursoPK(int asignaturaId, int tipoAsignaturaId) {
+    public CursoPK(int asignaturaId, int tipoAsignaturaId, int semestreId) {
         this.asignaturaId = asignaturaId;
         this.tipoAsignaturaId = tipoAsignaturaId;
+        this.semestreId = semestreId;
     }
 
     public int getAsignaturaId() {
@@ -49,11 +54,20 @@ public class CursoPK implements Serializable {
         this.tipoAsignaturaId = tipoAsignaturaId;
     }
 
+    public int getSemestreId() {
+        return semestreId;
+    }
+
+    public void setSemestreId(int semestreId) {
+        this.semestreId = semestreId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) asignaturaId;
         hash += (int) tipoAsignaturaId;
+        hash += (int) semestreId;
         return hash;
     }
 
@@ -70,12 +84,15 @@ public class CursoPK implements Serializable {
         if (this.tipoAsignaturaId != other.tipoAsignaturaId) {
             return false;
         }
+        if (this.semestreId != other.semestreId) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "entity.CursoPK[ asignaturaId=" + asignaturaId + ", tipoAsignaturaId=" + tipoAsignaturaId + " ]";
+        return "entity.CursoPK[ asignaturaId=" + asignaturaId + ", tipoAsignaturaId=" + tipoAsignaturaId + ", semestreId=" + semestreId + " ]";
     }
     
 }

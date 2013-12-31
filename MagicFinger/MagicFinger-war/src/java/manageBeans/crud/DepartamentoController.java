@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
-import entity.Profesor;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import entity.Departamento;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,31 +18,31 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.ProfesorFacadeLocal;
+import sessionBeans.DepartamentoFacadeLocal;
 
-@Named("profesorController")
+@Named("departamentoController")
 @SessionScoped
-public class ProfesorController implements Serializable {
+public class DepartamentoController implements Serializable {
 
-    private Profesor current;
+    private Departamento current;
     private DataModel items = null;
     @EJB
-    private ProfesorFacadeLocal ejbFacade;
+    private DepartamentoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public ProfesorController() {
+    public DepartamentoController() {
     }
 
-    public Profesor getSelected() {
+    public Departamento getSelected() {
         if (current == null) {
-            current = new Profesor();
+            current = new Departamento();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private ProfesorFacadeLocal getFacade() {
+    private DepartamentoFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -69,13 +69,13 @@ public class ProfesorController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Profesor) getItems().getRowData();
+        current = (Departamento) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Profesor();
+        current = new Departamento();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -84,17 +84,17 @@ public class ProfesorController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor creado", "Se ha creado una Profesor correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado una Departamento correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (Profesor) getItems().getRowData();
+        current = (Departamento) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -103,18 +103,18 @@ public class ProfesorController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Profesor no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
     public String destroy() {
-        current = (Profesor) getItems().getRowData();
+        current = (Departamento) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -139,10 +139,10 @@ public class ProfesorController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor eliminado", "Se ha eliminado una Profesor"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento eliminado", "Se ha eliminado una Departamento"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -196,21 +196,21 @@ public class ProfesorController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Profesor getProfesor(java.lang.Integer id) {
+    public Departamento getDepartamento(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Profesor.class)
-    public static class ProfesorControllerConverter implements Converter {
+    @FacesConverter(forClass = Departamento.class)
+    public static class DepartamentoControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ProfesorController controller = (ProfesorController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "profesorController");
-            return controller.getProfesor(getKey(value));
+            DepartamentoController controller = (DepartamentoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "departamentoController");
+            return controller.getDepartamento(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -230,11 +230,11 @@ public class ProfesorController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Profesor) {
-                Profesor o = (Profesor) object;
-                return getStringKey(o.getIdProfesor());
+            if (object instanceof Departamento) {
+                Departamento o = (Departamento) object;
+                return getStringKey(o.getIdDepartamento());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Profesor.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Departamento.class.getName());
             }
         }
     }

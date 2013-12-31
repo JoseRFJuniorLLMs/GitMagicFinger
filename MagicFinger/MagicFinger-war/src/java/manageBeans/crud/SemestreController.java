@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
 import entity.Semestre;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -232,7 +232,7 @@ public class SemestreController implements Serializable {
             }
             if (object instanceof Semestre) {
                 Semestre o = (Semestre) object;
-                return getStringKey(o.getIdSemestre());
+                return getStringKey(o.getIdFecha());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Semestre.class.getName());
             }

@@ -55,8 +55,8 @@
                             <h:selectOneMenu id="asignatura" value="#{cursoController.selected.asignatura}" title="#{bundle.EditCursoTitle_asignatura}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_asignatura}">
                                 <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
-                            <h:outputLabel value="#{bundle.EditCursoLabel_semestreId}" for="semestreId" />
-                            <h:selectOneMenu id="semestreId" value="#{cursoController.selected.semestreId}" title="#{bundle.EditCursoTitle_semestreId}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_semestreId}">
+                            <h:outputLabel value="#{bundle.EditCursoLabel_semestre}" for="semestre" />
+                            <h:selectOneMenu id="semestre" value="#{cursoController.selected.semestre}" title="#{bundle.EditCursoTitle_semestre}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_semestre}">
                                 <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
                             <h:outputLabel value="#{bundle.EditCursoLabel_tipoAsignatura}" for="tipoAsignatura" />

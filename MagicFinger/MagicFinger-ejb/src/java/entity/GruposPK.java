@@ -18,34 +18,84 @@ import javax.validation.constraints.NotNull;
 public class GruposPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CURSO_ID2")
-    private int cursoId2;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "CURSO_ID")
-    private int cursoId;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ALUMNOS_DEL_CURSO_ID2")
-    private int alumnosDelCursoId2;
+    @Column(name = "ALUMNOS_DEL_CURSO_ID4")
+    private int alumnosDelCursoId4;
     @Basic(optional = false)
     @NotNull
     @Column(name = "ALUMNOS_DEL_CURSO_ID3")
     private int alumnosDelCursoId3;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "ALUMNOS_DEL_CURSO_ID2")
+    private int alumnosDelCursoId2;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "ALUMNOS_DEL_CURSO_ID")
     private int alumnosDelCursoId;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "CURSO_ID3")
+    private int cursoId3;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "CURSO_ID2")
+    private int cursoId2;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "CURSO_ID")
+    private int cursoId;
 
     public GruposPK() {
     }
 
-    public GruposPK(int cursoId2, int cursoId, int alumnosDelCursoId2, int alumnosDelCursoId3, int alumnosDelCursoId) {
+    public GruposPK(int alumnosDelCursoId4, int alumnosDelCursoId3, int alumnosDelCursoId2, int alumnosDelCursoId, int cursoId3, int cursoId2, int cursoId) {
+        this.alumnosDelCursoId4 = alumnosDelCursoId4;
+        this.alumnosDelCursoId3 = alumnosDelCursoId3;
+        this.alumnosDelCursoId2 = alumnosDelCursoId2;
+        this.alumnosDelCursoId = alumnosDelCursoId;
+        this.cursoId3 = cursoId3;
         this.cursoId2 = cursoId2;
         this.cursoId = cursoId;
-        this.alumnosDelCursoId2 = alumnosDelCursoId2;
+    }
+
+    public int getAlumnosDelCursoId4() {
+        return alumnosDelCursoId4;
+    }
+
+    public void setAlumnosDelCursoId4(int alumnosDelCursoId4) {
+        this.alumnosDelCursoId4 = alumnosDelCursoId4;
+    }
+
+    public int getAlumnosDelCursoId3() {
+        return alumnosDelCursoId3;
+    }
+
+    public void setAlumnosDelCursoId3(int alumnosDelCursoId3) {
         this.alumnosDelCursoId3 = alumnosDelCursoId3;
+    }
+
+    public int getAlumnosDelCursoId2() {
+        return alumnosDelCursoId2;
+    }
+
+    public void setAlumnosDelCursoId2(int alumnosDelCursoId2) {
+        this.alumnosDelCursoId2 = alumnosDelCursoId2;
+    }
+
+    public int getAlumnosDelCursoId() {
+        return alumnosDelCursoId;
+    }
+
+    public void setAlumnosDelCursoId(int alumnosDelCursoId) {
         this.alumnosDelCursoId = alumnosDelCursoId;
+    }
+
+    public int getCursoId3() {
+        return cursoId3;
+    }
+
+    public void setCursoId3(int cursoId3) {
+        this.cursoId3 = cursoId3;
     }
 
     public int getCursoId2() {
@@ -64,38 +114,16 @@ public class GruposPK implements Serializable {
         this.cursoId = cursoId;
     }
 
-    public int getAlumnosDelCursoId2() {
-        return alumnosDelCursoId2;
-    }
-
-    public void setAlumnosDelCursoId2(int alumnosDelCursoId2) {
-        this.alumnosDelCursoId2 = alumnosDelCursoId2;
-    }
-
-    public int getAlumnosDelCursoId3() {
-        return alumnosDelCursoId3;
-    }
-
-    public void setAlumnosDelCursoId3(int alumnosDelCursoId3) {
-        this.alumnosDelCursoId3 = alumnosDelCursoId3;
-    }
-
-    public int getAlumnosDelCursoId() {
-        return alumnosDelCursoId;
-    }
-
-    public void setAlumnosDelCursoId(int alumnosDelCursoId) {
-        this.alumnosDelCursoId = alumnosDelCursoId;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
+        hash += (int) alumnosDelCursoId4;
+        hash += (int) alumnosDelCursoId3;
+        hash += (int) alumnosDelCursoId2;
+        hash += (int) alumnosDelCursoId;
+        hash += (int) cursoId3;
         hash += (int) cursoId2;
         hash += (int) cursoId;
-        hash += (int) alumnosDelCursoId2;
-        hash += (int) alumnosDelCursoId3;
-        hash += (int) alumnosDelCursoId;
         return hash;
     }
 
@@ -106,19 +134,25 @@ public class GruposPK implements Serializable {
             return false;
         }
         GruposPK other = (GruposPK) object;
-        if (this.cursoId2 != other.cursoId2) {
-            return false;
-        }
-        if (this.cursoId != other.cursoId) {
-            return false;
-        }
-        if (this.alumnosDelCursoId2 != other.alumnosDelCursoId2) {
+        if (this.alumnosDelCursoId4 != other.alumnosDelCursoId4) {
             return false;
         }
         if (this.alumnosDelCursoId3 != other.alumnosDelCursoId3) {
             return false;
         }
+        if (this.alumnosDelCursoId2 != other.alumnosDelCursoId2) {
+            return false;
+        }
         if (this.alumnosDelCursoId != other.alumnosDelCursoId) {
+            return false;
+        }
+        if (this.cursoId3 != other.cursoId3) {
+            return false;
+        }
+        if (this.cursoId2 != other.cursoId2) {
+            return false;
+        }
+        if (this.cursoId != other.cursoId) {
             return false;
         }
         return true;
@@ -126,7 +160,7 @@ public class GruposPK implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.GruposPK[ cursoId2=" + cursoId2 + ", cursoId=" + cursoId + ", alumnosDelCursoId2=" + alumnosDelCursoId2 + ", alumnosDelCursoId3=" + alumnosDelCursoId3 + ", alumnosDelCursoId=" + alumnosDelCursoId + " ]";
+        return "entity.GruposPK[ alumnosDelCursoId4=" + alumnosDelCursoId4 + ", alumnosDelCursoId3=" + alumnosDelCursoId3 + ", alumnosDelCursoId2=" + alumnosDelCursoId2 + ", alumnosDelCursoId=" + alumnosDelCursoId + ", cursoId3=" + cursoId3 + ", cursoId2=" + cursoId2 + ", cursoId=" + cursoId + " ]";
     }
     
 }

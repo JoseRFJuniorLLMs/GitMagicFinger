@@ -59,13 +59,17 @@
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.password}" title="#{bundle.ViewUserTitle_password}"/>
                             </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_profesorId}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.profesorId}" title="#{bundle.ViewUserTitle_profesorId}"/>
+                            </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_alumnoId}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.alumnoId}" title="#{bundle.ViewUserTitle_alumnoId}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_profesorId}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_userrolName}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.profesorId}" title="#{bundle.ViewUserTitle_profesorId}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.userrolName}" title="#{bundle.ViewUserTitle_userrolName}"/>
                             </h4>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{userController.prepareList}" immediate="true">

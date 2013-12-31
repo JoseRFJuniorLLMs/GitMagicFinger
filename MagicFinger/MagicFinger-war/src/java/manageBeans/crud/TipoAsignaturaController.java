@@ -1,8 +1,8 @@
-package manageBenas.crud;
+package manageBeans.crud;
 
-import entity.BloqueClase;
-import manageBenas.crud.util.JsfUtil;
-import manageBenas.crud.util.PaginationHelper;
+import entity.TipoAsignatura;
+import manageBeans.crud.util.JsfUtil;
+import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -18,31 +18,31 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.BloqueClaseFacadeLocal;
+import sessionBeans.TipoAsignaturaFacadeLocal;
 
-@Named("bloqueClaseController")
+@Named("tipoAsignaturaController")
 @SessionScoped
-public class BloqueClaseController implements Serializable {
+public class TipoAsignaturaController implements Serializable {
 
-    private BloqueClase current;
+    private TipoAsignatura current;
     private DataModel items = null;
     @EJB
-    private BloqueClaseFacadeLocal ejbFacade;
+    private TipoAsignaturaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public BloqueClaseController() {
+    public TipoAsignaturaController() {
     }
 
-    public BloqueClase getSelected() {
+    public TipoAsignatura getSelected() {
         if (current == null) {
-            current = new BloqueClase();
+            current = new TipoAsignatura();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private BloqueClaseFacadeLocal getFacade() {
+    private TipoAsignaturaFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -69,13 +69,13 @@ public class BloqueClaseController implements Serializable {
     }
 
     public String prepareView() {
-        current = (BloqueClase) getItems().getRowData();
+        current = (TipoAsignatura) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new BloqueClase();
+        current = new TipoAsignatura();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -84,17 +84,17 @@ public class BloqueClaseController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase creado", "Se ha creado una BloqueClase correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "TipoAsignatura creado", "Se ha creado una TipoAsignatura correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: BloqueClase no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: TipoAsignatura no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
     public String prepareEdit() {
-        current = (BloqueClase) getItems().getRowData();
+        current = (TipoAsignatura) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -103,18 +103,18 @@ public class BloqueClaseController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "TipoAsignatura actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: BloqueClase no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: TipoAsignatura no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
     public String destroy() {
-        current = (BloqueClase) getItems().getRowData();
+        current = (TipoAsignatura) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -139,10 +139,10 @@ public class BloqueClaseController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase eliminado", "Se ha eliminado una BloqueClase"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "TipoAsignatura eliminado", "Se ha eliminado una TipoAsignatura"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: BloqueClase no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: TipoAsignatura no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -196,21 +196,21 @@ public class BloqueClaseController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public BloqueClase getBloqueClase(java.lang.Integer id) {
+    public TipoAsignatura getTipoAsignatura(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = BloqueClase.class)
-    public static class BloqueClaseControllerConverter implements Converter {
+    @FacesConverter(forClass = TipoAsignatura.class)
+    public static class TipoAsignaturaControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            BloqueClaseController controller = (BloqueClaseController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "bloqueClaseController");
-            return controller.getBloqueClase(getKey(value));
+            TipoAsignaturaController controller = (TipoAsignaturaController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tipoAsignaturaController");
+            return controller.getTipoAsignatura(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -230,11 +230,11 @@ public class BloqueClaseController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof BloqueClase) {
-                BloqueClase o = (BloqueClase) object;
-                return getStringKey(o.getIdBloque());
+            if (object instanceof TipoAsignatura) {
+                TipoAsignatura o = (TipoAsignatura) object;
+                return getStringKey(o.getIdTipoAsignatura());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + BloqueClase.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + TipoAsignatura.class.getName());
             }
         }
     }

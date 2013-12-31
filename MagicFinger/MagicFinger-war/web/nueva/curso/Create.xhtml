@@ -57,9 +57,9 @@
                             <h:selectOneMenu style="vertical-align: center" id="asignatura" value="#{cursoController.selected.asignatura}" title="#{bundle.CreateCursoTitle_asignatura}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_asignatura}">
                                 <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_semestreId}" for="semestreId" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_semestre}" for="semestre" />
                             </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="semestreId" value="#{cursoController.selected.semestreId}" title="#{bundle.CreateCursoTitle_semestreId}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_semestreId}">
+                            <h:selectOneMenu style="vertical-align: center" id="semestre" value="#{cursoController.selected.semestre}" title="#{bundle.CreateCursoTitle_semestre}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_semestre}">
                                 <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_tipoAsignatura}" for="tipoAsignatura" />

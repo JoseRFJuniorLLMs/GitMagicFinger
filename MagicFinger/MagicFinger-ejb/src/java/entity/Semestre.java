@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Semestre.findAll", query = "SELECT s FROM Semestre s"),
-    @NamedQuery(name = "Semestre.findByIdSemestre", query = "SELECT s FROM Semestre s WHERE s.idSemestre = :idSemestre"),
+    @NamedQuery(name = "Semestre.findByIdFecha", query = "SELECT s FROM Semestre s WHERE s.idFecha = :idFecha"),
     @NamedQuery(name = "Semestre.findByFechaInicio", query = "SELECT s FROM Semestre s WHERE s.fechaInicio = :fechaInicio"),
     @NamedQuery(name = "Semestre.findByFechaTermino", query = "SELECT s FROM Semestre s WHERE s.fechaTermino = :fechaTermino"),
     @NamedQuery(name = "Semestre.findByNumSemestre", query = "SELECT s FROM Semestre s WHERE s.numSemestre = :numSemestre"),
@@ -42,8 +42,8 @@ public class Semestre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_SEMESTRE")
-    private Integer idSemestre;
+    @Column(name = "ID_FECHA")
+    private Integer idFecha;
     @Column(name = "FECHA_INICIO")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
@@ -54,22 +54,22 @@ public class Semestre implements Serializable {
     private Integer numSemestre;
     @Column(name = "ANO_SEMESTRE")
     private Integer anoSemestre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "semestreId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "semestre")
     private List<Curso> cursoList;
 
     public Semestre() {
     }
 
-    public Semestre(Integer idSemestre) {
-        this.idSemestre = idSemestre;
+    public Semestre(Integer idFecha) {
+        this.idFecha = idFecha;
     }
 
-    public Integer getIdSemestre() {
-        return idSemestre;
+    public Integer getIdFecha() {
+        return idFecha;
     }
 
-    public void setIdSemestre(Integer idSemestre) {
-        this.idSemestre = idSemestre;
+    public void setIdFecha(Integer idFecha) {
+        this.idFecha = idFecha;
     }
 
     public Date getFechaInicio() {
@@ -116,7 +116,7 @@ public class Semestre implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idSemestre != null ? idSemestre.hashCode() : 0);
+        hash += (idFecha != null ? idFecha.hashCode() : 0);
         return hash;
     }
 
@@ -127,7 +127,7 @@ public class Semestre implements Serializable {
             return false;
         }
         Semestre other = (Semestre) object;
-        if ((this.idSemestre == null && other.idSemestre != null) || (this.idSemestre != null && !this.idSemestre.equals(other.idSemestre))) {
+        if ((this.idFecha == null && other.idFecha != null) || (this.idFecha != null && !this.idFecha.equals(other.idFecha))) {
             return false;
         }
         return true;
@@ -135,7 +135,7 @@ public class Semestre implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Semestre[ idSemestre=" + idSemestre + " ]";
+        return "entity.Semestre[ idFecha=" + idFecha + " ]";
     }
     
 }

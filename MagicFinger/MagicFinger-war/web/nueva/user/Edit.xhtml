@@ -53,13 +53,17 @@
                             <h:inputText id="usuario" value="#{userController.selected.usuario}" title="#{bundle.EditUserTitle_usuario}" />
                             <h:outputLabel value="#{bundle.EditUserLabel_password}" for="password" />
                             <h:inputText id="password" value="#{userController.selected.password}" title="#{bundle.EditUserTitle_password}" />
+                            <h:outputLabel value="#{bundle.EditUserLabel_profesorId}" for="profesorId" />
+                            <h:selectOneMenu id="profesorId" value="#{userController.selected.profesorId}" title="#{bundle.EditUserTitle_profesorId}" >
+                                <f:selectItems value="#{profesorController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
                             <h:outputLabel value="#{bundle.EditUserLabel_alumnoId}" for="alumnoId" />
                             <h:selectOneMenu id="alumnoId" value="#{userController.selected.alumnoId}" title="#{bundle.EditUserTitle_alumnoId}" >
                                 <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
-                            <h:outputLabel value="#{bundle.EditUserLabel_profesorId}" for="profesorId" />
-                            <h:selectOneMenu id="profesorId" value="#{userController.selected.profesorId}" title="#{bundle.EditUserTitle_profesorId}" >
-                                <f:selectItems value="#{profesorController.itemsAvailableSelectOne}"/>
+                            <h:outputLabel value="#{bundle.EditUserLabel_userrolName}" for="userrolName" />
+                            <h:selectOneMenu id="userrolName" value="#{userController.selected.userrolName}" title="#{bundle.EditUserTitle_userrolName}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_userrolName}">
+                                <f:selectItems value="#{userrolController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{userController.update}">

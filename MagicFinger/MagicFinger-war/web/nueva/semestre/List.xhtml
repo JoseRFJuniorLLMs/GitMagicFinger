@@ -54,11 +54,11 @@
                         <f:facet name="header">
                             <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.idSemestre}" sortBy="#{item.idSemestre}" >
+                        <p:column filterBy="#{item.idFecha}" sortBy="#{item.idFecha}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSemestreTitle_idSemestre}"/>
+                                <h:outputText value="#{bundle.ListSemestreTitle_idFecha}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idSemestre}"/>
+                            <h:outputText value="#{item.idFecha}"/>
                         </p:column>
                         <p:column filterBy="#{item.fechaInicio}" sortBy="#{item.fechaInicio}" >
                             <f:facet name="header">

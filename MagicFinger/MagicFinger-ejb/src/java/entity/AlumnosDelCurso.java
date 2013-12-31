@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AlumnosDelCurso.findAll", query = "SELECT a FROM AlumnosDelCurso a"),
+    @NamedQuery(name = "AlumnosDelCurso.findByCursoId3", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.cursoId3 = :cursoId3"),
     @NamedQuery(name = "AlumnosDelCurso.findByCursoId2", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.cursoId2 = :cursoId2"),
     @NamedQuery(name = "AlumnosDelCurso.findByCursoId", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.cursoId = :cursoId"),
     @NamedQuery(name = "AlumnosDelCurso.findByAlumnoId", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.alumnoId = :alumnoId")})
@@ -36,8 +37,9 @@ public class AlumnosDelCurso implements Serializable {
     @EmbeddedId
     protected AlumnosDelCursoPK alumnosDelCursoPK;
     @JoinColumns({
-        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "ASIGNATURA_ID", insertable = false, updatable = false),
-        @JoinColumn(name = "CURSO_ID", referencedColumnName = "TIPO_ASIGNATURA_ID", insertable = false, updatable = false)})
+        @JoinColumn(name = "CURSO_ID3", referencedColumnName = "ASIGNATURA_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "TIPO_ASIGNATURA_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "CURSO_ID", referencedColumnName = "SEMESTRE_ID", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Curso curso;
     @JoinColumn(name = "ALUMNO_ID", referencedColumnName = "ID_ALUMNO", insertable = false, updatable = false)
@@ -55,8 +57,8 @@ public class AlumnosDelCurso implements Serializable {
         this.alumnosDelCursoPK = alumnosDelCursoPK;
     }
 
-    public AlumnosDelCurso(int cursoId2, int cursoId, int alumnoId) {
-        this.alumnosDelCursoPK = new AlumnosDelCursoPK(cursoId2, cursoId, alumnoId);
+    public AlumnosDelCurso(int cursoId3, int cursoId2, int cursoId, int alumnoId) {
+        this.alumnosDelCursoPK = new AlumnosDelCursoPK(cursoId3, cursoId2, cursoId, alumnoId);
     }
 
     public AlumnosDelCursoPK getAlumnosDelCursoPK() {

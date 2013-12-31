@@ -52,12 +52,15 @@ public class User implements Serializable {
     private List<Profesor> profesorList;
     @OneToMany(mappedBy = "userId")
     private List<Alumno> alumnoList;
-    @JoinColumn(name = "ALUMNO_ID", referencedColumnName = "ID_ALUMNO")
-    @ManyToOne
-    private Alumno alumnoId;
     @JoinColumn(name = "PROFESOR_ID", referencedColumnName = "ID_PROFESOR")
     @ManyToOne
     private Profesor profesorId;
+    @JoinColumn(name = "ALUMNO_ID", referencedColumnName = "ID_ALUMNO")
+    @ManyToOne
+    private Alumno alumnoId;
+    @JoinColumn(name = "USERROL_NAME", referencedColumnName = "NAME")
+    @ManyToOne(optional = false)
+    private Userrol userrolName;
 
     public User() {
     }
@@ -108,6 +111,14 @@ public class User implements Serializable {
         this.alumnoList = alumnoList;
     }
 
+    public Profesor getProfesorId() {
+        return profesorId;
+    }
+
+    public void setProfesorId(Profesor profesorId) {
+        this.profesorId = profesorId;
+    }
+
     public Alumno getAlumnoId() {
         return alumnoId;
     }
@@ -116,12 +127,12 @@ public class User implements Serializable {
         this.alumnoId = alumnoId;
     }
 
-    public Profesor getProfesorId() {
-        return profesorId;
+    public Userrol getUserrolName() {
+        return userrolName;
     }
 
-    public void setProfesorId(Profesor profesorId) {
-        this.profesorId = profesorId;
+    public void setUserrolName(Userrol userrolName) {
+        this.userrolName = userrolName;
     }
 
     @Override

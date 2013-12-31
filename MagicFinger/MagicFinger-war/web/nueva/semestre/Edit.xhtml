@@ -47,8 +47,8 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h:outputLabel value="#{bundle.EditSemestreLabel_idSemestre}" for="idSemestre" />
-                            <h:inputText id="idSemestre" value="#{semestreController.selected.idSemestre}" title="#{bundle.EditSemestreTitle_idSemestre}" required="true" requiredMessage="#{bundle.EditSemestreRequiredMessage_idSemestre}"/>
+                            <h:outputLabel value="#{bundle.EditSemestreLabel_idFecha}" for="idFecha" />
+                            <h:inputText id="idFecha" value="#{semestreController.selected.idFecha}" title="#{bundle.EditSemestreTitle_idFecha}" required="true" requiredMessage="#{bundle.EditSemestreRequiredMessage_idFecha}"/>
                             <h:outputLabel value="#{bundle.EditSemestreLabel_fechaInicio}" for="fechaInicio" />
                             <h:inputText id="fechaInicio" value="#{semestreController.selected.fechaInicio}" title="#{bundle.EditSemestreTitle_fechaInicio}" >
                                 <f:convertDateTime pattern="MM/dd/yyyy" />

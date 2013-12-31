@@ -27,11 +27,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Grupos.findAll", query = "SELECT g FROM Grupos g"),
-    @NamedQuery(name = "Grupos.findByCursoId2", query = "SELECT g FROM Grupos g WHERE g.gruposPK.cursoId2 = :cursoId2"),
-    @NamedQuery(name = "Grupos.findByCursoId", query = "SELECT g FROM Grupos g WHERE g.gruposPK.cursoId = :cursoId"),
-    @NamedQuery(name = "Grupos.findByAlumnosDelCursoId2", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId2 = :alumnosDelCursoId2"),
+    @NamedQuery(name = "Grupos.findByAlumnosDelCursoId4", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId4 = :alumnosDelCursoId4"),
     @NamedQuery(name = "Grupos.findByAlumnosDelCursoId3", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId3 = :alumnosDelCursoId3"),
-    @NamedQuery(name = "Grupos.findByAlumnosDelCursoId", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId = :alumnosDelCursoId")})
+    @NamedQuery(name = "Grupos.findByAlumnosDelCursoId2", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId2 = :alumnosDelCursoId2"),
+    @NamedQuery(name = "Grupos.findByAlumnosDelCursoId", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId = :alumnosDelCursoId"),
+    @NamedQuery(name = "Grupos.findByCursoId3", query = "SELECT g FROM Grupos g WHERE g.gruposPK.cursoId3 = :cursoId3"),
+    @NamedQuery(name = "Grupos.findByCursoId2", query = "SELECT g FROM Grupos g WHERE g.gruposPK.cursoId2 = :cursoId2"),
+    @NamedQuery(name = "Grupos.findByCursoId", query = "SELECT g FROM Grupos g WHERE g.gruposPK.cursoId = :cursoId")})
 public class Grupos implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -41,14 +43,16 @@ public class Grupos implements Serializable {
     @Column(name = "NOMBRE")
     private String nombre;
     @JoinColumns({
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID2", referencedColumnName = "CURSO_ID2", insertable = false, updatable = false),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID3", referencedColumnName = "CURSO_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID4", referencedColumnName = "CURSO_ID3", insertable = false, updatable = false),
+        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID3", referencedColumnName = "CURSO_ID2", insertable = false, updatable = false),
+        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID2", referencedColumnName = "CURSO_ID", insertable = false, updatable = false),
         @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID", referencedColumnName = "ALUMNO_ID", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private AlumnosDelCurso alumnosDelCurso;
     @JoinColumns({
-        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "ASIGNATURA_ID", insertable = false, updatable = false),
-        @JoinColumn(name = "CURSO_ID", referencedColumnName = "TIPO_ASIGNATURA_ID", insertable = false, updatable = false)})
+        @JoinColumn(name = "CURSO_ID3", referencedColumnName = "ASIGNATURA_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "TIPO_ASIGNATURA_ID", insertable = false, updatable = false),
+        @JoinColumn(name = "CURSO_ID", referencedColumnName = "SEMESTRE_ID", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Curso curso;
 
@@ -59,8 +63,8 @@ public class Grupos implements Serializable {
         this.gruposPK = gruposPK;
     }
 
-    public Grupos(int cursoId2, int cursoId, int alumnosDelCursoId2, int alumnosDelCursoId3, int alumnosDelCursoId) {
-        this.gruposPK = new GruposPK(cursoId2, cursoId, alumnosDelCursoId2, alumnosDelCursoId3, alumnosDelCursoId);
+    public Grupos(int alumnosDelCursoId4, int alumnosDelCursoId3, int alumnosDelCursoId2, int alumnosDelCursoId, int cursoId3, int cursoId2, int cursoId) {
+        this.gruposPK = new GruposPK(alumnosDelCursoId4, alumnosDelCursoId3, alumnosDelCursoId2, alumnosDelCursoId, cursoId3, cursoId2, cursoId);
     }
 
     public GruposPK getGruposPK() {

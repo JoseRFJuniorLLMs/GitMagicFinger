@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
     @NamedQuery(name = "Curso.findByAsignaturaId", query = "SELECT c FROM Curso c WHERE c.cursoPK.asignaturaId = :asignaturaId"),
     @NamedQuery(name = "Curso.findByTipoAsignaturaId", query = "SELECT c FROM Curso c WHERE c.cursoPK.tipoAsignaturaId = :tipoAsignaturaId"),
+    @NamedQuery(name = "Curso.findBySemestreId", query = "SELECT c FROM Curso c WHERE c.cursoPK.semestreId = :semestreId"),
     @NamedQuery(name = "Curso.findByPorcentajeAprobacion", query = "SELECT c FROM Curso c WHERE c.porcentajeAprobacion = :porcentajeAprobacion"),
     @NamedQuery(name = "Curso.findByTermino", query = "SELECT c FROM Curso c WHERE c.termino = :termino")})
 public class Curso implements Serializable {
@@ -48,9 +49,9 @@ public class Curso implements Serializable {
     @JoinColumn(name = "ASIGNATURA_ID", referencedColumnName = "ID_ASIGNATURA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Asignatura asignatura;
-    @JoinColumn(name = "SEMESTRE_ID", referencedColumnName = "ID_SEMESTRE")
+    @JoinColumn(name = "SEMESTRE_ID", referencedColumnName = "ID_FECHA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Semestre semestreId;
+    private Semestre semestre;
     @JoinColumn(name = "TIPO_ASIGNATURA_ID", referencedColumnName = "ID_TIPO_ASIGNATURA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TipoAsignatura tipoAsignatura;
@@ -66,8 +67,8 @@ public class Curso implements Serializable {
         this.cursoPK = cursoPK;
     }
 
-    public Curso(int asignaturaId, int tipoAsignaturaId) {
-        this.cursoPK = new CursoPK(asignaturaId, tipoAsignaturaId);
+    public Curso(int asignaturaId, int tipoAsignaturaId, int semestreId) {
+        this.cursoPK = new CursoPK(asignaturaId, tipoAsignaturaId, semestreId);
     }
 
     public CursoPK getCursoPK() {
@@ -120,12 +121,12 @@ public class Curso implements Serializable {
         this.asignatura = asignatura;
     }
 
-    public Semestre getSemestreId() {
-        return semestreId;
+    public Semestre getSemestre() {
+        return semestre;
     }
 
-    public void setSemestreId(Semestre semestreId) {
-        this.semestreId = semestreId;
+    public void setSemestre(Semestre semestre) {
+        this.semestre = semestre;
     }
 
     public TipoAsignatura getTipoAsignatura() {
