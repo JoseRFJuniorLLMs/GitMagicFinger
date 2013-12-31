@@ -93,24 +93,24 @@ public class LoginSessionMB implements Serializable {
     private void redireccionar(String nombre) throws IOException {
         ExternalContext context2 = FacesContext.getCurrentInstance().getExternalContext();
 
-//        User usuario = usuarios.getRol(nombre);
-//        switch (usuario.getUserRol().getName()) {
-//            case "Administrador":
-//                context2.redirect(context2.getRequestContextPath() + "/faces/administrador/index.xhtml");
-//                break;
-//            case "Profesor":
-//                profesor = usuario.getProfesorId();
-//                System.out.println(profesor.getNombre());
-//                context2.redirect(context2.getRequestContextPath() + "/faces/profesor/index.xhtml");
-//                break;
-//            case "Alumno":
-//                alumno = usuario.getAlumnoId();
-//                context2.redirect(context2.getRequestContextPath() + "/faces/alumno/index.xhtml");
-//                break;
-//            case "Secretaria":
-//                context2.redirect(context2.getRequestContextPath() + "/faces/secretaria/index.xhtml");
-//                break;
-//        }
+        User usuario = usuarios.getRol(nombre);
+        switch (usuario.getUserrolName().getName()) {
+            case "Administrador":
+                context2.redirect(context2.getRequestContextPath() + "/faces/administrador/index.xhtml");
+                break;
+            case "Profesor":
+                profesor = usuario.getProfesorId();
+                System.out.println(profesor.getNombre());
+                context2.redirect(context2.getRequestContextPath() + "/faces/profesor/index.xhtml");
+                break;
+            case "Alumno":
+                alumno = usuario.getAlumnoId();
+                context2.redirect(context2.getRequestContextPath() + "/faces/alumno/index.xhtml");
+                break;
+            case "Secretaria":
+                context2.redirect(context2.getRequestContextPath() + "/faces/secretaria/index.xhtml");
+                break;
+        }
 
     }
 
