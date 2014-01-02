@@ -1,12 +1,53 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <div style="display: inline-block; width: 100%">
+        <h:form id="form" > <p:growl id="grow1" showDetail="true" />
+
+                        <h3>Grupos del Curso</h3>
+                        <div style="display: inline-block">
+                        <p:dataTable id="grupo" 
+                                     style="width: 480px;margin-top:20px;" 
+                                     var="gru" value="#{gruposMB.listaGrupoData}" 
+                                     selection ="#{gruposMB.grupoSeleccionado}"
+                                     selectionMode="single"
+                                     >  
+                            <p:ajax event="rowSelect" listener="#{gruposMB.onRowSelect}"
+                                    update=":form:grow1 :form:integrantes :form:pickList" /> 
+
+                            <p:column headerText="Nombre Grupos" style="width:24%" >  
+                                <h:outputText value="#{gru.toString()}" />  
+                            </p:column>
+
+                        </p:dataTable>
+                        </div>
+                        <div style="display: inline-block">
+                        <h3>Integrantes del grupo</h3>
+                        <p:dataTable id="integrantes" 
+                                     style="width: 480px;margin-top:20px;" 
+                                     var="int" value="#{gruposMB.listaIntegrante}" 
+                                     >  
+            
+
+                            <p:column headerText="Nombre Integrante" style="width:24%" >  
+                                <h:outputText value="#{int.toString()}" />  
+                            </p:column>
+
+                        </p:dataTable>
+                        </div>
+                        <p:pickList id="pickList" value="#{gruposMB.asignar}" var="city"   
+                itemLabel="#{city}" itemValue="#{city}" />  
+  
+    <p:commandButton id="citySubmit" value="Submit" style="margin-top:5px"/>  
+        </h:form>
+        </div>
     </h:body>
 </html>
 

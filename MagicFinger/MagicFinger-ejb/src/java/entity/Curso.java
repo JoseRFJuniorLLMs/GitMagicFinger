@@ -177,7 +177,5 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return asignatura.getNombre()+" ("+tipoAsignatura.getNombre()+" "+semestre.getNumSemestre()+"-"+semestre.getAnoSemestre()+")";
-    }
-    
+        return this.asignatura.getNombre()+" ("+this.tipoAsignatura.getNombre()+" "+this.semestre.toString()+")";
 }
