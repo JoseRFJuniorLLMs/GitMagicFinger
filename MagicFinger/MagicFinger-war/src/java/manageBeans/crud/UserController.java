@@ -33,7 +33,7 @@ public class UserController implements Serializable {
 
     public UserController() {
     }
-
+ 
     public User getSelected() {
         if (current == null) {
             current = new User();
