@@ -12,6 +12,6 @@ import javax.ejb.Local;
 
 @Local
 public interface asistenciaSBLocal {
-
+    
     Asistencia alumnoAsiste(AlumnosDelCurso alumnosDelCurso, BloqueClase bloque, Date fecha);
 }

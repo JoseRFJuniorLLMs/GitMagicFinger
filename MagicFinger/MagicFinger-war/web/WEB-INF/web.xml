@@ -94,4 +94,10 @@
         <description/>
         <role-name>Secretaria</role-name>
     </security-role>
+    <ejb-local-ref>
+        <ejb-ref-name>SemestreFacade</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>sessionBeans.SemestreFacadeLocal</local>
+        <ejb-link>MagicFinger-ejb.jar#SemestreFacade</ejb-link>
+    </ejb-local-ref>
 </web-app>

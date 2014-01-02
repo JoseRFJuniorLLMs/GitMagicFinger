@@ -7,6 +7,7 @@ import entity.Asistencia;
 import entity.BloqueClase;
 import entity.Curso;
 import entity.Profesor;
+import entity.Semestre;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -21,6 +22,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
 import sessionBeans.AsistenciaFacadeLocal;
+import sessionBeans.SemestreFacadeLocal;
 import sessionBeans.alumnos.alumnosLocal;
 import sessionBeans.asignaturas.asistenciaSBLocal;
 
@@ -38,6 +40,8 @@ public class asistenciaCursoMB {
     private AsistenciaFacadeLocal asistenciaFacade;
     @EJB
     private alumnosLocal alumnos;
+    @EJB
+    private SemestreFacadeLocal semestreFacade;
     
     @Inject 
     private TomaAsistenciaConversation conversation;
@@ -78,6 +82,16 @@ public class asistenciaCursoMB {
         }
     }
 
+    public Semestre buscaSemestre(Date fecha){
+        List<Semestre> nuevo = semestreFacade.findAll();
+        for (Semestre semestre : nuevo) {
+            if(semestre.getFechaInicio().before(fecha) && semestre.getFechaTermino().after(fecha) ){
+                System.out.println("semestre::"+ semestre.toString());
+                return semestre;
+            }
+        }
+       return null;
+    }
     public void buscaPersona(ActionEvent actionEvent) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("comparando la huella " + HuellaEnString));
         Alumno encontrado = alumnos.CompareFingerPrint(HuellaEnString);
@@ -96,9 +110,17 @@ public class asistenciaCursoMB {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "No se puede marcar asistencia, fuera del bloque de clases"));
             return;
         }
-        
         if (encontrado != null) {
-            AlumnosDelCurso tempAlumno = new AlumnosDelCurso(curso.getAsignatura().getIdAsignatura(), curso.getTipoAsignatura().getIdTipoAsignatura(), encontrado.getIdAlumno());
+            Semestre semestre = buscaSemestre(new Date());
+            if(semestre == null){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "La fecha ingresada no corresponde a ningun semestre"));
+                return;
+            }
+            if(curso.getSemestre().getIdFecha() != semestre.getIdFecha()){
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "El curso no pertenece a este semestre"));
+                return;
+            }
+            AlumnosDelCurso tempAlumno = new AlumnosDelCurso(curso.getAsignatura().getIdAsignatura(), curso.getTipoAsignatura().getIdTipoAsignatura(),semestre.getIdFecha() ,encontrado.getIdAlumno());
             if (asistenciaSB.alumnoAsiste(tempAlumno, bloqueClaseActual, new Date()) == null) {
                 Asistencia nueva = new Asistencia();
                 //estado
@@ -162,7 +184,9 @@ public class asistenciaCursoMB {
         if (bloqueClase == null ) {
             return "-";
         }
+        
         Asistencia asis = asistenciaSB.alumnoAsiste(alumnoClase, bloqueClase, fecha);
+        
         if(asis==null){
             return "Ausente";
         }

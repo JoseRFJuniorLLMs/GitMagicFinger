@@ -62,8 +62,9 @@ public class LoginSessionMB implements Serializable {
             if (request.getRemoteUser() == null) {
                 request.login(user, password);
                 redireccionar(context.getExternalContext().getUserPrincipal().getName());
-
             } else {
+                logout();
+                request.login(user, password);
                 redireccionar(context.getExternalContext().getUserPrincipal().getName());
                 // System.out.println(request.getContextPath()+"------------------------------------"+context.getExternalContext().getUserPrincipal());
             }

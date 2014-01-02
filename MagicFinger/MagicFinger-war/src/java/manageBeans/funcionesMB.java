@@ -4,14 +4,19 @@
  */
 package manageBeans;
 
+import entity.Semestre;
+import java.util.Date;
+import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import sessionBeans.SemestreFacadeLocal;
 /**
  *
  * @author Nacho
@@ -19,11 +24,22 @@ import javax.faces.validator.ValidatorException;
 @Named(value = "funcionesMB")
 @RequestScoped
 public class funcionesMB {
+    @EJB
+    private SemestreFacadeLocal semestreFacade;
 
     /**
      * Creates a new instance of funcionesMB
      */
     public funcionesMB() {
+    }
+    public Semestre buscaSemestre(Date fecha){
+        List<Semestre> nuevo = semestreFacade.findAll();
+        for (Semestre semestre : nuevo) {
+            if(semestre.getFechaInicio().after(fecha) && semestre.getFechaTermino().before(fecha) ){
+                return semestre;
+            }
+        }
+       return null;
     }
     
     public void validarNombre(FacesContext arg0, UIComponent arg1, Object texto) throws ValidatorException {
