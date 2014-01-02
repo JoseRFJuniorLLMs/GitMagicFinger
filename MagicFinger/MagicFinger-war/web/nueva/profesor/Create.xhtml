@@ -46,11 +46,7 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px; margin-bottom: 20px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_rut}" for="rut" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="rut" value="#{profesorController.selected.rut}" title="#{bundle.CreateProfesorTitle_rut}"  />
-
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_nombre}" for="nombre" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Nombre:" for="nombre" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="nombre" value="#{profesorController.selected.nombre}" title="#{bundle.CreateProfesorTitle_nombre}"  />
 
@@ -62,7 +58,9 @@
                             </h4>
                             <h:inputText style="vertical-align: center" id="apellidom" value="#{profesorController.selected.apellidom}" title="#{bundle.CreateProfesorTitle_apellidom}"  />
 
-                            
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="RUT:" for="rut" />
+                            </h4>
+                            <h:inputText style="vertical-align: center" id="rut" value="#{profesorController.selected.rut}" title="#{bundle.CreateProfesorTitle_rut}"  />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Teléfono:" for="telefono" />
                             </h4>
@@ -71,8 +69,7 @@
                             </h4>
                             <h:inputText style="vertical-align: center" id="correo" value="#{profesorController.selected.correo}" title="#{bundle.CreateProfesorTitle_correo}"  />
 
-                            
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_departamentoId}" for="departamentoId" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Departamento:" for="departamentoId" />
                             </h4>
                             <h:selectOneMenu style="vertical-align: center" id="departamentoId" value="#{profesorController.selected.departamentoId}" title="#{bundle.CreateProfesorTitle_departamentoId}" required="true" requiredMessage="#{bundle.CreateProfesorRequiredMessage_departamentoId}">
                                 <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"/>
