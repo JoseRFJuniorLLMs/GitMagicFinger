@@ -4,6 +4,7 @@
  */
 package entity;
 
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.emptyType;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -152,7 +153,30 @@ public class BloqueClase implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.BloqueClase[ idBloque=" + idBloque + " ]";
+        System.out.println("bloq" + bloque);
+        switch (this.bloque){
+            case 1: 
+                return bloque + " (08:00-09:30)";
+            case 2: 
+                return bloque + " (09:40-11:10)";
+            case 3:
+                return bloque + " (11:20-12:50)";
+            case 4:
+                return bloque + " (13:50-15:20)";
+            case 5:
+                return bloque + " (15:30-17:00)";
+            case 6:
+                return bloque + " (17:10-18:40)";
+            case 7:
+                return bloque + " (19:00-20:10)";
+            case 8:
+                return bloque + " (20:20-22:00)";
+            case 9:
+                return bloque + " (22:00-23:00)";
+            default:
+                System.out.println("default");
+                return bloque+"";
+        }
     }
     
 }

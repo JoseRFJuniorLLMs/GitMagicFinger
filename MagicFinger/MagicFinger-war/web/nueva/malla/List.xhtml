@@ -68,11 +68,11 @@
                             </h:outputText>
                         </p:column>
                        
-                        <p:column filterBy="#{item.carreraId}" sortBy="#{item.carreraId}" >
+                        <p:column filterBy="#{item.carreraId.nombreCarrera}" sortBy="#{item.carreraId.nombreCarrera}" >
                             <f:facet name="header">
                                 <h:outputText value="Carrera"/>
                             </f:facet>
-                            <h:outputText value="#{item.carreraId}"/>
+                            <h:outputText value="#{item.carreraId.nombreCarrera}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

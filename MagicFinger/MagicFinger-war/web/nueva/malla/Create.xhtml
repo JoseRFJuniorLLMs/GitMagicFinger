@@ -52,9 +52,8 @@
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Fecha:" for="fecha" />
                             </h4>
-                            <h:inputText style="vertical-align: center; margin-top: 18px" id="fecha" value="#{mallaController.selected.fecha}" title="#{bundle.CreateMallaTitle_fecha}" >
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:inputText>
+                            <p:calendar style="vertical-align: center; margin-top: 18px" value="#{mallaController.selected.fecha}" showOn="button" /> 
+                            
                   
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Carrera:" for="carreraId" />
                             </h4>

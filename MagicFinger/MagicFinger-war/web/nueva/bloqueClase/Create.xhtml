@@ -53,20 +53,12 @@
                             </h:selectOneMenu>
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Día de la semana:" for="diaSemana" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="diaSemana" value="#{bloqueClaseController.selected.diaSemana}" title="#{bundle.CreateBloqueClaseTitle_diaSemana}"  />
+                            <h:inputText style="vertical-align: center" id="diaSemana" value="#{bloqueClaseController.selected.diaSemana}" title="#{bundle.CreateBloqueClaseTitle_diaSemana}" />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Bloque:" for="bloque" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="bloque" value="#{bloqueClaseController.selected.bloque}" title="#{bundle.CreateBloqueClaseTitle_bloque}" />
                             
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Hora inicio:" for="horaInicio" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="horaInicio" value="#{bloqueClaseController.selected.horaInicio}" title="#{bundle.CreateBloqueClaseTitle_horaInicio}"  />
-
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Hora de término:" for="horaTermino" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="horaTermino" value="#{bloqueClaseController.selected.horaTermino}" title="#{bundle.CreateBloqueClaseTitle_horaTermino}"  />
-
                             
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{bloqueClaseController.create}">
