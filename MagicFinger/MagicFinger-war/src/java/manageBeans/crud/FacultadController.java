@@ -25,6 +25,7 @@ import sessionBeans.FacultadFacadeLocal;
 public class FacultadController implements Serializable {
 
     private Facultad current;
+    private String nombreAnterior;
     private DataModel items = null;
     @EJB
     private FacultadFacadeLocal ejbFacade;
@@ -82,32 +83,47 @@ public class FacultadController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad creado", "Se ha creado una Facultad correctamente"));
+            for (Facultad facultad : getFacade().findAll()) {
+                if(facultad.getNombre().equals(current.getNombre())){
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creada","La facultad ya existe"));
+                    return null;
+                }
+            }
+            getFacade().create(current);
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad creada", "Se ha creado una facultad correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creada", "Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
 
     public String prepareEdit() {
         current = (Facultad) getItems().getRowData();
+        nombreAnterior = current.getNombre();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad actualizado", "Se ha actualizado correctamente"));
-            return "View";
+            if(!nombreAnterior.equals(current.getNombre())){
+                for (Facultad facultad : getFacade().findAll()) {
+                if(facultad.getNombre().equals(current.getNombre())){
+                    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creada","La facultad ya existe"));
+                    return null;
+                    }
+                }
+            }
+            getFacade().edit(current);
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad actualizada", "Se ha actualizado correctamente"));
+            return "List";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Facultad no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Facultad no actualizada", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
@@ -139,10 +155,10 @@ public class FacultadController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad eliminado", "Se ha eliminado una Facultad"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad eliminada", "Se ha eliminado una facultad"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no eliminada", "Lo sentimos, inténtelo más tarde"));
         }
     }
 

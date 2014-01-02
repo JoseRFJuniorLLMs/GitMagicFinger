@@ -47,9 +47,9 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h:outputLabel value="#{bundle.EditUserLabel_id}" for="id" />
+                            <h4><h:outputLabel value="#{bundle.EditUserLabel_id}" for="id" /></h4>
                             <h:inputText id="id" value="#{userController.selected.id}" title="#{bundle.EditUserTitle_id}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_id}"/>
-                            <h:outputLabel value="#{bundle.EditUserLabel_usuario}" for="usuario" />
+                            <h4><h:outputLabel value="#{bundle.EditUserLabel_usuario}" for="usuario" /></h4>
                             <h:inputText id="usuario" value="#{userController.selected.usuario}" title="#{bundle.EditUserTitle_usuario}" />
                             <h:outputLabel value="#{bundle.EditUserLabel_password}" for="password" />
                             <h:inputText id="password" value="#{userController.selected.password}" title="#{bundle.EditUserTitle_password}" />

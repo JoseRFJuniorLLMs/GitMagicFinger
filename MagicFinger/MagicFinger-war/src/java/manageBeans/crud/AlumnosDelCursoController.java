@@ -90,11 +90,11 @@ public class AlumnosDelCursoController implements Serializable {
             current.getAlumnosDelCursoPK().setCursoId3(current.getCurso().getCursoPK().getAsignaturaId());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso creado", "Se ha creado una AlumnosDelCurso correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno asignado", "Se ha asignado un alumno a un curso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no asignado", "Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
@@ -113,11 +113,11 @@ public class AlumnosDelCursoController implements Serializable {
             current.getAlumnosDelCursoPK().setCursoId3(current.getCurso().getCursoPK().getAsignaturaId());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignación actualizada", "Se ha actualizado la asignación del alumno"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: AlumnosDelCurso no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Asignación no actualizada", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
@@ -149,10 +149,10 @@ public class AlumnosDelCursoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso eliminado", "Se ha eliminado una AlumnosDelCurso"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignación del Alumno eliminada", "Se ha eliminado una AlumnosDelCurso"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignación del Alumno eliminada", "Lo sentimos, inténtelo más tarde"));
         }
     }
 
