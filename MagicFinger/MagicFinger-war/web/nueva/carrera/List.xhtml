@@ -66,19 +66,19 @@
                         
                         <p:column filterBy="#{item.nombreCarrera}" sortBy="#{item.nombreCarrera}" >
                             <f:facet name="header">
-                                <h:outputText value="Nombre:"/>
+                                <h:outputText value="Nombre"/>
                             </f:facet>
                             <h:outputText value="#{item.nombreCarrera}"/>
                         </p:column>
                         <p:column filterBy="#{item.departamentoId}" sortBy="#{item.departamentoId}" >
                             <f:facet name="header">
-                                <h:outputText value="Departamento:"/>
+                                <h:outputText value="Departamento"/>
                             </f:facet>
                             <h:outputText value="#{item.departamentoId.nombre}"/>
                         </p:column>
                        <p:column filterBy="#{item.departamentoId.facultadId}" sortBy="#{item.departamentoId.facultadId}" >
                             <f:facet name="header">
-                                <h:outputText value="Facultad:"/>
+                                <h:outputText value="Facultad"/>
                             </f:facet>
                             <h:outputText value="#{item.departamentoId.facultadId.nombre}"/>
                         </p:column>
