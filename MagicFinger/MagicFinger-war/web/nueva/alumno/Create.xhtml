@@ -46,45 +46,24 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_idAlumno}" for="idAlumno" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="idAlumno" value="#{alumnoController.selected.idAlumno}" title="#{bundle.CreateAlumnoTitle_idAlumno}" required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_idAlumno}"/>
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_rut}" for="rut" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="rut" value="#{alumnoController.selected.rut}" title="#{bundle.CreateAlumnoTitle_rut}"  />
-
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_nombre}" for="nombre" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.CreateAlumnoTitle_nombre}"  />
-
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_apellidop}" for="apellidop" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="apellidop" value="#{alumnoController.selected.apellidop}" title="#{bundle.CreateAlumnoTitle_apellidop}"  />
-
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_apellidom}" for="apellidom" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="apellidom" value="#{alumnoController.selected.apellidom}" title="#{bundle.CreateAlumnoTitle_apellidom}"  />
-
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_huella1}" for="huella1" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="huella1" value="#{alumnoController.selected.huella1}" title="#{bundle.CreateAlumnoTitle_huella1}"  />
-
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_telefono}" for="telefono" />
+                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_telefono}" for="telefono" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="telefono" value="#{alumnoController.selected.telefono}" title="#{bundle.CreateAlumnoTitle_telefono}" />
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_correo}" for="correo" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.CreateAlumnoTitle_correo}"  />
-
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_huella2}" for="huella2" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="huella2" value="#{alumnoController.selected.huella2}" title="#{bundle.CreateAlumnoTitle_huella2}"  />
-
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_userId}" for="userId" />
-                            </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="userId" value="#{alumnoController.selected.userId}" title="#{bundle.CreateAlumnoTitle_userId}" >
-                                <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{alumnoController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

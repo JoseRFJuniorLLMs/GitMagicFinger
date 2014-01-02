@@ -50,7 +50,7 @@
                             <h:outputLabel value="#{bundle.EditFacultadLabel_idFacultad}" for="idFacultad" />
                             <h:inputText id="idFacultad" value="#{facultadController.selected.idFacultad}" title="#{bundle.EditFacultadTitle_idFacultad}" required="true" requiredMessage="#{bundle.EditFacultadRequiredMessage_idFacultad}"/>
                             <h:outputLabel value="#{bundle.EditFacultadLabel_nombre}" for="nombre" />
-                            <h:inputText id="nombre" value="#{facultadController.selected.nombre}" title="#{bundle.EditFacultadTitle_nombre}" />
+                            <h:inputText id="nombre" value="#{facultadController.selected.nombre}" title="#{bundle.EditFacultadTitle_nombre}" validator="#{funcionesMB.validarNombre}"/>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{facultadController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

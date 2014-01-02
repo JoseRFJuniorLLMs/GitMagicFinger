@@ -51,7 +51,7 @@
                             <h:inputText style="vertical-align: center" id="idFacultad" value="#{facultadController.selected.idFacultad}" title="#{bundle.CreateFacultadTitle_idFacultad}" required="true" requiredMessage="#{bundle.CreateFacultadRequiredMessage_idFacultad}"/>
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateFacultadLabel_nombre}" for="nombre" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="nombre" value="#{facultadController.selected.nombre}" title="#{bundle.CreateFacultadTitle_nombre}"  />
+                            <h:inputText style="vertical-align: center" id="nombre" value="#{facultadController.selected.nombre}" title="#{bundle.CreateFacultadTitle_nombre}" validator="#{funcionesMB.validarNombre}"  />
 
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{facultadController.create}">

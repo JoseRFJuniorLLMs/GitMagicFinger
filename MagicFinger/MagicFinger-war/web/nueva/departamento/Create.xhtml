@@ -51,11 +51,11 @@
                             <h:inputText style="vertical-align: center" id="idDepartamento" value="#{departamentoController.selected.idDepartamento}" title="#{bundle.CreateDepartamentoTitle_idDepartamento}" required="true" requiredMessage="#{bundle.CreateDepartamentoRequiredMessage_idDepartamento}"/>
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateDepartamentoLabel_nombre}" for="nombre" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="nombre" value="#{departamentoController.selected.nombre}" title="#{bundle.CreateDepartamentoTitle_nombre}"  />
+                            <h:inputText style="vertical-align: center" id="nombre" value="#{departamentoController.selected.nombre}" title="#{bundle.CreateDepartamentoTitle_nombre}" validator="#{funcionesMB.validarNombre}" />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateDepartamentoLabel_facultadId}" for="facultadId" />
                             </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="facultadId" value="#{departamentoController.selected.facultadId}" title="#{bundle.CreateDepartamentoTitle_facultadId}" required="true" requiredMessage="#{bundle.CreateDepartamentoRequiredMessage_facultadId}">
+                            <h:selectOneMenu style="vertical-align: center" id="facultadId" value="#{departamentoController.selected.facultadId}" title="#{bundle.CreateDepartamentoTitle_facultadId}" required="true" requiredMessage="Debe seleccionar una facultad">
                                 <f:selectItems value="#{facultadController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
                         </h:panelGrid>

@@ -100,7 +100,7 @@ public class Facultad implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Facultad[ idFacultad=" + idFacultad + " ]";
+        return nombre;
     }
     
 }

@@ -46,9 +46,6 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_idProfesor}" for="idProfesor" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="idProfesor" value="#{profesorController.selected.idProfesor}" title="#{bundle.CreateProfesorTitle_idProfesor}" required="true" requiredMessage="#{bundle.CreateProfesorRequiredMessage_idProfesor}"/>
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_rut}" for="rut" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="rut" value="#{profesorController.selected.rut}" title="#{bundle.CreateProfesorTitle_rut}"  />
@@ -65,9 +62,7 @@
                             </h4>
                             <h:inputText style="vertical-align: center" id="apellidom" value="#{profesorController.selected.apellidom}" title="#{bundle.CreateProfesorTitle_apellidom}"  />
 
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella1}" for="huella1" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="huella1" value="#{profesorController.selected.huella1}" title="#{bundle.CreateProfesorTitle_huella1}"  />
+                            
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_telefono}" for="telefono" />
                             </h4>
@@ -76,20 +71,13 @@
                             </h4>
                             <h:inputText style="vertical-align: center" id="correo" value="#{profesorController.selected.correo}" title="#{bundle.CreateProfesorTitle_correo}"  />
 
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella2}" for="huella2" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="huella2" value="#{profesorController.selected.huella2}" title="#{bundle.CreateProfesorTitle_huella2}"  />
-
+                            
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_departamentoId}" for="departamentoId" />
                             </h4>
                             <h:selectOneMenu style="vertical-align: center" id="departamentoId" value="#{profesorController.selected.departamentoId}" title="#{bundle.CreateProfesorTitle_departamentoId}" required="true" requiredMessage="#{bundle.CreateProfesorRequiredMessage_departamentoId}">
                                 <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_userId}" for="userId" />
-                            </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="userId" value="#{profesorController.selected.userId}" title="#{bundle.CreateProfesorTitle_userId}" >
-                                <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
+                            
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{profesorController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
