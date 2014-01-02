@@ -48,7 +48,7 @@
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"><h:outputLabel value="Nombre:" for="nombre" /></h4>
-                            <h:inputText id="nombre" value="#{asignaturaController.selected.nombre}" title="#{bundle.EditAsignaturaTitle_nombre}" />
+                            <h:inputText id="nombre" value="#{asignaturaController.selected.nombre}" title="#{bundle.EditAsignaturaTitle_nombre}" validator="#{funcionesMB.validarNombre}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Malla:" for="mallaId" /></h4>
                             <h:selectOneMenu id="mallaId" value="#{asignaturaController.selected.mallaId}" title="#{bundle.EditAsignaturaTitle_mallaId}" required="true" requiredMessage="#{bundle.EditAsignaturaRequiredMessage_mallaId}">
                                 <f:selectItems value="#{mallaController.itemsAvailableSelectOne}"/>

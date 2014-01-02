@@ -48,7 +48,7 @@
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Nombre:" for="descripcion" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="descripcion" value="#{mallaController.selected.descripcion}" title="#{bundle.CreateMallaTitle_descripcion}"  />
+                            <h:inputText style="vertical-align: center" id="descripcion" value="#{mallaController.selected.descripcion}" title="#{bundle.CreateMallaTitle_descripcion}" validator="#{funcionesMB.validarNombre}" />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Fecha:" for="fecha" />
                             </h4>

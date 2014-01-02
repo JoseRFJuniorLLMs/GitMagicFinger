@@ -21,7 +21,7 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
                 </h:form>
             </div>
         </div>      
@@ -32,29 +32,27 @@
                     <h1 style="text-align: center;margin-bottom: 20px "> Editar TipoAsignatura</h1>
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
                         <p:megaMenu style="display: inline-block;ext-align: center;">  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de usuarios" url="/faces/administrador/user/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
                             <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
                         </p:megaMenu>  
                     </div>
                     <div id="editar" style="display: inline-block;width: 100%;">
                         <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
                         <p style="float: left;display: inline-block">
-                            &nbsp;Para Editar el TipoAsignatura, debe ingresar los siguientes campos:
+                            &nbsp;Para editar el tipo de asignatura, debe ingresar el siguiente campo:
                         </p>  
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h:outputLabel value="#{bundle.EditTipoAsignaturaLabel_idTipoAsignatura}" for="idTipoAsignatura" />
-                            <h:inputText id="idTipoAsignatura" value="#{tipoAsignaturaController.selected.idTipoAsignatura}" title="#{bundle.EditTipoAsignaturaTitle_idTipoAsignatura}" required="true" requiredMessage="#{bundle.EditTipoAsignaturaRequiredMessage_idTipoAsignatura}"/>
-                            <h:outputLabel value="#{bundle.EditTipoAsignaturaLabel_nombre}" for="nombre" />
-                            <h:inputText id="nombre" value="#{tipoAsignaturaController.selected.nombre}" title="#{bundle.EditTipoAsignaturaTitle_nombre}" />
+                            <h4 style="display: inline-block;"><h:outputLabel value="Nombre:" for="nombre" /></h4>
+                            <h:inputText id="nombre" value="#{tipoAsignaturaController.selected.nombre}" title="#{bundle.EditTipoAsignaturaTitle_nombre}" validator="#{funcionesMB.validarNombre}"/>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{tipoAsignaturaController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <h:outputLabel> Guardar facultad</h:outputLabel>
+                            <h:outputLabel> Guardar cambios</h:outputLabel>
                         </h:commandLink>
                         <h:commandLink style="display: inline-block;" action="#{tipoAsignaturaController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>

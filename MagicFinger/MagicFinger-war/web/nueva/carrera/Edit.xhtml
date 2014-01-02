@@ -48,7 +48,7 @@
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"><h:outputLabel value="Nombre:" for="nombreCarrera" /></h4>
-                            <h:inputText id="nombreCarrera" value="#{carreraController.selected.nombreCarrera}" title="#{bundle.EditCarreraTitle_nombreCarrera}" />
+                            <h:inputText id="nombreCarrera" value="#{carreraController.selected.nombreCarrera}" title="#{bundle.EditCarreraTitle_nombreCarrera}" validator="#{funcionesMB.validarNombre}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Departamento:" for="departamentoId" /></h4>
                             <h:selectOneMenu id="departamentoId" value="#{carreraController.selected.departamentoId}" title="#{bundle.EditCarreraTitle_departamentoId}" required="true" requiredMessage="#{bundle.EditCarreraRequiredMessage_departamentoId}">
                                 <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"/>
