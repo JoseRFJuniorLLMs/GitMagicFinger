@@ -1,6 +1,7 @@
 package manageBeans.crud;
 
 import entity.Asignatura;
+import entity.Malla;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -30,6 +31,8 @@ public class AsignaturaController implements Serializable {
     private AsignaturaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String nombreAnterior;
+    private Malla mallaAnterior;
 
     public AsignaturaController() {
     }
@@ -82,8 +85,14 @@ public class AsignaturaController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
+            for (Asignatura asignatura : getFacade().findAll()) {
+                if(asignatura.getNombre().equals(current.getNombre()) && asignatura.getMallaId().equals(current.getMallaId())){
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignatura no fue creada"," la asignatura ya existe"));
+                    return null;
+                }
+            }
+            getFacade().create(current);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignatura creada", "Se ha creado una asignatura correctamente"));
             return prepareList();
         } catch (Exception e) {
@@ -95,14 +104,24 @@ public class AsignaturaController implements Serializable {
 
     public String prepareEdit() {
         current = (Asignatura) getItems().getRowData();
+        nombreAnterior = current.getNombre();
+        mallaAnterior = current.getMallaId();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
+            if(!(nombreAnterior.equals(current.getNombre())) || !(mallaAnterior.equals(current.getMallaId()))){
+                for (Asignatura asignatura : getFacade().findAll()) {
+                    if(asignatura.getNombre().equals(current.getNombre())){
+                         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignatura no actualizada","El nombre de la asignatura ya existe"));
+                         return null;
+                    }
+                }
+            }
+            getFacade().edit(current);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignatura actualizada", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
