@@ -94,11 +94,11 @@ public class DepartamentoController implements Serializable {
                 }
             }
             getFacade().create(current);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado un Departamento correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado un departamento correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado","Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
@@ -127,7 +127,7 @@ public class DepartamentoController implements Serializable {
             return "List";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
@@ -159,10 +159,10 @@ public class DepartamentoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento eliminado", "Se ha eliminado una Departamento"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento eliminado", "Se ha eliminado una departamento"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no eliminado", "Lo sentimos, inténtelo más tarde"));
         }
     }
 
