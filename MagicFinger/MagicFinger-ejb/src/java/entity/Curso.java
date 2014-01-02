@@ -177,7 +177,7 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Curso[ cursoPK=" + cursoPK + " ]";
+        return asignatura.getNombre();
     }
     
 }
