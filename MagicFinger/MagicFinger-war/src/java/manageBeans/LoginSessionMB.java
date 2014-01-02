@@ -98,15 +98,17 @@ public class LoginSessionMB implements Serializable {
             case "Administrador":
                 context2.redirect(context2.getRequestContextPath() + "/faces/administrador/index.xhtml");
                 break;
+            case "Alumno":
+                alumno = usuario.getAlumnoId();
+                System.out.println(alumno.getNombre());
+                context2.redirect(context2.getRequestContextPath() + "/faces/alumno/index.xhtml");
+                break;
             case "Profesor":
                 profesor = usuario.getProfesorId();
                 System.out.println(profesor.getNombre());
                 context2.redirect(context2.getRequestContextPath() + "/faces/profesor/index.xhtml");
                 break;
-            case "Alumno":
-                alumno = usuario.getAlumnoId();
-                context2.redirect(context2.getRequestContextPath() + "/faces/alumno/index.xhtml");
-                break;
+           
             case "Secretaria":
                 context2.redirect(context2.getRequestContextPath() + "/faces/secretaria/index.xhtml");
                 break;
@@ -121,4 +123,13 @@ public class LoginSessionMB implements Serializable {
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+    
 }
