@@ -1,5 +1,6 @@
 package manageBeans.crud;
 
+import com.sun.jersey.core.util.Base64;
 import entity.Alumno;
 import entity.User;
 import entity.Userrol;
@@ -11,6 +12,7 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -24,7 +26,7 @@ import javax.inject.Inject;
 import sessionBeans.AlumnoFacadeLocal;
 
 @Named("alumnoController")
-@SessionScoped
+@RequestScoped
 public class AlumnoController implements Serializable {
     @Inject UserController usercontroller;
     
@@ -34,6 +36,8 @@ public class AlumnoController implements Serializable {
     private AlumnoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String huellaEnString1;
+    private String huellaEnString2;
 
     public AlumnoController() {
     }
@@ -94,22 +98,38 @@ public class AlumnoController implements Serializable {
             user.setPassword(current.getApellidop());
             user.setUserrolName(userrol);
             usercontroller.setCurrent(user);
-            if(usercontroller.create()!=null){
-            getFacade().create(current);
-            //EDITANDO
-            Alumno alumno = getFacade().findAll().get(getFacade().count()-1);
-            User user2 = usercontroller.getFacade().findAll().get(usercontroller.getFacade().count()-1);
-            alumno.setUserId(user2);
-            user2.setAlumnoId(alumno);
-            getFacade().edit(alumno);
-            usercontroller.getFacade().edit(user2);
-            /*****/
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno creado", "Se ha creado una Alumno correctamente"));
-            return prepareList();
-            }else{
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: El alumno ya existe en los registros",null ));
-                return null;
-            }
+            
+                 if (huellaEnString1.isEmpty()) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Huella 1 vacía"));
+                } else {
+                    if (huellaEnString2.isEmpty()) {
+                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Huella 2 vacía"));
+                    } else {
+                        if(usercontroller.create()!=null){
+                        byte[] templeByte1 = Base64.decode(huellaEnString1);
+                        current.setHuella1(templeByte1);
+                        byte[] templeByte2 = Base64.decode(huellaEnString2);
+                        current.setHuella2(templeByte2);
+                        getFacade().create(current);
+                        //EDITANDO
+                        Alumno alumno = getFacade().findAll().get(getFacade().count()-1);
+                        User user2 = usercontroller.getFacade().findAll().get(usercontroller.getFacade().count()-1);
+                        alumno.setUserId(user2);
+                        user2.setAlumnoId(alumno);
+                        getFacade().edit(alumno);
+                        usercontroller.getFacade().edit(user2);
+                        /*****/
+                        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno creado", "Se ha creado una Alumno correctamente"));
+                        return prepareList();
+                        }else{
+                            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: El alumno ya existe en los registros",null ));
+                            return null;
+                    }
+                    }
+                 }
+            
+            return null;
+            
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no creado", "Lo sentimos, inténtelo más tarde"));
@@ -224,6 +244,22 @@ public class AlumnoController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    public String getHuellaEnString1() {
+        return huellaEnString1;
+    }
+
+    public void setHuellaEnString1(String huellaEnString1) {
+        this.huellaEnString1 = huellaEnString1;
+    }
+
+    public String getHuellaEnString2() {
+        return huellaEnString2;
+    }
+
+    public void setHuellaEnString2(String huellaEnString2) {
+        this.huellaEnString2 = huellaEnString2;
+    }
+
     @FacesConverter(forClass = Alumno.class)
     public static class AlumnoControllerConverter implements Converter {
 
@@ -261,5 +297,6 @@ public class AlumnoController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Alumno.class.getName());
             }
         }
+        
     }
 }

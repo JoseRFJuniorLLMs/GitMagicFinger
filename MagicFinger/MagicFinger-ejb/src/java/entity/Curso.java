@@ -180,5 +180,5 @@ public class Curso implements Serializable {
 
         return this.asignatura.getNombre()+" ("+this.tipoAsignatura.getNombre()+" "+this.semestre.toString()+")";
 
-    
+    }
 }
