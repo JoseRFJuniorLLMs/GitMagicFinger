@@ -121,7 +121,7 @@ public class Grupos implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Grupos[ gruposPK=" + gruposPK + " ]";
+        return nombre;
     }
     
 }
