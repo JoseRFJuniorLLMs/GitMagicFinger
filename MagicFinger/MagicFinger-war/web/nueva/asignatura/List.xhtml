@@ -60,11 +60,11 @@
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column filterBy="#{item.mallaId}" sortBy="#{item.mallaId}" >
+                        <p:column filterBy="#{item.mallaId.descripcion}" sortBy="#{item.mallaId.descripcion}" >
                             <f:facet name="header">
                                 <h:outputText value="Malla:"/>
                             </f:facet>
-                            <h:outputText value="#{item.mallaId}"/>
+                            <h:outputText value="#{item.mallaId.descripcion}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

@@ -206,7 +206,9 @@ public class Alumno implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Alumno[ idAlumno=" + idAlumno + " ]";
+        return nombre+" "+apellidop+" "+apellidom;
     }
-    
+    public String toStringComprimido() {
+        return nombre+" "+apellidop+" "+apellidom.substring(0, 1)+".";
+    }
 }

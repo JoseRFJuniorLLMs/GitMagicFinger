@@ -113,7 +113,7 @@ public class Asignatura implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Asignatura[ idAsignatura=" + idAsignatura + " ]";
+        return nombre;
     }
     
 }

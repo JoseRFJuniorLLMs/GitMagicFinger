@@ -53,17 +53,17 @@
                         <f:facet name="header">
                             <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.curso}" sortBy="#{item.curso}" >
+                        <p:column filterBy="#{item.asignatura.nombre}" sortBy="#{item.asignatura.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_curso}"/>
                             </f:facet>
-                            <h:outputText value="#{item.curso}"/>
+                            <h:outputText value="#{item.curso.asignatura.nombre} (#{item.curso.tipoAsignatura.nombre} #{item.curso.semestre.toString()})"/>
                         </p:column>
-                        <p:column filterBy="#{item.alumno}" sortBy="#{item.alumno}" >
+                        <p:column filterBy="#{item.alumno.nombre}" sortBy="#{item.alumno.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_alumno}"/>
                             </f:facet>
-                            <h:outputText value="#{item.alumno}"/>
+                            <h:outputText value="#{item.alumno.toStringComprimido()}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
