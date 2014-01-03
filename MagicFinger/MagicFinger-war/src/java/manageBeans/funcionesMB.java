@@ -76,5 +76,9 @@ public class funcionesMB {
         if (!n.matches()) throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "Debe ingresar un número entero positivo"));    
     }
     
-    
+    public void validarCorreo(FacesContext arg0, UIComponent arg1, Object texto) throws ValidatorException {
+        Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$ ");
+        Matcher n = p.matcher((String)texto);
+        if (!n.matches()) throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "Debe ingresar un e-mail válido"));    
+    }  
 }

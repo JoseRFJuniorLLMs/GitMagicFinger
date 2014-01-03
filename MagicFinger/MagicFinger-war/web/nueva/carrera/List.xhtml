@@ -10,6 +10,15 @@
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+        <script language="javascript">
+            function ConfirmDelete(link){
+                var del = confirm('Do you want to Delete?');
+                if (del == true){ link.onclick(); 
+                }
+            }
+            
+                
+        </script>
     </h:head>
     <h:body>
         <div id="top" style="display: inline-block; ">
@@ -70,7 +79,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCarreraTitle_departamentoId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.departamentoId}"/>
+                            <h:outputText value="#{item.departamentoId.nombre}"/>
+                        </p:column>
+                       <p:column filterBy="#{item.departamentoId.facultadId}" sortBy="#{item.departamentoId.facultadId}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDepartamentoTitle_facultadId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.departamentoId.facultadId.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -82,11 +97,16 @@
                             <h:commandLink action="#{carreraController.prepareEdit}">
                                 <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{carreraController.destroy}">
+                            
+                            <h:commandLink action="#{carreraController.destroy}" onmousedown="return ConfirmDelete(this);">
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
                             </h:commandLink>
+
+
                         </p:column>
                     </p:dataTable>
+                    
+                    . . . . <h:commandLink action="delete" onmousedown="return ConfirmDelete(this);"> <h:outputText value="delete it"/> </h:commandLink>
                 </div>
             </div>
         </h:form>

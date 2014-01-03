@@ -82,13 +82,21 @@ public class CarreraController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
+            for (Carrera carrera : getFacade().findAll()) {
+                if(carrera.getNombreCarrera().equals(current.getNombreCarrera()) && carrera.getDepartamentoId().equals(current.getDepartamentoId())){
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no creada","La carrera ya existe en departamento seleccionada"));
+                    return null;
+                }
+            }
+            getFacade().create(current);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera creada", "Se ha creado una carrera correctamente"));
+
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no creada", "Lo sentimos, inténtelo más tarde"));
+
             return null;
         }
     }
@@ -104,7 +112,7 @@ public class CarreraController implements Serializable {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera actualizada", "Se ha actualizado correctamente"));
-            return "View";
+            return "List";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Carrera no actualizada", "Lo sentimos, intentelo mas tarde"));
