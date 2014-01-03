@@ -84,11 +84,11 @@ public class UserController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User creado", "Se ha creado una User correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario creado", "Se ha creado un usuario correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: User no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Usuario no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
@@ -103,11 +103,11 @@ public class UserController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: User no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Usuario no actualizado", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
@@ -139,10 +139,10 @@ public class UserController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User eliminado", "Se ha eliminado una User"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado", "Se ha eliminado un usuario"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: User no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Usuario no eliminado", "Lo sentimos, inténtelo más tarde"));
         }
     }
 

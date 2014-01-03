@@ -89,11 +89,11 @@ public class CursoController implements Serializable {
             current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado una Curso correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado un curso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no creado", "Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
@@ -115,7 +115,7 @@ public class CursoController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Curso no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Curso no actualizado", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
@@ -147,10 +147,10 @@ public class CursoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso eliminado", "Se ha eliminado una Curso"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso eliminado", "Se ha eliminado una curso"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no eliminado", "Lo sentimos, inténtelo más tarde"));
         }
     }
 

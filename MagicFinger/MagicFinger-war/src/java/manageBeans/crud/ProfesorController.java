@@ -84,11 +84,11 @@ public class ProfesorController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor creado", "Se ha creado una Profesor correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor creado", "Se ha creado un profesor correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no creado", "Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
@@ -107,7 +107,7 @@ public class ProfesorController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Profesor no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Profesor no actualizado","Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
@@ -139,10 +139,10 @@ public class ProfesorController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor eliminado", "Se ha eliminado una Profesor"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor eliminado", "Se ha eliminado un Profesor"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no eliminado", "Lo sentimos, inténtelo más tarde"));
         }
     }
 

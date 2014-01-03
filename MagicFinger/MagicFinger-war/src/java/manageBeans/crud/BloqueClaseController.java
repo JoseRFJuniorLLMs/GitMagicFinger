@@ -84,11 +84,11 @@ public class BloqueClaseController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase creado", "Se ha creado una BloqueClase correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bloque de clase creado", "Se ha creado un bloque de clases correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: BloqueClase no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Bloque de clase no creado", "Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
@@ -103,11 +103,11 @@ public class BloqueClaseController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bloque de clase actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: BloqueClase no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Bloque de clase no actualizado", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
@@ -139,10 +139,10 @@ public class BloqueClaseController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "BloqueClase eliminado", "Se ha eliminado una BloqueClase"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Bloque de clase eliminado", "Se ha eliminado un bloque de clase"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: BloqueClase no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Bloque de clase no eliminado", "Lo sentimos, inténtelo más tarde"));
         }
     }
 
