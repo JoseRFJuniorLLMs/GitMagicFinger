@@ -221,8 +221,11 @@ public class Profesor implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "entity.Profesor[ idProfesor=" + idProfesor + " ]";
+     public String toString() {
+        return nombre+" "+apellidop;
+    }
+    public String toStringComprimido() {
+        return nombre+" "+apellidop+" "+apellidom.substring(0, 1)+".";
     }
     
 }

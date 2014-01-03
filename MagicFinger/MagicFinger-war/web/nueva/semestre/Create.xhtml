@@ -48,14 +48,11 @@
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Fecha de inicio:" for="fechaInicio" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="fechaInicio" value="#{semestreController.selected.fechaInicio}" title="#{bundle.CreateSemestreTitle_fechaInicio}" >
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:inputText>
+                            <p:calendar style="vertical-align: center" value="#{semestreController.selected.fechaInicio}" showOn="button" /> 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Fecha de término:" for="fechaTermino" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="fechaTermino" value="#{semestreController.selected.fechaTermino}" title="#{bundle.CreateSemestreTitle_fechaTermino}" >
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:inputText>
+                            <p:calendar style="vertical-align: center" value="#{semestreController.selected.fechaTermino}" showOn="button" /> 
+                            
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Número de semestre:" for="numSemestre" />
                             </h4>
                             <h:inputText style="vertical-align: center" id="numSemestre" value="#{semestreController.selected.numSemestre}" title="#{bundle.CreateSemestreTitle_numSemestre}" />

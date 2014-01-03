@@ -49,7 +49,7 @@
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"> <h:outputText value="Curso:"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.curso}" title="#{bundle.ViewBloqueClaseTitle_curso}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.curso.asignatura.nombre} (#{bloqueClaseController.selected.curso.tipoAsignatura.nombre} #{bloqueClaseController.selected.curso.semestre.toString()})" title="#{bundle.ViewBloqueClaseTitle_curso}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="Día de la semana:"/>
                             </h4>
@@ -59,14 +59,6 @@
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.bloque}" title="#{bundle.ViewBloqueClaseTitle_bloque}"/>
                             </h4>                            
-                            <h4 style="display: inline-block;"> <h:outputText value="Hora de inicio:"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.horaInicio}" title="#{bundle.ViewBloqueClaseTitle_horaInicio}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="Hora de término:"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.horaTermino}" title="#{bundle.ViewBloqueClaseTitle_horaTermino}"/>
-                            </h4>
                             
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{bloqueClaseController.prepareList}" immediate="true">

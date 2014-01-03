@@ -64,19 +64,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Nombre"/>
                             </f:facet>
-                            <h:outputText value="#{item.nombre}"/>
-                        </p:column>
-                        <p:column filterBy="#{item.apellidop}" sortBy="#{item.apellidop}" >
-                            <f:facet name="header">
-                                <h:outputText value="Apellido paterno"/>
-                            </f:facet>
-                            <h:outputText value="#{item.apellidop}"/>
-                        </p:column>
-                        <p:column filterBy="#{item.apellidom}" sortBy="#{item.apellidom}" >
-                            <f:facet name="header">
-                                <h:outputText value="Apellido materno"/>
-                            </f:facet>
-                            <h:outputText value="#{item.apellidom}"/>
+                            <h:outputText value="#{item.toString()}"/>
                         </p:column>
                         
                         
@@ -91,7 +79,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Departamento"/>
                             </f:facet>
-                            <h:outputText value="#{item.departamentoId}"/>
+                            <h:outputText value="#{item.departamentoId.nombre}"/>
                         </p:column>
                         
                         <p:column>

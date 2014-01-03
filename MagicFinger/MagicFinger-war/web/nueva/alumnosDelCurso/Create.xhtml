@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Agregar alumnos a un curso</title>
+        <title>Agregar Alumno a un Curso</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
@@ -28,7 +28,7 @@
         <div class="center_content">
             <h:form><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
-                    <h1 style="text-align: center;margin-bottom: 20px "> Agregar alumnos a un curso</h1>
+                    <h1 style="text-align: center;margin-bottom: 20px "> Agregar Alumno a un Curso</h1>
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
                         <p:megaMenu style="display: inline-block;ext-align: center;">  
                             <p:menuitem icon="ui-icon-bullet" value="Gestión de usuarios" url="/faces/administrador/user/List.xhtml"/>  
@@ -46,12 +46,12 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px;margin-bottom: 20px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnosDelCursoLabel_curso}" for="curso" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value= "Curso:" for="curso" />
                             </h4>
                             <h:selectOneMenu style="vertical-align: center" id="curso" value="#{alumnosDelCursoController.selected.curso}" title="#{bundle.CreateAlumnosDelCursoTitle_curso}" required="true" requiredMessage="#{bundle.CreateAlumnosDelCursoRequiredMessage_curso}">
                                 <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnosDelCursoLabel_alumno}" for="alumno" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Alumno:" for="alumno" />
                             </h4>
                             <h:selectOneMenu style="vertical-align: center" id="alumno" value="#{alumnosDelCursoController.selected.alumno}" title="#{bundle.CreateAlumnosDelCursoTitle_alumno}" required="true" requiredMessage="#{bundle.CreateAlumnosDelCursoRequiredMessage_alumno}">
                                 <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"/>
@@ -59,7 +59,7 @@
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{alumnosDelCursoController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <h:outputLabel> Guardar facultad</h:outputLabel>
+                            <h:outputLabel> Guardar alumno en curso</h:outputLabel>
                         </h:commandLink>
                         <h:commandLink style="display: inline-block;" action="#{alumnosDelCursoController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>

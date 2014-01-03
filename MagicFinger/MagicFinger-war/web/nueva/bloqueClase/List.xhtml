@@ -53,11 +53,11 @@
                         <f:facet name="header">
                             <h3 style="color:white">Bloques de Clase Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.curso}" sortBy="#{item.curso}" >
+                        <p:column filterBy="#{item.curso.asignatura.nombre}" sortBy="#{item.curso.asignatura.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="Curso"/>
                             </f:facet>
-                            <h:outputText value="#{item.curso}"/>
+                            <h:outputText value="#{item.curso.asignatura.nombre} (#{item.curso.tipoAsignatura.nombre} #{item.curso.semestre.toString()})"/>
                         </p:column>
                         
                         <p:column filterBy="#{item.diaSemana}" sortBy="#{item.diaSemana}" >
@@ -70,19 +70,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Bloque"/>
                             </f:facet>
-                            <h:outputText value="#{item.bloque}"/>
-                        </p:column>
-                        <p:column filterBy="#{item.horaInicio}" sortBy="#{item.horaInicio}" >
-                            <f:facet name="header">
-                                <h:outputText value="Hora de inicio"/>
-                            </f:facet>
-                            <h:outputText value="#{item.horaInicio}"/>
-                        </p:column>
-                        <p:column filterBy="#{item.horaTermino}" sortBy="#{item.horaTermino}" >
-                            <f:facet name="header">
-                                <h:outputText value="Hora de término"/>
-                            </f:facet>
-                            <h:outputText value="#{item.horaTermino}"/>
+                            <h:outputText value="#{item.toString()}" />
                         </p:column>
                         
                         <p:column>
