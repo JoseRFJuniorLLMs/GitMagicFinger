@@ -21,7 +21,7 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
                 </h:form>
             </div>
         </div>      
@@ -32,47 +32,42 @@
                     <h1 style="text-align: center;margin-bottom: 20px "> Editar Alumno</h1>
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
                         <p:megaMenu style="display: inline-block;ext-align: center;">  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/curso/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de usuarios" url="/faces/administrador/user/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
                         </p:megaMenu>  
                     </div>
                     <div id="editar" style="display: inline-block;width: 100%;">
                         <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
                         <p style="float: left;display: inline-block">
-                            &nbsp;Para Editar el Alumno, debe ingresar los siguientes campos:
+                            &nbsp;Para editar el alumno, debe ingresar los siguientes campos:
                         </p>  
                     </div>
-                    <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
+                    <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ; margin-bottom: 20px">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_idAlumno}" for="idAlumno" />
-                            <h:inputText id="idAlumno" value="#{alumnoController.selected.idAlumno}" title="#{bundle.EditAlumnoTitle_idAlumno}" required="true" requiredMessage="#{bundle.EditAlumnoRequiredMessage_idAlumno}"/>
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_rut}" for="rut" />
-                            <h:inputText id="rut" value="#{alumnoController.selected.rut}" title="#{bundle.EditAlumnoTitle_rut}" />
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_nombre}" for="nombre" />
-                            <h:inputText id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.EditAlumnoTitle_nombre}" />
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_apellidop}" for="apellidop" />
-                            <h:inputText id="apellidop" value="#{alumnoController.selected.apellidop}" title="#{bundle.EditAlumnoTitle_apellidop}" />
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_apellidom}" for="apellidom" />
-                            <h:inputText id="apellidom" value="#{alumnoController.selected.apellidom}" title="#{bundle.EditAlumnoTitle_apellidom}" />
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_telefono}" for="telefono" />
-                            <h:inputText id="telefono" value="#{alumnoController.selected.telefono}" title="#{bundle.EditAlumnoTitle_telefono}" />
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_correo}" for="correo" />
-                            <h:inputText id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.EditAlumnoTitle_correo}" />
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_userId}" for="userId" />
-                            <h:selectOneMenu id="userId" value="#{alumnoController.selected.userId}" title="#{bundle.EditAlumnoTitle_userId}" >
-                                <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_huella1}" for="huella1" />
+                            <h4 style="display: inline-block;"><h:outputLabel value="Nombre:" for="nombre" /></h4>
+                            <h:inputText id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.EditAlumnoTitle_nombre}" validator="#{funcionesMB.validarNombre}" />
+                            <h4 style="display: inline-block;"><h:outputLabel value="Apellido paterno:" for="apellidop" /></h4>
+                            <h:inputText id="apellidop" value="#{alumnoController.selected.apellidop}" title="#{bundle.EditAlumnoTitle_apellidop}" validator="#{funcionesMB.validarNombre}" />
+                            <h4 style="display: inline-block;"><h:outputLabel value="Apellido materno:" for="apellidom" /></h4>
+                            <h:inputText id="apellidom" value="#{alumnoController.selected.apellidom}" title="#{bundle.EditAlumnoTitle_apellidom}" validator="#{funcionesMB.validarNombre}" />
+                            <h4 style="display: inline-block;"><h:outputLabel value="RUT:" for="rut" /></h4>
+                            <h:inputText id="rut" value="#{alumnoController.selected.rut}" title="#{bundle.EditAlumnoTitle_rut}" validator="#{funcionesMB.validarRut}"/>
+                            <h4 style="display: inline-block;"><h:outputLabel value="Teléfono" for="telefono" /></h4>
+                            <h:inputText id="telefono" value="#{alumnoController.selected.telefono}" title="#{bundle.EditAlumnoTitle_telefono}" validator="#{funcionesMB.validarNumero}" />
+                            <h4 style="display: inline-block;"><h:outputLabel value="Correo electrónico:" for="correo" /></h4>
+                            <h:inputText id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.EditAlumnoTitle_correo}" validator="#{funcionesMB.validarCorreo}" />
+                            <h4 style="display: inline-block;"><h:outputLabel value="Huella dactilar:" for="huella1" /></h4>
                             <h:inputText id="huella1" value="#{alumnoController.selected.huella1}" title="#{bundle.EditAlumnoTitle_huella1}" />
-                            <h:outputLabel value="#{bundle.EditAlumnoLabel_huella2}" for="huella2" />
+                            <h4 style="display: inline-block;"><h:outputLabel value="Huella dactilar (comprobación):" for="huella2" /></h4>
                             <h:inputText id="huella2" value="#{alumnoController.selected.huella2}" title="#{bundle.EditAlumnoTitle_huella2}" />
+                           
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{alumnoController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <h:outputLabel> Guardar facultad</h:outputLabel>
+                            <h:outputLabel> Guardar cambios</h:outputLabel>
                         </h:commandLink>
                         <h:commandLink style="display: inline-block;" action="#{alumnoController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>

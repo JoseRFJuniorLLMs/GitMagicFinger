@@ -49,8 +49,14 @@
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h:outputLabel value="#{bundle.EditGruposLabel_nombre}" for="nombre" />
                             <h:inputText id="nombre" value="#{gruposController.selected.nombre}" title="#{bundle.EditGruposTitle_nombre}" />
-                            <h:outputLabel value="#{bundle.EditGruposLabel_id}" for="id" />
-                            <h:inputText id="id" value="#{gruposController.selected.id}" title="#{bundle.EditGruposTitle_id}" />
+                            <h:outputLabel value="#{bundle.EditGruposLabel_alumnosDelCurso}" for="alumnosDelCurso" />
+                            <h:selectOneMenu id="alumnosDelCurso" value="#{gruposController.selected.alumnosDelCurso}" title="#{bundle.EditGruposTitle_alumnosDelCurso}" required="true" requiredMessage="#{bundle.EditGruposRequiredMessage_alumnosDelCurso}">
+                                <f:selectItems value="#{alumnosDelCursoController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel value="#{bundle.EditGruposLabel_curso}" for="curso" />
+                            <h:selectOneMenu id="curso" value="#{gruposController.selected.curso}" title="#{bundle.EditGruposTitle_curso}" required="true" requiredMessage="#{bundle.EditGruposRequiredMessage_curso}">
+                                <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
+                            </h:selectOneMenu>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{gruposController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

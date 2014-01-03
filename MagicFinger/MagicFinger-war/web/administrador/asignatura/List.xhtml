@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>Gestion de Asignatura</title>
+        <title>Gestión de Asignatura</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
@@ -21,60 +21,46 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 54, column 55 in unknown." value="Cerrar sesion" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 54, column 55 in unknown." value="Cerrar sesión" />
                 </h:form>
             </div>
         </div>
         <h:form >
             <div class="center_content" style="padding-bottom: 40px;">
                 <p:growl id="grow1" showDetail="true" />
-                <h1 style="text-align: center;margin-bottom: 20px"> Gestion de Asignatura</h1>
+                <h1 style="text-align: center;margin-bottom: 20px"> Gestión de Asignatura</h1>
                 <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                    <p:megaMenu style="display: inline-block;text-align: center;">
-                            <p:submenu label="Gestión de cursos " icon="ui-icon-bullet">  
-                                <p:column>  
-                                    <p:submenu>  
-                                        <p:menuitem value="Cursos" url="/faces/administrador/curso/List.xhtml"/>  
-                                        <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml"/>  
-                                        <p:menuitem value="Tipo" url="/faces/administrador/tipoAsignatura/List.xhtml" />                    
-                                    </p:submenu>  
-                                </p:column>
-                            </p:submenu>
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de mallas" url="/faces/administrador/malla/List.xhtml"/>  
-                        </p:megaMenu>  
+                    <p:megaMenu style="display: inline-block;ext-align: center;">  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestión de usuarios" url="/faces/administrador/user/List.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestión de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestión de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestión de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestión de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
+                    </p:megaMenu>  
                 </div>
                 <div id="agregar" style="display: inline-block;width: 100%;">
                     <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px"/>
                     <p style="vertical-align: middle;display: inline-block;text-align: left">
-                        En esta vista usted puede gestionar las Asignaturas inscritas en el sistema
+                        &nbsp;En esta sección, usted puede gestionar las asignaturas inscritas en el sistema.
                     </p>
                     <h:commandLink action="#{asignaturaController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 40px"/>
-                        <br></br>
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;  display: block;"/>
                         <h:outputLabel>Agregar Asignatura</h:outputLabel>
                     </h:commandLink>            
                 </div>
                 <div style="text-align:center">
                     <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{asignaturaController.items}" var="item" paginator="true" rows="10">
                         <f:facet name="header">
-                            <h3 style="color:white">Asignaturas Registrados</h3>
+                            <h3 style="color:white">Asignaturas Registradas</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.idAsignatura}" sortBy="#{item.idAsignatura}" >
-                            <f:facet name="header">
-                                <h:outputText value="Código"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idAsignatura}"/>
-                        </p:column>
+                        
                         <p:column filterBy="#{item.nombre}" sortBy="#{item.nombre}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAsignaturaTitle_nombre}"/>
+                                <h:outputText value="Nombre"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column filterBy="#{item.mallaId}" sortBy="#{item.mallaId}" >
+                        <p:column filterBy="#{item.mallaId.descripcion}" sortBy="#{item.mallaId.descripcion}" >
                             <f:facet name="header">
                                 <h:outputText value="Malla"/>
                             </f:facet>

@@ -47,10 +47,6 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_userRol}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.userRol}" title="#{bundle.ViewUserTitle_userRol}"/>
-                            </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_id}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.id}" title="#{bundle.ViewUserTitle_id}"/>
@@ -63,13 +59,17 @@
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.password}" title="#{bundle.ViewUserTitle_password}"/>
                             </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_profesorId}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.profesorId}" title="#{bundle.ViewUserTitle_profesorId}"/>
+                            </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_alumnoId}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.alumnoId}" title="#{bundle.ViewUserTitle_alumnoId}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_profesorId}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewUserLabel_userrolName}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.profesorId}" title="#{bundle.ViewUserTitle_profesorId}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{userController.selected.userrolName}" title="#{bundle.ViewUserTitle_userrolName}"/>
                             </h4>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{userController.prepareList}" immediate="true">

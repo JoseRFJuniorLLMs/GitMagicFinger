@@ -51,9 +51,13 @@
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.nombre}" title="#{bundle.ViewGruposTitle_nombre}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_id}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_alumnosDelCurso}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.id}" title="#{bundle.ViewGruposTitle_id}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.alumnosDelCurso}" title="#{bundle.ViewGruposTitle_alumnosDelCurso}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_curso}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.curso}" title="#{bundle.ViewGruposTitle_curso}"/>
                             </h4>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{gruposController.prepareList}" immediate="true">

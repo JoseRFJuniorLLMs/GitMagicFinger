@@ -21,7 +21,7 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
                 </h:form>
             </div>
         </div>      
@@ -32,65 +32,60 @@
                     <h1 style="text-align: center;margin-bottom: 20px "> Ver Profesor</h1>
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
                         <p:megaMenu style="display: inline-block;ext-align: center;">  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de usuarios" url="/faces/administrador/user/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestión de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
                         </p:megaMenu>  
                     </div>
                     <div id="ver" style="display: inline-block;width: 100%;">
-                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
+                        <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
                         <p style="float: left;display: inline-block">
-                            &nbsp;Para ver el Profesor, debe ingresar los siguientes campos:
+                            &nbsp;A continuación, se muestra el detalle del profesor:
                         </p>  
                     </div>
-                    <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
+                    <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px;margin-bottom: 20px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_idProfesor}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.idProfesor}" title="#{bundle.ViewProfesorTitle_idProfesor}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_rut}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.rut}" title="#{bundle.ViewProfesorTitle_rut}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_nombre}"/>
+                            
+                            <h4 style="display: inline-block;"> <h:outputText value="Nombre:"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.nombre}" title="#{bundle.ViewProfesorTitle_nombre}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_apellidop}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Apellido paterno:"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.apellidop}" title="#{bundle.ViewProfesorTitle_apellidop}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_apellidom}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Apellido materno:"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.apellidom}" title="#{bundle.ViewProfesorTitle_apellidom}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_huella1}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="RUT:"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.huella1}" title="#{bundle.ViewProfesorTitle_huella1}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.rut}" title="#{bundle.ViewProfesorTitle_rut}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_telefono}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Teléfono:"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.telefono}" title="#{bundle.ViewProfesorTitle_telefono}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_correo}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Correo electrónico:"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.correo}" title="#{bundle.ViewProfesorTitle_correo}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_huella2}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.huella2}" title="#{bundle.ViewProfesorTitle_huella2}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_userId}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.userId}" title="#{bundle.ViewProfesorTitle_userId}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewProfesorLabel_departamentoId}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Departamento:"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.departamentoId}" title="#{bundle.ViewProfesorTitle_departamentoId}"/>
                             </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="Huella dactilar:"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.huella1}" title="#{bundle.ViewProfesorTitle_huella1}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="Huella dactilar (comprobación):"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{profesorController.selected.huella2}" title="#{bundle.ViewProfesorTitle_huella2}"/>
+                            </h4>
+                           
+                            
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{profesorController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>

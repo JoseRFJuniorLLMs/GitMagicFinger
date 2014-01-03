@@ -44,8 +44,7 @@
                         En esta vista usted puede gestionar las facultades inscritas en el sistema
                     </p>
                     <h:commandLink action="#{gruposController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 33px"/>
-                        <br></br>
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;  display: block;"/>
                         <h:outputLabel>Agregar Grupos</h:outputLabel>
                     </h:commandLink>            
                 </div>
@@ -60,11 +59,17 @@
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column filterBy="#{item.id}" sortBy="#{item.id}" >
+                        <p:column filterBy="#{item.alumnosDelCurso}" sortBy="#{item.alumnosDelCurso}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListGruposTitle_id}"/>
+                                <h:outputText value="#{bundle.ListGruposTitle_alumnosDelCurso}"/>
                             </f:facet>
-                            <h:outputText value="#{item.id}"/>
+                            <h:outputText value="#{item.alumnosDelCurso}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.curso}" sortBy="#{item.curso}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListGruposTitle_curso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.curso}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
