@@ -66,26 +66,37 @@
                             
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Nombre:" for="nombre" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.CreateAlumnoTitle_nombre}"  />
+                            <h:inputText style="vertical-align: center" id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.CreateAlumnoTitle_nombre}" validator="#{funcionesMB.validarNombre}" />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Apellido paterno:" for="apellidop" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="apellidop" value="#{alumnoController.selected.apellidop}" title="#{bundle.CreateAlumnoTitle_apellidop}"  />
+                            <h:inputText style="vertical-align: center" id="apellidop" value="#{alumnoController.selected.apellidop}" title="#{bundle.CreateAlumnoTitle_apellidop}" validator="#{funcionesMB.validarNombre}" />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Apellido materno:" for="apellidom" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="apellidom" value="#{alumnoController.selected.apellidom}" title="#{bundle.CreateAlumnoTitle_apellidom}"  />
+                            <h:inputText style="vertical-align: center" id="apellidom" value="#{alumnoController.selected.apellidom}" title="#{bundle.CreateAlumnoTitle_apellidom}" validator="#{funcionesMB.validarNombre}"  />
 
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="RUT:" for="rut" />
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="RUT:" for="rut" validator="#{funcionesMB.validarRut}"/>
                             </h4>
                             <h:inputText style="vertical-align: center" id="rut" value="#{alumnoController.selected.rut}" title="#{bundle.CreateAlumnoTitle_rut}"  />
                             
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Teléfono:" for="telefono" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="telefono" value="#{alumnoController.selected.telefono}" title="#{bundle.CreateAlumnoTitle_telefono}" />
+                            <h:inputText style="vertical-align: center" id="telefono" value="#{alumnoController.selected.telefono}" title="#{bundle.CreateAlumnoTitle_telefono}"/>
                             
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Correo electrónico:" for="correo" />
                             </h4>
+
+                            <h:inputText style="vertical-align: center" id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.CreateAlumnoTitle_correo}"/>
+
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Huella dactilar:" for="huella1" />
+                            </h4>
+                            <h:inputText style="vertical-align: center" id="huella1" value="#{alumnoController.selected.huella1}" title="#{bundle.CreateAlumnoTitle_huella1}"  />
+                            
+                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Huella dactilar (confirmación):" for="huella2" />
+                            </h4>
+                            <h:inputText style="vertical-align: center" id="huella2" value="#{alumnoController.selected.huella2}" title="#{bundle.CreateAlumnoTitle_huella2}"  />
+
                             <h:inputText style="vertical-align: center" id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.CreateAlumnoTitle_correo}"  />
                             <h:outputLabel id="variableHuella1TXT" value="Huella 1:" />
                         <p:outputLabel id="estado1" value="NO INGRESADA"></p:outputLabel> <br />
@@ -94,6 +105,7 @@
                         
                         <h:inputHidden id="variableHuella1" value="#{alumnoController.huellaEnString1}"/>
                         <h:inputHidden id="variableHuella2" value="#{alumnoController.huellaEnString2}"/>
+
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{alumnoController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

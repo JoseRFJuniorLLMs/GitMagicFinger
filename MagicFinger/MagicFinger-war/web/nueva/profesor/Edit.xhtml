@@ -48,13 +48,13 @@
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ; margin-bottom: 20px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"><h:outputLabel value="Nombre:" for="nombre" /></h4>
-                            <h:inputText id="nombre" value="#{profesorController.selected.nombre}" title="#{bundle.EditProfesorTitle_nombre}" />
+                            <h:inputText id="nombre" value="#{profesorController.selected.nombre}" title="#{bundle.EditProfesorTitle_nombre}" validator="#{funcionesMB.validarNombre}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Apellido paterno:" for="apellidop" /></h4>
-                            <h:inputText id="apellidop" value="#{profesorController.selected.apellidop}" title="#{bundle.EditProfesorTitle_apellidop}" />
+                            <h:inputText id="apellidop" value="#{profesorController.selected.apellidop}" title="#{bundle.EditProfesorTitle_apellidop}" validator="#{funcionesMB.validarNombre}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Apellido materno:" for="apellidom" /></h4>
-                            <h:inputText id="apellidom" value="#{profesorController.selected.apellidom}" title="#{bundle.EditProfesorTitle_apellidom}" />
+                            <h:inputText id="apellidom" value="#{profesorController.selected.apellidom}" title="#{bundle.EditProfesorTitle_apellidom}" validator="#{funcionesMB.validarNombre}"/>
                             <h4 style="display: inline-block;"><h:outputLabel value="RUT:" for="rut" /></h4>
-                            <h:inputText id="rut" value="#{profesorController.selected.rut}" title="#{bundle.EditProfesorTitle_rut}" />
+                            <h:inputText id="rut" value="#{profesorController.selected.rut}" title="#{bundle.EditProfesorTitle_rut}" validator="#{funcionesMB.validarRut}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Teléfono" for="telefono" /></h4>
                             <h:inputText id="telefono" value="#{profesorController.selected.telefono}" title="#{bundle.EditProfesorTitle_telefono}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Correo electrónico:" for="correo" /></h4>

@@ -48,17 +48,17 @@
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ; margin-bottom: 20px">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"><h:outputLabel value="Nombre:" for="nombre" /></h4>
-                            <h:inputText id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.EditAlumnoTitle_nombre}" />
+                            <h:inputText id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.EditAlumnoTitle_nombre}" validator="#{funcionesMB.validarNombre}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Apellido paterno:" for="apellidop" /></h4>
-                            <h:inputText id="apellidop" value="#{alumnoController.selected.apellidop}" title="#{bundle.EditAlumnoTitle_apellidop}" />
+                            <h:inputText id="apellidop" value="#{alumnoController.selected.apellidop}" title="#{bundle.EditAlumnoTitle_apellidop}" validator="#{funcionesMB.validarNombre}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Apellido materno:" for="apellidom" /></h4>
-                            <h:inputText id="apellidom" value="#{alumnoController.selected.apellidom}" title="#{bundle.EditAlumnoTitle_apellidom}" />
+                            <h:inputText id="apellidom" value="#{alumnoController.selected.apellidom}" title="#{bundle.EditAlumnoTitle_apellidom}" validator="#{funcionesMB.validarNombre}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="RUT:" for="rut" /></h4>
-                            <h:inputText id="rut" value="#{alumnoController.selected.rut}" title="#{bundle.EditAlumnoTitle_rut}" />
+                            <h:inputText id="rut" value="#{alumnoController.selected.rut}" title="#{bundle.EditAlumnoTitle_rut}" validator="#{funcionesMB.validarRut}"/>
                             <h4 style="display: inline-block;"><h:outputLabel value="Teléfono" for="telefono" /></h4>
-                            <h:inputText id="telefono" value="#{alumnoController.selected.telefono}" title="#{bundle.EditAlumnoTitle_telefono}" />
+                            <h:inputText id="telefono" value="#{alumnoController.selected.telefono}" title="#{bundle.EditAlumnoTitle_telefono}" validator="#{funcionesMB.validarNumero}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Correo electrónico:" for="correo" /></h4>
-                            <h:inputText id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.EditAlumnoTitle_correo}" />
+                            <h:inputText id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.EditAlumnoTitle_correo}" validator="#{funcionesMB.validarCorreo}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Huella dactilar:" for="huella1" /></h4>
                             <h:inputText id="huella1" value="#{alumnoController.selected.huella1}" title="#{bundle.EditAlumnoTitle_huella1}" />
                             <h4 style="display: inline-block;"><h:outputLabel value="Huella dactilar (comprobación):" for="huella2" /></h4>

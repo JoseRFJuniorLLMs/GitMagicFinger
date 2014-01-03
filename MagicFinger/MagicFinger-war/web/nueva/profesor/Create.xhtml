@@ -48,19 +48,19 @@
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Nombre:" for="nombre" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="nombre" value="#{profesorController.selected.nombre}" title="#{bundle.CreateProfesorTitle_nombre}"  />
+                            <h:inputText style="vertical-align: center" id="nombre" value="#{profesorController.selected.nombre}" title="#{bundle.CreateProfesorTitle_nombre}" validator="#{funcionesMB.validarNombre}" />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Apellido paterno:" for="apellidop" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="apellidop" value="#{profesorController.selected.apellidop}" title="#{bundle.CreateProfesorTitle_apellidop}"  />
+                            <h:inputText style="vertical-align: center" id="apellidop" value="#{profesorController.selected.apellidop}" title="#{bundle.CreateProfesorTitle_apellidop}" validator="#{funcionesMB.validarNombre}"  />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Apellido materno:" for="apellidom" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="apellidom" value="#{profesorController.selected.apellidom}" title="#{bundle.CreateProfesorTitle_apellidom}"  />
+                            <h:inputText style="vertical-align: center" id="apellidom" value="#{profesorController.selected.apellidom}" title="#{bundle.CreateProfesorTitle_apellidom}" validator="#{funcionesMB.validarNombre}"  />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="RUT:" for="rut" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="rut" value="#{profesorController.selected.rut}" title="#{bundle.CreateProfesorTitle_rut}"  />
+                            <h:inputText style="vertical-align: center" id="rut" value="#{profesorController.selected.rut}" title="#{bundle.CreateProfesorTitle_rut}" validator="#{funcionesMB.validarRut}"  />
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Teléfono:" for="telefono" />
                             </h4>

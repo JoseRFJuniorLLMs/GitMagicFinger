@@ -41,14 +41,14 @@
                     <div id="agregar" style="display: inline-block;width: 100%;">       
                         <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
                         <p style="float: left;display: inline-block">
-                            &nbsp;Para agregar un nuevo tipo de asignatura, debe ingresar los siguientes campos:
+                            &nbsp;Para agregar un nuevo tipo de asignatura, debe ingresar el siguiente campo:
                         </p>  
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Nombre:" for="nombre" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="nombre" value="#{tipoAsignaturaController.selected.nombre}" title="#{bundle.CreateTipoAsignaturaTitle_nombre}"  />
+                            <h:inputText style="vertical-align: center" id="nombre" value="#{tipoAsignaturaController.selected.nombre}" title="#{bundle.CreateTipoAsignaturaTitle_nombre}" validator="#{funcionesMB.validarNombre}" />
 
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{tipoAsignaturaController.create}">
