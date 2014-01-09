@@ -33,6 +33,7 @@ public class LoginMB {
     private String password;
 
     public LoginMB() {
+        
     }
 
     public LoginSessionMB getSession() {
@@ -45,6 +46,7 @@ public class LoginMB {
 
     public void login() throws IOException {
         session.login(user, password);
+        session.setIdUniversidad(3);
     }
 
     public void logout() throws IOException {

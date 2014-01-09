@@ -41,11 +41,20 @@ public class LoginSessionMB implements Serializable {
     private Profesor profesor;
     private Alumno alumno;
     private Curso curso;
-
+    private int IdUniversidad;
          
     public LoginSessionMB() {
     }
 
+    public int getIdUniversidad() {
+        return IdUniversidad;
+    }
+
+    public void setIdUniversidad(int IdUniversidad) {
+        this.IdUniversidad = IdUniversidad;
+    }
+
+    
     public Curso getCurso() {
         return curso;
     }
@@ -63,7 +72,10 @@ public class LoginSessionMB implements Serializable {
                 request.login(user, password);
                 redireccionar(context.getExternalContext().getUserPrincipal().getName());
             } else {
-                logout();
+                FacesContext context1 = FacesContext.getCurrentInstance();
+                HttpSession session = (HttpSession) context1.
+                getExternalContext().getSession(false);
+                session.invalidate();
                 request.login(user, password);
                 redireccionar(context.getExternalContext().getUserPrincipal().getName());
                 // System.out.println(request.getContextPath()+"------------------------------------"+context.getExternalContext().getUserPrincipal());
@@ -95,17 +107,17 @@ public class LoginSessionMB implements Serializable {
         ExternalContext context2 = FacesContext.getCurrentInstance().getExternalContext();
 
         User usuario = usuarios.getRol(nombre);
-        switch (usuario.getUserrolName().getName()) {
+        switch (usuario.getUseRol().getRol()) {
             case "Administrador":
                 context2.redirect(context2.getRequestContextPath() + "/faces/administrador/index.xhtml");
                 break;
             case "Alumno":
-                alumno = usuario.getAlumnoId();
+                alumno = usuario.getAluIdAlumno();
                 System.out.println(alumno.getNombre());
                 context2.redirect(context2.getRequestContextPath() + "/faces/alumno/index.xhtml");
                 break;
             case "Profesor":
-                profesor = usuario.getProfesorId();
+                profesor = usuario.getProIdProfesor();
                 System.out.println(profesor.getNombre());
                 context2.redirect(context2.getRequestContextPath() + "/faces/profesor/index.xhtml");
                 break;

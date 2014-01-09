@@ -7,6 +7,8 @@ import manageBeans.crud.util.PaginationHelper;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -15,10 +17,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.model.ArrayDataModel;
 import javax.faces.model.DataModel;
 import javax.faces.model.DataModelListener;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import manageBeans.LoginSessionMB;
 import sessionBeans.FacultadFacadeLocal;
 
 @Named("facultadController")
@@ -31,8 +36,10 @@ public class FacultadController implements Serializable {
     private FacultadFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    @Inject
+    LoginSessionMB session;
     public FacultadController() {
+        
     }
 
     public Facultad getSelected() {
@@ -164,17 +171,8 @@ public class FacultadController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
-            for (Object Objec : items) {
-               Facultad temp = new Facultad();
-               temp=(Facultad) Objec;
-               
-                if(temp.getUniIdUniversidad().getIdUniversidad()!=3){
-                    System.out.println("soy diferente de la universidad 3 ");
-                    items.removeDataModelListener(null);
-                }
-            }
-            
+            List lista = ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad());
+            items= new ListDataModel(lista);  
         }
          
         return items;
