@@ -69,9 +69,9 @@ public class AlumnosDelCursoController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (AlumnosDelCurso) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(AlumnosDelCurso vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -84,47 +84,57 @@ public class AlumnosDelCursoController implements Serializable {
 
     public String create() {
         try {
-            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getTipoAsignaturaId());
-            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
-            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getSemestreId());
-            current.getAlumnosDelCursoPK().setCursoId3(current.getCurso().getCursoPK().getAsignaturaId());
+            current.getAlumnosDelCursoPK().setNombreMalla(current.getCurso().getCursoPK().getNombreMalla());
+            current.getAlumnosDelCursoPK().setNombreFacultad(current.getCurso().getCursoPK().getNombreFacultad());
+            current.getAlumnosDelCursoPK().setIdAlumno(current.getAlumno().getIdAlumno());
+            current.getAlumnosDelCursoPK().setNombreCarrera(current.getCurso().getCursoPK().getNombreCarrera());
+            current.getAlumnosDelCursoPK().setNombreDepartamento(current.getCurso().getCursoPK().getNombreDepartamento());
+            current.getAlumnosDelCursoPK().setIdFecha(current.getCurso().getCursoPK().getIdFecha());
+            current.getAlumnosDelCursoPK().setNombreAsignatura(current.getCurso().getCursoPK().getNombreAsignatura());
+            current.getAlumnosDelCursoPK().setIdUniversidad(current.getCurso().getCursoPK().getIdUniversidad());
+            current.getAlumnosDelCursoPK().setIdTipoAsignatura(current.getCurso().getCursoPK().getIdTipoAsignatura());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno asignado", "Se ha asignado un alumno a un curso correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso creado", "Se ha creado una AlumnosDelCurso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no asignado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+    public String prepareEdit(AlumnosDelCurso var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getTipoAsignaturaId());
-            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
-            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getSemestreId());
-            current.getAlumnosDelCursoPK().setCursoId3(current.getCurso().getCursoPK().getAsignaturaId());
+            current.getAlumnosDelCursoPK().setNombreMalla(current.getCurso().getCursoPK().getNombreMalla());
+            current.getAlumnosDelCursoPK().setNombreFacultad(current.getCurso().getCursoPK().getNombreFacultad());
+            current.getAlumnosDelCursoPK().setIdAlumno(current.getAlumno().getIdAlumno());
+            current.getAlumnosDelCursoPK().setNombreCarrera(current.getCurso().getCursoPK().getNombreCarrera());
+            current.getAlumnosDelCursoPK().setNombreDepartamento(current.getCurso().getCursoPK().getNombreDepartamento());
+            current.getAlumnosDelCursoPK().setIdFecha(current.getCurso().getCursoPK().getIdFecha());
+            current.getAlumnosDelCursoPK().setNombreAsignatura(current.getCurso().getCursoPK().getNombreAsignatura());
+            current.getAlumnosDelCursoPK().setIdUniversidad(current.getCurso().getCursoPK().getIdUniversidad());
+            current.getAlumnosDelCursoPK().setIdTipoAsignatura(current.getCurso().getCursoPK().getIdTipoAsignatura());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignación actualizada", "Se ha actualizado la asignación del alumno"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Asignación no actualizada", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: AlumnosDelCurso no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+    public String destroy(AlumnosDelCurso valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -149,10 +159,10 @@ public class AlumnosDelCursoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignación del Alumno eliminada", "Se ha eliminado una AlumnosDelCurso"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso eliminado", "Se ha eliminado una AlumnosDelCurso"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignación del Alumno eliminada", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -230,22 +240,37 @@ public class AlumnosDelCursoController implements Serializable {
             entity.AlumnosDelCursoPK key;
             String values[] = value.split(SEPARATOR_ESCAPED);
             key = new entity.AlumnosDelCursoPK();
-            key.setCursoId3(Integer.parseInt(values[0]));
-            key.setCursoId2(Integer.parseInt(values[1]));
-            key.setCursoId(Integer.parseInt(values[2]));
-            key.setAlumnoId(Integer.parseInt(values[3]));
+            key.setIdUniversidad(Integer.parseInt(values[0]));
+            key.setNombreFacultad(values[1]);
+            key.setNombreDepartamento(values[2]);
+            key.setNombreCarrera(values[3]);
+            key.setNombreMalla(values[4]);
+            key.setNombreAsignatura(values[5]);
+            key.setIdTipoAsignatura(Integer.parseInt(values[6]));
+            key.setIdFecha(Integer.parseInt(values[7]));
+            key.setIdAlumno(Integer.parseInt(values[8]));
             return key;
         }
 
         String getStringKey(entity.AlumnosDelCursoPK value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getCursoId3());
+            sb.append(value.getIdUniversidad());
             sb.append(SEPARATOR);
-            sb.append(value.getCursoId2());
+            sb.append(value.getNombreFacultad());
             sb.append(SEPARATOR);
-            sb.append(value.getCursoId());
+            sb.append(value.getNombreDepartamento());
             sb.append(SEPARATOR);
-            sb.append(value.getAlumnoId());
+            sb.append(value.getNombreCarrera());
+            sb.append(SEPARATOR);
+            sb.append(value.getNombreMalla());
+            sb.append(SEPARATOR);
+            sb.append(value.getNombreAsignatura());
+            sb.append(SEPARATOR);
+            sb.append(value.getIdTipoAsignatura());
+            sb.append(SEPARATOR);
+            sb.append(value.getIdFecha());
+            sb.append(SEPARATOR);
+            sb.append(value.getIdAlumno());
             return sb.toString();
         }
 

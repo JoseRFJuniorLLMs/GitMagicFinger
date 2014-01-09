@@ -7,7 +7,6 @@ import manageBeans.crud.util.PaginationHelper;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -32,17 +31,9 @@ public class UserController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public User getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(User current) {
-        this.current = current;
-    }
-    
     public UserController() {
     }
- 
+
     public User getSelected() {
         if (current == null) {
             current = new User();
@@ -51,7 +42,7 @@ public class UserController implements Serializable {
         return current;
     }
 
-   public UserFacadeLocal getFacade() {
+    private UserFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -77,9 +68,9 @@ public class UserController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (User) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(User vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -88,70 +79,42 @@ public class UserController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
-private static String convertToMd5(final String md5) throws UnsupportedEncodingException {
-    StringBuffer sb = null;   
-    try {
-            final java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-            final byte[] array = md.digest(md5.getBytes("UTF-8"));
-            sb = new StringBuffer();
-            for (int i = 0; i < array.length; ++i) {
-                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
-            }
-            return sb.toString();
-        } catch (final java.security.NoSuchAlgorithmException e) {
-        }
-        return sb.toString();
-    }
+
     public String create() {
         try {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            for (User user : getFacade().findAll()) {
-                if(user.getUsuario().equals(current.getUsuario())){
-                    return null;
-                }
-            }
-            current.setPassword(convertToMd5(current.getPassword()));
             getFacade().create(current);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario creado", "Se ha creado un usuario correctamente"));
-
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User creado", "Se ha creado una User correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Usuario no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: User no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (User) getItems().getRowData();
+    public String prepareEdit(User var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            for (User user : getFacade().findAll()) {
-                if(user.getUsuario().equals(current.getUsuario())){
-                    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: El usuario ya existe","Debe escoger otro nombre" ));
-                    return null;
-                }
-            }
-            current.setPassword(convertToMd5(current.getPassword()));
             getFacade().edit(current);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario actualizado", "Se ha actualizado correctamente"));
-
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Usuario no actualizado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: User no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy() {
-        current = (User) getItems().getRowData();
+    public String destroy(User valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -176,10 +139,10 @@ private static String convertToMd5(final String md5) throws UnsupportedEncodingE
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuario eliminado", "Se ha eliminado un usuario"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User eliminado", "Se ha eliminado una User"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Usuario no eliminado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: User no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 

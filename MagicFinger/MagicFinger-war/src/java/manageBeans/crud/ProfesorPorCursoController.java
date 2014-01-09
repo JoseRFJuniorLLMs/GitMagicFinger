@@ -1,6 +1,6 @@
 package manageBeans.crud;
 
-import entity.Facultad;
+import entity.ProfesorPorCurso;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -18,32 +18,32 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.FacultadFacadeLocal;
+import sessionBeans.ProfesorPorCursoFacadeLocal;
 
-@Named("facultadController")
+@Named("profesorPorCursoController")
 @SessionScoped
-public class FacultadController implements Serializable {
+public class ProfesorPorCursoController implements Serializable {
 
-    private Facultad current;
+    private ProfesorPorCurso current;
     private DataModel items = null;
     @EJB
-    private FacultadFacadeLocal ejbFacade;
+    private ProfesorPorCursoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public FacultadController() {
+    public ProfesorPorCursoController() {
     }
 
-    public Facultad getSelected() {
+    public ProfesorPorCurso getSelected() {
         if (current == null) {
-            current = new Facultad();
-            current.setFacultadPK(new entity.FacultadPK());
+            current = new ProfesorPorCurso();
+            current.setProfesorPorCursoPK(new entity.ProfesorPorCursoPK());
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private FacultadFacadeLocal getFacade() {
+    private ProfesorPorCursoFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -69,34 +69,42 @@ public class FacultadController implements Serializable {
         return "List";
     }
 
-    public String prepareView(Facultad vari) {
+    public String prepareView(ProfesorPorCurso vari) {
         current = vari;
         //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Facultad();
-        current.setFacultadPK(new entity.FacultadPK());
+        current = new ProfesorPorCurso();
+        current.setProfesorPorCursoPK(new entity.ProfesorPorCursoPK());
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-            current.getFacultadPK().setIdUniversidad(current.getUniversidad().getIdUniversidad());
+            current.getProfesorPorCursoPK().setNombreMalla(current.getCurso().getCursoPK().getNombreMalla());
+            current.getProfesorPorCursoPK().setIdProfesor(current.getProfesor().getIdProfesor());
+            current.getProfesorPorCursoPK().setIdTipoAsignatura(current.getCurso().getCursoPK().getIdTipoAsignatura());
+            current.getProfesorPorCursoPK().setNombreFacultad(current.getCurso().getCursoPK().getNombreFacultad());
+            current.getProfesorPorCursoPK().setNombreAsignatura(current.getCurso().getCursoPK().getNombreAsignatura());
+            current.getProfesorPorCursoPK().setNombreCarrera(current.getCurso().getCursoPK().getNombreCarrera());
+            current.getProfesorPorCursoPK().setIdUniversidad(current.getCurso().getCursoPK().getIdUniversidad());
+            current.getProfesorPorCursoPK().setIdFecha(current.getCurso().getCursoPK().getIdFecha());
+            current.getProfesorPorCursoPK().setNombreDepartamento(current.getCurso().getCursoPK().getNombreDepartamento());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad creado", "Se ha creado una Facultad correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesorPorCurso creado", "Se ha creado una ProfesorPorCurso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: ProfesorPorCurso no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit(Facultad var) {
+    public String prepareEdit(ProfesorPorCurso var) {
         current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
@@ -104,20 +112,28 @@ public class FacultadController implements Serializable {
 
     public String update() {
         try {
-            current.getFacultadPK().setIdUniversidad(current.getUniversidad().getIdUniversidad());
+            current.getProfesorPorCursoPK().setNombreMalla(current.getCurso().getCursoPK().getNombreMalla());
+            current.getProfesorPorCursoPK().setIdProfesor(current.getProfesor().getIdProfesor());
+            current.getProfesorPorCursoPK().setIdTipoAsignatura(current.getCurso().getCursoPK().getIdTipoAsignatura());
+            current.getProfesorPorCursoPK().setNombreFacultad(current.getCurso().getCursoPK().getNombreFacultad());
+            current.getProfesorPorCursoPK().setNombreAsignatura(current.getCurso().getCursoPK().getNombreAsignatura());
+            current.getProfesorPorCursoPK().setNombreCarrera(current.getCurso().getCursoPK().getNombreCarrera());
+            current.getProfesorPorCursoPK().setIdUniversidad(current.getCurso().getCursoPK().getIdUniversidad());
+            current.getProfesorPorCursoPK().setIdFecha(current.getCurso().getCursoPK().getIdFecha());
+            current.getProfesorPorCursoPK().setNombreDepartamento(current.getCurso().getCursoPK().getNombreDepartamento());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesorPorCurso actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Facultad no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: ProfesorPorCurso no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy(Facultad valor) {
+    public String destroy(ProfesorPorCurso valor) {
         current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
@@ -143,10 +159,10 @@ public class FacultadController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad eliminado", "Se ha eliminado una Facultad"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesorPorCurso eliminado", "Se ha eliminado una ProfesorPorCurso"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: ProfesorPorCurso no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -200,12 +216,12 @@ public class FacultadController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Facultad getFacultad(entity.FacultadPK id) {
+    public ProfesorPorCurso getProfesorPorCurso(entity.ProfesorPorCursoPK id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Facultad.class)
-    public static class FacultadControllerConverter implements Converter {
+    @FacesConverter(forClass = ProfesorPorCurso.class)
+    public static class ProfesorPorCursoControllerConverter implements Converter {
 
         private static final String SEPARATOR = "#";
         private static final String SEPARATOR_ESCAPED = "\\#";
@@ -215,25 +231,46 @@ public class FacultadController implements Serializable {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            FacultadController controller = (FacultadController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "facultadController");
-            return controller.getFacultad(getKey(value));
+            ProfesorPorCursoController controller = (ProfesorPorCursoController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "profesorPorCursoController");
+            return controller.getProfesorPorCurso(getKey(value));
         }
 
-        entity.FacultadPK getKey(String value) {
-            entity.FacultadPK key;
+        entity.ProfesorPorCursoPK getKey(String value) {
+            entity.ProfesorPorCursoPK key;
             String values[] = value.split(SEPARATOR_ESCAPED);
-            key = new entity.FacultadPK();
+            key = new entity.ProfesorPorCursoPK();
             key.setIdUniversidad(Integer.parseInt(values[0]));
             key.setNombreFacultad(values[1]);
+            key.setNombreDepartamento(values[2]);
+            key.setNombreCarrera(values[3]);
+            key.setNombreMalla(values[4]);
+            key.setNombreAsignatura(values[5]);
+            key.setIdTipoAsignatura(Integer.parseInt(values[6]));
+            key.setIdFecha(Integer.parseInt(values[7]));
+            key.setIdProfesor(Integer.parseInt(values[8]));
             return key;
         }
 
-        String getStringKey(entity.FacultadPK value) {
+        String getStringKey(entity.ProfesorPorCursoPK value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value.getIdUniversidad());
             sb.append(SEPARATOR);
             sb.append(value.getNombreFacultad());
+            sb.append(SEPARATOR);
+            sb.append(value.getNombreDepartamento());
+            sb.append(SEPARATOR);
+            sb.append(value.getNombreCarrera());
+            sb.append(SEPARATOR);
+            sb.append(value.getNombreMalla());
+            sb.append(SEPARATOR);
+            sb.append(value.getNombreAsignatura());
+            sb.append(SEPARATOR);
+            sb.append(value.getIdTipoAsignatura());
+            sb.append(SEPARATOR);
+            sb.append(value.getIdFecha());
+            sb.append(SEPARATOR);
+            sb.append(value.getIdProfesor());
             return sb.toString();
         }
 
@@ -242,11 +279,11 @@ public class FacultadController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Facultad) {
-                Facultad o = (Facultad) object;
-                return getStringKey(o.getFacultadPK());
+            if (object instanceof ProfesorPorCurso) {
+                ProfesorPorCurso o = (ProfesorPorCurso) object;
+                return getStringKey(o.getProfesorPorCursoPK());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Facultad.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + ProfesorPorCurso.class.getName());
             }
         }
     }

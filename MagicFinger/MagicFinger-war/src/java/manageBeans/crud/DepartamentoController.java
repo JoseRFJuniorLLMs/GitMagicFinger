@@ -1,7 +1,6 @@
 package manageBeans.crud;
 
 import entity.Departamento;
-import entity.Facultad;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -19,15 +18,12 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
 import sessionBeans.DepartamentoFacadeLocal;
 
 @Named("departamentoController")
 @SessionScoped
 public class DepartamentoController implements Serializable {
-    @Inject FacultadController facultadcontroller;
-    private Facultad facultadAnterior;
-    private String nombreAnterior;
+
     private Departamento current;
     private DataModel items = null;
     @EJB
@@ -41,6 +37,7 @@ public class DepartamentoController implements Serializable {
     public Departamento getSelected() {
         if (current == null) {
             current = new Departamento();
+            current.setDepartamentoPK(new entity.DepartamentoPK());
             selectedItemIndex = -1;
         }
         return current;
@@ -72,69 +69,58 @@ public class DepartamentoController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (Departamento) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(Departamento vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
         current = new Departamento();
+        current.setDepartamentoPK(new entity.DepartamentoPK());
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            for (Departamento departamento : getFacade().findAll()) {
-                if(departamento.getNombre().equals(current.getNombre()) && departamento.getFacultadId().equals(current.getFacultadId())){
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado","El departamento ya existe en facultad seleccionada"));
-                    return null;
-                }
-            }
+            current.getDepartamentoPK().setIdUniversidad(current.getFacultad().getFacultadPK().getIdUniversidad());
+            current.getDepartamentoPK().setNombreFacultad(current.getFacultad().getFacultadPK().getNombreFacultad());
             getFacade().create(current);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado un departamento correctamente"));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado una Departamento correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado","Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (Departamento) getItems().getRowData();
-        nombreAnterior = current.getNombre();
-        facultadAnterior = current.getFacultadId();
+    public String prepareEdit(Departamento var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            if(!(nombreAnterior.equals(current.getNombre())) || !(facultadAnterior.equals(current.getFacultadId()))){
-                for (Departamento departamento : getFacade().findAll()) {
-                    if(departamento.getNombre().equals(current.getNombre()) && departamento.getFacultadId().equals(current.getFacultadId())){
-                         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado","El departamento ya existe en facultad seleccionada"));
-                         return null;
-                    }
-                }
-            }
+            current.getDepartamentoPK().setIdUniversidad(current.getFacultad().getFacultadPK().getIdUniversidad());
+            current.getDepartamentoPK().setNombreFacultad(current.getFacultad().getFacultadPK().getNombreFacultad());
             getFacade().edit(current);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento actualizado", "Se ha actualizado correctamente"));
-            return "List";
+            return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy() {
-        current = (Departamento) getItems().getRowData();
+    public String destroy(Departamento valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -159,10 +145,10 @@ public class DepartamentoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento eliminado", "Se ha eliminado una departamento"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento eliminado", "Se ha eliminado una Departamento"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no eliminado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -216,12 +202,15 @@ public class DepartamentoController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Departamento getDepartamento(java.lang.Integer id) {
+    public Departamento getDepartamento(entity.DepartamentoPK id) {
         return ejbFacade.find(id);
     }
 
     @FacesConverter(forClass = Departamento.class)
     public static class DepartamentoControllerConverter implements Converter {
+
+        private static final String SEPARATOR = "#";
+        private static final String SEPARATOR_ESCAPED = "\\#";
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
@@ -233,15 +222,23 @@ public class DepartamentoController implements Serializable {
             return controller.getDepartamento(getKey(value));
         }
 
-        java.lang.Integer getKey(String value) {
-            java.lang.Integer key;
-            key = Integer.valueOf(value);
+        entity.DepartamentoPK getKey(String value) {
+            entity.DepartamentoPK key;
+            String values[] = value.split(SEPARATOR_ESCAPED);
+            key = new entity.DepartamentoPK();
+            key.setIdUniversidad(Integer.parseInt(values[0]));
+            key.setNombreFacultad(values[1]);
+            key.setNombreDepartamento(values[2]);
             return key;
         }
 
-        String getStringKey(java.lang.Integer value) {
+        String getStringKey(entity.DepartamentoPK value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value);
+            sb.append(value.getIdUniversidad());
+            sb.append(SEPARATOR);
+            sb.append(value.getNombreFacultad());
+            sb.append(SEPARATOR);
+            sb.append(value.getNombreDepartamento());
             return sb.toString();
         }
 
@@ -252,7 +249,7 @@ public class DepartamentoController implements Serializable {
             }
             if (object instanceof Departamento) {
                 Departamento o = (Departamento) object;
-                return getStringKey(o.getIdDepartamento());
+                return getStringKey(o.getDepartamentoPK());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Departamento.class.getName());
             }

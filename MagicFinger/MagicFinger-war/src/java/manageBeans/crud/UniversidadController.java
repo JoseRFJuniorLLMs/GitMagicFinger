@@ -1,6 +1,6 @@
 package manageBeans.crud;
 
-import entity.Grupos;
+import entity.Universidad;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -18,31 +18,31 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import sessionBeans.GruposFacadeLocal;
+import sessionBeans.UniversidadFacadeLocal;
 
-@Named("gruposController")
+@Named("universidadController")
 @SessionScoped
-public class GruposController implements Serializable {
+public class UniversidadController implements Serializable {
 
-    private Grupos current;
+    private Universidad current;
     private DataModel items = null;
     @EJB
-    private GruposFacadeLocal ejbFacade;
+    private UniversidadFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public GruposController() {
+    public UniversidadController() {
     }
 
-    public Grupos getSelected() {
+    public Universidad getSelected() {
         if (current == null) {
-            current = new Grupos();
+            current = new Universidad();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private GruposFacadeLocal getFacade() {
+    private UniversidadFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -68,14 +68,14 @@ public class GruposController implements Serializable {
         return "List";
     }
 
-    public String prepareView(Grupos vari) {
+    public String prepareView(Universidad vari) {
         current = vari;
         //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Grupos();
+        current = new Universidad();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -84,16 +84,16 @@ public class GruposController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos creado", "Se ha creado una Grupos correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Universidad creado", "Se ha creado una Universidad correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Grupos no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Universidad no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit(Grupos var) {
+    public String prepareEdit(Universidad var) {
         current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
@@ -103,17 +103,17 @@ public class GruposController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Universidad actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Grupos no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Universidad no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy(Grupos valor) {
+    public String destroy(Universidad valor) {
         current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
@@ -139,10 +139,10 @@ public class GruposController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos eliminado", "Se ha eliminado una Grupos"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Universidad eliminado", "Se ha eliminado una Universidad"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Grupos no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Universidad no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -196,21 +196,21 @@ public class GruposController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Grupos getGrupos(java.lang.Integer id) {
+    public Universidad getUniversidad(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = Grupos.class)
-    public static class GruposControllerConverter implements Converter {
+    @FacesConverter(forClass = Universidad.class)
+    public static class UniversidadControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            GruposController controller = (GruposController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "gruposController");
-            return controller.getGrupos(getKey(value));
+            UniversidadController controller = (UniversidadController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "universidadController");
+            return controller.getUniversidad(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -230,11 +230,11 @@ public class GruposController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Grupos) {
-                Grupos o = (Grupos) object;
-                return getStringKey(o.getIdGrupo());
+            if (object instanceof Universidad) {
+                Universidad o = (Universidad) object;
+                return getStringKey(o.getIdUniversidad());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Grupos.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Universidad.class.getName());
             }
         }
     }
