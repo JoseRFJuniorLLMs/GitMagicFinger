@@ -36,41 +36,49 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Malla.findAll", query = "SELECT m FROM Malla m"),
-    @NamedQuery(name = "Malla.findByIdCarrera", query = "SELECT m FROM Malla m WHERE m.idCarrera = :idCarrera"),
+    @NamedQuery(name = "Malla.findByIdMalla", query = "SELECT m FROM Malla m WHERE m.idMalla = :idMalla"),
     @NamedQuery(name = "Malla.findByFecha", query = "SELECT m FROM Malla m WHERE m.fecha = :fecha")})
 public class Malla implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_CARRERA")
-    private Integer idCarrera;
+    @Column(name = "ID_MALLA")
+    private Integer idMalla;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "NOMBRE")
+    private String nombre;
     @Column(name = "FECHA")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "DESCRIPCION")
-    private String descripcion;
-    @JoinColumn(name = "CARRERA_ID", referencedColumnName = "ID_CARR")
+    @JoinColumn(name = "CAR_ID_CARRERA", referencedColumnName = "ID_CARRERA")
     @ManyToOne(optional = false)
-    private Carrera carreraId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "mallaId")
+    private Carrera carIdCarrera;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "malIdMalla")
     private List<Asignatura> asignaturaList;
 
     public Malla() {
     }
 
-    public Malla(Integer idCarrera) {
-        this.idCarrera = idCarrera;
+    public Malla(Integer idMalla) {
+        this.idMalla = idMalla;
     }
 
-    public Integer getIdCarrera() {
-        return idCarrera;
+    public Integer getIdMalla() {
+        return idMalla;
     }
 
-    public void setIdCarrera(Integer idCarrera) {
-        this.idCarrera = idCarrera;
+    public void setIdMalla(Integer idMalla) {
+        this.idMalla = idMalla;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Date getFecha() {
@@ -81,20 +89,12 @@ public class Malla implements Serializable {
         this.fecha = fecha;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Carrera getCarIdCarrera() {
+        return carIdCarrera;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Carrera getCarreraId() {
-        return carreraId;
-    }
-
-    public void setCarreraId(Carrera carreraId) {
-        this.carreraId = carreraId;
+    public void setCarIdCarrera(Carrera carIdCarrera) {
+        this.carIdCarrera = carIdCarrera;
     }
 
     @XmlTransient
@@ -109,7 +109,7 @@ public class Malla implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCarrera != null ? idCarrera.hashCode() : 0);
+        hash += (idMalla != null ? idMalla.hashCode() : 0);
         return hash;
     }
 
@@ -120,7 +120,7 @@ public class Malla implements Serializable {
             return false;
         }
         Malla other = (Malla) object;
-        if ((this.idCarrera == null && other.idCarrera != null) || (this.idCarrera != null && !this.idCarrera.equals(other.idCarrera))) {
+        if ((this.idMalla == null && other.idMalla != null) || (this.idMalla != null && !this.idMalla.equals(other.idMalla))) {
             return false;
         }
         return true;
@@ -128,7 +128,7 @@ public class Malla implements Serializable {
 
     @Override
     public String toString() {
-        return descripcion;
+        return "entity.Malla[ idMalla=" + idMalla + " ]";
     }
     
 }

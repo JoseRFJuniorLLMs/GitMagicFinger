@@ -11,7 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,9 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
-    @NamedQuery(name = "Curso.findByAsignaturaId", query = "SELECT c FROM Curso c WHERE c.cursoPK.asignaturaId = :asignaturaId"),
-    @NamedQuery(name = "Curso.findByTipoAsignaturaId", query = "SELECT c FROM Curso c WHERE c.cursoPK.tipoAsignaturaId = :tipoAsignaturaId"),
-    @NamedQuery(name = "Curso.findBySemestreId", query = "SELECT c FROM Curso c WHERE c.cursoPK.semestreId = :semestreId"),
+    @NamedQuery(name = "Curso.findByAsiIdAsignatura", query = "SELECT c FROM Curso c WHERE c.cursoPK.asiIdAsignatura = :asiIdAsignatura"),
+    @NamedQuery(name = "Curso.findByTipIdTipoAsignatura", query = "SELECT c FROM Curso c WHERE c.cursoPK.tipIdTipoAsignatura = :tipIdTipoAsignatura"),
+    @NamedQuery(name = "Curso.findBySemIdFecha", query = "SELECT c FROM Curso c WHERE c.cursoPK.semIdFecha = :semIdFecha"),
     @NamedQuery(name = "Curso.findByPorcentajeAprobacion", query = "SELECT c FROM Curso c WHERE c.porcentajeAprobacion = :porcentajeAprobacion"),
     @NamedQuery(name = "Curso.findByTermino", query = "SELECT c FROM Curso c WHERE c.termino = :termino")})
 public class Curso implements Serializable {
@@ -42,22 +41,22 @@ public class Curso implements Serializable {
     private Integer porcentajeAprobacion;
     @Column(name = "TERMINO")
     private Integer termino;
-    @ManyToMany(mappedBy = "cursoList")
-    private List<Profesor> profesorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
+    private List<ProfesoresPorCurso> profesoresPorCursoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
     private List<AlumnosDelCurso> alumnosDelCursoList;
-    @JoinColumn(name = "ASIGNATURA_ID", referencedColumnName = "ID_ASIGNATURA", insertable = false, updatable = false)
+    @JoinColumn(name = "ASI_ID_ASIGNATURA", referencedColumnName = "ID_ASIGNATURA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Asignatura asignatura;
-    @JoinColumn(name = "SEMESTRE_ID", referencedColumnName = "ID_FECHA", insertable = false, updatable = false)
+    @JoinColumn(name = "SEM_ID_FECHA", referencedColumnName = "ID_FECHA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Semestre semestre;
-    @JoinColumn(name = "TIPO_ASIGNATURA_ID", referencedColumnName = "ID_TIPO_ASIGNATURA", insertable = false, updatable = false)
+    @JoinColumn(name = "TIP_ID_TIPO_ASIGNATURA", referencedColumnName = "ID_TIPO_ASIGNATURA", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private TipoAsignatura tipoAsignatura;
     @OneToMany(mappedBy = "curso")
     private List<BloqueClase> bloqueClaseList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso")
+    @OneToMany(mappedBy = "curso")
     private List<Grupos> gruposList;
 
     public Curso() {
@@ -67,8 +66,8 @@ public class Curso implements Serializable {
         this.cursoPK = cursoPK;
     }
 
-    public Curso(int asignaturaId, int tipoAsignaturaId, int semestreId) {
-        this.cursoPK = new CursoPK(asignaturaId, tipoAsignaturaId, semestreId);
+    public Curso(int asiIdAsignatura, int tipIdTipoAsignatura, int semIdFecha) {
+        this.cursoPK = new CursoPK(asiIdAsignatura, tipIdTipoAsignatura, semIdFecha);
     }
 
     public CursoPK getCursoPK() {
@@ -96,12 +95,12 @@ public class Curso implements Serializable {
     }
 
     @XmlTransient
-    public List<Profesor> getProfesorList() {
-        return profesorList;
+    public List<ProfesoresPorCurso> getProfesoresPorCursoList() {
+        return profesoresPorCursoList;
     }
 
-    public void setProfesorList(List<Profesor> profesorList) {
-        this.profesorList = profesorList;
+    public void setProfesoresPorCursoList(List<ProfesoresPorCurso> profesoresPorCursoList) {
+        this.profesoresPorCursoList = profesoresPorCursoList;
     }
 
     @XmlTransient
@@ -177,7 +176,7 @@ public class Curso implements Serializable {
 
     @Override
     public String toString() {
-        return this.asignatura.getNombre()+" ("+this.tipoAsignatura.getNombre()+" "+this.semestre.toString()+")";
-
+        return "entity.Curso[ cursoPK=" + cursoPK + " ]";
     }
+    
 }

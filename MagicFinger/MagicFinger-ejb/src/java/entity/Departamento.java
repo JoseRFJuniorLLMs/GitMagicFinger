@@ -45,13 +45,13 @@ public class Departamento implements Serializable {
     @Size(max = 65535)
     @Column(name = "NOMBRE")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamentoId")
-    private List<Profesor> profesorList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamentoId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departamento")
+    private List<ProfesoresPorDepartamento> profesoresPorDepartamentoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "depIdDepartamento")
     private List<Carrera> carreraList;
-    @JoinColumn(name = "FACULTAD_ID", referencedColumnName = "ID_FACULTAD")
+    @JoinColumn(name = "FAC_ID_FACULTAD", referencedColumnName = "ID_FACULTAD")
     @ManyToOne(optional = false)
-    private Facultad facultadId;
+    private Facultad facIdFacultad;
 
     public Departamento() {
     }
@@ -77,12 +77,12 @@ public class Departamento implements Serializable {
     }
 
     @XmlTransient
-    public List<Profesor> getProfesorList() {
-        return profesorList;
+    public List<ProfesoresPorDepartamento> getProfesoresPorDepartamentoList() {
+        return profesoresPorDepartamentoList;
     }
 
-    public void setProfesorList(List<Profesor> profesorList) {
-        this.profesorList = profesorList;
+    public void setProfesoresPorDepartamentoList(List<ProfesoresPorDepartamento> profesoresPorDepartamentoList) {
+        this.profesoresPorDepartamentoList = profesoresPorDepartamentoList;
     }
 
     @XmlTransient
@@ -94,12 +94,12 @@ public class Departamento implements Serializable {
         this.carreraList = carreraList;
     }
 
-    public Facultad getFacultadId() {
-        return facultadId;
+    public Facultad getFacIdFacultad() {
+        return facIdFacultad;
     }
 
-    public void setFacultadId(Facultad facultadId) {
-        this.facultadId = facultadId;
+    public void setFacIdFacultad(Facultad facIdFacultad) {
+        this.facIdFacultad = facIdFacultad;
     }
 
     @Override
@@ -124,7 +124,7 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return nombre+" - "+facultadId.getNombre();
+        return "entity.Departamento[ idDepartamento=" + idDepartamento + " ]";
     }
     
 }

@@ -135,7 +135,7 @@ public class Semestre implements Serializable {
 
     @Override
     public String toString() {
-        return this.numSemestre + "-"+this.anoSemestre;
+        return "entity.Semestre[ idFecha=" + idFecha + " ]";
     }
     
 }

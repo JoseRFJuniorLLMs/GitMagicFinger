@@ -69,9 +69,9 @@ public class CursoController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (Curso) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(Curso vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -84,45 +84,45 @@ public class CursoController implements Serializable {
 
     public String create() {
         try {
-            current.getCursoPK().setSemestreId(current.getSemestre().getIdFecha());
-            current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
-            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
+            current.getCursoPK().setTipIdTipoAsignatura(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsiIdAsignatura(current.getAsignatura().getIdAsignatura());
+            current.getCursoPK().setSemIdFecha(current.getSemestre().getIdFecha());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado un curso correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado una Curso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no creado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (Curso) getItems().getRowData();
+    public String prepareEdit(Curso var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            current.getCursoPK().setSemestreId(current.getSemestre().getIdFecha());
-            current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
-            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
+            current.getCursoPK().setTipIdTipoAsignatura(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsiIdAsignatura(current.getAsignatura().getIdAsignatura());
+            current.getCursoPK().setSemIdFecha(current.getSemestre().getIdFecha());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Curso no actualizado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Curso no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy() {
-        current = (Curso) getItems().getRowData();
+    public String destroy(Curso valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -147,10 +147,10 @@ public class CursoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso eliminado", "Se ha eliminado una curso"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso eliminado", "Se ha eliminado una Curso"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no eliminado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -228,19 +228,19 @@ public class CursoController implements Serializable {
             entity.CursoPK key;
             String values[] = value.split(SEPARATOR_ESCAPED);
             key = new entity.CursoPK();
-            key.setAsignaturaId(Integer.parseInt(values[0]));
-            key.setTipoAsignaturaId(Integer.parseInt(values[1]));
-            key.setSemestreId(Integer.parseInt(values[2]));
+            key.setAsiIdAsignatura(Integer.parseInt(values[0]));
+            key.setTipIdTipoAsignatura(Integer.parseInt(values[1]));
+            key.setSemIdFecha(Integer.parseInt(values[2]));
             return key;
         }
 
         String getStringKey(entity.CursoPK value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getAsignaturaId());
+            sb.append(value.getAsiIdAsignatura());
             sb.append(SEPARATOR);
-            sb.append(value.getTipoAsignaturaId());
+            sb.append(value.getTipIdTipoAsignatura());
             sb.append(SEPARATOR);
-            sb.append(value.getSemestreId());
+            sb.append(value.getSemIdFecha());
             return sb.toString();
         }
 

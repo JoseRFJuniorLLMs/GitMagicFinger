@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
+import javax.faces.model.DataModelListener;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import sessionBeans.FacultadFacadeLocal;
@@ -25,7 +26,6 @@ import sessionBeans.FacultadFacadeLocal;
 public class FacultadController implements Serializable {
 
     private Facultad current;
-    private String nombreAnterior;
     private DataModel items = null;
     @EJB
     private FacultadFacadeLocal ejbFacade;
@@ -69,9 +69,9 @@ public class FacultadController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (Facultad) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(Facultad vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -83,54 +83,39 @@ public class FacultadController implements Serializable {
 
     public String create() {
         try {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            for (Facultad facultad : getFacade().findAll()) {
-                if(facultad.getNombre().equals(current.getNombre())){
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creada","La facultad ya existe"));
-                    return null;
-                }
-            }
             getFacade().create(current);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad creada", "Se ha creado una facultad correctamente"));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad creado", "Se ha creado una Facultad correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creada", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (Facultad) getItems().getRowData();
-        nombreAnterior = current.getNombre();
+    public String prepareEdit(Facultad var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            if(!nombreAnterior.equals(current.getNombre())){
-                for (Facultad facultad : getFacade().findAll()) {
-                if(facultad.getNombre().equals(current.getNombre())){
-                    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creada","La facultad ya existe"));
-                    return null;
-                    }
-                }
-            }
             getFacade().edit(current);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad actualizada", "Se ha actualizado correctamente"));
-            return "List";
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad actualizado", "Se ha actualizado correctamente"));
+            return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Facultad no actualizada", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Facultad no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy() {
-        current = (Facultad) getItems().getRowData();
+    public String destroy(Facultad valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -155,10 +140,10 @@ public class FacultadController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad eliminada", "Se ha eliminado una facultad"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad eliminado", "Se ha eliminado una Facultad"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no eliminada", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -180,7 +165,18 @@ public class FacultadController implements Serializable {
     public DataModel getItems() {
         if (items == null) {
             items = getPagination().createPageDataModel();
+            for (Object Objec : items) {
+               Facultad temp = new Facultad();
+               temp=(Facultad) Objec;
+               
+                if(temp.getUniIdUniversidad().getIdUniversidad()!=3){
+                    System.out.println("soy diferente de la universidad 3 ");
+                    items.removeDataModelListener(null);
+                }
+            }
+            
         }
+         
         return items;
     }
 

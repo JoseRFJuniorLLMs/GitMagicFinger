@@ -1,9 +1,6 @@
 package manageBeans.crud;
 
-import com.sun.jersey.core.util.Base64;
 import entity.Alumno;
-import entity.User;
-import entity.Userrol;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -12,7 +9,6 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -22,22 +18,18 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
 import sessionBeans.AlumnoFacadeLocal;
 
 @Named("alumnoController")
-@RequestScoped
+@SessionScoped
 public class AlumnoController implements Serializable {
-    @Inject UserController usercontroller;
-    
+
     private Alumno current;
     private DataModel items = null;
     @EJB
     private AlumnoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    private String huellaEnString1;
-    private String huellaEnString2;
 
     public AlumnoController() {
     }
@@ -76,9 +68,9 @@ public class AlumnoController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (Alumno) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(Alumno vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -90,55 +82,19 @@ public class AlumnoController implements Serializable {
 
     public String create() {
         try {
-            User user = new User();
-            Userrol userrol = new Userrol("Alumno");
-            //user.setId();
+            getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            user.setUsuario(current.getRut());
-            user.setPassword(current.getApellidop());
-            user.setUserrolName(userrol);
-            usercontroller.setCurrent(user);
-            
-                 if (huellaEnString1.isEmpty()) {
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Huella 1 vacía"));
-                } else {
-                    if (huellaEnString2.isEmpty()) {
-                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Huella 2 vacía"));
-                    } else {
-                        if(usercontroller.create()!=null){
-                        byte[] templeByte1 = Base64.decode(huellaEnString1);
-                        current.setHuella1(templeByte1);
-                        byte[] templeByte2 = Base64.decode(huellaEnString2);
-                        current.setHuella2(templeByte2);
-                        getFacade().create(current);
-                        //EDITANDO
-                        Alumno alumno = getFacade().findAll().get(getFacade().count()-1);
-                        User user2 = usercontroller.getFacade().findAll().get(usercontroller.getFacade().count()-1);
-                        alumno.setUserId(user2);
-                        user2.setAlumnoId(alumno);
-                        getFacade().edit(alumno);
-                        usercontroller.getFacade().edit(user2);
-                        /*****/
-                        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno creado", "Se ha creado una Alumno correctamente"));
-                        return prepareList();
-                        }else{
-                            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: El alumno ya existe en los registros",null ));
-                            return null;
-                    }
-                    }
-                 }
-            
-            return null;
-            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno creado", "Se ha creado una Alumno correctamente"));
+            return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no creado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (Alumno) getItems().getRowData();
+    public String prepareEdit(Alumno var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -151,14 +107,14 @@ public class AlumnoController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Alumno no actualizado","Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Alumno no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy() {
-        current = (Alumno) getItems().getRowData();
+    public String destroy(Alumno valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -186,7 +142,7 @@ public class AlumnoController implements Serializable {
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno eliminado", "Se ha eliminado una Alumno"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no eliminado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -244,22 +200,6 @@ public class AlumnoController implements Serializable {
         return ejbFacade.find(id);
     }
 
-    public String getHuellaEnString1() {
-        return huellaEnString1;
-    }
-
-    public void setHuellaEnString1(String huellaEnString1) {
-        this.huellaEnString1 = huellaEnString1;
-    }
-
-    public String getHuellaEnString2() {
-        return huellaEnString2;
-    }
-
-    public void setHuellaEnString2(String huellaEnString2) {
-        this.huellaEnString2 = huellaEnString2;
-    }
-
     @FacesConverter(forClass = Alumno.class)
     public static class AlumnoControllerConverter implements Converter {
 
@@ -297,6 +237,5 @@ public class AlumnoController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Alumno.class.getName());
             }
         }
-        
     }
 }

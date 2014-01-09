@@ -68,9 +68,9 @@ public class CarreraController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (Carrera) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(Carrera vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -82,27 +82,19 @@ public class CarreraController implements Serializable {
 
     public String create() {
         try {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            for (Carrera carrera : getFacade().findAll()) {
-                if(carrera.getNombreCarrera().equals(current.getNombreCarrera()) && carrera.getDepartamentoId().equals(current.getDepartamentoId())){
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no creada","La carrera ya existe en departamento seleccionada"));
-                    return null;
-                }
-            }
             getFacade().create(current);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera creada", "Se ha creado una carrera correctamente"));
-
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera creado", "Se ha creado una Carrera correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no creada", "Lo sentimos, inténtelo más tarde"));
-
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (Carrera) getItems().getRowData();
+    public String prepareEdit(Carrera var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -111,17 +103,18 @@ public class CarreraController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera actualizada", "Se ha actualizado correctamente"));
-            return "List";
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera actualizado", "Se ha actualizado correctamente"));
+            return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Carrera no actualizada", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Carrera no actualizado", "Lo sentimos, intentelo mas tarde"));
+
             return null;
         }
     }
 
-    public String destroy() {
-        current = (Carrera) getItems().getRowData();
+    public String destroy(Carrera valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -146,10 +139,10 @@ public class CarreraController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera eliminado", "Se ha eliminado una carrera"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Carrera eliminado", "Se ha eliminado una Carrera"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no eliminada", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Carrera no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -239,7 +232,7 @@ public class CarreraController implements Serializable {
             }
             if (object instanceof Carrera) {
                 Carrera o = (Carrera) object;
-                return getStringKey(o.getIdCarr());
+                return getStringKey(o.getIdCarrera());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Carrera.class.getName());
             }

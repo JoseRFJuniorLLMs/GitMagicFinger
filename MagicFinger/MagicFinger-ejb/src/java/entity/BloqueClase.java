@@ -4,7 +4,6 @@
  */
 package entity;
 
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.emptyType;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -58,12 +57,12 @@ public class BloqueClase implements Serializable {
     @Size(max = 65535)
     @Column(name = "HORA_TERMINO")
     private String horaTermino;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bloqueClaseId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bloIdBloque")
     private List<Asistencia> asistenciaList;
     @JoinColumns({
-        @JoinColumn(name = "CURSO_ID3", referencedColumnName = "ASIGNATURA_ID"),
-        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "TIPO_ASIGNATURA_ID"),
-        @JoinColumn(name = "CURSO_ID", referencedColumnName = "SEMESTRE_ID")})
+        @JoinColumn(name = "CUR_ASI_ID_ASIGNATURA", referencedColumnName = "ASI_ID_ASIGNATURA"),
+        @JoinColumn(name = "CUR_TIP_ID_TIPO_ASIGNATURA", referencedColumnName = "TIP_ID_TIPO_ASIGNATURA"),
+        @JoinColumn(name = "CUR_SEM_ID_FECHA", referencedColumnName = "SEM_ID_FECHA")})
     @ManyToOne
     private Curso curso;
 
@@ -153,30 +152,7 @@ public class BloqueClase implements Serializable {
 
     @Override
     public String toString() {
-        System.out.println("bloq" + bloque);
-        switch (this.bloque){
-            case 1: 
-                return bloque + " (08:00-09:30)";
-            case 2: 
-                return bloque + " (09:40-11:10)";
-            case 3:
-                return bloque + " (11:20-12:50)";
-            case 4:
-                return bloque + " (13:50-15:20)";
-            case 5:
-                return bloque + " (15:30-17:00)";
-            case 6:
-                return bloque + " (17:10-18:40)";
-            case 7:
-                return bloque + " (19:00-20:10)";
-            case 8:
-                return bloque + " (20:20-22:00)";
-            case 9:
-                return bloque + " (22:00-23:00)";
-            default:
-                System.out.println("default");
-                return bloque+"";
-        }
+        return "entity.BloqueClase[ idBloque=" + idBloque + " ]";
     }
     
 }

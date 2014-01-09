@@ -5,18 +5,24 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,52 +33,40 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Grupos.findAll", query = "SELECT g FROM Grupos g"),
-    @NamedQuery(name = "Grupos.findByAlumnosDelCursoId4", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId4 = :alumnosDelCursoId4"),
-    @NamedQuery(name = "Grupos.findByAlumnosDelCursoId3", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId3 = :alumnosDelCursoId3"),
-    @NamedQuery(name = "Grupos.findByAlumnosDelCursoId2", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId2 = :alumnosDelCursoId2"),
-    @NamedQuery(name = "Grupos.findByAlumnosDelCursoId", query = "SELECT g FROM Grupos g WHERE g.gruposPK.alumnosDelCursoId = :alumnosDelCursoId"),
-    @NamedQuery(name = "Grupos.findByCursoId3", query = "SELECT g FROM Grupos g WHERE g.gruposPK.cursoId3 = :cursoId3"),
-    @NamedQuery(name = "Grupos.findByCursoId2", query = "SELECT g FROM Grupos g WHERE g.gruposPK.cursoId2 = :cursoId2"),
-    @NamedQuery(name = "Grupos.findByCursoId", query = "SELECT g FROM Grupos g WHERE g.gruposPK.cursoId = :cursoId")})
+    @NamedQuery(name = "Grupos.findByIdGrupo", query = "SELECT g FROM Grupos g WHERE g.idGrupo = :idGrupo")})
 public class Grupos implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected GruposPK gruposPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID_GRUPO")
+    private Integer idGrupo;
     @Lob
     @Size(max = 65535)
     @Column(name = "NOMBRE")
     private String nombre;
+    @OneToMany(mappedBy = "gruIdGrupo")
+    private List<AlumnosDelCurso> alumnosDelCursoList;
     @JoinColumns({
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID4", referencedColumnName = "CURSO_ID3", insertable = false, updatable = false),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID3", referencedColumnName = "CURSO_ID2", insertable = false, updatable = false),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID2", referencedColumnName = "CURSO_ID", insertable = false, updatable = false),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID", referencedColumnName = "ALUMNO_ID", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private AlumnosDelCurso alumnosDelCurso;
-    @JoinColumns({
-        @JoinColumn(name = "CURSO_ID3", referencedColumnName = "ASIGNATURA_ID", insertable = false, updatable = false),
-        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "TIPO_ASIGNATURA_ID", insertable = false, updatable = false),
-        @JoinColumn(name = "CURSO_ID", referencedColumnName = "SEMESTRE_ID", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
+        @JoinColumn(name = "CUR_ASI_ID_ASIGNATURA", referencedColumnName = "ASI_ID_ASIGNATURA"),
+        @JoinColumn(name = "CUR_TIP_ID_TIPO_ASIGNATURA", referencedColumnName = "TIP_ID_TIPO_ASIGNATURA"),
+        @JoinColumn(name = "CUR_SEM_ID_FECHA", referencedColumnName = "SEM_ID_FECHA")})
+    @ManyToOne
     private Curso curso;
 
     public Grupos() {
     }
 
-    public Grupos(GruposPK gruposPK) {
-        this.gruposPK = gruposPK;
+    public Grupos(Integer idGrupo) {
+        this.idGrupo = idGrupo;
     }
 
-    public Grupos(int alumnosDelCursoId4, int alumnosDelCursoId3, int alumnosDelCursoId2, int alumnosDelCursoId, int cursoId3, int cursoId2, int cursoId) {
-        this.gruposPK = new GruposPK(alumnosDelCursoId4, alumnosDelCursoId3, alumnosDelCursoId2, alumnosDelCursoId, cursoId3, cursoId2, cursoId);
+    public Integer getIdGrupo() {
+        return idGrupo;
     }
 
-    public GruposPK getGruposPK() {
-        return gruposPK;
-    }
-
-    public void setGruposPK(GruposPK gruposPK) {
-        this.gruposPK = gruposPK;
+    public void setIdGrupo(Integer idGrupo) {
+        this.idGrupo = idGrupo;
     }
 
     public String getNombre() {
@@ -83,12 +77,13 @@ public class Grupos implements Serializable {
         this.nombre = nombre;
     }
 
-    public AlumnosDelCurso getAlumnosDelCurso() {
-        return alumnosDelCurso;
+    @XmlTransient
+    public List<AlumnosDelCurso> getAlumnosDelCursoList() {
+        return alumnosDelCursoList;
     }
 
-    public void setAlumnosDelCurso(AlumnosDelCurso alumnosDelCurso) {
-        this.alumnosDelCurso = alumnosDelCurso;
+    public void setAlumnosDelCursoList(List<AlumnosDelCurso> alumnosDelCursoList) {
+        this.alumnosDelCursoList = alumnosDelCursoList;
     }
 
     public Curso getCurso() {
@@ -102,7 +97,7 @@ public class Grupos implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (gruposPK != null ? gruposPK.hashCode() : 0);
+        hash += (idGrupo != null ? idGrupo.hashCode() : 0);
         return hash;
     }
 
@@ -113,7 +108,7 @@ public class Grupos implements Serializable {
             return false;
         }
         Grupos other = (Grupos) object;
-        if ((this.gruposPK == null && other.gruposPK != null) || (this.gruposPK != null && !this.gruposPK.equals(other.gruposPK))) {
+        if ((this.idGrupo == null && other.idGrupo != null) || (this.idGrupo != null && !this.idGrupo.equals(other.idGrupo))) {
             return false;
         }
         return true;
@@ -121,7 +116,7 @@ public class Grupos implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "entity.Grupos[ idGrupo=" + idGrupo + " ]";
     }
     
 }

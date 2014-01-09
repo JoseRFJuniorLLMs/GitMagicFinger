@@ -18,70 +18,70 @@ import javax.validation.constraints.NotNull;
 public class AlumnosDelCursoPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CURSO_ID3")
-    private int cursoId3;
+    @Column(name = "CUR_ASI_ID_ASIGNATURA")
+    private int curAsiIdAsignatura;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CURSO_ID2")
-    private int cursoId2;
+    @Column(name = "CUR_TIP_ID_TIPO_ASIGNATURA")
+    private int curTipIdTipoAsignatura;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "CURSO_ID")
-    private int cursoId;
+    @Column(name = "CUR_SEM_ID_FECHA")
+    private int curSemIdFecha;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ALUMNO_ID")
-    private int alumnoId;
+    @Column(name = "ALU_ID_ALUMNO")
+    private int aluIdAlumno;
 
     public AlumnosDelCursoPK() {
     }
 
-    public AlumnosDelCursoPK(int cursoId3, int cursoId2, int cursoId, int alumnoId) {
-        this.cursoId3 = cursoId3;
-        this.cursoId2 = cursoId2;
-        this.cursoId = cursoId;
-        this.alumnoId = alumnoId;
+    public AlumnosDelCursoPK(int curAsiIdAsignatura, int curTipIdTipoAsignatura, int curSemIdFecha, int aluIdAlumno) {
+        this.curAsiIdAsignatura = curAsiIdAsignatura;
+        this.curTipIdTipoAsignatura = curTipIdTipoAsignatura;
+        this.curSemIdFecha = curSemIdFecha;
+        this.aluIdAlumno = aluIdAlumno;
     }
 
-    public int getCursoId3() {
-        return cursoId3;
+    public int getCurAsiIdAsignatura() {
+        return curAsiIdAsignatura;
     }
 
-    public void setCursoId3(int cursoId3) {
-        this.cursoId3 = cursoId3;
+    public void setCurAsiIdAsignatura(int curAsiIdAsignatura) {
+        this.curAsiIdAsignatura = curAsiIdAsignatura;
     }
 
-    public int getCursoId2() {
-        return cursoId2;
+    public int getCurTipIdTipoAsignatura() {
+        return curTipIdTipoAsignatura;
     }
 
-    public void setCursoId2(int cursoId2) {
-        this.cursoId2 = cursoId2;
+    public void setCurTipIdTipoAsignatura(int curTipIdTipoAsignatura) {
+        this.curTipIdTipoAsignatura = curTipIdTipoAsignatura;
     }
 
-    public int getCursoId() {
-        return cursoId;
+    public int getCurSemIdFecha() {
+        return curSemIdFecha;
     }
 
-    public void setCursoId(int cursoId) {
-        this.cursoId = cursoId;
+    public void setCurSemIdFecha(int curSemIdFecha) {
+        this.curSemIdFecha = curSemIdFecha;
     }
 
-    public int getAlumnoId() {
-        return alumnoId;
+    public int getAluIdAlumno() {
+        return aluIdAlumno;
     }
 
-    public void setAlumnoId(int alumnoId) {
-        this.alumnoId = alumnoId;
+    public void setAluIdAlumno(int aluIdAlumno) {
+        this.aluIdAlumno = aluIdAlumno;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) cursoId3;
-        hash += (int) cursoId2;
-        hash += (int) cursoId;
-        hash += (int) alumnoId;
+        hash += (int) curAsiIdAsignatura;
+        hash += (int) curTipIdTipoAsignatura;
+        hash += (int) curSemIdFecha;
+        hash += (int) aluIdAlumno;
         return hash;
     }
 
@@ -92,16 +92,16 @@ public class AlumnosDelCursoPK implements Serializable {
             return false;
         }
         AlumnosDelCursoPK other = (AlumnosDelCursoPK) object;
-        if (this.cursoId3 != other.cursoId3) {
+        if (this.curAsiIdAsignatura != other.curAsiIdAsignatura) {
             return false;
         }
-        if (this.cursoId2 != other.cursoId2) {
+        if (this.curTipIdTipoAsignatura != other.curTipIdTipoAsignatura) {
             return false;
         }
-        if (this.cursoId != other.cursoId) {
+        if (this.curSemIdFecha != other.curSemIdFecha) {
             return false;
         }
-        if (this.alumnoId != other.alumnoId) {
+        if (this.aluIdAlumno != other.aluIdAlumno) {
             return false;
         }
         return true;
@@ -109,7 +109,7 @@ public class AlumnosDelCursoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.AlumnosDelCursoPK[ cursoId3=" + cursoId3 + ", cursoId2=" + cursoId2 + ", cursoId=" + cursoId + ", alumnoId=" + alumnoId + " ]";
+        return "entity.AlumnosDelCursoPK[ curAsiIdAsignatura=" + curAsiIdAsignatura + ", curTipIdTipoAsignatura=" + curTipIdTipoAsignatura + ", curSemIdFecha=" + curSemIdFecha + ", aluIdAlumno=" + aluIdAlumno + " ]";
     }
     
 }

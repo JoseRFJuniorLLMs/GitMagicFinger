@@ -28,27 +28,28 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AlumnosDelCurso.findAll", query = "SELECT a FROM AlumnosDelCurso a"),
-    @NamedQuery(name = "AlumnosDelCurso.findByCursoId3", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.cursoId3 = :cursoId3"),
-    @NamedQuery(name = "AlumnosDelCurso.findByCursoId2", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.cursoId2 = :cursoId2"),
-    @NamedQuery(name = "AlumnosDelCurso.findByCursoId", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.cursoId = :cursoId"),
-    @NamedQuery(name = "AlumnosDelCurso.findByAlumnoId", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.alumnoId = :alumnoId")})
+    @NamedQuery(name = "AlumnosDelCurso.findByCurAsiIdAsignatura", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.curAsiIdAsignatura = :curAsiIdAsignatura"),
+    @NamedQuery(name = "AlumnosDelCurso.findByCurTipIdTipoAsignatura", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.curTipIdTipoAsignatura = :curTipIdTipoAsignatura"),
+    @NamedQuery(name = "AlumnosDelCurso.findByCurSemIdFecha", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.curSemIdFecha = :curSemIdFecha"),
+    @NamedQuery(name = "AlumnosDelCurso.findByAluIdAlumno", query = "SELECT a FROM AlumnosDelCurso a WHERE a.alumnosDelCursoPK.aluIdAlumno = :aluIdAlumno")})
 public class AlumnosDelCurso implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AlumnosDelCursoPK alumnosDelCursoPK;
-    @JoinColumns({
-        @JoinColumn(name = "CURSO_ID3", referencedColumnName = "ASIGNATURA_ID", insertable = false, updatable = false),
-        @JoinColumn(name = "CURSO_ID2", referencedColumnName = "TIPO_ASIGNATURA_ID", insertable = false, updatable = false),
-        @JoinColumn(name = "CURSO_ID", referencedColumnName = "SEMESTRE_ID", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private Curso curso;
-    @JoinColumn(name = "ALUMNO_ID", referencedColumnName = "ID_ALUMNO", insertable = false, updatable = false)
+    @JoinColumn(name = "ALU_ID_ALUMNO", referencedColumnName = "ID_ALUMNO", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Alumno alumno;
+    @JoinColumns({
+        @JoinColumn(name = "CUR_ASI_ID_ASIGNATURA", referencedColumnName = "ASI_ID_ASIGNATURA", insertable = false, updatable = false),
+        @JoinColumn(name = "CUR_TIP_ID_TIPO_ASIGNATURA", referencedColumnName = "TIP_ID_TIPO_ASIGNATURA", insertable = false, updatable = false),
+        @JoinColumn(name = "CUR_SEM_ID_FECHA", referencedColumnName = "SEM_ID_FECHA", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private Curso curso;
+    @JoinColumn(name = "GRU_ID_GRUPO", referencedColumnName = "ID_GRUPO")
+    @ManyToOne
+    private Grupos gruIdGrupo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnosDelCurso")
     private List<Asistencia> asistenciaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumnosDelCurso")
-    private List<Grupos> gruposList;
 
     public AlumnosDelCurso() {
     }
@@ -57,8 +58,8 @@ public class AlumnosDelCurso implements Serializable {
         this.alumnosDelCursoPK = alumnosDelCursoPK;
     }
 
-    public AlumnosDelCurso(int cursoId3, int cursoId2, int cursoId, int alumnoId) {
-        this.alumnosDelCursoPK = new AlumnosDelCursoPK(cursoId3, cursoId2, cursoId, alumnoId);
+    public AlumnosDelCurso(int curAsiIdAsignatura, int curTipIdTipoAsignatura, int curSemIdFecha, int aluIdAlumno) {
+        this.alumnosDelCursoPK = new AlumnosDelCursoPK(curAsiIdAsignatura, curTipIdTipoAsignatura, curSemIdFecha, aluIdAlumno);
     }
 
     public AlumnosDelCursoPK getAlumnosDelCursoPK() {
@@ -69,6 +70,14 @@ public class AlumnosDelCurso implements Serializable {
         this.alumnosDelCursoPK = alumnosDelCursoPK;
     }
 
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
+    }
+
     public Curso getCurso() {
         return curso;
     }
@@ -77,12 +86,12 @@ public class AlumnosDelCurso implements Serializable {
         this.curso = curso;
     }
 
-    public Alumno getAlumno() {
-        return alumno;
+    public Grupos getGruIdGrupo() {
+        return gruIdGrupo;
     }
 
-    public void setAlumno(Alumno alumno) {
-        this.alumno = alumno;
+    public void setGruIdGrupo(Grupos gruIdGrupo) {
+        this.gruIdGrupo = gruIdGrupo;
     }
 
     @XmlTransient
@@ -92,15 +101,6 @@ public class AlumnosDelCurso implements Serializable {
 
     public void setAsistenciaList(List<Asistencia> asistenciaList) {
         this.asistenciaList = asistenciaList;
-    }
-
-    @XmlTransient
-    public List<Grupos> getGruposList() {
-        return gruposList;
-    }
-
-    public void setGruposList(List<Grupos> gruposList) {
-        this.gruposList = gruposList;
     }
 
     @Override
@@ -125,7 +125,7 @@ public class AlumnosDelCurso implements Serializable {
 
     @Override
     public String toString() {
-        return alumno.getNombre()+" "+alumno.getApellidop();
+        return "entity.AlumnosDelCurso[ alumnosDelCursoPK=" + alumnosDelCursoPK + " ]";
     }
     
 }

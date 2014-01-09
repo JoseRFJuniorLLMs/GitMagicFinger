@@ -69,9 +69,9 @@ public class AlumnosDelCursoController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (AlumnosDelCurso) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(AlumnosDelCurso vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -84,47 +84,47 @@ public class AlumnosDelCursoController implements Serializable {
 
     public String create() {
         try {
-            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getTipoAsignaturaId());
-            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
-            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getSemestreId());
-            current.getAlumnosDelCursoPK().setCursoId3(current.getCurso().getCursoPK().getAsignaturaId());
+            current.getAlumnosDelCursoPK().setCurAsiIdAsignatura(current.getCurso().getCursoPK().getAsiIdAsignatura());
+            current.getAlumnosDelCursoPK().setAluIdAlumno(current.getAlumno().getIdAlumno());
+            current.getAlumnosDelCursoPK().setCurSemIdFecha(current.getCurso().getCursoPK().getSemIdFecha());
+            current.getAlumnosDelCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno asignado", "Se ha asignado un alumno a un curso correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso creado", "Se ha creado una AlumnosDelCurso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no asignado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+    public String prepareEdit(AlumnosDelCurso var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            current.getAlumnosDelCursoPK().setCursoId2(current.getCurso().getCursoPK().getTipoAsignaturaId());
-            current.getAlumnosDelCursoPK().setAlumnoId(current.getAlumno().getIdAlumno());
-            current.getAlumnosDelCursoPK().setCursoId(current.getCurso().getCursoPK().getSemestreId());
-            current.getAlumnosDelCursoPK().setCursoId3(current.getCurso().getCursoPK().getAsignaturaId());
+            current.getAlumnosDelCursoPK().setCurAsiIdAsignatura(current.getCurso().getCursoPK().getAsiIdAsignatura());
+            current.getAlumnosDelCursoPK().setAluIdAlumno(current.getAlumno().getIdAlumno());
+            current.getAlumnosDelCursoPK().setCurSemIdFecha(current.getCurso().getCursoPK().getSemIdFecha());
+            current.getAlumnosDelCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignación actualizada", "Se ha actualizado la asignación del alumno"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Asignación no actualizada", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: AlumnosDelCurso no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy() {
-        current = (AlumnosDelCurso) getItems().getRowData();
+    public String destroy(AlumnosDelCurso valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -149,10 +149,10 @@ public class AlumnosDelCursoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignación del Alumno eliminada", "Se ha eliminado una AlumnosDelCurso"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "AlumnosDelCurso eliminado", "Se ha eliminado una AlumnosDelCurso"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignación del Alumno eliminada", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: AlumnosDelCurso no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 
@@ -230,22 +230,22 @@ public class AlumnosDelCursoController implements Serializable {
             entity.AlumnosDelCursoPK key;
             String values[] = value.split(SEPARATOR_ESCAPED);
             key = new entity.AlumnosDelCursoPK();
-            key.setCursoId3(Integer.parseInt(values[0]));
-            key.setCursoId2(Integer.parseInt(values[1]));
-            key.setCursoId(Integer.parseInt(values[2]));
-            key.setAlumnoId(Integer.parseInt(values[3]));
+            key.setCurAsiIdAsignatura(Integer.parseInt(values[0]));
+            key.setCurTipIdTipoAsignatura(Integer.parseInt(values[1]));
+            key.setCurSemIdFecha(Integer.parseInt(values[2]));
+            key.setAluIdAlumno(Integer.parseInt(values[3]));
             return key;
         }
 
         String getStringKey(entity.AlumnosDelCursoPK value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getCursoId3());
+            sb.append(value.getCurAsiIdAsignatura());
             sb.append(SEPARATOR);
-            sb.append(value.getCursoId2());
+            sb.append(value.getCurTipIdTipoAsignatura());
             sb.append(SEPARATOR);
-            sb.append(value.getCursoId());
+            sb.append(value.getCurSemIdFecha());
             sb.append(SEPARATOR);
-            sb.append(value.getAlumnoId());
+            sb.append(value.getAluIdAlumno());
             return sb.toString();
         }
 

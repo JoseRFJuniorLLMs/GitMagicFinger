@@ -20,7 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -34,8 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Alumno.findAll", query = "SELECT a FROM Alumno a"),
-    @NamedQuery(name = "Alumno.findByIdAlumno", query = "SELECT a FROM Alumno a WHERE a.idAlumno = :idAlumno"),
-    @NamedQuery(name = "Alumno.findByTelefono", query = "SELECT a FROM Alumno a WHERE a.telefono = :telefono")})
+    @NamedQuery(name = "Alumno.findByIdAlumno", query = "SELECT a FROM Alumno a WHERE a.idAlumno = :idAlumno")})
 public class Alumno implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,8 +60,10 @@ public class Alumno implements Serializable {
     @Lob
     @Column(name = "HUELLA1")
     private byte[] huella1;
+    @Lob
+    @Size(max = 65535)
     @Column(name = "TELEFONO")
-    private Integer telefono;
+    private String telefono;
     @Lob
     @Size(max = 65535)
     @Column(name = "CORREO")
@@ -71,12 +71,15 @@ public class Alumno implements Serializable {
     @Lob
     @Column(name = "HUELLA2")
     private byte[] huella2;
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "USE_ID", referencedColumnName = "ID")
     @ManyToOne
-    private User userId;
+    private User useId;
+    @JoinColumn(name = "UNI_ID_UNIVERSIDAD", referencedColumnName = "ID_UNIVERSIDAD")
+    @ManyToOne(optional = false)
+    private Universidad uniIdUniversidad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "alumno")
     private List<AlumnosDelCurso> alumnosDelCursoList;
-    @OneToMany(mappedBy = "alumnoId")
+    @OneToMany(mappedBy = "aluIdAlumno")
     private List<User> userList;
 
     public Alumno() {
@@ -134,11 +137,11 @@ public class Alumno implements Serializable {
         this.huella1 = huella1;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -158,12 +161,20 @@ public class Alumno implements Serializable {
         this.huella2 = huella2;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUseId() {
+        return useId;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUseId(User useId) {
+        this.useId = useId;
+    }
+
+    public Universidad getUniIdUniversidad() {
+        return uniIdUniversidad;
+    }
+
+    public void setUniIdUniversidad(Universidad uniIdUniversidad) {
+        this.uniIdUniversidad = uniIdUniversidad;
     }
 
     @XmlTransient
@@ -206,9 +217,7 @@ public class Alumno implements Serializable {
 
     @Override
     public String toString() {
-        return nombre+" "+apellidop+" "+apellidom;
+        return "entity.Alumno[ idAlumno=" + idAlumno + " ]";
     }
-    public String toStringComprimido() {
-        return nombre+" "+apellidop+" "+apellidom.substring(0, 1)+".";
-    }
+    
 }

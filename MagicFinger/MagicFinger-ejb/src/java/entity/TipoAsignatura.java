@@ -13,7 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -43,6 +45,9 @@ public class TipoAsignatura implements Serializable {
     @Size(max = 65535)
     @Column(name = "NOMBRE")
     private String nombre;
+    @JoinColumn(name = "UNI_ID_UNIVERSIDAD", referencedColumnName = "ID_UNIVERSIDAD")
+    @ManyToOne(optional = false)
+    private Universidad uniIdUniversidad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoAsignatura")
     private List<Curso> cursoList;
 
@@ -67,6 +72,14 @@ public class TipoAsignatura implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Universidad getUniIdUniversidad() {
+        return uniIdUniversidad;
+    }
+
+    public void setUniIdUniversidad(Universidad uniIdUniversidad) {
+        this.uniIdUniversidad = uniIdUniversidad;
     }
 
     @XmlTransient
@@ -100,7 +113,7 @@ public class TipoAsignatura implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "entity.TipoAsignatura[ idTipoAsignatura=" + idTipoAsignatura + " ]";
     }
     
 }

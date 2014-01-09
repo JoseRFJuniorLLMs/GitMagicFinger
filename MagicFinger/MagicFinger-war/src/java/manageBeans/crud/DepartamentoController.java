@@ -1,7 +1,6 @@
 package manageBeans.crud;
 
 import entity.Departamento;
-import entity.Facultad;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -19,15 +18,12 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
 import sessionBeans.DepartamentoFacadeLocal;
 
 @Named("departamentoController")
 @SessionScoped
 public class DepartamentoController implements Serializable {
-    @Inject FacultadController facultadcontroller;
-    private Facultad facultadAnterior;
-    private String nombreAnterior;
+
     private Departamento current;
     private DataModel items = null;
     @EJB
@@ -72,9 +68,9 @@ public class DepartamentoController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (Departamento) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(Departamento vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -86,55 +82,39 @@ public class DepartamentoController implements Serializable {
 
     public String create() {
         try {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            for (Departamento departamento : getFacade().findAll()) {
-                if(departamento.getNombre().equals(current.getNombre()) && departamento.getFacultadId().equals(current.getFacultadId())){
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado","El departamento ya existe en facultad seleccionada"));
-                    return null;
-                }
-            }
             getFacade().create(current);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado un departamento correctamente"));
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento creado", "Se ha creado una Departamento correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado","Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (Departamento) getItems().getRowData();
-        nombreAnterior = current.getNombre();
-        facultadAnterior = current.getFacultadId();
+    public String prepareEdit(Departamento var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            if(!(nombreAnterior.equals(current.getNombre())) || !(facultadAnterior.equals(current.getFacultadId()))){
-                for (Departamento departamento : getFacade().findAll()) {
-                    if(departamento.getNombre().equals(current.getNombre()) && departamento.getFacultadId().equals(current.getFacultadId())){
-                         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado","El departamento ya existe en facultad seleccionada"));
-                         return null;
-                    }
-                }
-            }
             getFacade().edit(current);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento actualizado", "Se ha actualizado correctamente"));
-            return "List";
+            return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy() {
-        current = (Departamento) getItems().getRowData();
+    public String destroy(Departamento valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -159,10 +139,10 @@ public class DepartamentoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento eliminado", "Se ha eliminado una departamento"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento eliminado", "Se ha eliminado una Departamento"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no eliminado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 

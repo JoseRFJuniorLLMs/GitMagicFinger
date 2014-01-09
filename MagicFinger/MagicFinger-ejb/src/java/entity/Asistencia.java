@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Asistencia.findAll", query = "SELECT a FROM Asistencia a"),
     @NamedQuery(name = "Asistencia.findByIdAsistencia", query = "SELECT a FROM Asistencia a WHERE a.idAsistencia = :idAsistencia"),
     @NamedQuery(name = "Asistencia.findByFecha", query = "SELECT a FROM Asistencia a WHERE a.fecha = :fecha"),
-    @NamedQuery(name = "Asistencia.findAsistencia", query = "SELECT a FROM Asistencia a WHERE a.alumnosDelCurso = :AlumnosDelCurso AND a.bloqueClaseId.idBloque = :bloqueClaseId AND a.fecha = :fecha"),
     @NamedQuery(name = "Asistencia.findByEstado", query = "SELECT a FROM Asistencia a WHERE a.estado = :estado")})
 public class Asistencia implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -48,15 +47,15 @@ public class Asistencia implements Serializable {
     @Column(name = "ESTADO")
     private Integer estado;
     @JoinColumns({
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID4", referencedColumnName = "CURSO_ID3"),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID3", referencedColumnName = "CURSO_ID2"),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID2", referencedColumnName = "CURSO_ID"),
-        @JoinColumn(name = "ALUMNOS_DEL_CURSO_ID", referencedColumnName = "ALUMNO_ID")})
+        @JoinColumn(name = "ALU_CUR_ASI_ID_ASIGNATURA", referencedColumnName = "CUR_ASI_ID_ASIGNATURA"),
+        @JoinColumn(name = "ALU_CUR_TIP_ID_TIPO_ASIGNATURA", referencedColumnName = "CUR_TIP_ID_TIPO_ASIGNATURA"),
+        @JoinColumn(name = "ALU_CUR_SEM_ID_FECHA", referencedColumnName = "CUR_SEM_ID_FECHA"),
+        @JoinColumn(name = "ALU_ALU_ID_ALUMNO", referencedColumnName = "ALU_ID_ALUMNO")})
     @ManyToOne(optional = false)
     private AlumnosDelCurso alumnosDelCurso;
-    @JoinColumn(name = "BLOQUE_CLASE_ID", referencedColumnName = "ID_BLOQUE")
+    @JoinColumn(name = "BLO_ID_BLOQUE", referencedColumnName = "ID_BLOQUE")
     @ManyToOne(optional = false)
-    private BloqueClase bloqueClaseId;
+    private BloqueClase bloIdBloque;
 
     public Asistencia() {
     }
@@ -97,12 +96,12 @@ public class Asistencia implements Serializable {
         this.alumnosDelCurso = alumnosDelCurso;
     }
 
-    public BloqueClase getBloqueClaseId() {
-        return bloqueClaseId;
+    public BloqueClase getBloIdBloque() {
+        return bloIdBloque;
     }
 
-    public void setBloqueClaseId(BloqueClase bloqueClaseId) {
-        this.bloqueClaseId = bloqueClaseId;
+    public void setBloIdBloque(BloqueClase bloIdBloque) {
+        this.bloIdBloque = bloIdBloque;
     }
 
     @Override

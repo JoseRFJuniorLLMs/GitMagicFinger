@@ -1,9 +1,6 @@
 package manageBeans.crud;
 
-import entity.Alumno;
 import entity.Profesor;
-import entity.User;
-import entity.Userrol;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -21,13 +18,12 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
 import sessionBeans.ProfesorFacadeLocal;
 
 @Named("profesorController")
 @SessionScoped
 public class ProfesorController implements Serializable {
-    @Inject UserController usercontroller;
+
     private Profesor current;
     private DataModel items = null;
     @EJB
@@ -72,9 +68,9 @@ public class ProfesorController implements Serializable {
         return "List";
     }
 
-    public String prepareView() {
-        current = (Profesor) getItems().getRowData();
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView(Profesor vari) {
+        current = vari;
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -86,39 +82,19 @@ public class ProfesorController implements Serializable {
 
     public String create() {
         try {
-            User user = new User();
-            Userrol userrol = new Userrol("Profesor");
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            user.setUsuario(current.getRut());
-            user.setPassword(current.getApellidop());
-            user.setUserrolName(userrol);
-            usercontroller.setCurrent(user);
-            if(usercontroller.create()!=null){
             getFacade().create(current);
-            //EDITANDO
-            Profesor profesor = getFacade().findAll().get(getFacade().count()-1);
-            User user2 = usercontroller.getFacade().findAll().get(usercontroller.getFacade().count()-1);
-            profesor.setUserId(user2);
-            user2.setProfesorId(profesor);
-            getFacade().edit(profesor);
-            usercontroller.getFacade().edit(user2);
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor creado", "Se ha creado un profesor correctamente"));
-
-            return prepareList();
-            
-            }else{
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: El profesor ya existe en los registros",null ));
-                return null;
-            }
-            } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no creado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor creado", "Se ha creado una Profesor correctamente"));
+            return prepareList();
+        } catch (Exception e) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
     }
 
-    public String prepareEdit() {
-        current = (Profesor) getItems().getRowData();
+    public String prepareEdit(Profesor var) {
+        current = var;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -131,14 +107,14 @@ public class ProfesorController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Profesor no actualizado","Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Profesor no actualizado", "Lo sentimos, intentelo mas tarde"));
 
             return null;
         }
     }
 
-    public String destroy() {
-        current = (Profesor) getItems().getRowData();
+    public String destroy(Profesor valor) {
+        current = valor;
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -163,10 +139,10 @@ public class ProfesorController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor eliminado", "Se ha eliminado un Profesor"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor eliminado", "Se ha eliminado una Profesor"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no eliminado", "Lo sentimos, inténtelo más tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no eliminado", "Lo sentimos, intentelo mas tarde"));
         }
     }
 

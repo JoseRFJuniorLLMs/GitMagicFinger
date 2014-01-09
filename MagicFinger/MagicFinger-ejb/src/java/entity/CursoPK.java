@@ -18,56 +18,56 @@ import javax.validation.constraints.NotNull;
 public class CursoPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "ASIGNATURA_ID")
-    private int asignaturaId;
+    @Column(name = "ASI_ID_ASIGNATURA")
+    private int asiIdAsignatura;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "TIPO_ASIGNATURA_ID")
-    private int tipoAsignaturaId;
+    @Column(name = "TIP_ID_TIPO_ASIGNATURA")
+    private int tipIdTipoAsignatura;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "SEMESTRE_ID")
-    private int semestreId;
+    @Column(name = "SEM_ID_FECHA")
+    private int semIdFecha;
 
     public CursoPK() {
     }
 
-    public CursoPK(int asignaturaId, int tipoAsignaturaId, int semestreId) {
-        this.asignaturaId = asignaturaId;
-        this.tipoAsignaturaId = tipoAsignaturaId;
-        this.semestreId = semestreId;
+    public CursoPK(int asiIdAsignatura, int tipIdTipoAsignatura, int semIdFecha) {
+        this.asiIdAsignatura = asiIdAsignatura;
+        this.tipIdTipoAsignatura = tipIdTipoAsignatura;
+        this.semIdFecha = semIdFecha;
     }
 
-    public int getAsignaturaId() {
-        return asignaturaId;
+    public int getAsiIdAsignatura() {
+        return asiIdAsignatura;
     }
 
-    public void setAsignaturaId(int asignaturaId) {
-        this.asignaturaId = asignaturaId;
+    public void setAsiIdAsignatura(int asiIdAsignatura) {
+        this.asiIdAsignatura = asiIdAsignatura;
     }
 
-    public int getTipoAsignaturaId() {
-        return tipoAsignaturaId;
+    public int getTipIdTipoAsignatura() {
+        return tipIdTipoAsignatura;
     }
 
-    public void setTipoAsignaturaId(int tipoAsignaturaId) {
-        this.tipoAsignaturaId = tipoAsignaturaId;
+    public void setTipIdTipoAsignatura(int tipIdTipoAsignatura) {
+        this.tipIdTipoAsignatura = tipIdTipoAsignatura;
     }
 
-    public int getSemestreId() {
-        return semestreId;
+    public int getSemIdFecha() {
+        return semIdFecha;
     }
 
-    public void setSemestreId(int semestreId) {
-        this.semestreId = semestreId;
+    public void setSemIdFecha(int semIdFecha) {
+        this.semIdFecha = semIdFecha;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) asignaturaId;
-        hash += (int) tipoAsignaturaId;
-        hash += (int) semestreId;
+        hash += (int) asiIdAsignatura;
+        hash += (int) tipIdTipoAsignatura;
+        hash += (int) semIdFecha;
         return hash;
     }
 
@@ -78,13 +78,13 @@ public class CursoPK implements Serializable {
             return false;
         }
         CursoPK other = (CursoPK) object;
-        if (this.asignaturaId != other.asignaturaId) {
+        if (this.asiIdAsignatura != other.asiIdAsignatura) {
             return false;
         }
-        if (this.tipoAsignaturaId != other.tipoAsignaturaId) {
+        if (this.tipIdTipoAsignatura != other.tipIdTipoAsignatura) {
             return false;
         }
-        if (this.semestreId != other.semestreId) {
+        if (this.semIdFecha != other.semIdFecha) {
             return false;
         }
         return true;
@@ -92,7 +92,7 @@ public class CursoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.CursoPK[ asignaturaId=" + asignaturaId + ", tipoAsignaturaId=" + tipoAsignaturaId + ", semestreId=" + semestreId + " ]";
+        return "entity.CursoPK[ asiIdAsignatura=" + asiIdAsignatura + ", tipIdTipoAsignatura=" + tipIdTipoAsignatura + ", semIdFecha=" + semIdFecha + " ]";
     }
     
 }

@@ -47,9 +47,9 @@ public class Asignatura implements Serializable {
     private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignatura")
     private List<Curso> cursoList;
-    @JoinColumn(name = "MALLA_ID", referencedColumnName = "ID_CARRERA")
+    @JoinColumn(name = "MAL_ID_MALLA", referencedColumnName = "ID_MALLA")
     @ManyToOne(optional = false)
-    private Malla mallaId;
+    private Malla malIdMalla;
 
     public Asignatura() {
     }
@@ -83,12 +83,12 @@ public class Asignatura implements Serializable {
         this.cursoList = cursoList;
     }
 
-    public Malla getMallaId() {
-        return mallaId;
+    public Malla getMalIdMalla() {
+        return malIdMalla;
     }
 
-    public void setMallaId(Malla mallaId) {
-        this.mallaId = mallaId;
+    public void setMalIdMalla(Malla malIdMalla) {
+        this.malIdMalla = malIdMalla;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Asignatura implements Serializable {
 
     @Override
     public String toString() {
-        return nombre;
+        return "entity.Asignatura[ idAsignatura=" + idAsignatura + " ]";
     }
     
 }

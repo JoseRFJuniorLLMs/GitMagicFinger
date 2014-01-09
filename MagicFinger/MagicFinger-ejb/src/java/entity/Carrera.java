@@ -33,45 +33,45 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Carrera.findAll", query = "SELECT c FROM Carrera c"),
-    @NamedQuery(name = "Carrera.findByIdCarr", query = "SELECT c FROM Carrera c WHERE c.idCarr = :idCarr")})
+    @NamedQuery(name = "Carrera.findByIdCarrera", query = "SELECT c FROM Carrera c WHERE c.idCarrera = :idCarrera")})
 public class Carrera implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_CARR")
-    private Integer idCarr;
+    @Column(name = "ID_CARRERA")
+    private Integer idCarrera;
     @Lob
     @Size(max = 65535)
-    @Column(name = "NOMBRE_CARRERA")
-    private String nombreCarrera;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "carreraId")
+    @Column(name = "NOMBRE")
+    private String nombre;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "carIdCarrera")
     private List<Malla> mallaList;
-    @JoinColumn(name = "DEPARTAMENTO_ID", referencedColumnName = "ID_DEPARTAMENTO")
+    @JoinColumn(name = "DEP_ID_DEPARTAMENTO", referencedColumnName = "ID_DEPARTAMENTO")
     @ManyToOne(optional = false)
-    private Departamento departamentoId;
+    private Departamento depIdDepartamento;
 
     public Carrera() {
     }
 
-    public Carrera(Integer idCarr) {
-        this.idCarr = idCarr;
+    public Carrera(Integer idCarrera) {
+        this.idCarrera = idCarrera;
     }
 
-    public Integer getIdCarr() {
-        return idCarr;
+    public Integer getIdCarrera() {
+        return idCarrera;
     }
 
-    public void setIdCarr(Integer idCarr) {
-        this.idCarr = idCarr;
+    public void setIdCarrera(Integer idCarrera) {
+        this.idCarrera = idCarrera;
     }
 
-    public String getNombreCarrera() {
-        return nombreCarrera;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreCarrera(String nombreCarrera) {
-        this.nombreCarrera = nombreCarrera;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @XmlTransient
@@ -83,18 +83,18 @@ public class Carrera implements Serializable {
         this.mallaList = mallaList;
     }
 
-    public Departamento getDepartamentoId() {
-        return departamentoId;
+    public Departamento getDepIdDepartamento() {
+        return depIdDepartamento;
     }
 
-    public void setDepartamentoId(Departamento departamentoId) {
-        this.departamentoId = departamentoId;
+    public void setDepIdDepartamento(Departamento depIdDepartamento) {
+        this.depIdDepartamento = depIdDepartamento;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCarr != null ? idCarr.hashCode() : 0);
+        hash += (idCarrera != null ? idCarrera.hashCode() : 0);
         return hash;
     }
 
@@ -105,7 +105,7 @@ public class Carrera implements Serializable {
             return false;
         }
         Carrera other = (Carrera) object;
-        if ((this.idCarr == null && other.idCarr != null) || (this.idCarr != null && !this.idCarr.equals(other.idCarr))) {
+        if ((this.idCarrera == null && other.idCarrera != null) || (this.idCarrera != null && !this.idCarrera.equals(other.idCarrera))) {
             return false;
         }
         return true;
@@ -113,7 +113,7 @@ public class Carrera implements Serializable {
 
     @Override
     public String toString() {
-        return nombreCarrera;
+        return "entity.Carrera[ idCarrera=" + idCarrera + " ]";
     }
     
 }

@@ -29,31 +29,31 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Userrol.findAll", query = "SELECT u FROM Userrol u"),
-    @NamedQuery(name = "Userrol.findByName", query = "SELECT u FROM Userrol u WHERE u.name = :name")})
+    @NamedQuery(name = "Userrol.findByRol", query = "SELECT u FROM Userrol u WHERE u.rol = :rol")})
 public class Userrol implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "NAME")
-    private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userrolName")
+    @Column(name = "ROL")
+    private String rol;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "useRol")
     private List<User> userList;
 
     public Userrol() {
     }
 
-    public Userrol(String name) {
-        this.name = name;
+    public Userrol(String rol) {
+        this.rol = rol;
     }
 
-    public String getName() {
-        return name;
+    public String getRol() {
+        return rol;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     @XmlTransient
@@ -68,7 +68,7 @@ public class Userrol implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (name != null ? name.hashCode() : 0);
+        hash += (rol != null ? rol.hashCode() : 0);
         return hash;
     }
 
@@ -79,7 +79,7 @@ public class Userrol implements Serializable {
             return false;
         }
         Userrol other = (Userrol) object;
-        if ((this.name == null && other.name != null) || (this.name != null && !this.name.equals(other.name))) {
+        if ((this.rol == null && other.rol != null) || (this.rol != null && !this.rol.equals(other.rol))) {
             return false;
         }
         return true;
@@ -87,7 +87,7 @@ public class Userrol implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Userrol[ name=" + name + " ]";
+        return "entity.Userrol[ rol=" + rol + " ]";
     }
     
 }

@@ -19,7 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -33,8 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
-@NamedQuery(name = "User.findByUsuario", query = "SELECT u FROM User u Where u.usuario = :usuario")})
+    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")})
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -50,19 +48,19 @@ public class User implements Serializable {
     @Size(max = 65535)
     @Column(name = "PASSWORD")
     private String password;
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "useId")
     private List<Profesor> profesorList;
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "useId")
     private List<Alumno> alumnoList;
-    @JoinColumn(name = "PROFESOR_ID", referencedColumnName = "ID_PROFESOR")
+    @JoinColumn(name = "PRO_ID_PROFESOR", referencedColumnName = "ID_PROFESOR")
     @ManyToOne
-    private Profesor profesorId;
-    @JoinColumn(name = "ALUMNO_ID", referencedColumnName = "ID_ALUMNO")
+    private Profesor proIdProfesor;
+    @JoinColumn(name = "ALU_ID_ALUMNO", referencedColumnName = "ID_ALUMNO")
     @ManyToOne
-    private Alumno alumnoId;
-    @JoinColumn(name = "USERROL_NAME", referencedColumnName = "NAME")
+    private Alumno aluIdAlumno;
+    @JoinColumn(name = "USE_ROL", referencedColumnName = "ROL")
     @ManyToOne(optional = false)
-    private Userrol userrolName;
+    private Userrol useRol;
 
     public User() {
     }
@@ -113,28 +111,28 @@ public class User implements Serializable {
         this.alumnoList = alumnoList;
     }
 
-    public Profesor getProfesorId() {
-        return profesorId;
+    public Profesor getProIdProfesor() {
+        return proIdProfesor;
     }
 
-    public void setProfesorId(Profesor profesorId) {
-        this.profesorId = profesorId;
+    public void setProIdProfesor(Profesor proIdProfesor) {
+        this.proIdProfesor = proIdProfesor;
     }
 
-    public Alumno getAlumnoId() {
-        return alumnoId;
+    public Alumno getAluIdAlumno() {
+        return aluIdAlumno;
     }
 
-    public void setAlumnoId(Alumno alumnoId) {
-        this.alumnoId = alumnoId;
+    public void setAluIdAlumno(Alumno aluIdAlumno) {
+        this.aluIdAlumno = aluIdAlumno;
     }
 
-    public Userrol getUserrolName() {
-        return userrolName;
+    public Userrol getUseRol() {
+        return useRol;
     }
 
-    public void setUserrolName(Userrol userrolName) {
-        this.userrolName = userrolName;
+    public void setUseRol(Userrol useRol) {
+        this.useRol = useRol;
     }
 
     @Override
@@ -159,7 +157,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return usuario;
+        return "entity.User[ id=" + id + " ]";
     }
     
 }
