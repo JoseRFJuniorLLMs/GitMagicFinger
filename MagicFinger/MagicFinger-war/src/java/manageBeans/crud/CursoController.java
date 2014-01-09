@@ -69,9 +69,9 @@ public class CursoController implements Serializable {
         return "List";
     }
 
-    public String prepareView(Curso vari) {
-        current = vari;
-        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView() {
+        current = (Curso) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -84,55 +84,45 @@ public class CursoController implements Serializable {
 
     public String create() {
         try {
-            current.getCursoPK().setNombreDepartamento(current.getAsignatura().getAsignaturaPK().getNombreDepartamento());
-            current.getCursoPK().setNombreCarrera(current.getAsignatura().getAsignaturaPK().getNombreCarrera());
-            current.getCursoPK().setIdFecha(current.getSemestre().getIdFecha());
-            current.getCursoPK().setNombreMalla(current.getAsignatura().getAsignaturaPK().getNombreMalla());
-            current.getCursoPK().setNombreAsignatura(current.getAsignatura().getAsignaturaPK().getNombreAsignatura());
-            current.getCursoPK().setNombreFacultad(current.getAsignatura().getAsignaturaPK().getNombreFacultad());
-            current.getCursoPK().setIdTipoAsignatura(current.getTipoAsignatura().getIdTipoAsignatura());
-            current.getCursoPK().setIdUniversidad(current.getAsignatura().getAsignaturaPK().getIdUniversidad());
+            current.getCursoPK().setSemestreId(current.getSemestre().getIdFecha());
+            current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado una Curso correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado un curso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no creado", "Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
 
-    public String prepareEdit(Curso var) {
-        current = var;
+    public String prepareEdit() {
+        current = (Curso) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            current.getCursoPK().setNombreDepartamento(current.getAsignatura().getAsignaturaPK().getNombreDepartamento());
-            current.getCursoPK().setNombreCarrera(current.getAsignatura().getAsignaturaPK().getNombreCarrera());
-            current.getCursoPK().setIdFecha(current.getSemestre().getIdFecha());
-            current.getCursoPK().setNombreMalla(current.getAsignatura().getAsignaturaPK().getNombreMalla());
-            current.getCursoPK().setNombreAsignatura(current.getAsignatura().getAsignaturaPK().getNombreAsignatura());
-            current.getCursoPK().setNombreFacultad(current.getAsignatura().getAsignaturaPK().getNombreFacultad());
-            current.getCursoPK().setIdTipoAsignatura(current.getTipoAsignatura().getIdTipoAsignatura());
-            current.getCursoPK().setIdUniversidad(current.getAsignatura().getAsignaturaPK().getIdUniversidad());
+            current.getCursoPK().setSemestreId(current.getSemestre().getIdFecha());
+            current.getCursoPK().setTipoAsignaturaId(current.getTipoAsignatura().getIdTipoAsignatura());
+            current.getCursoPK().setAsignaturaId(current.getAsignatura().getIdAsignatura());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Curso no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Curso no actualizado", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
     }
 
-    public String destroy(Curso valor) {
-        current = valor;
+    public String destroy() {
+        current = (Curso) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -157,10 +147,10 @@ public class CursoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso eliminado", "Se ha eliminado una Curso"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso eliminado", "Se ha eliminado una curso"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no eliminado", "Lo sentimos, inténtelo más tarde"));
         }
     }
 
@@ -238,34 +228,19 @@ public class CursoController implements Serializable {
             entity.CursoPK key;
             String values[] = value.split(SEPARATOR_ESCAPED);
             key = new entity.CursoPK();
-            key.setIdUniversidad(Integer.parseInt(values[0]));
-            key.setNombreFacultad(values[1]);
-            key.setNombreDepartamento(values[2]);
-            key.setNombreCarrera(values[3]);
-            key.setNombreMalla(values[4]);
-            key.setNombreAsignatura(values[5]);
-            key.setIdTipoAsignatura(Integer.parseInt(values[6]));
-            key.setIdFecha(Integer.parseInt(values[7]));
+            key.setAsignaturaId(Integer.parseInt(values[0]));
+            key.setTipoAsignaturaId(Integer.parseInt(values[1]));
+            key.setSemestreId(Integer.parseInt(values[2]));
             return key;
         }
 
         String getStringKey(entity.CursoPK value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getIdUniversidad());
+            sb.append(value.getAsignaturaId());
             sb.append(SEPARATOR);
-            sb.append(value.getNombreFacultad());
+            sb.append(value.getTipoAsignaturaId());
             sb.append(SEPARATOR);
-            sb.append(value.getNombreDepartamento());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreCarrera());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreMalla());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreAsignatura());
-            sb.append(SEPARATOR);
-            sb.append(value.getIdTipoAsignatura());
-            sb.append(SEPARATOR);
-            sb.append(value.getIdFecha());
+            sb.append(value.getSemestreId());
             return sb.toString();
         }
 

@@ -68,9 +68,9 @@ public class SemestreController implements Serializable {
         return "List";
     }
 
-    public String prepareView(Semestre vari) {
-        current = vari;
-        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView() {
+        current = (Semestre) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -84,17 +84,17 @@ public class SemestreController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Semestre creado", "Se ha creado una Semestre correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Semestre creado", "Se ha creado un semestre correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Semestre no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Semestre no creado", "Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
 
-    public String prepareEdit(Semestre var) {
-        current = var;
+    public String prepareEdit() {
+        current = (Semestre) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -107,14 +107,14 @@ public class SemestreController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Semestre no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Semestre no actualizado", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
     }
 
-    public String destroy(Semestre valor) {
-        current = valor;
+    public String destroy() {
+        current = (Semestre) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -139,10 +139,10 @@ public class SemestreController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Semestre eliminado", "Se ha eliminado una Semestre"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Semestre eliminado", "Se ha eliminado un semestre"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Semestre no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Semestre no eliminado", "Lo sentimos, inténtelo más tarde"));
         }
     }
 

@@ -1,6 +1,7 @@
 package manageBeans.crud;
 
 import entity.Asignatura;
+import entity.Malla;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -30,6 +31,8 @@ public class AsignaturaController implements Serializable {
     private AsignaturaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String nombreAnterior;
+    private Malla mallaAnterior;
 
     public AsignaturaController() {
     }
@@ -37,11 +40,8 @@ public class AsignaturaController implements Serializable {
     public Asignatura getSelected() {
         if (current == null) {
             current = new Asignatura();
-            current.setAsignaturaPK(new entity.AsignaturaPK());
             selectedItemIndex = -1;
         }
-        
-        
         return current;
     }
 
@@ -71,64 +71,69 @@ public class AsignaturaController implements Serializable {
         return "List";
     }
 
-    public String prepareView(Asignatura vari) {
-        current = vari;
-        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView() {
+        current = (Asignatura) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
         current = new Asignatura();
-        current.setAsignaturaPK(new entity.AsignaturaPK());
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-            current.getAsignaturaPK().setIdUniversidad(current.getMalla().getMallaPK().getIdUniversidad());
-            current.getAsignaturaPK().setNombreDepartamento(current.getMalla().getMallaPK().getNombreDepartamento());
-            current.getAsignaturaPK().setNombreFacultad(current.getMalla().getMallaPK().getNombreFacultad());
-            current.getAsignaturaPK().setNombreMalla(current.getMalla().getMallaPK().getNombreMalla());
-            current.getAsignaturaPK().setNombreCarrera(current.getMalla().getMallaPK().getNombreCarrera());
-            getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignatura creado", "Se ha creado una Asignatura correctamente"));
+            for (Asignatura asignatura : getFacade().findAll()) {
+                if(asignatura.getNombre().equals(current.getNombre()) && asignatura.getMallaId().equals(current.getMallaId())){
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignatura no fue creada"," la asignatura ya existe"));
+                    return null;
+                }
+            }
+            getFacade().create(current);
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignatura creada", "Se ha creado una asignatura correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignatura no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignatura no creada", "Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
 
-    public String prepareEdit(Asignatura var) {
-        current = var;
+    public String prepareEdit() {
+        current = (Asignatura) getItems().getRowData();
+        nombreAnterior = current.getNombre();
+        mallaAnterior = current.getMallaId();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            current.getAsignaturaPK().setIdUniversidad(current.getMalla().getMallaPK().getIdUniversidad());
-            current.getAsignaturaPK().setNombreDepartamento(current.getMalla().getMallaPK().getNombreDepartamento());
-            current.getAsignaturaPK().setNombreFacultad(current.getMalla().getMallaPK().getNombreFacultad());
-            current.getAsignaturaPK().setNombreMalla(current.getMalla().getMallaPK().getNombreMalla());
-            current.getAsignaturaPK().setNombreCarrera(current.getMalla().getMallaPK().getNombreCarrera());
-            getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignatura actualizado", "Se ha actualizado correctamente"));
+            if(!(nombreAnterior.equals(current.getNombre())) || !(mallaAnterior.equals(current.getMallaId()))){
+                for (Asignatura asignatura : getFacade().findAll()) {
+                    if(asignatura.getNombre().equals(current.getNombre())){
+                         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignatura no actualizada","El nombre de la asignatura ya existe"));
+                         return null;
+                    }
+                }
+            }
+            getFacade().edit(current);
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignatura actualizada", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Asignatura no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Asignatura no actualizada", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
     }
 
-    public String destroy(Asignatura valor) {
-        current = valor;
+    public String destroy() {
+        current = (Asignatura) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -153,10 +158,10 @@ public class AsignaturaController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignatura eliminado", "Se ha eliminado una Asignatura"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asignatura eliminada", "Se ha eliminado una asignatura"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignatura no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignatura no eliminada", "Lo sentimos, inténtelo más tarde"));
         }
     }
 
@@ -207,18 +212,15 @@ public class AsignaturaController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.BuscarPorUniversidad(1), true);
+        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Asignatura getAsignatura(entity.AsignaturaPK id) {
+    public Asignatura getAsignatura(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
     @FacesConverter(forClass = Asignatura.class)
     public static class AsignaturaControllerConverter implements Converter {
-
-        private static final String SEPARATOR = "#";
-        private static final String SEPARATOR_ESCAPED = "\\#";
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
@@ -230,32 +232,15 @@ public class AsignaturaController implements Serializable {
             return controller.getAsignatura(getKey(value));
         }
 
-        entity.AsignaturaPK getKey(String value) {
-            entity.AsignaturaPK key;
-            String values[] = value.split(SEPARATOR_ESCAPED);
-            key = new entity.AsignaturaPK();
-            key.setIdUniversidad(Integer.parseInt(values[0]));
-            key.setNombreFacultad(values[1]);
-            key.setNombreDepartamento(values[2]);
-            key.setNombreCarrera(values[3]);
-            key.setNombreMalla(values[4]);
-            key.setNombreAsignatura(values[5]);
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
             return key;
         }
 
-        String getStringKey(entity.AsignaturaPK value) {
+        String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getIdUniversidad());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreFacultad());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreDepartamento());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreCarrera());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreMalla());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreAsignatura());
+            sb.append(value);
             return sb.toString();
         }
 
@@ -266,7 +251,7 @@ public class AsignaturaController implements Serializable {
             }
             if (object instanceof Asignatura) {
                 Asignatura o = (Asignatura) object;
-                return getStringKey(o.getAsignaturaPK());
+                return getStringKey(o.getIdAsignatura());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Asignatura.class.getName());
             }

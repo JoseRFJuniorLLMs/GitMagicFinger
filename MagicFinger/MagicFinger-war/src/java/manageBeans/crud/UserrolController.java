@@ -68,9 +68,9 @@ public class UserrolController implements Serializable {
         return "List";
     }
 
-    public String prepareView(Userrol vari) {
-        current = vari;
-        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView() {
+        current = (Userrol) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
@@ -84,7 +84,7 @@ public class UserrolController implements Serializable {
         try {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Userrol creado", "Se ha creado una Userrol correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Userrol creado", "Se ha creado un rol de usuario correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -93,8 +93,8 @@ public class UserrolController implements Serializable {
         }
     }
 
-    public String prepareEdit(Userrol var) {
-        current = var;
+    public String prepareEdit() {
+        current = (Userrol) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -113,8 +113,8 @@ public class UserrolController implements Serializable {
         }
     }
 
-    public String destroy(Userrol valor) {
-        current = valor;
+    public String destroy() {
+        current = (Userrol) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -232,7 +232,7 @@ public class UserrolController implements Serializable {
             }
             if (object instanceof Userrol) {
                 Userrol o = (Userrol) object;
-                return getStringKey(o.getRol());
+                return getStringKey(o.getName());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Userrol.class.getName());
             }

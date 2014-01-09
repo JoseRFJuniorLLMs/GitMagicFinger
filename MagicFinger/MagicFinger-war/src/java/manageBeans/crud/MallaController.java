@@ -37,7 +37,6 @@ public class MallaController implements Serializable {
     public Malla getSelected() {
         if (current == null) {
             current = new Malla();
-            current.setMallaPK(new entity.MallaPK());
             selectedItemIndex = -1;
         }
         return current;
@@ -69,62 +68,53 @@ public class MallaController implements Serializable {
         return "List";
     }
 
-    public String prepareView(Malla vari) {
-        current = vari;
-        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+    public String prepareView() {
+        current = (Malla) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
         current = new Malla();
-        current.setMallaPK(new entity.MallaPK());
         selectedItemIndex = -1;
         return "Create";
     }
 
     public String create() {
         try {
-            current.getMallaPK().setNombreFacultad(current.getCarrera().getCarreraPK().getNombreFacultad());
-            current.getMallaPK().setIdUniversidad(current.getCarrera().getCarreraPK().getIdUniversidad());
-            current.getMallaPK().setNombreDepartamento(current.getCarrera().getCarreraPK().getNombreDepartamento());
-            current.getMallaPK().setNombreCarrera(current.getCarrera().getCarreraPK().getNombreCarrera());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Malla creado", "Se ha creado una Malla correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Malla creada", "Se ha creado una malla correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Malla no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Malla no creada", "Lo sentimos, inténtelo más tarde"));
             return null;
         }
     }
 
-    public String prepareEdit(Malla var) {
-        current = var;
+    public String prepareEdit() {
+        current = (Malla) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
-            current.getMallaPK().setNombreFacultad(current.getCarrera().getCarreraPK().getNombreFacultad());
-            current.getMallaPK().setIdUniversidad(current.getCarrera().getCarreraPK().getIdUniversidad());
-            current.getMallaPK().setNombreDepartamento(current.getCarrera().getCarreraPK().getNombreDepartamento());
-            current.getMallaPK().setNombreCarrera(current.getCarrera().getCarreraPK().getNombreCarrera());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Malla actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Malla actualizada", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Malla no actualizado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Malla no actualizada", "Lo sentimos, inténtelo más tarde"));
 
             return null;
         }
     }
 
-    public String destroy(Malla valor) {
-        current = valor;
+    public String destroy() {
+        current = (Malla) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -149,10 +139,10 @@ public class MallaController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Malla eliminado", "Se ha eliminado una Malla"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Malla eliminada", "Se ha eliminado una malla"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Malla no eliminado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Malla no eliminada", "Lo sentimos, inténtelo más tarde"));
         }
     }
 
@@ -203,19 +193,15 @@ public class MallaController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Malla getMalla(entity.MallaPK id) {
+    public Malla getMalla(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
     @FacesConverter(forClass = Malla.class)
     public static class MallaControllerConverter implements Converter {
-
-        private static final String SEPARATOR = "#";
-        private static final String SEPARATOR_ESCAPED = "\\#";
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
@@ -227,29 +213,15 @@ public class MallaController implements Serializable {
             return controller.getMalla(getKey(value));
         }
 
-        entity.MallaPK getKey(String value) {
-            entity.MallaPK key;
-            String values[] = value.split(SEPARATOR_ESCAPED);
-            key = new entity.MallaPK();
-            key.setIdUniversidad(Integer.parseInt(values[0]));
-            key.setNombreFacultad(values[1]);
-            key.setNombreDepartamento(values[2]);
-            key.setNombreCarrera(values[3]);
-            key.setNombreMalla(values[4]);
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
             return key;
         }
 
-        String getStringKey(entity.MallaPK value) {
+        String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
-            sb.append(value.getIdUniversidad());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreFacultad());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreDepartamento());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreCarrera());
-            sb.append(SEPARATOR);
-            sb.append(value.getNombreMalla());
+            sb.append(value);
             return sb.toString();
         }
 
@@ -260,7 +232,7 @@ public class MallaController implements Serializable {
             }
             if (object instanceof Malla) {
                 Malla o = (Malla) object;
-                return getStringKey(o.getMallaPK());
+                return getStringKey(o.getIdCarrera());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Malla.class.getName());
             }
