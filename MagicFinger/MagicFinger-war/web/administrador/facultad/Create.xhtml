@@ -54,27 +54,19 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Nombre:" for="nombre" />
-                            </h4>
-                            <p:inputText style="vertical-align: center" id="idFacultad" value="#{facultadController.selected.idFacultad}"  required="true" requiredMessage="#{bundle.CreateFacultadRequiredMessage_idFacultad}"/>
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateFacultadLabel_nombre}" for="nombre" />
                             </h4>
-                            <p:inputText style="vertical-align: center" id="nombre" value="#{facultadController.selected.nombre}"  />
+                            <p:inputText style="vertical-align: center" id="nombre" value="#{facultadController.selected.nombre}"  validator="#{funcionesMB.validarNombre}"/>
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateFacultadLabel_uniIdUniversidad}" for="uniIdUniversidad" />
-                            </h4>
-                            <p:selectOneMenu style="vertical-align: center" id="uniIdUniversidad" value="#{facultadController.selected.uniIdUniversidad}"  required="true" requiredMessage="#{bundle.CreateFacultadRequiredMessage_uniIdUniversidad}">
-                                <f:selectItems value="#{universidadController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
                         </h:panelGrid>
-                        <p:commandLink style="display: inline-block; margin-right: 25px" action="#{facultadController.create}">
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{facultadController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <p:outputLabel> Guardar Facultad</p:outputLabel>
-                        </p:commandLink>
-                        <p:commandLink style="display: inline-block;" action="#{facultadController.prepareList}" immediate="true">
+                            <h:outputLabel> Guardar Facultad</h:outputLabel>
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{facultadController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <p:outputLabel>Volver</p:outputLabel>
-                        </p:commandLink>
+                            <h:outputLabel>Volver</h:outputLabel>
+                        </h:commandLink>
                         <br></br><br></br>
                     </div>
                 </div>

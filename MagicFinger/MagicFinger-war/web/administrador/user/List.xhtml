@@ -30,22 +30,13 @@
                 <p:growl id="grow1" showDetail="true" />
                 <h1 style="text-align: center;margin-bottom: 20px"> Gestion de User</h1>
                 <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                    
-                <p:menubar style="text-align: center; margin: 0 auto; width: 70%">  
-                    <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Profesor" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:submenu label="Curso" icon="ui-icon-bullet">  
-                        <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />   
-                    </p:submenu>
-                    <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
-               </p:menubar> 
+                    <p:megaMenu style="display: inline-block;ext-align: center;">  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
+                    </p:megaMenu>  
                 </div>
                 <div id="agregar" style="display: inline-block;width: 100%;">
                     <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px"/>
@@ -53,7 +44,8 @@
                         En esta vista usted puede gestionar las facultades inscritas en el sistema
                     </p>
                     <h:commandLink action="#{userController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;  display: block;"/>
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
+
                         <h:outputLabel>Agregar User</h:outputLabel>
                     </h:commandLink>            
                 </div>
@@ -62,37 +54,37 @@
                         <f:facet name="header">
                             <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.id}" sortBy="#{item.id}" >
+                        <p:column filterBy="#{item.id}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserTitle_id}"/>
                             </f:facet>
                             <h:outputText value="#{item.id}"/>
                         </p:column>
-                        <p:column filterBy="#{item.usuario}" sortBy="#{item.usuario}" >
+                        <p:column filterBy="#{item.usuario}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserTitle_usuario}"/>
                             </f:facet>
                             <h:outputText value="#{item.usuario}"/>
                         </p:column>
-                        <p:column filterBy="#{item.password}" sortBy="#{item.password}" >
+                        <p:column filterBy="#{item.password}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserTitle_password}"/>
                             </f:facet>
                             <h:outputText value="#{item.password}"/>
                         </p:column>
-                        <p:column filterBy="#{item.profesorId}" sortBy="#{item.profesorId}" >
+                        <p:column filterBy="#{item.proIdProfesor}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_profesorId}"/>
+                                <h:outputText value="#{bundle.ListUserTitle_proIdProfesor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.profesorId}"/>
+                            <h:outputText value="#{item.proIdProfesor}"/>
                         </p:column>
-                        <p:column filterBy="#{item.alumnoId}" sortBy="#{item.alumnoId}" >
+                        <p:column filterBy="#{item.aluIdAlumno}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_alumnoId}"/>
+                                <h:outputText value="#{bundle.ListUserTitle_aluIdAlumno}"/>
                             </f:facet>
-                            <h:outputText value="#{item.alumnoId}"/>
+                            <h:outputText value="#{item.aluIdAlumno}"/>
                         </p:column>
-                        <p:column filterBy="#{item.userrolName}" sortBy="#{item.userrolName}" >
+                        <p:column filterBy="#{item.userrolName}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserTitle_userrolName}"/>
                             </f:facet>
@@ -102,13 +94,13 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones"/>
                             </f:facet>
-                            <h:commandLink action="#{userController.prepareView}">
+                            <h:commandLink action="#{userController.prepareView(item)}">
                                 <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{userController.prepareEdit}">
+                            <h:commandLink action="#{userController.prepareEdit(item)}">
                                 <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{userController.destroy}">
+                            <h:commandLink action="#{userController.destroy(item)}">
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
                             </h:commandLink>
                         </p:column>

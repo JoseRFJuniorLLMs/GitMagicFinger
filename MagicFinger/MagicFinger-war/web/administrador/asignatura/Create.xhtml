@@ -54,15 +54,15 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Nombre:" for="nombre" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAsignaturaLabel_nombre}" for="nombre" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="nombre" value="#{asignaturaController.selected.nombre}" title="#{bundle.CreateAsignaturaTitle_nombre}" validator="#{funcionesMB.validarNombre}"  />
+                            <p:inputText style="vertical-align: center" id="nombre" value="#{asignaturaController.selected.nombre}"  />
 
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Malla:" for="mallaId" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAsignaturaLabel_malIdMalla}" for="malIdMalla" />
                             </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="mallaId" value="#{asignaturaController.selected.mallaId}" title="#{bundle.CreateAsignaturaTitle_mallaId}" required="true" requiredMessage="#{bundle.CreateAsignaturaRequiredMessage_mallaId}">
+                            <p:selectOneMenu style="vertical-align: center" id="malIdMalla" value="#{asignaturaController.selected.malIdMalla}"  required="true" requiredMessage="#{bundle.CreateAsignaturaRequiredMessage_malIdMalla}">
                                 <f:selectItems value="#{mallaController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
+                            </p:selectOneMenu>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{asignaturaController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

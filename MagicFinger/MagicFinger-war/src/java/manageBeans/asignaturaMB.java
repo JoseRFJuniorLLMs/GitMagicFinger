@@ -6,7 +6,9 @@ package manageBeans;
  */
 import entity.Curso;
 import entity.Profesor;
+import entity.ProfesoresPorCurso;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -35,7 +37,7 @@ public class asignaturaMB {
     private ProfesorFacadeLocal profesorFacade;
     
     private Profesor profesor;
-    private List<Curso> ListCurso;
+    private List<Curso> ListCurso = new LinkedList<>();
     private asignaturaDataModel ListaCursoData;
     private Curso cursoSeleccionado;
 
@@ -48,7 +50,10 @@ public class asignaturaMB {
         cursoSeleccionado = profesorLogin.getCurso();
         profesor = profesorLogin.getProfesor();
         if (profesor != null) {
-            ListCurso = profesor.getCursoList();
+            profesor.getProfesoresPorCursoList();
+            for (ProfesoresPorCurso curso : profesor.getProfesoresPorCursoList()) {
+               ListCurso.add(curso.getCurso());
+            }
             ListaCursoData = new asignaturaDataModel(ListCurso);
         }
     }

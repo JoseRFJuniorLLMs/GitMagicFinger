@@ -132,7 +132,7 @@ public class asistenciaCursoMB {
                 else
                     nueva.setEstado(3);
                 //datos
-                nueva.setBloqueClaseId(bloqueClaseActual);
+                nueva.setBloIdBloque(bloqueClaseActual);
                 nueva.setFecha(hoy);
                 nueva.setAlumnosDelCurso(tempAlumno);
                 asistenciaFacade.create(nueva);
@@ -244,7 +244,7 @@ public class asistenciaCursoMB {
                 if(asistioCurso==null){
                     Asistencia nuevo = new Asistencia();
                     nuevo.setAlumnosDelCurso(alumnoCurso);
-                    nuevo.setBloqueClaseId(bloqueClase);
+                    nuevo.setBloIdBloque(bloqueClase);
                     nuevo.setFecha(fecha);
                     nuevo.setEstado(valor2);
                     asistenciaFacade.create(nuevo);

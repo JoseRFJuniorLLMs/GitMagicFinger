@@ -52,7 +52,7 @@
                 <div style="text-align:center">
                     <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{facultadController.items}" var="item" paginator="true" rows="10">
                         <f:facet name="header">
-                            <h3 style="color:white">XXX Registrados</h3>
+                            <h3 style="color:white">Facultades Registradas</h3>
                         </f:facet>
                         <p:column filterBy="#{item.idFacultad}" >
                             <f:facet name="header">
@@ -66,12 +66,7 @@
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column filterBy="#{item.uniIdUniversidad}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFacultadTitle_uniIdUniversidad}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.uniIdUniversidad}"/>
-                        </p:column>
+                       
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Acciones"/>

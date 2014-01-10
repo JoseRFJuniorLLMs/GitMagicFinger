@@ -44,7 +44,8 @@
                         En esta vista usted puede gestionar las facultades inscritas en el sistema
                     </p>
                     <h:commandLink action="#{userrolController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;  display: block;"/>
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
+
                         <h:outputLabel>Agregar Userrol</h:outputLabel>
                     </h:commandLink>            
                 </div>
@@ -53,7 +54,7 @@
                         <f:facet name="header">
                             <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.name}" sortBy="#{item.name}" >
+                        <p:column filterBy="#{item.name}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUserrolTitle_name}"/>
                             </f:facet>
@@ -63,13 +64,13 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones"/>
                             </f:facet>
-                            <h:commandLink action="#{userrolController.prepareView}">
+                            <h:commandLink action="#{userrolController.prepareView(item)}">
                                 <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{userrolController.prepareEdit}">
+                            <h:commandLink action="#{userrolController.prepareEdit(item)}">
                                 <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{userrolController.destroy}">
+                            <h:commandLink action="#{userrolController.destroy(item)}">
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
                             </h:commandLink>
                         </p:column>

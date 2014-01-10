@@ -54,29 +54,27 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Asignatura:" for="asignatura" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_porcentajeAprobacion}" for="porcentajeAprobacion" />
                             </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="asignatura" value="#{cursoController.selected.asignatura}" title="#{bundle.CreateCursoTitle_asignatura}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_asignatura}">
+                            <p:inputText style="vertical-align: center" id="porcentajeAprobacion" value="#{cursoController.selected.porcentajeAprobacion}"  />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_termino}" for="termino" />
+                            </h4>
+                            <p:inputText style="vertical-align: center" id="termino" value="#{cursoController.selected.termino}"  />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_asignatura}" for="asignatura" />
+                            </h4>
+                            <p:selectOneMenu style="vertical-align: center" id="asignatura" value="#{cursoController.selected.asignatura}"  required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_asignatura}">
                                 <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Tipo:" for="tipoAsignatura" />
+                            </p:selectOneMenu>
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_semestre}" for="semestre" />
                             </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}" title="#{bundle.CreateCursoTitle_tipoAsignatura}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_tipoAsignatura}">
-                                <f:selectItems value="#{tipoAsignaturaController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Porcentaje de aprobación:" for="porcentajeAprobacion" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="porcentajeAprobacion" value="#{cursoController.selected.porcentajeAprobacion}" title="#{bundle.CreateCursoTitle_porcentajeAprobacion}" />
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Atrasados después de (min):" for="termino" />
-                            </h4>
-                            <h:inputText style="vertical-align: center" id="termino" value="#{cursoController.selected.termino}" title="#{bundle.CreateCursoTitle_termino}"  />
-                            
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Semestre:" for="semestre" />
-                            </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="semestre" value="#{cursoController.selected.semestre}" title="#{bundle.CreateCursoTitle_semestre}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_semestre}">
+                            <p:selectOneMenu style="vertical-align: center" id="semestre" value="#{cursoController.selected.semestre}"  required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_semestre}">
                                 <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
-                            
+                            </p:selectOneMenu>
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_tipoAsignatura}" for="tipoAsignatura" />
+                            </h4>
+                            <p:selectOneMenu style="vertical-align: center" id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}"  required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_tipoAsignatura}">
+                                <f:selectItems value="#{tipoAsignaturaController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{cursoController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

@@ -40,20 +40,20 @@
                         </p:megaMenu>  
                     </div>
                     <div id="ver" style="display: inline-block;width: 100%;">
-                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
+                        <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
                         <p style="float: left;display: inline-block">
-                            &nbsp;Para ver el Grupos, debe ingresar los siguientes campos:
+                            &nbsp;En esta vista usted puede ver el detalle de la Grupos
                         </p>  
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_idGrupo}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.idGrupo}" title="#{bundle.ViewGruposTitle_idGrupo}"/>
+                            </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_nombre}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.nombre}" title="#{bundle.ViewGruposTitle_nombre}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_alumnosDelCurso}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.alumnosDelCurso}" title="#{bundle.ViewGruposTitle_alumnosDelCurso}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_curso}"/>
                             </h4>

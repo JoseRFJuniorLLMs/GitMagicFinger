@@ -7,6 +7,7 @@ import manageBeans.crud.util.PaginationHelper;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -19,6 +20,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import manageBeans.LoginSessionMB;
 import sessionBeans.DepartamentoFacadeLocal;
 
 @Named("departamentoController")
@@ -31,7 +34,9 @@ public class DepartamentoController implements Serializable {
     private DepartamentoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    
+    @Inject
+    LoginSessionMB session;
     public DepartamentoController() {
     }
 
@@ -96,12 +101,13 @@ public class DepartamentoController implements Serializable {
 
     public String prepareEdit(Departamento var) {
         current = var;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
+            
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento actualizado", "Se ha actualizado correctamente"));
@@ -116,7 +122,7 @@ public class DepartamentoController implements Serializable {
 
     public String destroy(Departamento valor) {
         current = valor;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -164,7 +170,7 @@ public class DepartamentoController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
+            items = new ListDataModel(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()) );
         }
         return items;
     }
@@ -194,7 +200,7 @@ public class DepartamentoController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()), true);
     }
 
     public Departamento getDepartamento(java.lang.Integer id) {

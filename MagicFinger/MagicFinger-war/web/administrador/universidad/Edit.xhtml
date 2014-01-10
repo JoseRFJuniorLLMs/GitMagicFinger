@@ -5,31 +5,33 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Editar Malla</title>
+        <title>Editar Universidad</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
 
     </h:head>
     <h:body>
-        <div id="top" style="display: inline-block; text-align: center">
-            <div id="logo" style="display: inline-block; float:left">
-                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+       <div id="top" style="display: inline-block; ">
+            <div id="logo" style="display: inline-block;vertical-align: middle;">
+                <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
+                    <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                </h:outputLink>
             </div>
-            <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
-                <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
+            <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
+                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 54, column 55 in unknown." value="Cerrar sesion" />
                 </h:form>
             </div>
-        </div>      
+        </div>    
         <div class="center_content">
 
             <h:form><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
-                    <h1 style="text-align: center;margin-bottom: 20px "> Editar Malla</h1>
+                    <h1 style="text-align: center;margin-bottom: 20px "> Editar Universidad</h1>
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
                         <p:megaMenu style="display: inline-block;ext-align: center;">  
                             <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
@@ -42,33 +44,30 @@
                     <div id="editar" style="display: inline-block;width: 100%;">
                         <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
                         <p style="float: left;display: inline-block">
-                            &nbsp;Para Editar el Malla, debe ingresar los siguientes campos:
+                            &nbsp;Para Editar el Universidad, debe ingresar los siguientes campos:
                         </p>  
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4><p:outputLabel value="#{bundle.EditMallaLabel_idMalla}" for="idMalla" /></h4>
-                            <p:inputText id="idMalla" value="#{mallaController.selected.idMalla}" required="true" requiredMessage="#{bundle.EditMallaRequiredMessage_idMalla}"/>
-                            <h4><p:outputLabel value="#{bundle.EditMallaLabel_nombre}" for="nombre" /></h4>
-                            <p:inputText id="nombre" value="#{mallaController.selected.nombre}" />
-                            <h4><p:outputLabel value="#{bundle.EditMallaLabel_fecha}" for="fecha" /></h4>
-                            title
-                            <p:inputText id="fecha" value="#{mallaController.selected.fecha}" >
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </p:inputText>
-                            <h4><p:outputLabel value="#{bundle.EditMallaLabel_carIdCarrera}" for="carIdCarrera" /></h4>
-                            <p:selectOneMenu id="carIdCarrera" value="#{mallaController.selected.carIdCarrera}" required="true" requiredMessage="#{bundle.EditMallaRequiredMessage_carIdCarrera}">
-                                <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
+                            <h4><h:outputLabel value="Codigo" for="nombre" /></h4>
+                            <p:inputText id="nombre2" disabled="true"  value="#{universidadController.selected.idUniversidad}"/>
+                            <h4><h:outputLabel value="#{bundle.EditUniversidadLabel_nombre}" for="nombre" /></h4>
+                            <p:inputText id="nombre" value="#{universidadController.selected.nombre}" validator="#{funcionesMB.validarNombre}"/>
+                            <h4><h:outputLabel value="#{bundle.EditUniversidadLabel_rut}" for="rut" /></h4>
+                            <p:inputText id="rut" value="#{universidadController.selected.rut}" validator="#{funcionesMB.validarNombre}"/>
+                            <h4><h:outputLabel value="#{bundle.EditUniversidadLabel_direccion}" for="direccion" /></h4>
+                            <p:inputText id="direccion" value="#{universidadController.selected.direccion}" validator="#{funcionesMB.validarNombre}"/>
+                            <h4><h:outputLabel value="#{bundle.EditUniversidadLabel_telefono}" for="telefono" /></h4>
+                            <p:inputText id="telefono" value="#{universidadController.selected.telefono}" validator="#{funcionesMB.validarNombre}"/>
                         </h:panelGrid>
-                        <p:commandLink style="display: inline-block; margin-right: 25px" action="#{mallaController.update}">
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{universidadController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <p:outputLabel>Guardar Malla</p:outputLabel>
-                        </p:commandLink>
-                        <p:commandLink style="display: inline-block;" action="#{mallaController.prepareList}" immediate="true">
+                            <h:outputLabel>Guardar Universidad</h:outputLabel>
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{universidadController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <p:outputLabel>Volver</p:outputLabel>
-                        </p:commandLink>
+                            <h:outputLabel>Volver</h:outputLabel>
+                        </h:commandLink>
                         <br></br><br></br>
                     </div>
                 </div>

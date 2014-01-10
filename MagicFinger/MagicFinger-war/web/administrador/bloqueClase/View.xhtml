@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -6,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Ver Bloque de Clase</title>
+        <title>Ver BloqueClase</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
@@ -22,7 +21,7 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
                 </h:form>
             </div>
         </div>      
@@ -30,45 +29,48 @@
 
             <h:form><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
-                    <h1 style="text-align: center;margin-bottom: 20px "> Ver Bloque de Clase</h1>
+                    <h1 style="text-align: center;margin-bottom: 20px "> Ver BloqueClase</h1>
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                        <p:menubar style="text-align: center; margin: 0 auto; width: 70%">  
-                    <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Profesor" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:submenu label="Curso" icon="ui-icon-bullet">  
-                        <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />   
-                    </p:submenu>
-                    <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
-               </p:menubar> 
+                        <p:megaMenu style="display: inline-block;ext-align: center;">  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
+                        </p:megaMenu>  
                     </div>
                     <div id="ver" style="display: inline-block;width: 100%;">
                         <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
                         <p style="float: left;display: inline-block">
-                             &nbsp;A continuación, se muestra el detalle del bloque de clase:
+                            &nbsp;En esta vista usted puede ver el detalle de la BloqueClase
                         </p>  
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputText value="Curso:"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewBloqueClaseLabel_idBloque}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.curso.asignatura.nombre} (#{bloqueClaseController.selected.curso.tipoAsignatura.nombre} #{bloqueClaseController.selected.curso.semestre.toString()})" title="#{bundle.ViewBloqueClaseTitle_curso}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.idBloque}" title="#{bundle.ViewBloqueClaseTitle_idBloque}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="Día de la semana:"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewBloqueClaseLabel_bloque}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.bloque}" title="#{bundle.ViewBloqueClaseTitle_bloque}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewBloqueClaseLabel_diaSemana}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.diaSemana}" title="#{bundle.ViewBloqueClaseTitle_diaSemana}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="Bloque:"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewBloqueClaseLabel_horaInicio}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.toString()}" title="#{bundle.ViewBloqueClaseTitle_bloque}"/>
-                            </h4>                            
-                            
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.horaInicio}" title="#{bundle.ViewBloqueClaseTitle_horaInicio}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewBloqueClaseLabel_horaTermino}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.horaTermino}" title="#{bundle.ViewBloqueClaseTitle_horaTermino}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewBloqueClaseLabel_curso}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{bloqueClaseController.selected.curso}" title="#{bundle.ViewBloqueClaseTitle_curso}"/>
+                            </h4>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{bloqueClaseController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>

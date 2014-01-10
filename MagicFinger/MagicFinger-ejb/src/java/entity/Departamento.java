@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Departamento.findAll", query = "SELECT d FROM Departamento d"),
+    @NamedQuery(name = "Departamento.findByUniversidad", query = "SELECT d FROM Departamento d WHERE d.facIdFacultad.uniIdUniversidad.idUniversidad = :idUniversidad"),
     @NamedQuery(name = "Departamento.findByIdDepartamento", query = "SELECT d FROM Departamento d WHERE d.idDepartamento = :idDepartamento")})
 public class Departamento implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -124,7 +125,7 @@ public class Departamento implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Departamento[ idDepartamento=" + idDepartamento + " ]";
+        return nombre;
     }
     
 }

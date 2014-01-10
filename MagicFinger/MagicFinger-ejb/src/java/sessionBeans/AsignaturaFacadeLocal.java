@@ -29,4 +29,5 @@ public interface AsignaturaFacadeLocal {
 
     int count();
     
+    List BuscarPorIdUniversidad(int idUniversidad);
 }

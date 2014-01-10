@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Agregar Malla Curricular</title>
+        <title>Agregar Malla</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
@@ -54,20 +54,19 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Nombre:" for="descripcion" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateMallaLabel_nombre}" for="nombre" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="descripcion" value="#{mallaController.selected.descripcion}" title="#{bundle.CreateMallaTitle_descripcion}" validator="#{funcionesMB.validarNombre}" />
+                            <p:inputText style="vertical-align: center" id="nombre" value="#{mallaController.selected.nombre}"  />
 
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Fecha:" for="fecha" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateMallaLabel_fecha}" for="fecha" />
                             </h4>
-                            <p:calendar style="vertical-align: center; margin-top: 18px" value="#{mallaController.selected.fecha}" showOn="button" /> 
+                            <p:calendar style="vertical-align: center;" id="fecha" value="#{mallaController.selected.fecha}" />
                             
-                  
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Carrera:" for="carreraId" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateMallaLabel_carIdCarrera}" for="carIdCarrera" />
                             </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="carreraId" value="#{mallaController.selected.carreraId}" title="#{bundle.CreateMallaTitle_carreraId}" required="true" requiredMessage="#{bundle.CreateMallaRequiredMessage_carreraId}">
+                            <p:selectOneMenu style="vertical-align: center" id="carIdCarrera" value="#{mallaController.selected.carIdCarrera}"  required="true" requiredMessage="#{bundle.CreateMallaRequiredMessage_carIdCarrera}">
                                 <f:selectItems value="#{carreraController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
+                            </p:selectOneMenu>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{mallaController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

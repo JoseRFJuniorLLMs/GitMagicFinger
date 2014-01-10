@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Editar Bloque Clase</title>
+        <title>Editar BloqueClase</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
@@ -21,7 +21,7 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
                 </h:form>
             </div>
         </div>      
@@ -29,68 +29,47 @@
 
             <h:form><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
-                    <h1 style="text-align: center;margin-bottom: 20px "> Editar Bloque Clase</h1>
+                    <h1 style="text-align: center;margin-bottom: 20px "> Editar BloqueClase</h1>
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                        <p:menubar style="text-align: center; margin: 0 auto; width: 70%">  
-                    <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Profesor" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:submenu label="Curso" icon="ui-icon-bullet">  
-                        <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />   
-                    </p:submenu>
-                    <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
-               </p:menubar> 
+                        <p:megaMenu style="display: inline-block;ext-align: center;">  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
+                            <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
+                        </p:megaMenu>  
                     </div>
                     <div id="editar" style="display: inline-block;width: 100%;">
                         <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
                         <p style="float: left;display: inline-block">
-                            &nbsp;Para editar el bloque de clase, debe ingresar los siguientes campos:
+                            &nbsp;Para Editar el BloqueClase, debe ingresar los siguientes campos:
                         </p>  
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"><h:outputLabel value="#{bundle.EditBloqueClaseLabel_curso}" for="curso" /></h4>
-                            <h:selectOneMenu id="curso" value="#{bloqueClaseController.selected.curso}" title="#{bundle.EditBloqueClaseTitle_curso}">
+                            <h4><p:outputLabel value="#{bundle.EditBloqueClaseLabel_idBloque}" for="idBloque" /></h4>
+                            <p:inputText id="idBloque" value="#{bloqueClaseController.selected.idBloque}" required="true" requiredMessage="#{bundle.EditBloqueClaseRequiredMessage_idBloque}"/>
+                            <h4><p:outputLabel value="#{bundle.EditBloqueClaseLabel_bloque}" for="bloque" /></h4>
+                            <p:inputText id="bloque" value="#{bloqueClaseController.selected.bloque}" />
+                            <h4><p:outputLabel value="#{bundle.EditBloqueClaseLabel_diaSemana}" for="diaSemana" /></h4>
+                            <p:inputText id="diaSemana" value="#{bloqueClaseController.selected.diaSemana}" />
+                            <h4><p:outputLabel value="#{bundle.EditBloqueClaseLabel_horaInicio}" for="horaInicio" /></h4>
+                            <p:inputText id="horaInicio" value="#{bloqueClaseController.selected.horaInicio}" />
+                            <h4><p:outputLabel value="#{bundle.EditBloqueClaseLabel_horaTermino}" for="horaTermino" /></h4>
+                            <p:inputText id="horaTermino" value="#{bloqueClaseController.selected.horaTermino}" />
+                            <h4><p:outputLabel value="#{bundle.EditBloqueClaseLabel_curso}" for="curso" /></h4>
+                            <p:selectOneMenu id="curso" value="#{bloqueClaseController.selected.curso}" >
                                 <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
-                            </h:selectOneMenu>
-                            
-                            <h4 style="display: inline-block;"><h:outputLabel value="Día de la semana:" for="diaSemana" /></h4>
-                            <h:selectOneMenu style="vertical-align: center" value="#{bloqueClaseController.selected.diaSemana}">  
-                                <f:selectItem itemLabel="Lunes" itemValue="Lunes" />  
-                                <f:selectItem itemLabel="Martes" itemValue="Martes" />  
-                                <f:selectItem itemLabel="Miércoles" itemValue="Miércoles" /> 
-                                <f:selectItem itemLabel="Jueves" itemValue="Jueves" />  
-                                <f:selectItem itemLabel="Viernes" itemValue="Viernes" />  
-                                <f:selectItem itemLabel="Sabado" itemValue="Sabado" />   
-                            </h:selectOneMenu> 
-                            
-                            <h4 style="display: inline-block;"><h:outputLabel value="Bloque:" for="bloque" /></h4>
-                            <h:selectOneMenu style="vertical-align: center" value="#{bloqueClaseController.selected.bloque}" >  
-                                <f:selectItem itemLabel="1 ( 08:00-09:30 )" itemValue="1" />  
-                                <f:selectItem itemLabel="2 ( 09:40-11:10 )" itemValue="2" />  
-                                <f:selectItem itemLabel="3 ( 11:20-12:50 )" itemValue="3" /> 
-                                <f:selectItem itemLabel="4 ( 13:50-15:20 )" itemValue="4" />  
-                                <f:selectItem itemLabel="5 ( 15:30-17:00 )" itemValue="5" />  
-                                <f:selectItem itemLabel="6 ( 17:10-18:40 )" itemValue="6" /> 
-                                <f:selectItem itemLabel="7 ( 19:00-20:10 )" itemValue="7" />   
-                                <f:selectItem itemLabel="8 ( 20:20-22:00 )" itemValue="8" />   
-                                <f:selectItem itemLabel="9 ( 22:00-23:00 )" itemValue="9" />  
-                            </h:selectOneMenu> 
+                            </p:selectOneMenu>
                         </h:panelGrid>
-                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{bloqueClaseController.update}">
+                        <p:commandLink style="display: inline-block; margin-right: 25px" action="#{bloqueClaseController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <h:outputLabel> Guardar cambios</h:outputLabel>
-                        </h:commandLink>
-                        <h:commandLink style="display: inline-block;" action="#{bloqueClaseController.prepareList}" immediate="true">
+                            <p:outputLabel>Guardar BloqueClase</p:outputLabel>
+                        </p:commandLink>
+                        <p:commandLink style="display: inline-block;" action="#{bloqueClaseController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <h:outputLabel>Volver </h:outputLabel>
-                        </h:commandLink>
+                            <p:outputLabel>Volver</p:outputLabel>
+                        </p:commandLink>
                         <br></br><br></br>
                     </div>
                 </div>
@@ -98,6 +77,4 @@
         </div>
     </h:body>
 </html>
-
-
 

@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Carrera.findAll", query = "SELECT c FROM Carrera c"),
+    @NamedQuery(name = "Carrera.findByUniversidad", query = "SELECT c FROM Carrera c WHERE c.depIdDepartamento.facIdFacultad.uniIdUniversidad.idUniversidad = :idUniversidad"),
     @NamedQuery(name = "Carrera.findByIdCarrera", query = "SELECT c FROM Carrera c WHERE c.idCarrera = :idCarrera")})
 public class Carrera implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -113,7 +114,7 @@ public class Carrera implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Carrera[ idCarrera=" + idCarrera + " ]";
+        return nombre;
     }
     
 }

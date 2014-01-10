@@ -1,6 +1,7 @@
 package manageBeans.crud;
 
 import entity.Facultad;
+import entity.Universidad;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -91,6 +92,8 @@ public class FacultadController implements Serializable {
 
     public String create() {
         try {
+            Universidad nueva = new Universidad(session.getIdUniversidad());
+            current.setUniIdUniversidad(nueva);
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Facultad creado", "Se ha creado una Facultad correctamente"));
@@ -124,7 +127,7 @@ public class FacultadController implements Serializable {
 
     public String destroy(Facultad valor) {
         current = valor;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -205,7 +208,7 @@ public class FacultadController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()), true);
     }
 
     public Facultad getFacultad(java.lang.Integer id) {

@@ -29,4 +29,5 @@ public interface MallaFacadeLocal {
 
     int count();
     
+    List BuscarPorIdUniversidad(int idUniversidad);
 }

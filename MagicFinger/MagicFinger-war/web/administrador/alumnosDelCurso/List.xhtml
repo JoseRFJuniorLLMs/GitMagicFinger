@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
-        <title>Gestión de Alumnos por Curso</title>
+        <title>Gestion de AlumnosDelCurso</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
@@ -21,69 +21,68 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 54, column 55 in unknown." value="Cerrar sesión" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 54, column 55 in unknown." value="Cerrar sesion" />
                 </h:form>
             </div>
         </div>
         <h:form >
             <div class="center_content" style="padding-bottom: 40px;">
                 <p:growl id="grow1" showDetail="true" />
-                <h1 style="text-align: center;margin-bottom: 20px"> Gestión de Alumnos por Curso</h1>
+                <h1 style="text-align: center;margin-bottom: 20px"> Gestion de AlumnosDelCurso</h1>
                 <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                    <p:menubar style="text-align: center; margin: 0 auto; width: 70%">  
-                    <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Profesor" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:submenu label="Curso" icon="ui-icon-bullet">  
-                        <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />   
-                    </p:submenu>
-                    <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
-               </p:menubar> 
+                    <p:megaMenu style="display: inline-block;ext-align: center;">  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
+                        <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
+                    </p:megaMenu>  
                 </div>
                 <div id="agregar" style="display: inline-block;width: 100%;">
                     <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px"/>
                     <p style="vertical-align: middle;display: inline-block;text-align: left">
-                        &nbsp; En esta sección, usted puede gestionar los alumnos por curso inscritos en el sistema.
+                        En esta vista usted puede gestionar las facultades inscritas en el sistema
                     </p>
                     <h:commandLink action="#{alumnosDelCursoController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;  display: block;"/>
-                        <h:outputLabel>Agregar Alumno a un Curso</h:outputLabel>
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
+
+                        <h:outputLabel>Agregar AlumnosDelCurso</h:outputLabel>
                     </h:commandLink>            
                 </div>
                 <div style="text-align:center">
                     <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{alumnosDelCursoController.items}" var="item" paginator="true" rows="10">
                         <f:facet name="header">
-                            <h3 style="color:white">Alumnos por Curso Registrados</h3>
+                            <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.asignatura.nombre}" sortBy="#{item.asignatura.nombre}" >
+                        <p:column filterBy="#{item.alumno}" >
                             <f:facet name="header">
-                                <h:outputText value="Curso"/>
+                                <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_alumno}"/>
                             </f:facet>
-                            <h:outputText value="#{item.curso.asignatura.nombre} (#{item.curso.tipoAsignatura.nombre} #{item.curso.semestre.toString()})"/>
+                            <h:outputText value="#{item.alumno}"/>
                         </p:column>
-                        <p:column filterBy="#{item.alumno.nombre}" sortBy="#{item.alumno.nombre}" >
+                        <p:column filterBy="#{item.curso}" >
                             <f:facet name="header">
-                                <h:outputText value="Alumno"/>
+                                <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_curso}"/>
                             </f:facet>
-                            <h:outputText value="#{item.alumno.toStringComprimido()}"/>
+                            <h:outputText value="#{item.curso}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.gruIdGrupo}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAlumnosDelCursoTitle_gruIdGrupo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.gruIdGrupo}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Acciones"/>
                             </f:facet>
-                            <h:commandLink action="#{alumnosDelCursoController.prepareView}">
+                            <h:commandLink action="#{alumnosDelCursoController.prepareView(item)}">
                                 <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{alumnosDelCursoController.prepareEdit}">
+                            <h:commandLink action="#{alumnosDelCursoController.prepareEdit(item)}">
                                 <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{alumnosDelCursoController.destroy}">
+                            <h:commandLink action="#{alumnosDelCursoController.destroy(item)}">
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
                             </h:commandLink>
                         </p:column>

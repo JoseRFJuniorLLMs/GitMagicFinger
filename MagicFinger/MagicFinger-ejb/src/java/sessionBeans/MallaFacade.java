@@ -5,9 +5,11 @@
 package sessionBeans;
 
 import entity.Malla;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,5 +28,9 @@ public class MallaFacade extends AbstractFacade<Malla> implements MallaFacadeLoc
     public MallaFacade() {
         super(Malla.class);
     }
-    
+    public List BuscarPorIdUniversidad(int idUniversidad){
+        Query q = em.createNamedQuery("Malla.findByUniversidad").setParameter("idUniversidad", idUniversidad);
+        List listado = q.getResultList();
+        return listado;
+    }
 }

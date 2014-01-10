@@ -21,7 +21,7 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
                 </h:form>
             </div>
         </div>      
@@ -55,13 +55,17 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputText value="Nombre:"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Código: "/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{carreraController.selected.nombreCarrera}" title="#{bundle.ViewCarreraTitle_nombreCarrera}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="00#{carreraController.selected.idCarrera}" title="Código"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="Departamento:"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Nombre: "/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{carreraController.selected.departamentoId}" title="#{bundle.ViewCarreraTitle_departamentoId}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{carreraController.selected.nombre}" title="Nombre"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="Departamento: "/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{carreraController.selected.depIdDepartamento.nombre}" title="Departamento"/>
                             </h4>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{carreraController.prepareList}" immediate="true">

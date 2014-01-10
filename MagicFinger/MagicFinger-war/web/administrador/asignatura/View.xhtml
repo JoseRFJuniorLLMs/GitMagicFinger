@@ -55,14 +55,17 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            
-                            <h4 style="display: inline-block;"> <h:outputText value="Nombre:"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Código :"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{asignaturaController.selected.idAsignatura}" title="#{bundle.ViewAsignaturaTitle_idAsignatura}"/>
+                            </h4>
+                            <h4 style="display: inline-block;"> <h:outputText value="Nombre: "/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{asignaturaController.selected.nombre}" title="#{bundle.ViewAsignaturaTitle_nombre}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="Malla:"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="Malla"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{asignaturaController.selected.mallaId}" title="#{bundle.ViewAsignaturaTitle_mallaId}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{asignaturaController.selected.malIdMalla.nombre}" title="#{bundle.ViewAsignaturaTitle_malIdMalla}"/>
                             </h4>
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block;" action="#{asignaturaController.prepareList}" immediate="true">

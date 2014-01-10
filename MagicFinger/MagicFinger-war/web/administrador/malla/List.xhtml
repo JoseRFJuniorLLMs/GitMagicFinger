@@ -61,38 +61,43 @@
                         <f:facet name="header">
                             <h3 style="color:white">Planes de Estudio Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.descripcion}" sortBy="#{item.descripcion}" >
+                        <p:column filterBy="#{item.idMalla}" >
                             <f:facet name="header">
-                                <h:outputText value="Nombre"/>
+                                <h:outputText value="Código"/>
                             </f:facet>
-                            <h:outputText value="#{item.descripcion}"/>
+                            <h:outputText value="#{item.idMalla}"/>
                         </p:column>
-                        <p:column filterBy="#{item.fecha}" sortBy="#{item.fecha}" >
+                        <p:column filterBy="#{item.nombre}" >
                             <f:facet name="header">
-                                <h:outputText value="Fecha"/>
+                                <h:outputText value="#{bundle.ListMallaTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.fecha}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMallaTitle_fecha}"/>
                             </f:facet>
                             <h:outputText value="#{item.fecha}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
-                       
-                        <p:column filterBy="#{item.carreraId.nombreCarrera}" sortBy="#{item.carreraId.nombreCarrera}" >
+                        <p:column filterBy="#{item.carIdCarrera.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="Carrera"/>
                             </f:facet>
-                            <h:outputText value="#{item.carreraId.nombreCarrera}"/>
+                            <h:outputText value="#{item.carIdCarrera.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Acciones"/>
                             </f:facet>
-                            <h:commandLink action="#{mallaController.prepareView}">
+                            <h:commandLink action="#{mallaController.prepareView(item)}">
                                 <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{mallaController.prepareEdit}">
+                            <h:commandLink action="#{mallaController.prepareEdit(item)}">
                                 <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{mallaController.destroy}">
+                            <h:commandLink action="#{mallaController.destroy(item)}">
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
                             </h:commandLink>
                         </p:column>

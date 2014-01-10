@@ -19,6 +19,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import manageBeans.LoginSessionMB;
 import sessionBeans.CarreraFacadeLocal;
 
 @Named("carreraController")
@@ -31,7 +33,8 @@ public class CarreraController implements Serializable {
     private CarreraFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    @Inject
+    LoginSessionMB session;
     public CarreraController() {
     }
 
@@ -96,7 +99,7 @@ public class CarreraController implements Serializable {
 
     public String prepareEdit(Carrera var) {
         current = var;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
@@ -116,7 +119,7 @@ public class CarreraController implements Serializable {
 
     public String destroy(Carrera valor) {
         current = valor;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -164,7 +167,7 @@ public class CarreraController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
+            items = new ListDataModel( ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()) );
         }
         return items;
     }
@@ -194,7 +197,7 @@ public class CarreraController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()), true);
     }
 
     public Carrera getCarrera(java.lang.Integer id) {

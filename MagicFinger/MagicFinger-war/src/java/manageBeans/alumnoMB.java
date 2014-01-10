@@ -48,7 +48,7 @@ public class alumnoMB {
                 nuevo.setRut(rut);
                 nuevo.setApellidop(apellidoP);
                 nuevo.setApellidom(apellidoM);
-                nuevo.setTelefono(telefono);
+                nuevo.setTelefono(telefono+"");
                 nuevo.setCorreo(correo);
                 byte[] templeByte1 = Base64.decode(huellaEnString1);
                 nuevo.setHuella1(templeByte1);
