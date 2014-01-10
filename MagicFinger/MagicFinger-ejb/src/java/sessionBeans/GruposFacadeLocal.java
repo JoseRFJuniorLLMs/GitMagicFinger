@@ -29,4 +29,5 @@ public interface GruposFacadeLocal {
 
     int count();
     
+    List BuscarPorIdUniversidad(int idUniversidad);
 }

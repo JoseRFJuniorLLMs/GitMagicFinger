@@ -29,4 +29,6 @@ public interface BloqueClaseFacadeLocal {
 
     int count();
     
+    List BuscarPorIdUniversidad(int idUniversidad);
+    
 }

@@ -29,4 +29,5 @@ public interface AsistenciaFacadeLocal {
 
     int count();
     
+    List BuscarPorIdUniversidad(int idUniversidad);
 }

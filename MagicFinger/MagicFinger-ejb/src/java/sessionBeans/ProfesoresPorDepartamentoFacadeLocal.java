@@ -29,4 +29,5 @@ public interface ProfesoresPorDepartamentoFacadeLocal {
 
     int count();
     
+    List BuscarPorIdUniversidad(int idUniversidad);
 }

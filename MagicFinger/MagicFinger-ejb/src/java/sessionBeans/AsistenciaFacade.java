@@ -5,9 +5,11 @@
 package sessionBeans;
 
 import entity.Asistencia;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -26,5 +28,9 @@ public class AsistenciaFacade extends AbstractFacade<Asistencia> implements Asis
     public AsistenciaFacade() {
         super(Asistencia.class);
     }
-    
+    public List BuscarPorIdUniversidad(int idUniversidad){
+        Query q = em.createNamedQuery("Asistencia.findByIdAsistencia").setParameter("idUniversidad", idUniversidad);
+        List listado = q.getResultList();
+        return listado;
+    }
 }

@@ -29,4 +29,6 @@ public interface AlumnosDelCursoFacadeLocal {
 
     int count();
     
+    List BuscarPorIdUniversidad(int idUniversidad);
+    
 }

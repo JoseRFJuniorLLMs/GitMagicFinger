@@ -19,6 +19,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import manageBeans.LoginSessionMB;
 import sessionBeans.SemestreFacadeLocal;
 
 @Named("semestreController")
@@ -31,7 +33,10 @@ public class SemestreController implements Serializable {
     private SemestreFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    
+    @Inject
+    LoginSessionMB session;
+    
     public SemestreController() {
     }
 

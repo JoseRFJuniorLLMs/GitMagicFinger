@@ -5,9 +5,11 @@
 package sessionBeans;
 
 import entity.Grupos;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +27,11 @@ public class GruposFacade extends AbstractFacade<Grupos> implements GruposFacade
 
     public GruposFacade() {
         super(Grupos.class);
+    }
+    public List BuscarPorIdUniversidad(int idUniversidad){
+        Query q = em.createNamedQuery("Grupos.findByUniversidad").setParameter("idUniversidad", idUniversidad);
+        List listado = q.getResultList();
+        return listado;
     }
     
 }

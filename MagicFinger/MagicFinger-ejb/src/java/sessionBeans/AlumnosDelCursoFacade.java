@@ -5,9 +5,11 @@
 package sessionBeans;
 
 import entity.AlumnosDelCurso;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +27,11 @@ public class AlumnosDelCursoFacade extends AbstractFacade<AlumnosDelCurso> imple
 
     public AlumnosDelCursoFacade() {
         super(AlumnosDelCurso.class);
+    }
+    public List BuscarPorIdUniversidad(int idUniversidad){
+        Query q = em.createNamedQuery("AlumnoDelCurso.findByUniversidad").setParameter("idUniversidad", idUniversidad);
+        List listado = q.getResultList();
+        return listado;
     }
     
 }

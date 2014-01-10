@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ProfesoresPorDepartamento.findAll", query = "SELECT p FROM ProfesoresPorDepartamento p"),
+    @NamedQuery(name = "ProfesoresPorDepartamento.findByUniversidad", query = "SELECT d FROM ProfesoresPorDepartamento d "),
     @NamedQuery(name = "ProfesoresPorDepartamento.findByProIdProfesor", query = "SELECT p FROM ProfesoresPorDepartamento p WHERE p.profesoresPorDepartamentoPK.proIdProfesor = :proIdProfesor"),
     @NamedQuery(name = "ProfesoresPorDepartamento.findByDepIdDepartamento", query = "SELECT p FROM ProfesoresPorDepartamento p WHERE p.profesoresPorDepartamentoPK.depIdDepartamento = :depIdDepartamento"),
     @NamedQuery(name = "ProfesoresPorDepartamento.findByIdProfDep", query = "SELECT p FROM ProfesoresPorDepartamento p WHERE p.idProfDep = :idProfDep")})
