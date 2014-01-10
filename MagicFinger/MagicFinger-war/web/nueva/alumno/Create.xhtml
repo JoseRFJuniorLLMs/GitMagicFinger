@@ -65,10 +65,6 @@
                             </h4>
                             <p:inputText style="vertical-align: center" id="apellidom" value="#{alumnoController.selected.apellidom}"  />
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_huella1}" for="huella1" />
-                            </h4>
-                            <p:inputText style="vertical-align: center" id="huella1" value="#{alumnoController.selected.huella1}"  />
-
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_telefono}" for="telefono" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="telefono" value="#{alumnoController.selected.telefono}"  />
@@ -76,10 +72,6 @@
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_correo}" for="correo" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="correo" value="#{alumnoController.selected.correo}"  />
-
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_huella2}" for="huella2" />
-                            </h4>
-                            <p:inputText style="vertical-align: center" id="huella2" value="#{alumnoController.selected.huella2}"  />
 
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_useId}" for="useId" />
                             </h4>
@@ -91,10 +83,18 @@
                             <p:selectOneMenu style="vertical-align: center" id="uniIdUniversidad" value="#{alumnoController.selected.uniIdUniversidad}"  required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_uniIdUniversidad}">
                                 <f:selectItems value="#{universidadController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_huella1}" for="huella1" />
+                            </h4>
+                            <p:inputText style="vertical-align: center" id="huella1" value="#{alumnoController.selected.huella1}"  />
+
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_huella2}" for="huella2" />
+                            </h4>
+                            <p:inputText style="vertical-align: center" id="huella2" value="#{alumnoController.selected.huella2}"  />
+
                         </h:panelGrid>
                         <p:commandLink style="display: inline-block; margin-right: 25px" action="#{alumnoController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <p:outputLabel> Guardar facultad</p:outputLabel>
+                            <p:outputLabel> Guardar Alumno</p:outputLabel>
                         </p:commandLink>
                         <p:commandLink style="display: inline-block;" action="#{alumnoController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>

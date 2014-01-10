@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Universidad implements Serializable {
     @Lob
     @Column(name = "imagen")
-    private byte[] imagen;
+    private String imagen;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -164,11 +164,11 @@ public class Universidad implements Serializable {
         return "entity.Universidad[ idUniversidad=" + idUniversidad + " ]";
     }
 
-    public byte[] getImagen() {
+    public String getImagen() {
         return imagen;
     }
 
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
     

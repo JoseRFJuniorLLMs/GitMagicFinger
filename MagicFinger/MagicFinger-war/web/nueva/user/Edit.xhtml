@@ -61,8 +61,8 @@
                             <p:selectOneMenu id="aluIdAlumno" value="#{userController.selected.aluIdAlumno}" >
                                 <f:selectItems value="#{alumnoController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
-                            <h4><p:outputLabel value="#{bundle.EditUserLabel_useRol}" for="useRol" /></h4>
-                            <p:selectOneMenu id="useRol" value="#{userController.selected.useRol}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_useRol}">
+                            <h4><p:outputLabel value="#{bundle.EditUserLabel_userrolName}" for="userrolName" /></h4>
+                            <p:selectOneMenu id="userrolName" value="#{userController.selected.userrolName}" required="true" requiredMessage="#{bundle.EditUserRequiredMessage_userrolName}">
                                 <f:selectItems value="#{userrolController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
                         </h:panelGrid>

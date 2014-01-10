@@ -7,6 +7,7 @@ import manageBeans.crud.util.PaginationHelper;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -79,12 +80,31 @@ public class UserController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
-
+    private static String convertToMd5(final String md5) throws UnsupportedEncodingException {
+    StringBuffer sb = null;   
+    try {
+            final java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+            final byte[] array = md.digest(md5.getBytes("UTF-8"));
+            sb = new StringBuffer();
+            for (int i = 0; i < array.length; ++i) {
+                sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+            }
+            return sb.toString();
+        } catch (final java.security.NoSuchAlgorithmException e) {
+        }
+        return sb.toString();
+    }
     public String create() {
         try {
-            getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User creado", "Se ha creado una User correctamente"));
+            for (User user : getFacade().findAll()) {
+                if(user.getUsuario().equals(current.getUsuario())){
+                    return null;
+                }
+            }
+            current.setPassword(convertToMd5(current.getPassword()));
+            getFacade().create(current);
+           // facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User creado", "Se ha creado una User correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -101,8 +121,15 @@ public class UserController implements Serializable {
 
     public String update() {
         try {
-            getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
+            for (User user : getFacade().findAll()) {
+                if(user.getUsuario().equals(current.getUsuario())){
+                    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: El usuario ya existe","Debe escoger otro nombre" ));
+                    return null;
+                }
+            }
+            current.setPassword(convertToMd5(current.getPassword()));
+            getFacade().edit(current);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "User actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {

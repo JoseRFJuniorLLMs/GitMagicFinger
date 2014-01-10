@@ -193,7 +193,7 @@ public class UniversidadController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.BuscarPorUniversidad(3), true);
+        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
     public Universidad getUniversidad(java.lang.Integer id) {

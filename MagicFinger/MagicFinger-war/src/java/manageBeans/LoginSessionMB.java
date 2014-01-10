@@ -107,7 +107,7 @@ public class LoginSessionMB implements Serializable {
         ExternalContext context2 = FacesContext.getCurrentInstance().getExternalContext();
 
         User usuario = usuarios.getRol(nombre);
-        switch (usuario.getUseRol().getRol()) {
+        switch (usuario.getUserrolName().getName()) {
             case "Administrador":
                 context2.redirect(context2.getRequestContextPath() + "/faces/administrador/index.xhtml");
                 break;

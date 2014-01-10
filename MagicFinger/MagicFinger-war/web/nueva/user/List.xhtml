@@ -44,8 +44,8 @@
                         En esta vista usted puede gestionar las facultades inscritas en el sistema
                     </p>
                     <h:commandLink action="#{userController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 33px"/>
-                        <br></br>
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
+
                         <h:outputLabel>Agregar User</h:outputLabel>
                     </h:commandLink>            
                 </div>
@@ -84,11 +84,11 @@
                             </f:facet>
                             <h:outputText value="#{item.aluIdAlumno}"/>
                         </p:column>
-                        <p:column filterBy="#{item.useRol}" >
+                        <p:column filterBy="#{item.userrolName}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUserTitle_useRol}"/>
+                                <h:outputText value="#{bundle.ListUserTitle_userrolName}"/>
                             </f:facet>
-                            <h:outputText value="#{item.useRol}"/>
+                            <h:outputText value="#{item.userrolName}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

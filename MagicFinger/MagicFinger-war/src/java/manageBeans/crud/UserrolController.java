@@ -232,7 +232,7 @@ public class UserrolController implements Serializable {
             }
             if (object instanceof Userrol) {
                 Userrol o = (Userrol) object;
-                return getStringKey(o.getRol());
+                return getStringKey(o.getName());
             } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Userrol.class.getName());
             }

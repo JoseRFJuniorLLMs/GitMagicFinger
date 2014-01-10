@@ -84,10 +84,10 @@ public class ProfesoresPorCursoController implements Serializable {
 
     public String create() {
         try {
-            current.getProfesoresPorCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             current.getProfesoresPorCursoPK().setCurAsiIdAsignatura(current.getCurso().getCursoPK().getAsiIdAsignatura());
             current.getProfesoresPorCursoPK().setCurSemIdFecha(current.getCurso().getCursoPK().getSemIdFecha());
             current.getProfesoresPorCursoPK().setProIdProfesor(current.getProfesor().getIdProfesor());
+            current.getProfesoresPorCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesoresPorCurso creado", "Se ha creado una ProfesoresPorCurso correctamente"));
@@ -107,10 +107,10 @@ public class ProfesoresPorCursoController implements Serializable {
 
     public String update() {
         try {
-            current.getProfesoresPorCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             current.getProfesoresPorCursoPK().setCurAsiIdAsignatura(current.getCurso().getCursoPK().getAsiIdAsignatura());
             current.getProfesoresPorCursoPK().setCurSemIdFecha(current.getCurso().getCursoPK().getSemIdFecha());
             current.getProfesoresPorCursoPK().setProIdProfesor(current.getProfesor().getIdProfesor());
+            current.getProfesoresPorCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesoresPorCurso actualizado", "Se ha actualizado correctamente"));

@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")})
+    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
+@NamedQuery(name = "User.findByUsuario", query = "SELECT u FROM User u Where u.usuario = :usuario")})
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -58,9 +59,9 @@ public class User implements Serializable {
     @JoinColumn(name = "ALU_ID_ALUMNO", referencedColumnName = "ID_ALUMNO")
     @ManyToOne
     private Alumno aluIdAlumno;
-    @JoinColumn(name = "USE_ROL", referencedColumnName = "ROL")
+    @JoinColumn(name = "USERROL_NAME", referencedColumnName = "NAME")
     @ManyToOne(optional = false)
-    private Userrol useRol;
+    private Userrol userrolName;
 
     public User() {
     }
@@ -127,12 +128,12 @@ public class User implements Serializable {
         this.aluIdAlumno = aluIdAlumno;
     }
 
-    public Userrol getUseRol() {
-        return useRol;
+    public Userrol getUserrolName() {
+        return userrolName;
     }
 
-    public void setUseRol(Userrol useRol) {
-        this.useRol = useRol;
+    public void setUserrolName(Userrol userrolName) {
+        this.userrolName = userrolName;
     }
 
     @Override

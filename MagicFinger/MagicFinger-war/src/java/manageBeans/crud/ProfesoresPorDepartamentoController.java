@@ -84,8 +84,8 @@ public class ProfesoresPorDepartamentoController implements Serializable {
 
     public String create() {
         try {
-            current.getProfesoresPorDepartamentoPK().setDepIdDepartamento(current.getDepartamento().getIdDepartamento());
             current.getProfesoresPorDepartamentoPK().setProIdProfesor(current.getProfesor().getIdProfesor());
+            current.getProfesoresPorDepartamentoPK().setDepIdDepartamento(current.getDepartamento().getIdDepartamento());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesoresPorDepartamento creado", "Se ha creado una ProfesoresPorDepartamento correctamente"));
@@ -105,8 +105,8 @@ public class ProfesoresPorDepartamentoController implements Serializable {
 
     public String update() {
         try {
-            current.getProfesoresPorDepartamentoPK().setDepIdDepartamento(current.getDepartamento().getIdDepartamento());
             current.getProfesoresPorDepartamentoPK().setProIdProfesor(current.getProfesor().getIdProfesor());
+            current.getProfesoresPorDepartamentoPK().setDepIdDepartamento(current.getDepartamento().getIdDepartamento());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesoresPorDepartamento actualizado", "Se ha actualizado correctamente"));

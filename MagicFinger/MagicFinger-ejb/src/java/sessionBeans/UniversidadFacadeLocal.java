@@ -27,8 +27,6 @@ public interface UniversidadFacadeLocal {
 
     List<Universidad> findRange(int[] range);
 
-    List<Universidad> BuscarPorUniversidad(int idUniversidad);
-    
     int count();
     
 }

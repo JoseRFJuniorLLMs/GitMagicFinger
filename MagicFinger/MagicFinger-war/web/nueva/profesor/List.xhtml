@@ -44,8 +44,8 @@
                         En esta vista usted puede gestionar las facultades inscritas en el sistema
                     </p>
                     <h:commandLink action="#{profesorController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin-left: 33px"/>
-                        <br></br>
+                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
+
                         <h:outputLabel>Agregar Profesor</h:outputLabel>
                     </h:commandLink>            
                 </div>
@@ -84,12 +84,6 @@
                             </f:facet>
                             <h:outputText value="#{item.apellidom}"/>
                         </p:column>
-                        <p:column filterBy="#{item.huella1}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProfesorTitle_huella1}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.huella1}"/>
-                        </p:column>
                         <p:column filterBy="#{item.telefono}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProfesorTitle_telefono}"/>
@@ -102,17 +96,23 @@
                             </f:facet>
                             <h:outputText value="#{item.correo}"/>
                         </p:column>
-                        <p:column filterBy="#{item.huella2}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProfesorTitle_huella2}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.huella2}"/>
-                        </p:column>
                         <p:column filterBy="#{item.useId}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProfesorTitle_useId}"/>
                             </f:facet>
                             <h:outputText value="#{item.useId}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.huella1}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProfesorTitle_huella1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.huella1}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.huella2}" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListProfesorTitle_huella2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.huella2}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

@@ -38,8 +38,8 @@ public class FacultadController implements Serializable {
     private int selectedItemIndex;
     @Inject
     LoginSessionMB session;
+
     public FacultadController() {
-        
     }
 
     public Facultad getSelected() {
@@ -171,10 +171,10 @@ public class FacultadController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            List lista = ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad());
-            items= new ListDataModel(lista);  
+            List lista = ejbFacade.BuscarPorIdUniversidad(3);
+            items = new ListDataModel(lista);
         }
-         
+
         return items;
     }
 

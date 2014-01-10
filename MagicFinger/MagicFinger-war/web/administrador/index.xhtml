@@ -25,43 +25,24 @@
             </div>
      </div>
         <div  class="center_content">
-        <h1 style="text-align: center;margin-bottom: 150px"> Menú Administrador</h1>
-        <div style="display:inline-block">
-            <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/profesor/List.xhtml">
-                <img src="/MagicFinger-war/faces/img/profesores.png" heigt="80" width="80" style="margin: 0 auto;display:block"/>
-                <h4>Gestión de Profesores</h4>
-            </h:outputLink>
-        </div>
-        <div style="display:inline-block;margin-left: 30px">
-            <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/alumno/List.xhtml">
-                <img src="/MagicFinger-war/faces/img/estudiantes.png" heigt="80" width="80" style="margin: 0 auto;display:block"/>
-                <h4>Gestión de Alumnos</h4>
-            </h:outputLink>
-        </div>
-        <div style="display:inline-block; margin-left: 30px">
-            <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/curso/List.xhtml">
-                <img src="/MagicFinger-war/faces/img/cursos.png" heigt="80" width="80" style="margin: 0 auto;display:block"/>
-                <h4>Gestión de Cursos</h4>
-            </h:outputLink>
-        </div>
-        <div style="display:inline-block; margin-left: 30px">
-            <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/carrera/List.xhtml">
-                <img src="/MagicFinger-war/faces/img/carreras.png" heigt="110" width="110" style="margin: 0 auto;display:block"/>
-                <h4>Gestión de Carreras</h4>
-            </h:outputLink>
-        </div>
-        <div style="display:inline-block; margin-left: 30px">
-            <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/facultad/List.xhtml">
-                <img src="/MagicFinger-war/faces/img/fing.png" heigt="55" width="55" style="margin: 0 auto;display:block"/>
-                <h4>Gestión de Facultades</h4>
-            </h:outputLink>
-        </div>
-        <div style="display:inline-block; margin-left: 30px">
-            <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/departamento/List.xhtml">
-                <img src="/MagicFinger-war/faces/img/depto.png" heigt="84" width="84" style="margin: 0 auto;display:block"/>
-                <h4>Gestión de Departamentos</h4>
-            </h:outputLink>
-        </div>
+        <h1 style="text-align: center;margin-bottom: 50px"> Menú Administrador</h1>
+            <div style="display: block;margin: 0 auto;text-align: center;">
+                <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/alumno/List.xhtml">
+                    <img src="/MagicFinger-war/faces/img/estudiantes.png" heigt="80" width="80" style="margin: 0 auto;display:block"/>
+                    <h4>Gestión de Universidades</h4>
+                </h:outputLink>
+            </div>
+        <h2>Universidades</h2>  
+        <h:form>
+        <p:dataGrid value="#{postLoginMB.listUniversidad}" var="car" columns="4" rows="120" >  
+            <div style="display: block;margin: 0 auto;text-align: center;">
+                <h:commandLink action="#{postLoginMB.redirec( car.idUniversidad )}">
+                    <img src="/MagicFinger-war/faces/img/estudiantes.png" heigt="80" width="80" style="margin: 0 auto;display:block"/>
+                    <h4>#{car.nombre}</h4>
+                </h:commandLink>
+            </div>
+        </p:dataGrid>  
+        </h:form>
     </div>
     </h:body>
 </html>

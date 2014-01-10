@@ -57,18 +57,18 @@
                             <p:inputText id="apellidop" value="#{profesorController.selected.apellidop}" />
                             <h4><p:outputLabel value="#{bundle.EditProfesorLabel_apellidom}" for="apellidom" /></h4>
                             <p:inputText id="apellidom" value="#{profesorController.selected.apellidom}" />
-                            <h4><p:outputLabel value="#{bundle.EditProfesorLabel_huella1}" for="huella1" /></h4>
-                            <p:inputText id="huella1" value="#{profesorController.selected.huella1}" />
                             <h4><p:outputLabel value="#{bundle.EditProfesorLabel_telefono}" for="telefono" /></h4>
                             <p:inputText id="telefono" value="#{profesorController.selected.telefono}" />
                             <h4><p:outputLabel value="#{bundle.EditProfesorLabel_correo}" for="correo" /></h4>
                             <p:inputText id="correo" value="#{profesorController.selected.correo}" />
-                            <h4><p:outputLabel value="#{bundle.EditProfesorLabel_huella2}" for="huella2" /></h4>
-                            <p:inputText id="huella2" value="#{profesorController.selected.huella2}" />
                             <h4><p:outputLabel value="#{bundle.EditProfesorLabel_useId}" for="useId" /></h4>
                             <p:selectOneMenu id="useId" value="#{profesorController.selected.useId}" >
                                 <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
+                            <h4><p:outputLabel value="#{bundle.EditProfesorLabel_huella1}" for="huella1" /></h4>
+                            <p:inputText id="huella1" value="#{profesorController.selected.huella1}" />
+                            <h4><p:outputLabel value="#{bundle.EditProfesorLabel_huella2}" for="huella2" /></h4>
+                            <p:inputText id="huella2" value="#{profesorController.selected.huella2}" />
                         </h:panelGrid>
                         <p:commandLink style="display: inline-block; margin-right: 25px" action="#{profesorController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

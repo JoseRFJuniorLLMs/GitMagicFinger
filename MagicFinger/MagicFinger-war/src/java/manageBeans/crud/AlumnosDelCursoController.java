@@ -85,8 +85,8 @@ public class AlumnosDelCursoController implements Serializable {
     public String create() {
         try {
             current.getAlumnosDelCursoPK().setCurAsiIdAsignatura(current.getCurso().getCursoPK().getAsiIdAsignatura());
-            current.getAlumnosDelCursoPK().setAluIdAlumno(current.getAlumno().getIdAlumno());
             current.getAlumnosDelCursoPK().setCurSemIdFecha(current.getCurso().getCursoPK().getSemIdFecha());
+            current.getAlumnosDelCursoPK().setAluIdAlumno(current.getAlumno().getIdAlumno());
             current.getAlumnosDelCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -108,8 +108,8 @@ public class AlumnosDelCursoController implements Serializable {
     public String update() {
         try {
             current.getAlumnosDelCursoPK().setCurAsiIdAsignatura(current.getCurso().getCursoPK().getAsiIdAsignatura());
-            current.getAlumnosDelCursoPK().setAluIdAlumno(current.getAlumno().getIdAlumno());
             current.getAlumnosDelCursoPK().setCurSemIdFecha(current.getCurso().getCursoPK().getSemIdFecha());
+            current.getAlumnosDelCursoPK().setAluIdAlumno(current.getAlumno().getIdAlumno());
             current.getAlumnosDelCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();

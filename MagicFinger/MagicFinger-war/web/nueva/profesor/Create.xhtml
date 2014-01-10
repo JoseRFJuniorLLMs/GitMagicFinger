@@ -65,10 +65,6 @@
                             </h4>
                             <p:inputText style="vertical-align: center" id="apellidom" value="#{profesorController.selected.apellidom}"  />
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella1}" for="huella1" />
-                            </h4>
-                            <p:inputText style="vertical-align: center" id="huella1" value="#{profesorController.selected.huella1}"  />
-
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_telefono}" for="telefono" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="telefono" value="#{profesorController.selected.telefono}"  />
@@ -77,19 +73,23 @@
                             </h4>
                             <p:inputText style="vertical-align: center" id="correo" value="#{profesorController.selected.correo}"  />
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella2}" for="huella2" />
-                            </h4>
-                            <p:inputText style="vertical-align: center" id="huella2" value="#{profesorController.selected.huella2}"  />
-
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_useId}" for="useId" />
                             </h4>
                             <p:selectOneMenu style="vertical-align: center" id="useId" value="#{profesorController.selected.useId}"  >
                                 <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella1}" for="huella1" />
+                            </h4>
+                            <p:inputText style="vertical-align: center" id="huella1" value="#{profesorController.selected.huella1}"  />
+
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella2}" for="huella2" />
+                            </h4>
+                            <p:inputText style="vertical-align: center" id="huella2" value="#{profesorController.selected.huella2}"  />
+
                         </h:panelGrid>
                         <p:commandLink style="display: inline-block; margin-right: 25px" action="#{profesorController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <p:outputLabel> Guardar facultad</p:outputLabel>
+                            <p:outputLabel> Guardar Profesor</p:outputLabel>
                         </p:commandLink>
                         <p:commandLink style="display: inline-block;" action="#{profesorController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
