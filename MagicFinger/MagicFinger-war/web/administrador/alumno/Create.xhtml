@@ -46,9 +46,8 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_idAlumno}" for="idAlumno" />
-                            </h4>
-                            <p:inputText style="vertical-align: center" id="idAlumno" value="#{alumnoController.selected.idAlumno}"  required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_idAlumno}"/>
+                            <h4 style="display: inline-block;"></h4>
+                            <p:inputText style="vertical-align: center" type="hidden" id="idAlumno" value="#{alumnoController.selected.idAlumno}"  required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_idAlumno}"/>
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_rut}" for="rut" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="rut" value="#{alumnoController.selected.rut}"  />
@@ -72,17 +71,7 @@
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_correo}" for="correo" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="correo" value="#{alumnoController.selected.correo}"  />
-
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_useId}" for="useId" />
-                            </h4>
-                            <p:selectOneMenu style="vertical-align: center" id="useId" value="#{alumnoController.selected.useId}"  >
-                                <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_uniIdUniversidad}" for="uniIdUniversidad" />
-                            </h4>
-                            <p:selectOneMenu style="vertical-align: center" id="uniIdUniversidad" value="#{alumnoController.selected.uniIdUniversidad}"  required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_uniIdUniversidad}">
-                                <f:selectItems value="#{universidadController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
+          
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_huella1}" for="huella1" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="huella1" value="#{alumnoController.selected.huella1}"  />

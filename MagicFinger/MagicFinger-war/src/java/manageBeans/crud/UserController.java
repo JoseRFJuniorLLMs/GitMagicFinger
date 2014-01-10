@@ -32,7 +32,7 @@ public class UserController implements Serializable {
     private UserFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    
     public UserController() {
     }
 
@@ -44,7 +44,7 @@ public class UserController implements Serializable {
         return current;
     }
 
-    private UserFacadeLocal getFacade() {
+    public UserFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -266,4 +266,13 @@ public class UserController implements Serializable {
             }
         }
     }
+
+    public User getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(User current) {
+        this.current = current;
+    }
+    
 }

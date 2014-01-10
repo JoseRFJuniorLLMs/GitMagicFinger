@@ -1,12 +1,16 @@
 package manageBeans.crud;
 
 import entity.Alumno;
+import entity.Universidad;
+import entity.User;
+import entity.Userrol;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -19,19 +23,24 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import manageBeans.LoginSessionMB;
 import sessionBeans.AlumnoFacadeLocal;
 
 @Named("alumnoController")
 @RequestScoped
 public class AlumnoController implements Serializable {
-
+    @Inject 
+    UserController usercontroller;
+    
     private Alumno current;
     private DataModel items = null;
     @EJB
     private AlumnoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    @Inject
+    LoginSessionMB session;
     public AlumnoController() {
     }
 
@@ -83,20 +92,43 @@ public class AlumnoController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
+            User user = new User();
+            Userrol userrol = new Userrol("Alumno");
+            Universidad universidad = new Universidad(session.getIdUniversidad());
+            //user.setId();
             FacesContext facesContext = FacesContext.getCurrentInstance();
+            user.setUsuario(current.getRut());
+            user.setPassword(current.getApellidop());
+            user.setUserrolName(userrol);
+            usercontroller.setCurrent(user);
+            if(usercontroller.create()!=null){
+                current.setUniIdUniversidad(universidad);
+            getFacade().create(current);
+            //EDITANDO
+            Alumno alumno = getFacade().findAll().get(getFacade().count()-1);
+            User user2 = usercontroller.getFacade().findAll().get(usercontroller.getFacade().count()-1);
+            alumno.setUseId(user2);
+            user2.setAluIdAlumno(alumno);
+            getFacade().edit(alumno);
+            usercontroller.getFacade().edit(user2);
+            /*****/
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno creado", "Se ha creado una Alumno correctamente"));
             return prepareList();
+            }else{
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: El alumno ya existe en los registros",null ));
+                return null;
+            }
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Alumno no creado", "Lo sentimos, intentelo mas tarde"));
             return null;
         }
+        
     }
 
     public String prepareEdit(Alumno var) {
         current = var;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+       // selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
@@ -116,7 +148,7 @@ public class AlumnoController implements Serializable {
 
     public String destroy(Alumno valor) {
         current = valor;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+      //  selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -164,7 +196,8 @@ public class AlumnoController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
+            List lista = ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad());
+            items = new ListDataModel(lista);
         }
         return items;
     }
