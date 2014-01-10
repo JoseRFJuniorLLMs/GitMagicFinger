@@ -45,7 +45,6 @@
                     </p>
                     <h:commandLink action="#{tipoAsignaturaController.prepareCreate}" style="display: inline-block;float: right">
                         <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
-
                         <h:outputLabel>Agregar TipoAsignatura</h:outputLabel>
                     </h:commandLink>            
                 </div>
@@ -56,7 +55,7 @@
                         </f:facet>
                         <p:column filterBy="#{item.idTipoAsignatura}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTipoAsignaturaTitle_idTipoAsignatura}"/>
+                                <h:outputText value="Código"/>
                             </f:facet>
                             <h:outputText value="#{item.idTipoAsignatura}"/>
                         </p:column>

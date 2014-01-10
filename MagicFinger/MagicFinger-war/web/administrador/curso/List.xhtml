@@ -67,11 +67,11 @@
                             </f:facet>
                             <h:outputText value="#{item.asignatura.nombre}"/>
                         </p:column>
-                        <p:column filterBy="#{item.semestre.nombre}" >
+                        <p:column filterBy="#{item.semestre.anoSemestre}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListCursoTitle_semestre}"/>
+                                <h:outputText value="Semestre"/>
                             </f:facet>
-                            <h:outputText value="#{item.semestre.nombre}"/>
+                            <h:outputText value="#{item.semestre.anoSemestre}"/>
                         </p:column>
                         <p:column filterBy="#{item.tipoAsignatura.nombre}" >
                             <f:facet name="header">

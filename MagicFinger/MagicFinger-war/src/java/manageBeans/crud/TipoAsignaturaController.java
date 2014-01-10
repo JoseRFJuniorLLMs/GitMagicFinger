@@ -1,6 +1,7 @@
 package manageBeans.crud;
 
 import entity.TipoAsignatura;
+import entity.Universidad;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -19,6 +20,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import manageBeans.LoginSessionMB;
 import sessionBeans.TipoAsignaturaFacadeLocal;
 
 @Named("tipoAsignaturaController")
@@ -31,7 +34,9 @@ public class TipoAsignaturaController implements Serializable {
     private TipoAsignaturaFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+ @Inject
+    LoginSessionMB session;
+ 
     public TipoAsignaturaController() {
     }
 
@@ -83,6 +88,7 @@ public class TipoAsignaturaController implements Serializable {
 
     public String create() {
         try {
+            current.setUniIdUniversidad(new Universidad(session.getIdUniversidad()) );
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "TipoAsignatura creado", "Se ha creado una TipoAsignatura correctamente"));
@@ -96,7 +102,7 @@ public class TipoAsignaturaController implements Serializable {
 
     public String prepareEdit(TipoAsignatura var) {
         current = var;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
@@ -116,7 +122,7 @@ public class TipoAsignaturaController implements Serializable {
 
     public String destroy(TipoAsignatura valor) {
         current = valor;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -164,7 +170,7 @@ public class TipoAsignaturaController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
+            items = new ListDataModel(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()));
         }
         return items;
     }
@@ -190,11 +196,11 @@ public class TipoAsignaturaController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()), true);
     }
 
     public TipoAsignatura getTipoAsignatura(java.lang.Integer id) {

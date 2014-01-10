@@ -47,23 +47,20 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4><p:outputLabel value="#{bundle.EditTipoAsignaturaLabel_idTipoAsignatura}" for="idTipoAsignatura" /></h4>
-                            <p:inputText id="idTipoAsignatura" value="#{tipoAsignaturaController.selected.idTipoAsignatura}" required="true" requiredMessage="#{bundle.EditTipoAsignaturaRequiredMessage_idTipoAsignatura}"/>
+                            <h:inputHidden id="idTipoAsignatura" value="#{tipoAsignaturaController.selected.idTipoAsignatura}" required="true" requiredMessage="#{bundle.EditTipoAsignaturaRequiredMessage_idTipoAsignatura}"/>
                             <h4><p:outputLabel value="#{bundle.EditTipoAsignaturaLabel_nombre}" for="nombre" /></h4>
                             <p:inputText id="nombre" value="#{tipoAsignaturaController.selected.nombre}" />
-                            <h4><p:outputLabel value="#{bundle.EditTipoAsignaturaLabel_uniIdUniversidad}" for="uniIdUniversidad" /></h4>
-                            <p:selectOneMenu id="uniIdUniversidad" value="#{tipoAsignaturaController.selected.uniIdUniversidad}" required="true" requiredMessage="#{bundle.EditTipoAsignaturaRequiredMessage_uniIdUniversidad}">
-                                <f:selectItems value="#{universidadController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
+                             <h:inputHidden id="uniIdUniversidad" value="#{tipoAsignaturaController.selected.uniIdUniversidad}" required="true" requiredMessage="#{bundle.EditTipoAsignaturaRequiredMessage_uniIdUniversidad}" />
+                               
                         </h:panelGrid>
-                        <p:commandLink style="display: inline-block; margin-right: 25px" action="#{tipoAsignaturaController.update}">
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{tipoAsignaturaController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Guardar TipoAsignatura</p:outputLabel>
-                        </p:commandLink>
-                        <p:commandLink style="display: inline-block;" action="#{tipoAsignaturaController.prepareList}" immediate="true">
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{tipoAsignaturaController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Volver</p:outputLabel>
-                        </p:commandLink>
+                        </h:commandLink>
                         <br></br><br></br>
                     </div>
                 </div>
