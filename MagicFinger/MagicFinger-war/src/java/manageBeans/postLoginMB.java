@@ -30,15 +30,20 @@ public class postLoginMB {
     @Inject
     private LoginSessionMB login;
     private String nombreUniversidad;
+    
     public postLoginMB() {
     }
+    
     @PostConstruct
     public void init(){
         Integer nueva = login.getIdUniversidad();
-        if(nueva!=null){
+        if(nueva != null && nueva!=-1){
+            System.out.println("aki" + nueva);
             nombreUniversidad = universidadFacade.find(nueva).getNombre();
+            System.out.println("aki2");
         } 
         listUniversidad = universidadFacade.findAll();
+        System.out.println("aki fin");
     }
     
     public void redireccionar(String pagina){

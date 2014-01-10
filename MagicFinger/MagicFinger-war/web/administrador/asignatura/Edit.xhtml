@@ -47,8 +47,7 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4><p:outputLabel value="#{bundle.EditAsignaturaLabel_idAsignatura}" for="idAsignatura" /></h4>
-                            <p:inputText id="idAsignatura" value="#{asignaturaController.selected.idAsignatura}" required="true" requiredMessage="#{bundle.EditAsignaturaRequiredMessage_idAsignatura}"/>
+                            <h:inputHidden id="idAsignatura" value="#{asignaturaController.selected.idAsignatura}" required="true" requiredMessage="#{bundle.EditAsignaturaRequiredMessage_idAsignatura}"/>
                             <h4><p:outputLabel value="#{bundle.EditAsignaturaLabel_nombre}" for="nombre" /></h4>
                             <p:inputText id="nombre" value="#{asignaturaController.selected.nombre}" />
                             <h4><p:outputLabel value="#{bundle.EditAsignaturaLabel_malIdMalla}" for="malIdMalla" /></h4>
@@ -56,14 +55,14 @@
                                 <f:selectItems value="#{mallaController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
                         </h:panelGrid>
-                        <p:commandLink style="display: inline-block; margin-right: 25px" action="#{asignaturaController.update}">
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{asignaturaController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Guardar Asignatura</p:outputLabel>
-                        </p:commandLink>
-                        <p:commandLink style="display: inline-block;" action="#{asignaturaController.prepareList}" immediate="true">
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{asignaturaController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Volver</p:outputLabel>
-                        </p:commandLink>
+                        </h:commandLink>
                         <br></br><br></br>
                     </div>
                 </div>

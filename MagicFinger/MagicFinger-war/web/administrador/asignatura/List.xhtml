@@ -66,11 +66,11 @@
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column filterBy="#{item.malIdMalla}" >
+                        <p:column filterBy="#{item.malIdMalla.nombre}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAsignaturaTitle_malIdMalla}"/>
+                                <h:outputText value="Nombre Malla"/>
                             </f:facet>
-                            <h:outputText value="#{item.malIdMalla}"/>
+                            <h:outputText value="#{item.malIdMalla.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

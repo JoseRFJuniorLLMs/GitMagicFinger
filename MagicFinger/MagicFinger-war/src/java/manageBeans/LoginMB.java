@@ -46,7 +46,7 @@ public class LoginMB {
 
     public void login() throws IOException {
         session.login(user, password);
-        session.setIdUniversidad(3);
+        session.setIdUniversidad(-1);
     }
 
     public void logout() throws IOException {
