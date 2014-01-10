@@ -31,7 +31,7 @@ public class FacultadFacade extends AbstractFacade<Facultad> implements Facultad
 
     @Override
     public List BuscarPorIdUniversidad(int idUniversidad) {
-        Query q = em.createNamedQuery("Facultad.findByIdFacultad").setParameter("idUniversidad", idUniversidad);
+        Query q = em.createNamedQuery("Facultad.findByUniversidad").setParameter("idUniversidad", idUniversidad);
         List listado = q.getResultList();
         return listado;
     }

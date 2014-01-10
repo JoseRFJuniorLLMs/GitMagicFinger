@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -22,7 +23,7 @@ import javax.faces.model.SelectItem;
 import sessionBeans.UserFacadeLocal;
 
 @Named("userController")
-@SessionScoped
+@RequestScoped
 public class UserController implements Serializable {
 
     private User current;

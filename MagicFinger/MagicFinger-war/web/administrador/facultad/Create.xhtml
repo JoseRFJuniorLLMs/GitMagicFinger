@@ -21,7 +21,7 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
+                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
                 </h:form>
             </div>
         </div>      
@@ -54,19 +54,27 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Nombre:" for="nombre" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Nombre:" for="nombre" />
                             </h4>
-                            <h:inputText style="vertical-align: center" id="nombre" value="#{facultadController.selected.nombre}" title="#{bundle.CreateFacultadTitle_nombre}" validator="#{funcionesMB.validarNombre}" />
+                            <p:inputText style="vertical-align: center" id="idFacultad" value="#{facultadController.selected.idFacultad}"  required="true" requiredMessage="#{bundle.CreateFacultadRequiredMessage_idFacultad}"/>
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateFacultadLabel_nombre}" for="nombre" />
+                            </h4>
+                            <p:inputText style="vertical-align: center" id="nombre" value="#{facultadController.selected.nombre}"  />
 
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateFacultadLabel_uniIdUniversidad}" for="uniIdUniversidad" />
+                            </h4>
+                            <p:selectOneMenu style="vertical-align: center" id="uniIdUniversidad" value="#{facultadController.selected.uniIdUniversidad}"  required="true" requiredMessage="#{bundle.CreateFacultadRequiredMessage_uniIdUniversidad}">
+                                <f:selectItems value="#{universidadController.itemsAvailableSelectOne}"/>
+                            </p:selectOneMenu>
                         </h:panelGrid>
-                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{facultadController.create}">
+                        <p:commandLink style="display: inline-block; margin-right: 25px" action="#{facultadController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <h:outputLabel> Guardar facultad</h:outputLabel>
-                        </h:commandLink>
-                        <h:commandLink style="display: inline-block;" action="#{facultadController.prepareList}" immediate="true">
+                            <p:outputLabel> Guardar Facultad</p:outputLabel>
+                        </p:commandLink>
+                        <p:commandLink style="display: inline-block;" action="#{facultadController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
-                            <h:outputLabel>Volver</h:outputLabel>
-                        </h:commandLink>
+                            <p:outputLabel>Volver</p:outputLabel>
+                        </p:commandLink>
                         <br></br><br></br>
                     </div>
                 </div>

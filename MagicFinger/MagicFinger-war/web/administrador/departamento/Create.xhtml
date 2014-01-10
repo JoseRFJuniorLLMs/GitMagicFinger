@@ -60,7 +60,7 @@
 
                             <h4 style="display: inline-block;"> <h:outputLabel style="vertical-align: center" value="Facultad:" for="facultadId" />
                             </h4>
-                            <h:selectOneMenu style="vertical-align: center" id="facultadId" value="#{departamentoController.selected.facultadId}" title="#{bundle.CreateDepartamentoTitle_facultadId}" required="true" requiredMessage="Debe seleccionar una facultad">
+                            <h:selectOneMenu style="vertical-align: center" id="facultadId" value="#{departamentoController.selected.facIdFacultad}" title="#{bundle.CreateDepartamentoTitle_facultadId}" required="true" requiredMessage="Debe seleccionar una facultad">
                                 <f:selectItems value="#{facultadController.itemsAvailableSelectOne}"/>
                             </h:selectOneMenu>
                         </h:panelGrid>

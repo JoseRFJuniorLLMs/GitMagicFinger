@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -27,7 +28,7 @@ import manageBeans.LoginSessionMB;
 import sessionBeans.FacultadFacadeLocal;
 
 @Named("facultadController")
-@SessionScoped
+@RequestScoped
 public class FacultadController implements Serializable {
 
     private Facultad current;
@@ -103,7 +104,7 @@ public class FacultadController implements Serializable {
 
     public String prepareEdit(Facultad var) {
         current = var;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
@@ -171,7 +172,8 @@ public class FacultadController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            List lista = ejbFacade.BuscarPorIdUniversidad(3);
+            
+            List lista = ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad());
             items = new ListDataModel(lista);
         }
 

@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -21,7 +22,7 @@ import javax.faces.model.SelectItem;
 import sessionBeans.SemestreFacadeLocal;
 
 @Named("semestreController")
-@SessionScoped
+@RequestScoped
 public class SemestreController implements Serializable {
 
     private Semestre current;
