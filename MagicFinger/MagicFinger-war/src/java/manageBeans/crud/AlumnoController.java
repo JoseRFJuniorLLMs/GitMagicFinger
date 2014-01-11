@@ -38,6 +38,8 @@ public class AlumnoController implements Serializable {
     private int selectedItemIndex;
     @Inject
     LoginSessionMB session;
+    private String huellaEnString1;
+    private String huellaEnString2;
     public AlumnoController() {
     }
 
@@ -268,4 +270,21 @@ public class AlumnoController implements Serializable {
             }
         }
     }
+
+    public String getHuellaEnString1() {
+        return huellaEnString1;
+    }
+
+    public void setHuellaEnString1(String huellaEnString1) {
+        this.huellaEnString1 = huellaEnString1;
+    }
+
+    public String getHuellaEnString2() {
+        return huellaEnString2;
+    }
+
+    public void setHuellaEnString2(String huellaEnString2) {
+        this.huellaEnString2 = huellaEnString2;
+    }
+    
 }

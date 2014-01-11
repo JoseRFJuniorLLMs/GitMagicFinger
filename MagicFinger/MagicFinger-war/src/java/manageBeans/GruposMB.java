@@ -75,19 +75,19 @@ public class GruposMB {
         listaIntegrante = new ArrayList<>();
         for (Grupos lista : ListGrupos) {
             if((lista.getNombre()).equals(grupoSeleccionado.getNombre())){
-                listaIntegrante.add(lista.getAlumnosDelCurso() );
+                //listaIntegrante.add(lista.getAlumnosDelCurso() );
             }
         }
         
         for (AlumnosDelCurso alumnosDelCurso : aux) {
-            for (Grupos listgrupos : alumnosDelCurso.getGruposList()) {
+           /* for (Grupos listgrupos : alumnosDelCurso.getGruposList()) {
                 
                 if(listgrupos.getNombre() == null){
                     
                  aux2.add(alumnosDelCurso);
             
                 }
-            }
+            }*/
         }
         asignar = new DualListModel<>(aux2, listaIntegrante);
         FacesContext.getCurrentInstance().addMessage(null, msg);

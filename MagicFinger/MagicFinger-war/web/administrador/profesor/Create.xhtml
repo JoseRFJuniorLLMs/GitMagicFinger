@@ -12,6 +12,21 @@
 
     </h:head>
     <h:body>
+        <script>
+            var i=0;
+            function getStringTemplate(StringTemplate) {
+                if(i==0){    
+                    document.getElementById('variableHuella1').value = StringTemplate;
+                    document.getElementById('estado1').innerHTML = "INGRESADA";
+                    i++;
+                }
+                else{
+                    document.getElementById('variableHuella2').value = StringTemplate;
+                    document.getElementById('estado2').innerHTML = "INGRESADA";
+                    i++;
+                }
+            }
+        </script>
         <div id="top" style="display: inline-block; text-align: center">
             <div id="logo" style="display: inline-block; float:left">
                 <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
@@ -73,13 +88,13 @@
                             </h4>
                             <p:inputText style="vertical-align: center" id="correo" value="#{profesorController.selected.correo}"  />
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella1}" for="huella1" />
-                            </h4>
-                            <p:inputText style="vertical-align: center" id="huella1" value="#{profesorController.selected.huella1}"  />
-
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella2}" for="huella2" />
-                            </h4>
-                            <p:inputText style="vertical-align: center" id="huella2" value="#{profesorController.selected.huella2}"  />
+                            <h:outputLabel id="variableHuella1TXT" value="Huella 1:" />
+                        <p:outputLabel id="estado1" value="NO INGRESADA"></p:outputLabel> <br />
+                        <h:outputLabel id="variableHuella2TXT" value="Huella 2:" /> 
+                        <p:outputLabel id="estado2" value="NO INGRESADA"></p:outputLabel>
+                        
+                        <h:inputHidden id="variableHuella1" value="#{alumnoController.huellaEnString1}"/>
+                        <h:inputHidden id="variableHuella2" value="#{alumnoController.huellaEnString2}"/>
                              <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Departamento" for="depIdDepartamento"  />
                             </h4>
                             <p:selectCheckboxMenu value="#{profesorController.listDepartamentoSelecionados}" id="depIdDepartamento" label="Departamento" filter="true" filterMatchMode="startsWith" panelStyle="width:220px">  
