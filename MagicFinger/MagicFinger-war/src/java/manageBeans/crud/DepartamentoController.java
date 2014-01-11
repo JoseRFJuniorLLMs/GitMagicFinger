@@ -48,7 +48,7 @@ public class DepartamentoController implements Serializable {
         return current;
     }
 
-    private DepartamentoFacadeLocal getFacade() {
+    public DepartamentoFacadeLocal getFacade() {
         return ejbFacade;
     }
 

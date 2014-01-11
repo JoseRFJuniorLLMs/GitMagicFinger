@@ -28,8 +28,9 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
     public ProfesorFacade() {
         super(Profesor.class);
     }
-    public List BuscarPorIdUniversidad(int idUniversidad){
-        Query q = em.createNamedQuery("Profesor.findByUniversidad").setParameter("idUniversidad", idUniversidad);
+    @Override
+    public List BuscarPorIdUniversidad(List idUniversidad){
+        Query q = em.createNamedQuery("Profesor.findByUniversidad").setParameter("profesoresPorCursoList", idUniversidad);
         List listado = q.getResultList();
         return listado;
     }

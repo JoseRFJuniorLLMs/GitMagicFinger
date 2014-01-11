@@ -1,13 +1,22 @@
 package manageBeans.crud;
 
+import entity.Departamento;
 import entity.Profesor;
+import entity.ProfesoresPorCurso;
+import entity.ProfesoresPorDepartamento;
+import entity.Universidad;
+import entity.User;
+import entity.Userrol;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -19,22 +28,42 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import manageBeans.LoginSessionMB;
+import sessionBeans.DepartamentoFacadeLocal;
 import sessionBeans.ProfesorFacadeLocal;
+import sessionBeans.ProfesoresPorDepartamentoFacadeLocal;
 
 @Named("profesorController")
 @RequestScoped
 public class ProfesorController implements Serializable {
-
+    @EJB
+    private DepartamentoFacadeLocal departamentoFacade;
+    @EJB
+    private ProfesoresPorDepartamentoFacadeLocal profesoresPorDepartamentoFacade;
+    @Inject UserController usercontroller;
     private Profesor current;
     private DataModel items = null;
     @EJB
     private ProfesorFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private List<Departamento> listDepartamento = new ArrayList<>();
+    private List<String> listDepartamentoSelecionados = new ArrayList<>();
+    @Inject
+    LoginSessionMB session;
+    @Inject
+    ProfesoresPorDepartamentoController profesoresPorDepa;
+    
     public ProfesorController() {
+        
     }
 
+    @PostConstruct
+    public void init(){
+        listDepartamento = departamentoFacade.BuscarPorIdUniversidad(session.getIdUniversidad());
+    }
+   
     public Profesor getSelected() {
         if (current == null) {
             current = new Profesor();
@@ -43,6 +72,7 @@ public class ProfesorController implements Serializable {
         return current;
     }
 
+    
     private ProfesorFacadeLocal getFacade() {
         return ejbFacade;
     }
@@ -83,10 +113,38 @@ public class ProfesorController implements Serializable {
 
     public String create() {
         try {
-            getFacade().create(current);
+            User user = new User();
+            Userrol userrol = new Userrol("Profesor");
             FacesContext facesContext = FacesContext.getCurrentInstance();
+            user.setUsuario(current.getRut());
+            user.setPassword(current.getApellidop());
+            user.setUserrolName(userrol);
+            usercontroller.setCurrent(user);
+            if(usercontroller.create()!=null){
+            getFacade().create(current);
+            //EDITANDO
+            Profesor profesor = getFacade().findAll().get(getFacade().count()-1);
+            ProfesoresPorDepartamento prof = new ProfesoresPorDepartamento();
+            prof.setProfesoresPorDepartamentoPK(new entity.ProfesoresPorDepartamentoPK());
+            prof.setProfesor(profesor);
+            for (String object : listDepartamentoSelecionados) {
+                prof.setDepartamento(departamentoFacade.find(Integer.parseInt(object)));
+                profesoresPorDepa.setCurrent(prof);
+                profesoresPorDepa.create();
+                System.out.println("Departamento: "+object);
+            }
+            User user2 = usercontroller.getFacade().findAll().get(usercontroller.getFacade().count()-1);
+            profesor.setUseId(user2);
+            user2.setProIdProfesor(profesor);
+            getFacade().edit(profesor);
+            usercontroller.getFacade().edit(user2);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor creado", "Se ha creado una Profesor correctamente"));
             return prepareList();
+            
+            }else{
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: El profesor ya existe en los registros",null ));
+                return null;
+            }
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no creado", "Lo sentimos, intentelo mas tarde"));
@@ -96,7 +154,7 @@ public class ProfesorController implements Serializable {
 
     public String prepareEdit(Profesor var) {
         current = var;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+      //  selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
@@ -116,7 +174,7 @@ public class ProfesorController implements Serializable {
 
     public String destroy(Profesor valor) {
         current = valor;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+      //  selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -164,7 +222,14 @@ public class ProfesorController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
+            List<ProfesoresPorDepartamento> profePorDepa = profesoresPorDepartamentoFacade.BuscarPorIdUniversidad(session.getIdUniversidad());
+            List lista = new ArrayList();
+            for (ProfesoresPorDepartamento object : profePorDepa) {
+                if(object.getProfesor()!=null && !lista.contains(object.getProfesor())){
+                    lista.add(object.getProfesor()); 
+                }
+            }
+            items = new ListDataModel(lista);
         }
         return items;
     }
@@ -239,4 +304,19 @@ public class ProfesorController implements Serializable {
             }
         }
     }
+
+    public List<Departamento> getListDepartamento() {
+        return listDepartamento;
+    }
+
+    public List<String> getListDepartamentoSelecionados() {
+        return listDepartamentoSelecionados;
+    }
+
+    public void setListDepartamentoSelecionados(List<String> listDepartamentoSelecionados) {
+        this.listDepartamentoSelecionados = listDepartamentoSelecionados;
+    }
+    
+    
+    
 }

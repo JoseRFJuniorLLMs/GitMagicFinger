@@ -44,7 +44,7 @@ public class ProfesoresPorDepartamentoController implements Serializable {
         return current;
     }
 
-    private ProfesoresPorDepartamentoFacadeLocal getFacade() {
+    public ProfesoresPorDepartamentoFacadeLocal getFacade() {
         return ejbFacade;
     }
 
@@ -89,7 +89,7 @@ public class ProfesoresPorDepartamentoController implements Serializable {
             current.getProfesoresPorDepartamentoPK().setDepIdDepartamento(current.getDepartamento().getIdDepartamento());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesoresPorDepartamento creado", "Se ha creado una ProfesoresPorDepartamento correctamente"));
+            //facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesoresPorDepartamento creado", "Se ha creado una ProfesoresPorDepartamento correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -253,4 +253,13 @@ public class ProfesoresPorDepartamentoController implements Serializable {
             }
         }
     }
+
+    public ProfesoresPorDepartamento getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(ProfesoresPorDepartamento current) {
+        this.current = current;
+    }
+    
 }

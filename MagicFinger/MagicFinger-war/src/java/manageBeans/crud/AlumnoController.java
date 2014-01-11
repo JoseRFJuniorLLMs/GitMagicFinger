@@ -8,14 +8,11 @@ import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.util.List;
-import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -94,7 +91,6 @@ public class AlumnoController implements Serializable {
         try {
             User user = new User();
             Userrol userrol = new Userrol("Alumno");
-            Universidad universidad = new Universidad(session.getIdUniversidad());
             //user.setId();
             FacesContext facesContext = FacesContext.getCurrentInstance();
             user.setUsuario(current.getRut());
@@ -102,7 +98,7 @@ public class AlumnoController implements Serializable {
             user.setUserrolName(userrol);
             usercontroller.setCurrent(user);
             if(usercontroller.create()!=null){
-                current.setUniIdUniversidad(universidad);
+            current.setUniIdUniversidad(new Universidad(session.getIdUniversidad()));
             getFacade().create(current);
             //EDITANDO
             Alumno alumno = getFacade().findAll().get(getFacade().count()-1);

@@ -29,5 +29,5 @@ public interface ProfesorFacadeLocal {
 
     int count();
     
-    List BuscarPorIdUniversidad(int idUniversidad);
+    List BuscarPorIdUniversidad(List idUniversidad);
 }

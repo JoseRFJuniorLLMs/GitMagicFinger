@@ -47,10 +47,10 @@
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                             <h4 style="display: inline-block;"></h4>
-                            <p:inputText style="vertical-align: center" type="hidden" id="idAlumno" value="#{alumnoController.selected.idAlumno}"  required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_idAlumno}"/>
+                            <p:inputText style="vertical-align: center" type="hidden" id="idAlumno" value="#{alumnoController.selected.idAlumno}"/>
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_rut}" for="rut" />
                             </h4>
-                            <p:inputText style="vertical-align: center" id="rut" value="#{alumnoController.selected.rut}"  />
+                            <p:inputText style="vertical-align: center" id="rut" value="#{alumnoController.selected.rut}"  placeholder="123456789-0" validator="#{funcionesMB.validarRut}"  />
 
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_nombre}" for="nombre" />
                             </h4>
@@ -81,14 +81,14 @@
                             <p:inputText style="vertical-align: center" id="huella2" value="#{alumnoController.selected.huella2}"  />
 
                         </h:panelGrid>
-                        <p:commandLink style="display: inline-block; margin-right: 25px" action="#{alumnoController.create}">
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{alumnoController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel> Guardar Alumno</p:outputLabel>
-                        </p:commandLink>
-                        <p:commandLink style="display: inline-block;" action="#{alumnoController.prepareList}" immediate="true">
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{alumnoController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Volver</p:outputLabel>
-                        </p:commandLink>
+                        </h:commandLink>
                         <br></br><br></br>
                     </div>
                 </div>

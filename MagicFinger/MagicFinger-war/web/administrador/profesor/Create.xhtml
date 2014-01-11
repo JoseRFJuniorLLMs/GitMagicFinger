@@ -46,9 +46,9 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_idProfesor}" for="idProfesor" />
+                            <h4 style="display: inline-block;">
                             </h4>
-                            <p:inputText style="vertical-align: center" id="idProfesor" value="#{profesorController.selected.idProfesor}"  required="true" requiredMessage="#{bundle.CreateProfesorRequiredMessage_idProfesor}"/>
+                            <p:inputText style="vertical-align: center" id="idProfesor" type="hidden" value="#{profesorController.selected.idProfesor}"/>
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_rut}" for="rut" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="rut" value="#{profesorController.selected.rut}"  />
@@ -73,11 +73,6 @@
                             </h4>
                             <p:inputText style="vertical-align: center" id="correo" value="#{profesorController.selected.correo}"  />
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_useId}" for="useId" />
-                            </h4>
-                            <p:selectOneMenu style="vertical-align: center" id="useId" value="#{profesorController.selected.useId}"  >
-                                <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella1}" for="huella1" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="huella1" value="#{profesorController.selected.huella1}"  />
@@ -85,16 +80,21 @@
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesorLabel_huella2}" for="huella2" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="huella2" value="#{profesorController.selected.huella2}"  />
-
+                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Departamento" for="depIdDepartamento"  />
+                            </h4>
+                            <p:selectCheckboxMenu value="#{profesorController.listDepartamentoSelecionados}" id="depIdDepartamento" label="Departamento" filter="true" filterMatchMode="startsWith" panelStyle="width:220px">  
+                                <f:selectItems value="#{profesorController.listDepartamento}"  var="depa" itemLabel="#{depa.nombre}" itemValue="#{depa.idDepartamento}"/>  
+                            </p:selectCheckboxMenu>
+                           
                         </h:panelGrid>
-                        <p:commandLink style="display: inline-block; margin-right: 25px" action="#{profesorController.create}">
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{profesorController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel> Guardar Profesor</p:outputLabel>
-                        </p:commandLink>
-                        <p:commandLink style="display: inline-block;" action="#{profesorController.prepareList}" immediate="true">
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{profesorController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Volver</p:outputLabel>
-                        </p:commandLink>
+                        </h:commandLink>
                         <br></br><br></br>
                     </div>
                 </div>
