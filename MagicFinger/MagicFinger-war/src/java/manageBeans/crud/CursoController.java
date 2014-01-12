@@ -127,7 +127,7 @@ public class CursoController implements Serializable {
             current.getCursoPK().setTipIdTipoAsignatura(current.getTipoAsignatura().getIdTipoAsignatura());
             current.getCursoPK().setAsiIdAsignatura(current.getAsignatura().getIdAsignatura());
             current.getCursoPK().setSemIdFecha(current.getSemestre().getIdFecha());
-            getFacade().create(current);
+            ejbFacade.create(current);
             AlumnosDelCurso alumnosCurso = new AlumnosDelCurso();
             alumnosCurso.setAlumnosDelCursoPK(new entity.AlumnosDelCursoPK());
             alumnosCurso.setCurso(current);

@@ -11,10 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- *
- * @author chevo
- */
+
 @Stateless
 public class AlumnoFacade extends AbstractFacade<Alumno> implements AlumnoFacadeLocal {
     @PersistenceContext(unitName = "MagicFinger-ejbPU")
