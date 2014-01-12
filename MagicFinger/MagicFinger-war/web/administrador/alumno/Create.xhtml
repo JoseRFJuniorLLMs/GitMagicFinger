@@ -23,58 +23,86 @@
             <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
                 <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
             </div>
-            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
-                <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesion" />
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="form" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.usuario}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
                 </h:form>
-            </div>
+            </div>  
         </div>      
         <div class="center_content">
-            <h:form id="form" prependId="false"><p:growl id="grow1" showDetail="true" />
+            <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
+                <span>Gestión de alumnos</span> 
+                <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
+                    <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
+                         [Cambiar]
+                    </h:outputLink>
+                    </span> 
+                </span> 
+                </h1>
+            <h:form id="form2" prependId="false"><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
-                    <h1 style="text-align: center;margin-bottom: 20px "> Agregar Alumno</h1>
-                    <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                        <p:megaMenu style="display: inline-block;ext-align: center;">  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
-                            <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
-                        </p:megaMenu>  
+                    
+                    <div style="text-align: left; display: inline-block;width: 100%; margin-bottom: 20px;" >
+                        <p:menubar style="width: 70%;vertical-align: middle;display: inline-block">  
+                    <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:menuitem value="Profesores" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:submenu label="Cursos" icon="ui-icon-bullet">  
+                        <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
+                        <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
+                        <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
+                        <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />   
+                    </p:submenu>
+                    <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
+               </p:menubar>
                     </div>
-                    <div id="agregar" style="display: inline-block;width: 100%;">       
-                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
-                        <p style="float: left;display: inline-block">
-                            &nbsp;Para agregar una nueva Alumno, debe ingresar los siguientes campos:
-                        </p>  
+                    <div id="agregar" style="display: inline-block;width: 100%;">
+                    <img src="/MagicFinger-war/faces/img/advertencia.png" height="24" width="26" style="vertical-align: middle"/>
+                    <p style="vertical-align: middle;display: inline-block;text-align: center">
+                        Para agregar un alumno, debe completar los siguientes datos:
+                    </p>
+                    
                     </div>
-                    <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
+                    <div style="margin-bottom: 20px;display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"></h4>
-                            <p:inputText style="vertical-align: center" type="hidden" id="idAlumno" value="#{alumnoController.selected.idAlumno}"/>
+                            
+                            
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_rut}" for="rut" />
                             </h4>
-                            <p:inputText style="vertical-align: center" id="rut" value="#{alumnoController.selected.rut}"  placeholder="123456789-0" validator="#{funcionesMB.validarRut}"  />
+                            <p:inputText style="vertical-align: center" id="rut" value="#{alumnoController.selected.rut}"  placeholder="Ejemplo: 12345678-0" validator="#{funcionesMB.validarRut}"  />
 
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_nombre}" for="nombre" />
                             </h4>
-                            <p:inputText style="vertical-align: center" id="nombre" value="#{alumnoController.selected.nombre}"  />
+                            <p:inputText style="vertical-align: center" id="nombre" value="#{alumnoController.selected.nombre}" placeholder="Ingresar nombre" validator="#{funcionesMB.validarNombre}"/>
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_apellidop}" for="apellidop" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Apellido paterno:" for="apellidop" />
                             </h4>
-                            <p:inputText style="vertical-align: center" id="apellidop" value="#{alumnoController.selected.apellidop}"  />
+                            <p:inputText style="vertical-align: center" id="apellidop" value="#{alumnoController.selected.apellidop}" placeholder="Ingresar apellido p." validator="#{funcionesMB.validarNombre}"/>
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_apellidom}" for="apellidom" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Apellido materno:" for="apellidom"/>
                             </h4>
-                            <p:inputText style="vertical-align: center" id="apellidom" value="#{alumnoController.selected.apellidom}"  />
+                            <p:inputText style="vertical-align: center" id="apellidom" value="#{alumnoController.selected.apellidom}" placeholder="Ingresar apellido m." validator="#{funcionesMB.validarNombre}"/>
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_telefono}" for="telefono" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Teléfono:" for="telefono" />
                             </h4>
-                            <p:inputText style="vertical-align: center" id="telefono" value="#{alumnoController.selected.telefono}"  />
+                            <p:inputText style="vertical-align: center" id="telefono" value="#{alumnoController.selected.telefono}" placeholder="Ejemplo: 21234567" validator="#{funcionesMB.validarNumero}"/>
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_correo}" for="correo" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Correo:" for="correo" />
                             </h4>
-                            <p:inputText style="vertical-align: center" id="correo" value="#{alumnoController.selected.correo}"  />
+                            <p:inputText style="vertical-align: center" id="correo" value="#{alumnoController.selected.correo}" placeholder="ejemplo@correo.com" validator="#{funcionesMB.validarCorreo}"/>
                             
                             <h4 style="display: inline-block;"><h:outputLabel id="variableHuella1TXT" value="Huella 1:" /></h4>
                             <h4 style="display: inline-block;"><p:outputLabel id="estado1" value="NO INGRESADA"/></h4>

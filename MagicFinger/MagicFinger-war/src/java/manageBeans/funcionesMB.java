@@ -47,8 +47,8 @@ public class funcionesMB {
         Pattern pa = Pattern.compile("\\s+");
         Matcher t = p.matcher((String)texto);
         Matcher s = pa.matcher((String)texto);
-        if (((String)texto).length() == 0 || s.matches()) throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "El nombre no puede ser vacío"));
-        if(t.matches()) throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "El nombre no puede estar compuesto solo de números"));    
+        if (((String)texto).length() == 0 || s.matches()) throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "El campo no puede ser vacío"));
+        if(t.matches()) throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "El campo no puede estar compuesto solo de números"));    
     }
     
     public void validarRut(FacesContext arg0, UIComponent arg1, Object rut) throws ValidatorException {
@@ -77,7 +77,8 @@ public class funcionesMB {
     }
     
     public void validarCorreo(FacesContext arg0, UIComponent arg1, Object texto) throws ValidatorException {
-        Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$ ");
+        Pattern p = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher n = p.matcher((String)texto);
         if (!n.matches()) throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "Debe ingresar un e-mail válido"));    
     }  
