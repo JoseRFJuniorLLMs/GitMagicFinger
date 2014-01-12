@@ -11,6 +11,9 @@
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+        
+        <link type="text/css" rel="stylesheet" href="/MagicFinger-war/faces/javax.faces.resource/primefaces.css?ln=primefaces&amp;v=4.0" />
+<script type="text/javascript" src="/MagicFinger-war/faces/javax.faces.resource/jquery/jquery-plugins.js?ln=primefaces&amp;v=4.0"></script>
     </h:head>
     <h:body>
         <script>
@@ -37,7 +40,7 @@
                 <h3> Asignatura: <h:outputText value="#{reporteAsisteciaMB.curso.asignatura.nombre}" /> - <h:outputText value="#{reporteAsisteciaMB.curso.tipoAsignatura.nombre}" /></h3> <!--AQUI PONER EL PROFESOR QUE VIENE DESDE LA VISTA PRINCIPAL DEL PROFE --><br /><br />
                 <h3> Profesor: <h:outputText value="#{reporteAsisteciaMB.profesor.nombre}" /> &nbsp; <h:outputText value="#{reporteAsisteciaMB.profesor.apellidop}" /> </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
             </div>
-            <h:form>
+            <h:form id="adasd" prependId="false">
                 <p:lineChart id="linear" value="#{reporteAsisteciaMB.linearModel}" legendPosition="e"  
          title="Linear Chart" minY="0" maxY="10" style="height:300px"/>  
 
