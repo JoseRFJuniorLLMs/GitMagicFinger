@@ -73,10 +73,20 @@ public class asignaturaMB {
            System.out.println(e.getMessage());
        }
     }
+
     public void envioDatosGrupo(){
         conversationGrupo.beginConversation();
         redireccionar("/faces/profesor/grupos/grupos.xhtml?cid=".concat(this.conversationGrupo.getConversation().getId()));
     }
+
+    public void envioDatosEstadisticas(){
+        redireccionar("/faces/profesor/reporteEstadisticas.xhtml");
+    }
+    
+    public void envioDatosReportes(){
+        redireccionar("/faces/profesor/reporteAsistencia.xhtml");
+    }
+
     public void envioDatos(){
         conversation.beginConversation();
          System.out.println("El de asignatura imprime " + cursoSeleccionado.getTipoAsignatura().getNombre());

@@ -109,4 +109,6 @@ public final class funcionesGenerales {
             cal.add(Calendar.MINUTE, minutos); 
             return cal.getTime(); 
         }
+
+   
 }

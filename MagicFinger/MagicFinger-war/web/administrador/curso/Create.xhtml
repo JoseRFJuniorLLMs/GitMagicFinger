@@ -19,72 +19,88 @@
             <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
                 <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
             </div>
-            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
-                <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="form" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.usuario}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
                 </h:form>
             </div>
         </div>      
         <div class="center_content">
-            <h:form><p:growl id="grow1" showDetail="true" />
+            <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
+                    <span>Agregar curso</span> 
+                    <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
+                        <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
+                             [Cambiar]
+                        </h:outputLink>
+                        </span> 
+                    </span> 
+             </h1>
+            <h:form id="form2" prependId="false"><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
-                    <h1 style="text-align: center;margin-bottom: 20px "> Agregar Curso</h1>
-                    <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                       <p:menubar style="text-align: center; margin: 0 auto; width: 70%">  
-                    <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Profesor" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:submenu label="Curso" icon="ui-icon-bullet">  
-                        <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
-                        <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />   
-                    </p:submenu>
-                    <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
-               </p:menubar>  
+                   
+                  <div style="text-align: left; display: inline-block;width: 100%; margin-bottom: 20px;" >
+                    <p:menubar style="width: 75%;vertical-align: middle;display: inline-block">  
+                        <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Profesores" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:submenu label="Cursos" icon="ui-icon-bullet">  
+                            <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
+                            <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
+                            <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
+                            <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
+                            <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />   
+                        </p:submenu>
+                        <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
+                     </p:menubar>
                     </div>
-                    <div id="agregar" style="display: inline-block;width: 100%;">       
-                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
-                        <p style="float: left;display: inline-block">
-                            &nbsp;Para agregar un nuevo curso, debe ingresar los siguientes campos:
-                        </p>  
+                     <div id="agregar" style="display: inline-block;width: 100%;">
+                    <img src="/MagicFinger-war/faces/img/advertencia.png" height="24" width="26" style="vertical-align: middle"/>
+                    <p style="vertical-align: middle;display: inline-block;text-align: center">
+                        Para agregar un curso, debe completar los siguientes datos:
+                    </p>
+                    
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_asignatura}" for="asignatura" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Asignatura:" for="asignatura" />
                             </h4>
-                            <p:selectOneMenu style="vertical-align: center" id="asignatura" value="#{cursoController.selected.asignatura}"  required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_asignatura}">
+                            <p:selectOneMenu style="vertical-align: center" id="asignatura" value="#{cursoController.selected.asignatura}"  required="true" requiredMessage="Debe seleccionar una asignatura">
                                 <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_semestre}" for="semestre" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Semestre:" for="semestre" />
                             </h4>
-                            <p:selectOneMenu style="vertical-align: center" id="semestre" value="#{cursoController.selected.semestre}"  required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_semestre}">
+                            <p:selectOneMenu style="vertical-align: center" id="semestre" value="#{cursoController.selected.semestre}"  required="true" requiredMessage="Debe selecionar un semestre">
                                 <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_tipoAsignatura}" for="tipoAsignatura" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Tipo de asignatura:" for="tipoAsignatura" />
                             </h4>
-                            <p:selectOneMenu style="vertical-align: center" id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}"  required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_tipoAsignatura}">
+                            <p:selectOneMenu style="vertical-align: center" id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}"  required="true" requiredMessage="Debe seleccionar un tipo de asignatura">
                                 <f:selectItems value="#{tipoAsignaturaController.itemsAvailableSelectOne}"/>
                             </p:selectOneMenu>
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_porcentajeAprobacion}" for="porcentajeAprobacion" />
+                            
+                            
+                            
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Porcentaje de aprobación:" for="porcentajeAprobacion" />
                             </h4>
-                            <p:inputText style="vertical-align: center" id="porcentajeAprobacion" value="#{cursoController.selected.porcentajeAprobacion}"  />
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateCursoLabel_termino}" for="termino" />
+                            <p:spinner id="porcentajeAprobacion" value="#{cursoController.selected.porcentajeAprobacion}" min="0" max="100" required="true" requiredMessage="Debe ingresar un porcentaje entre 0 y 100"/> 
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Atrasados después de (min):" for="termino" />
                             </h4>
-                            <p:inputText style="vertical-align: center" id="termino" value="#{cursoController.selected.termino}"  />
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Alumnos" for="alumnos"  />
-                            </h4>
-                            <p:selectCheckboxMenu value="#{cursoController.listAlumnoSelecionados}" id="alumnos" label="Alumnos" filter="true" filterMatchMode="startsWith" panelStyle="width:220px">  
-                                <f:selectItems value="#{cursoController.listAlumno}"  var="alu" itemLabel="#{alu.nombre} #{alu.apellidop} #{alu.apellidom}" itemValue="#{alu.idAlumno}"/>  
-                            </p:selectCheckboxMenu>
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Profesores" for="profesores"  />
-                            </h4>
-                            <p:selectCheckboxMenu value="#{cursoController.listProfesorSelecionados}" id="profesores" label="Profesores" filter="true" filterMatchMode="startsWith" panelStyle="width:220px">  
-                                <f:selectItems value="#{cursoController.listProfesor}"  var="pro" itemLabel="#{pro.nombre} #{pro.apellidop} #{pro.apellidom}" itemValue="#{pro.idProfesor}"/>  
-                            </p:selectCheckboxMenu>
+                            <p:spinner id="termino" value="#{cursoController.selected.termino}" min="0" max="90" required="true" requiredMessage="Debe ingresar el tiempo de atrasados entre 0 y 90 min."/> 
+                            
+                           
+                            
                             
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{cursoController.create}">

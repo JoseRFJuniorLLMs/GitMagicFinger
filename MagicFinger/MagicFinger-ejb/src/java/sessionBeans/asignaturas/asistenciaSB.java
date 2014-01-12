@@ -6,10 +6,9 @@ package sessionBeans.asignaturas;
 
 import entity.Alumno;
 import entity.AlumnosDelCurso;
-import entity.Asignatura;
 import entity.Asistencia;
 import entity.BloqueClase;
-import entity.TipoAsignatura;
+import entity.Curso;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -35,6 +34,16 @@ public class asistenciaSB implements asistenciaSBLocal {
             return listado.get(0);
         }
         return null;
+    }
+    @Override
+    public List<Asistencia> cuentaAsistencia(Alumno alumno, Curso curso){
+        Query q = em.createNamedQuery("Asistencia.CountAsistencia").setParameter("Alumno", alumno).setParameter("Curso", curso);
+        return q.getResultList();
+        
+    }
+    public List<Asistencia> cuentaAsistenciaSuspendida(Alumno alumno, Curso curso){
+        Query q = em.createNamedQuery("Asistencia.CountAsistenciaNoValida").setParameter("Alumno", alumno).setParameter("Curso", curso);
+        return q.getResultList();
     }
 
     // Add business logic below. (Right-click in editor and choose

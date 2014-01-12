@@ -36,14 +36,26 @@
      </div>
         <div  class="center_content">
         <h1 style="margin-bottom: 50px;font-family: -webkit-pictograph"> Menú Administrador</h1>
-            <div style="display: block;margin: 0 auto;text-align: center;width: 200px;">
+        <div style="text-align: center;margin-bottom: 20px">
+            <div style="display: inline-block;text-align: center;width: 200px">
                 <h:outputLink value="/MagicFinger-war/faces/administrador/universidad/List.xhtml">
                     <img src="/MagicFinger-war/faces/img/universidad.jpg" heigt="95" width="95" style="margin: 0 auto;display:block"/>
-                    <h4>Gestión de Universidades</h4>
+                    <h4>Gestión de universidades</h4>
                 </h:outputLink>
             </div>
-        <h3>Universidades</h3>  
+            <div style="display: inline-block;text-align: center;width: 200px">
+                <h:outputLink value="/MagicFinger-war/faces/administrador/semestre/List.xhtml">
+                    <img src="/MagicFinger-war/faces/img/semestre.png" heigt="56" width="140" style="margin: 0 auto;display:block"/>
+                    <h4>Gestión de semestres</h4>
+                </h:outputLink>
+            </div>
+            
+        </div>
+           
+        
+        <div>
         <h:form>
+        <h3>Universidades</h3>  
         <p:dataGrid value="#{postLoginMB.listUniversidad}" var="car" columns="4" rows="120" >  
             <div style="display: block;margin: 0 auto;text-align: center;">
                 <h:commandLink action="#{postLoginMB.redirec( car.idUniversidad )}">
@@ -53,6 +65,7 @@
             </div>
         </p:dataGrid>  
         </h:form>
+        </div>
     </div>
     </h:body>
 </html>
