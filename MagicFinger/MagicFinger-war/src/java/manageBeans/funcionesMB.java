@@ -43,12 +43,19 @@ public class funcionesMB {
     }
     
     public void validarNombre(FacesContext arg0, UIComponent arg1, Object texto) throws ValidatorException {
+        
         Pattern p = Pattern.compile("[0-9]+");
         Pattern pa = Pattern.compile("\\s+");
-        Matcher t = p.matcher((String)texto);
-        Matcher s = pa.matcher((String)texto);
-        if (((String)texto).length() == 0 || s.matches()) throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "El campo no puede ser vacío"));
-        if(t.matches()) throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "El campo no puede estar compuesto solo de números"));    
+        Matcher t = p.matcher(texto.toString());
+        Matcher s = pa.matcher(texto.toString());
+        System.out.println("que wea hno");
+        if ((texto.toString().length()) == 0 || s.matches()){
+            System.out.println("bunddlemansad");
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "El campo no puede ser vacío"));
+        }
+        if(t.matches()){
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de validación", "El campo no puede estar compuesto solo de números"));
+        }
     }
     
     public void validarRut(FacesContext arg0, UIComponent arg1, Object rut) throws ValidatorException {
