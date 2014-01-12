@@ -1,4 +1,4 @@
-package manageBeans.crud;
+    package manageBeans.crud;
 
 import com.sun.jersey.core.util.Base64;
 import entity.Departamento;
