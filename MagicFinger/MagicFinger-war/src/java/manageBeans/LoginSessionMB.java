@@ -42,7 +42,8 @@ public class LoginSessionMB implements Serializable {
     private Alumno alumno;
     private Curso curso;
     private int IdUniversidad;
-         
+    private String usuario;     
+    
     public LoginSessionMB() {
     }
 
@@ -64,6 +65,7 @@ public class LoginSessionMB implements Serializable {
     }
 
     public void login(String user, String password) throws IOException {
+        usuario = user;
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext externalContext = context.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
@@ -141,6 +143,14 @@ public class LoginSessionMB implements Serializable {
 
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
     
 }
