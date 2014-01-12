@@ -28,10 +28,19 @@ public class AlumnosDelCursoFacade extends AbstractFacade<AlumnosDelCurso> imple
     public AlumnosDelCursoFacade() {
         super(AlumnosDelCurso.class);
     }
+    @Override
     public List BuscarPorIdUniversidad(int idUniversidad){
         Query q = em.createNamedQuery("AlumnoDelCurso.findByUniversidad").setParameter("idUniversidad", idUniversidad);
         List listado = q.getResultList();
         return listado;
     }
+    @Override
+    public AlumnosDelCurso BuscarPorIdAlumno(int idAlumno){
+        
+        Query q = em.createNamedQuery("AlumnosDelCurso.findByAluIdAlumno").setParameter("aluIdAlumno", idAlumno);
+        AlumnosDelCurso listado = (AlumnosDelCurso) q.getResultList().get(0);
+        return listado;
+    }
+    
     
 }

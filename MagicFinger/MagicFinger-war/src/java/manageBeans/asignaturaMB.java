@@ -43,6 +43,9 @@ public class asignaturaMB {
 
     @Inject 
     private TomaAsistenciaConversation conversation;
+    
+    @Inject
+    private GrupoConversation conversationGrupo;
     @Inject
     LoginSessionMB profesorLogin;
     @PostConstruct
@@ -69,6 +72,10 @@ public class asignaturaMB {
        catch (IOException e) {
            System.out.println(e.getMessage());
        }
+    }
+    public void envioDatosGrupo(){
+        conversationGrupo.beginConversation();
+        redireccionar("/faces/profesor/grupos/grupos.xhtml?cid=".concat(this.conversationGrupo.getConversation().getId()));
     }
     public void envioDatos(){
         conversation.beginConversation();
