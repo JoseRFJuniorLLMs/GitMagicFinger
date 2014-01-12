@@ -85,9 +85,9 @@
                         
                         <p:column filterBy="#{item.bloque}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListBloqueClaseTitle_bloque}"/>
+                                <h:outputText value="Bloque"/>
                             </f:facet>
-                            <h:outputText value="#{item.bloque.toString()}"/>
+                            <h:outputText value="#{item.toString()}"/>
                         </p:column>
                         <p:column filterBy="#{item.diaSemana}" >
                             <f:facet name="header">
@@ -100,7 +100,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Curso"/>
                             </f:facet>
-                            <h:outputText value="#{item.curso.asignatura.nombre} #{item.curso.tipoAsignatura.nombre}"/>
+                            <h:outputText value="#{item.curso.asignatura.nombre} - #{item.curso.tipoAsignatura.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
