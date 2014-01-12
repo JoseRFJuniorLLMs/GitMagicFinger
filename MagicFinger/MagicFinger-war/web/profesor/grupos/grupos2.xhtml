@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Grupos</title>
+    </h:head>
+    <h:body>
+        <div id="top" style="display: inline-block; text-align: center">
+            
+            <div id="logo" style="display: inline-block; float:left">
+                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+            </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
+                <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
+            </div>
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="forem" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.usuario}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
+                </h:form>
+            </div>  
+        </div>
+        <div class="center_content">
+            <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
+                <span>Agregar grupo</span> 
+                <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
+                    <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
+                         [Cambiar]
+                    </h:outputLink>
+                    </span> 
+                </span> 
+            </h1>
+            <h:form id="form" > <p:growl id="grow1" showDetail="true" />
+                <div style="text-align: center">
+                    <div style="text-align: left; display: inline-block;width: 100%; margin-bottom: 20px;" >
+                        <p:menubar style="width: 70%;vertical-align: middle;display: inline-block">  
+                        <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Profesores" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:submenu label="Cursos" icon="ui-icon-bullet">  
+                            <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
+                            <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
+                            <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
+                            <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
+                            <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />   
+                        </p:submenu>
+                        <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
+                        </p:menubar>
+                    </div>
+                    <div id="agregar" style="display: inline-block;width: 100%;">
+                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="24" width="26" style="vertical-align: middle"/>
+                        <p style="vertical-align: middle;display: inline-block;text-align: center">
+                            Para agregar un grupo, debe completar los siguientes datos:
+                        </p>
+                    </div>
+
+                        <div style="margin-bottom: 20px;display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px">
+                        <p:dataTable id="grupo" 
+                                     style="width: 480px;margin: 0 auto; padding: 10px;" 
+                                     var="gru" value="#{gruposMB.listaGrupoData}" 
+                                     selection ="#{gruposMB.grupoSeleccionado}"
+                                     selectionMode="single">  
+                            <p:ajax event="rowSelect" listener="#{gruposMB.onRowSelect}"
+                                    update=":form:grow1 :form:pickList" /> 
+
+                            <p:column headerText="Nombre Grupos" style="width:24%" >  
+                                <h:outputText value="#{gru.toString()}" />  
+                            </p:column>
+
+                        </p:dataTable>
+                        <p:pickList style="width: 480px;margin: 0 auto; padding: 10px;" id="pickList" value="#{gruposMB.asignar}" var="city" itemLabel="#{city}" itemValue="#{city}" />  
+                        <p:commandButton id="citySubmit" value="Submit" style="margin-top:5px"/>  
+                        </div>
+                </div>
+           </h:form>
+        </div>
+    </h:body>
+</html>
+
