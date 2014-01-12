@@ -263,4 +263,13 @@ public class AlumnosDelCursoController implements Serializable {
             }
         }
     }
+
+    public AlumnosDelCurso getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(AlumnosDelCurso current) {
+        this.current = current;
+    }
+    
 }

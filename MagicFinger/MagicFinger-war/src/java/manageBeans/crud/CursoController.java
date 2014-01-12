@@ -1,13 +1,21 @@
 package manageBeans.crud;
 
+import entity.Alumno;
+import entity.AlumnosDelCurso;
 import entity.Curso;
+import entity.Profesor;
+import entity.ProfesoresPorCurso;
+import entity.ProfesoresPorDepartamento;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -21,12 +29,21 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import manageBeans.LoginSessionMB;
+import sessionBeans.AlumnoFacadeLocal;
 import sessionBeans.CursoFacadeLocal;
+import sessionBeans.ProfesorFacadeLocal;
+import sessionBeans.ProfesoresPorDepartamentoFacadeLocal;
 
 @Named("cursoController")
 @RequestScoped
 public class CursoController implements Serializable {
-
+    @EJB
+    private ProfesorFacadeLocal profesorFacade;
+    @EJB
+    private ProfesoresPorDepartamentoFacadeLocal profesoresPorDepartamentoFacade;
+    @EJB
+    
+    private AlumnoFacadeLocal alumnoFacade;
     private Curso current;
     private DataModel items = null;
     @EJB
@@ -35,11 +52,28 @@ public class CursoController implements Serializable {
     private int selectedItemIndex;
     @Inject
     LoginSessionMB session;
-    
-
+    private List<Alumno> listAlumno = new ArrayList<>();
+    private List<String> listAlumnoSelecionados = new ArrayList<>();
+    private List<Profesor> listProfesor = new ArrayList<>();
+    private List<String> listProfesorSelecionados = new ArrayList<>();
+    @Inject
+    AlumnosDelCursoController alumnosdelcurso;
+    @Inject
+    ProfesoresPorCursoController profesoresporcurso;
     public CursoController() {
     }
-
+    @PostConstruct
+    public void init(){
+        listAlumno = alumnoFacade.BuscarPorIdUniversidad(session.getIdUniversidad());
+        List<ProfesoresPorDepartamento> profePorDepa = profesoresPorDepartamentoFacade.BuscarPorIdUniversidad(session.getIdUniversidad());
+            List lista = new ArrayList();
+            for (ProfesoresPorDepartamento object : profePorDepa) {
+                if(object.getProfesor()!=null && !lista.contains(object.getProfesor())){
+                    lista.add(object.getProfesor()); 
+                }
+            }
+            listProfesor = lista;
+    }
     public Curso getSelected() {
         if (current == null) {
             current = new Curso();
@@ -94,6 +128,24 @@ public class CursoController implements Serializable {
             current.getCursoPK().setAsiIdAsignatura(current.getAsignatura().getIdAsignatura());
             current.getCursoPK().setSemIdFecha(current.getSemestre().getIdFecha());
             getFacade().create(current);
+            AlumnosDelCurso alumnosCurso = new AlumnosDelCurso();
+            alumnosCurso.setAlumnosDelCursoPK(new entity.AlumnosDelCursoPK());
+            alumnosCurso.setCurso(current);
+            ProfesoresPorCurso profesorCurso = new ProfesoresPorCurso();
+            profesorCurso.setProfesoresPorCursoPK(new entity.ProfesoresPorCursoPK());
+            profesorCurso.setCurso(current);
+            for (String object : listAlumnoSelecionados) {
+                alumnosCurso.setAlumno(alumnoFacade.find(Integer.parseInt(object)));
+                alumnosdelcurso.setCurrent(alumnosCurso);
+                alumnosdelcurso.create();
+                System.out.println("Alumno: "+object);
+            }
+            for (String object : listProfesorSelecionados) {
+                profesorCurso.setProfesor(profesorFacade.find(Integer.parseInt(object)));
+                profesoresporcurso.setCurrent(profesorCurso);
+                profesoresporcurso.create();
+                System.out.println("Profesor: "+object);
+            }
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado una Curso correctamente"));
             return prepareList();
@@ -263,4 +315,38 @@ public class CursoController implements Serializable {
             }
         }
     }
+
+    public List<Alumno> getListAlumno() {
+        return listAlumno;
+    }
+
+    public void setListAlumno(List<Alumno> listAlumno) {
+        this.listAlumno = listAlumno;
+    }
+
+    public List<String> getListAlumnoSelecionados() {
+        return listAlumnoSelecionados;
+    }
+
+    public void setListAlumnoSelecionados(List<String> listAlumnoSelecionados) {
+        this.listAlumnoSelecionados = listAlumnoSelecionados;
+    }
+
+    public List<Profesor> getListProfesor() {
+        return listProfesor;
+    }
+
+    public void setListProfesor(List<Profesor> listProfesor) {
+        this.listProfesor = listProfesor;
+    }
+
+    public List<String> getListProfesorSelecionados() {
+        return listProfesorSelecionados;
+    }
+
+    public void setListProfesorSelecionados(List<String> listProfesorSelecionados) {
+        this.listProfesorSelecionados = listProfesorSelecionados;
+    }
+    
+    
 }
