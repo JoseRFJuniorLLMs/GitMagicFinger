@@ -1,134 +1,56 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
-
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      xmlns:p="http://primefaces.org/ui">
+     <h:head>
+        <title>Profesor</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
-        <title>Facelets Template</title>
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+
     </h:head>
-
     <h:body>
-        <script>
-            PrimeFaces.locales['es'] = {
-                closeText: 'Cerrar',
-                prevText: 'Anterior',
-                nextText: 'Siguiente',
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-                dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-                weekHeader: 'Semana',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: '',
-                timeOnlyTitle: 'Sólo hora',
-                timeText: 'Tiempo',
-                hourText: 'Hora',
-                minuteText: 'Minuto',
-                secondText: 'Segundo',
-                currentText: 'Fecha actual',
-                ampm: false,
-                month: 'Mes',
-                week: 'Semana',
-                day: 'Día',
-                allDayText: 'Todo el día'
-            }
-
-        </script>
-        <div id="top" style="display: inline-block; ">
+     <div id="top" style="display: inline-block; ">
             <div id="logo" style="display: inline-block;vertical-align: middle;">
                 <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
             </div>
             <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
-                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
+                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />
             </div>
-            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
-                <h:form>
-                <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="form" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.profesor.toString()}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
                 </h:form>
-            </div>    
-        </div>
-
-        <div id="content" class="center_content">
-            <h1 style="text-align: center;margin-bottom: 40px" > Bienvenido 
-                <h:outputText value="#{loginSessionMB.profesor.nombre}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidop}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidom}" />
-            </h1>
-            <div> 
-                <div id="cursos" style="display:inline-block; vertical-align: middle">
-                    <h:form id="form"> <p:growl id="grow1" showDetail="true" />
-
-                        <h3>Mis cursos</h3>
-
-                        <p:dataTable id="curso" 
-                                     style="width: 480px;margin-top:20px" 
-                                     var="cur" value="#{asignaturaMB.listaCursoData}" 
-                                     selection ="#{asignaturaMB.cursoSeleccionado}"
-                                     selectionMode="single"
-                                     >  
-                            <p:ajax event="rowSelect" listener="#{asignaturaMB.onRowSelect}"
-                                    update=":form:grow1 :form2:txt1 :form2:txt2" /> 
-
-                            <p:column headerText="Nombre Asignatura" style="width:24%" >  
-                                <h:outputText value="#{cur.toString()}" />  
-                            </p:column>
-
-                            <p:column style="width:4%">  
-                                <p:commandButton id="selectButton" update=":form:display1" oncomplete="PF('curDialog').show()" icon="ui-icon-search" title="View">  
-                                    <f:setPropertyActionListener value="#{cur}" target="#{asignaturaMB.cursoSeleccionado}" />  
-                                </p:commandButton>  
-                            </p:column>  
-
-                        </p:dataTable>  
-                       
-                        <p:dialog header="Detalle del curso" widgetVar="curDialog" resizable="false" id="carDlg"  
-                                  showEffect="fade" hideEffect="explode" modal="true">  
-                            <h:panelGrid id="display1" columns="2" cellpadding="4" style="margin:0 auto;">  
-                                <h:outputText value="Nombre asignatura:" />
-                                <h:outputText value="#{asignaturaMB.cursoSeleccionado.asignatura.nombre}" style="font-weight:bold"/>
-                                <h:outputText value="Código: " />
-                                <h:outputText value="#{asignaturaMB.cursoSeleccionado.asignatura.idAsignatura}" style="font-weight:bold"/>
-                                <h:outputText value="Tipo asignatura: " />
-                                <h:outputText value="#{asignaturaMB.cursoSeleccionado.tipoAsignatura.nombre}" style="font-weight:bold"/>
-
-                            </h:panelGrid>
-                        </p:dialog> 
-                        <p:commandButton style="float: right; margin-top: 10px;" action="#{asignaturaMB.envioDatos}" value="Tomar asistencia" />  
-                    </h:form>
-                </div>
-
-
-                <div id="normas" style="display:inline-block;vertical-align:middle;margin-left: 35px;" >
-                    <h:form id="form2" style="display: inline-block"> 
-                        <h3 style="margin-bottom: 20px; text-align: center;">Normas del curso</h3>
-                        <h5 style="text-align: left;"> Porcentaje aprobación:  </h5>
-                        
-                        <p:inplace id ="txt1" editor="true">
-                            <p:ajax event="save" listener="#{asignaturaMB.actualizarDatos}" update=":form:grow1"/>
-                             <p:spinner  min="0" max="100" style="margin-left: auto; margin-right: auto; display: inline;
-                                     margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.porcentajeAprobacion}" /> 
-                        </p:inplace>
-                        
-                        <h5 style="text-align: left;"> Limite asistencia:  </h5>
-                        
-                        <p:inplace id="txt2"  editor="true">
-                            <p:ajax event="save" listener="#{asignaturaMB.actualizarDatos}" update=":form:grow1"/>
-                        <p:spinner  min="10" max="90" style=" margin-left: auto; margin-right: auto; display: inline;
-                                     margin-bottom: 20px; padding: 4px; " value="#{asignaturaMB.cursoSeleccionado.termino}" /> 
-                        </p:inplace>  
-                    </h:form>
-                </div>
+            </div>  
+     </div>
+        <div  class="center_content">
+        <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;"> Menú profesor</h1>
+            
+        <h3>Universidades</h3>  
+        <h:form>
+        <p:dataGrid value="#{postLoginMB.listUniversidad}" var="car" columns="4" rows="120" >  
+            <div style="display: block;margin: 0 auto;text-align: center;">
+                <h:commandLink action="#{postLoginMB.redirec(car.idUniversidad )}">
+                    <img src="/MagicFinger-war/faces/img/estudiantes.png" heigt="80" width="80" style="margin: 0 auto;display:block"/>
+                    <h4>#{car.nombre}</h4>
+                </h:commandLink>
             </div>
-            <br />
-        </div>
+        </p:dataGrid>  
+        </h:form>
+    </div>
     </h:body>
 </html>
+
+
 

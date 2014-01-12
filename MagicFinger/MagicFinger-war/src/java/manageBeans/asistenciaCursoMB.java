@@ -43,6 +43,7 @@ public class asistenciaCursoMB {
     @EJB
     private SemestreFacadeLocal semestreFacade;
     
+    
     @Inject 
     private TomaAsistenciaConversation conversation;
     
@@ -56,7 +57,6 @@ public class asistenciaCursoMB {
     private Date fecha;
     private List<BloqueClase> bloqueClaseList;
     private List<BloqueClase> bloqueClasesAllList;
-    private boolean restriccionAsistencia;
     
     @PostConstruct
     public void init() {
@@ -105,6 +105,7 @@ public class asistenciaCursoMB {
 
     public void agregaPersona(ActionEvent actionEvent) {
         BloqueClase bloqueClaseActual = bloqueDetectadoPorFechaYHora();
+        System.out.println("bloqueActuaaal" + bloqueClaseActual);
         Alumno encontrado = alumnos.CompareFingerPrint(HuellaEnString, curso);
         if (bloqueClaseActual == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "No se puede marcar asistencia, fuera del bloque de clases"));
@@ -146,13 +147,13 @@ public class asistenciaCursoMB {
     }
     private BloqueClase bloqueDetectadoPorFechaYHora(){
         Date hoy= new Date();
-        for (BloqueClase bloqueClase1 : bloqueClaseList) {
-            Date[] fechaBloque = funcionesGenerales.buscaBloque(bloqueClase1.getBloque());
+        for (BloqueClase bloqueClase1 : bloqueClasesAllList) {
+            Date[] fechaBloque = funcionesGenerales.buscaBloque(bloqueClase1.getBloque() );
             if(hoy.after(fechaBloque[0]) && hoy.before(fechaBloque[1])){
-                System.out.println("encontre el bloque");
                 return bloqueClase1;
             }
         }
+        System.out.println("bloque no encontrado...");
         return null;
     }
     private List<BloqueClase> bloqueDetectadoPorFecha() {
@@ -204,7 +205,6 @@ public class asistenciaCursoMB {
             default:
                 return "Ausente";
         }
-        
     }
 
     public void handleDateSelect(SelectEvent event) {

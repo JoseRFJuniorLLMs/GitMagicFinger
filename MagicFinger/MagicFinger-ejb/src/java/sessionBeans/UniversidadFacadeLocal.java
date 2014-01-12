@@ -4,6 +4,7 @@
  */
 package sessionBeans;
 
+import entity.Profesor;
 import entity.Universidad;
 import java.util.List;
 import javax.ejb.Local;
@@ -28,5 +29,6 @@ public interface UniversidadFacadeLocal {
     List<Universidad> findRange(int[] range);
 
     int count();
+
     
 }

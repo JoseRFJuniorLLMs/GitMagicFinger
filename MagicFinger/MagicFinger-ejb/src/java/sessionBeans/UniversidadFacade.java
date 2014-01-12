@@ -4,10 +4,13 @@
  */
 package sessionBeans;
 
+import entity.Profesor;
 import entity.Universidad;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,4 +30,4 @@ public class UniversidadFacade extends AbstractFacade<Universidad> implements Un
         super(Universidad.class);
     }
     
-}
+}   
