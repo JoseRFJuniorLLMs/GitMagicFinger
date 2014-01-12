@@ -1,5 +1,6 @@
 package manageBeans.crud;
 
+import com.sun.jersey.core.util.Base64;
 import entity.Departamento;
 import entity.Profesor;
 import entity.ProfesoresPorCurso;
@@ -54,6 +55,8 @@ public class ProfesorController implements Serializable {
     LoginSessionMB session;
     @Inject
     ProfesoresPorDepartamentoController profesoresPorDepa;
+    private String huellaEnString1;
+    private String huellaEnString2;
     
     public ProfesorController() {
         
@@ -121,6 +124,10 @@ public class ProfesorController implements Serializable {
             user.setUserrolName(userrol);
             usercontroller.setCurrent(user);
             if(usercontroller.create()!=null){
+            byte[] templeByte1 = Base64.decode(huellaEnString1);
+            byte[] templeByte2 = Base64.decode(huellaEnString2);
+            current.setHuella1(templeByte1);
+            current.setHuella2(templeByte2);
             getFacade().create(current);
             //EDITANDO
             Profesor profesor = getFacade().findAll().get(getFacade().count()-1);
@@ -315,6 +322,22 @@ public class ProfesorController implements Serializable {
 
     public void setListDepartamentoSelecionados(List<String> listDepartamentoSelecionados) {
         this.listDepartamentoSelecionados = listDepartamentoSelecionados;
+    }
+
+    public String getHuellaEnString1() {
+        return huellaEnString1;
+    }
+
+    public void setHuellaEnString1(String huellaEnString1) {
+        this.huellaEnString1 = huellaEnString1;
+    }
+
+    public String getHuellaEnString2() {
+        return huellaEnString2;
+    }
+
+    public void setHuellaEnString2(String huellaEnString2) {
+        this.huellaEnString2 = huellaEnString2;
     }
     
     

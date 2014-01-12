@@ -19,6 +19,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import manageBeans.LoginSessionMB;
 import sessionBeans.CursoFacadeLocal;
 
 @Named("cursoController")
@@ -31,6 +33,9 @@ public class CursoController implements Serializable {
     private CursoFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    @Inject
+    LoginSessionMB session;
+    
 
     public CursoController() {
     }
@@ -101,7 +106,7 @@ public class CursoController implements Serializable {
 
     public String prepareEdit(Curso var) {
         current = var;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
@@ -124,7 +129,7 @@ public class CursoController implements Serializable {
 
     public String destroy(Curso valor) {
         current = valor;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -172,7 +177,7 @@ public class CursoController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
+            items = new ListDataModel(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()));
         }
         return items;
     }
@@ -198,11 +203,11 @@ public class CursoController implements Serializable {
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+        return JsfUtil.getSelectItems(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {
-        return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        return JsfUtil.getSelectItems(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()), true);
     }
 
     public Curso getCurso(entity.CursoPK id) {

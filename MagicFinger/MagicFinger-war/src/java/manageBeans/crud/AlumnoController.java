@@ -1,5 +1,6 @@
 package manageBeans.crud;
 
+import com.sun.jersey.core.util.Base64;
 import entity.Alumno;
 import entity.Universidad;
 import entity.User;
@@ -101,6 +102,10 @@ public class AlumnoController implements Serializable {
             usercontroller.setCurrent(user);
             if(usercontroller.create()!=null){
             current.setUniIdUniversidad(new Universidad(session.getIdUniversidad()));
+            byte[] templeByte1 = Base64.decode(huellaEnString1);
+            byte[] templeByte2 = Base64.decode(huellaEnString2);
+            current.setHuella1(templeByte1);
+            current.setHuella2(templeByte2);
             getFacade().create(current);
             //EDITANDO
             Alumno alumno = getFacade().findAll().get(getFacade().count()-1);

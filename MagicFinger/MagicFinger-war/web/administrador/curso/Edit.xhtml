@@ -52,26 +52,19 @@
                             <h4><p:outputLabel value="#{bundle.EditCursoLabel_termino}" for="termino" /></h4>
                             <p:inputText id="termino" value="#{cursoController.selected.termino}" />
                             <h4><p:outputLabel value="#{bundle.EditCursoLabel_asignatura}" for="asignatura" /></h4>
-                            <p:selectOneMenu id="asignatura" value="#{cursoController.selected.asignatura}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_asignatura}">
-                                <f:selectItems value="#{asignaturaController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
-                            <h4><p:outputLabel value="#{bundle.EditCursoLabel_semestre}" for="semestre" /></h4>
-                            <p:selectOneMenu id="semestre" value="#{cursoController.selected.semestre}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_semestre}">
-                                <f:selectItems value="#{semestreController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
-                            <h4><p:outputLabel value="#{bundle.EditCursoLabel_tipoAsignatura}" for="tipoAsignatura" /></h4>
-                            <p:selectOneMenu id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_tipoAsignatura}">
-                                <f:selectItems value="#{tipoAsignaturaController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
+                            <h:inputHidden id="asignatura" value="#{cursoController.selected.asignatura}" />
+                               
+                            <h:inputHidden id="semestre" value="#{cursoController.selected.semestre}" />
+                            <h:inputHidden id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}" />
                         </h:panelGrid>
-                        <p:commandLink style="display: inline-block; margin-right: 25px" action="#{cursoController.update}">
+                        <h:commandLink style="display: inline-block; margin-right: 25px" action="#{cursoController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Guardar Curso</p:outputLabel>
-                        </p:commandLink>
-                        <p:commandLink style="display: inline-block;" action="#{cursoController.prepareList}" immediate="true">
+                        </h:commandLink>
+                        <h:commandLink style="display: inline-block;" action="#{cursoController.prepareList}" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Volver</p:outputLabel>
-                        </p:commandLink>
+                        </h:commandLink>
                         <br></br><br></br>
                     </div>
                 </div>

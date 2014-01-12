@@ -46,9 +46,6 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesoresPorCursoLabel_idProCur}" for="idProCur" />
-                            </h4>
-                            <p:inputText style="vertical-align: center" id="idProCur" value="#{profesoresPorCursoController.selected.idProCur}"  />
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateProfesoresPorCursoLabel_curso}" for="curso" />
                             </h4>
                             <p:selectOneMenu style="vertical-align: center" id="curso" value="#{profesoresPorCursoController.selected.curso}"  required="true" requiredMessage="#{bundle.CreateProfesoresPorCursoRequiredMessage_curso}">

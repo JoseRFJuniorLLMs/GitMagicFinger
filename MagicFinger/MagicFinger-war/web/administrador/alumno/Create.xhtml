@@ -1,34 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
     <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Agregar Alumno</title>
         <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
 
     </h:head>
     <h:body>
-        <script>
-            var i=0;
-            function getStringTemplate(StringTemplate) {
-                if(i==0){    
-                    document.getElementById('variableHuella1').value = StringTemplate;
-                    document.getElementById('estado1').innerHTML = "INGRESADA";
-                    i++;
-                }
-                else{
-                    document.getElementById('variableHuella2').value = StringTemplate;
-                    document.getElementById('estado2').innerHTML = "INGRESADA";
-                    i++;
-                }
-            }
-        </script>
+        
         <div id="top" style="display: inline-block; text-align: center">
-            <applet style="display:inline;vertical-align: middle" archive="/MagicFinger-war/faces/Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>
+            
             <div id="logo" style="display: inline-block; float:left">
                 <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
             </div>
@@ -42,7 +30,7 @@
             </div>
         </div>      
         <div class="center_content">
-            <h:form><p:growl id="grow1" showDetail="true" />
+            <h:form id="form" prependId="false"><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
                     <h1 style="text-align: center;margin-bottom: 20px "> Agregar Alumno</h1>
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
@@ -87,16 +75,18 @@
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAlumnoLabel_correo}" for="correo" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="correo" value="#{alumnoController.selected.correo}"  />
-          
+                            
                             <h4 style="display: inline-block;"><h:outputLabel id="variableHuella1TXT" value="Huella 1:" /></h4>
                             <h4 style="display: inline-block;"><p:outputLabel id="estado1" value="NO INGRESADA"/></h4>
                             <h4 style="display: inline-block;"><h:outputLabel id="variableHuella2TXT" value="Huella 2:" /></h4>
                             <h4 style="display: inline-block;"><p:outputLabel id="estado2" value="NO INGRESADA"/></h4>
                         
-                        <h:inputHidden id="variableHuella1" value="#{alumnoController.huellaEnString1}"/>
-                        <h:inputHidden id="variableHuella2" value="#{alumnoController.huellaEnString2}"/>
+                            <h:inputHidden value="#{alumnoController.huellaEnString1}" id="variableHuella1" />
+                            <h:inputHidden value="#{alumnoController.huellaEnString2}" id="variableHuella2" />
+                            
 
                         </h:panelGrid>
+                        
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{alumnoController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel> Guardar Alumno</p:outputLabel>
@@ -110,5 +100,21 @@
                 </div>
             </h:form>
         </div>
+        <applet style="display:inline;vertical-align: middle" archive="/MagicFinger-war/faces/Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="0" height="0"/>
     </h:body>
+    <script>
+            var i=0;
+            function getStringTemplate(StringTemplate) {
+                if(i==0){    
+                    document.getElementById('variableHuella1').value = StringTemplate;
+                    document.getElementById('estado1').innerHTML = "INGRESADA";
+                    i++;
+                }
+                else{
+                    document.getElementById('variableHuella2').value = StringTemplate;
+                    document.getElementById('estado2').innerHTML = "INGRESADA";
+                    i++;
+                }
+            }
+        </script>
 </html>

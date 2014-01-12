@@ -54,12 +54,6 @@
                         <f:facet name="header">
                             <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.idProCur}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProfesoresPorCursoTitle_idProCur}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProCur}"/>
-                        </p:column>
                         <p:column filterBy="#{item.curso}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProfesoresPorCursoTitle_curso}"/>
@@ -78,9 +72,6 @@
                             </f:facet>
                             <h:commandLink action="#{profesoresPorCursoController.prepareView(item)}">
                                 <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
-                            </h:commandLink>
-                            <h:commandLink action="#{profesoresPorCursoController.prepareEdit(item)}">
-                                <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
                             </h:commandLink>
                             <h:commandLink action="#{profesoresPorCursoController.destroy(item)}">
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />

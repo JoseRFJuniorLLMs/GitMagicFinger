@@ -41,7 +41,7 @@
             </div>
         </div>      
         <div class="center_content">
-            <h:form><p:growl id="grow1" showDetail="true" />
+            <h:form id="form" prependId="false"><p:growl id="grow1" showDetail="true" />
                 <div style="text-align:center">
                     <h1 style="text-align: center;margin-bottom: 20px "> Agregar Profesor</h1>
                     <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
@@ -88,19 +88,19 @@
                             </h4>
                             <p:inputText style="vertical-align: center" id="correo" value="#{profesorController.selected.correo}"  />
 
-                            <h:outputLabel id="variableHuella1TXT" value="Huella 1:" />
-                        <p:outputLabel id="estado1" value="NO INGRESADA"></p:outputLabel> <br />
-                        <h:outputLabel id="variableHuella2TXT" value="Huella 2:" /> 
-                        <p:outputLabel id="estado2" value="NO INGRESADA"></p:outputLabel>
+                            <h4 style="display: inline-block;"><h:outputLabel id="variableHuella1TXT" value="Huella 1:" /></h4>
+                            <h4 style="display: inline-block;"><p:outputLabel id="estado1" value="NO INGRESADA"/></h4>
+                            <h4 style="display: inline-block;"><h:outputLabel id="variableHuella2TXT" value="Huella 2:" /></h4>
+                            <h4 style="display: inline-block;"><p:outputLabel id="estado2" value="NO INGRESADA"/></h4>
                         
-                        <h:inputHidden id="variableHuella1" value="#{alumnoController.huellaEnString1}"/>
-                        <h:inputHidden id="variableHuella2" value="#{alumnoController.huellaEnString2}"/>
+                            
                              <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Departamento" for="depIdDepartamento"  />
                             </h4>
                             <p:selectCheckboxMenu value="#{profesorController.listDepartamentoSelecionados}" id="depIdDepartamento" label="Departamento" filter="true" filterMatchMode="startsWith" panelStyle="width:220px">  
                                 <f:selectItems value="#{profesorController.listDepartamento}"  var="depa" itemLabel="#{depa.nombre}" itemValue="#{depa.idDepartamento}"/>  
                             </p:selectCheckboxMenu>
-                           
+                           <h:inputHidden value="#{profesorController.huellaEnString1}" id="variableHuella1" />
+                            <h:inputHidden value="#{profesorController.huellaEnString2}" id="variableHuella2" />
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{profesorController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
@@ -115,5 +115,6 @@
                 </div>
             </h:form>
         </div>
+        <applet style="display:inline;vertical-align: middle" archive="/MagicFinger-war/faces/Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="0" height="0"/>
     </h:body>
 </html>

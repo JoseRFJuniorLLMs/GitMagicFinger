@@ -83,13 +83,13 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones"/>
                             </f:facet>
-                            <h:commandLink action="#{cursoController.prepareView}">
+                            <h:commandLink action="#{cursoController.prepareView(item)}">
                                 <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{cursoController.prepareEdit}">
+                            <h:commandLink action="#{cursoController.prepareEdit(item)}">
                                 <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
                             </h:commandLink>
-                            <h:commandLink action="#{cursoController.destroy}">
+                            <h:commandLink action="#{cursoController.destroy(item)}">
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
                             </h:commandLink>
                         </p:column>

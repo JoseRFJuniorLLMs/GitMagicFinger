@@ -19,6 +19,9 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import javax.swing.event.ListDataEvent;
+import manageBeans.LoginSessionMB;
 import sessionBeans.BloqueClaseFacadeLocal;
 
 @Named("bloqueClaseController")
@@ -31,7 +34,8 @@ public class BloqueClaseController implements Serializable {
     private BloqueClaseFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    @Inject
+    LoginSessionMB session;
     public BloqueClaseController() {
     }
 
@@ -96,7 +100,7 @@ public class BloqueClaseController implements Serializable {
 
     public String prepareEdit(BloqueClase var) {
         current = var;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
@@ -116,7 +120,7 @@ public class BloqueClaseController implements Serializable {
 
     public String destroy(BloqueClase valor) {
         current = valor;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
@@ -164,7 +168,7 @@ public class BloqueClaseController implements Serializable {
 
     public DataModel getItems() {
         if (items == null) {
-            items = getPagination().createPageDataModel();
+            items = new ListDataModel(ejbFacade.BuscarPorIdUniversidad(session.getIdUniversidad()));
         }
         return items;
     }
