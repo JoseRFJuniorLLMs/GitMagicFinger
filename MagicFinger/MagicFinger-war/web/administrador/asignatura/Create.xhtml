@@ -19,21 +19,40 @@
             <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
                 <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
             </div>
-            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
-                <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 30, column 47 in unknown." value="Cerrar sesión" />
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="form" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.usuario}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
                 </h:form>
             </div>
         </div>      
         <div class="center_content">
             <h:form><p:growl id="grow1" showDetail="true" />
+                <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
+                <span>Agregar asignatura</span> 
+                <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
+                    <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
+                         [Cambiar]
+                    </h:outputLink>
+                    </span> 
+                </span> 
+                </h1>
                 <div style="text-align:center">
-                    <h1 style="text-align: center;margin-bottom: 20px "> Agregar Asignatura</h1>
-                    <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                        <p:menubar style="text-align: center; margin: 0 auto; width: 70%">  
+                    
+                     <div style="text-align: left; display: inline-block;width: 100%; margin-bottom: 20px;" >
+                        <p:menubar style="width: 70%;vertical-align: middle;display: inline-block">  
                     <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:menuitem value="Profesor" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
-                    <p:submenu label="Curso" icon="ui-icon-bullet">  
+                    <p:menuitem value="Profesores" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:submenu label="Cursos" icon="ui-icon-bullet">  
                         <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
                         <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
                         <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
@@ -44,21 +63,22 @@
                     <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
                     <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
                     <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
-               </p:menubar> 
+               </p:menubar>
                     </div>
-                    <div id="agregar" style="display: inline-block;width: 100%;">       
-                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="32" width="36" style="vertical-align: middle; margin-left:20px;float: left"/>    
-                        <p style="float: left;display: inline-block">
-                            &nbsp;Para agregar una nueva asignatura, debe ingresar los siguientes campos:
-                        </p>  
+                    <div id="agregar" style="display: inline-block;width: 100%;">
+                    <img src="/MagicFinger-war/faces/img/advertencia.png" height="24" width="26" style="vertical-align: middle"/>
+                    <p style="vertical-align: middle;display: inline-block;text-align: center">
+                        Para agregar una asignatura, debe completar los siguientes datos:
+                    </p>
+                    
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAsignaturaLabel_nombre}" for="nombre" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Nombre:" for="nombre" />
                             </h4>
                             <p:inputText style="vertical-align: center" id="nombre" value="#{asignaturaController.selected.nombre}"  />
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateAsignaturaLabel_malIdMalla}" for="malIdMalla" />
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Plan de estudio:" for="malIdMalla" />
                             </h4>
                             <p:selectOneMenu style="vertical-align: center" id="malIdMalla" value="#{asignaturaController.selected.malIdMalla}"  required="true" requiredMessage="#{bundle.CreateAsignaturaRequiredMessage_malIdMalla}">
                                 <f:selectItems value="#{mallaController.itemsAvailableSelectOne}"/>
