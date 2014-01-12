@@ -75,8 +75,7 @@ public class LoginSessionMB implements Serializable {
                 redireccionar(context.getExternalContext().getUserPrincipal().getName());
             } else {
                 FacesContext context1 = FacesContext.getCurrentInstance();
-                HttpSession session = (HttpSession) context1.
-                getExternalContext().getSession(false);
+                HttpSession session = (HttpSession) context1.getExternalContext().getSession(false);
                 session.invalidate();
                 request.login(user, password);
                 redireccionar(context.getExternalContext().getUserPrincipal().getName());
@@ -90,8 +89,7 @@ public class LoginSessionMB implements Serializable {
 
     public void logout() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) context.
-                getExternalContext().getSession(false);
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
         session.invalidate();
         ExternalContext context2 = FacesContext.getCurrentInstance().getExternalContext();
         context2.redirect(context2.getRequestContextPath() + "/faces/login.xhtml");

@@ -263,4 +263,13 @@ public class ProfesoresPorCursoController implements Serializable {
             }
         }
     }
+
+    public ProfesoresPorCurso getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(ProfesoresPorCurso current) {
+        this.current = current;
+    }
+    
 }

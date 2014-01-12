@@ -202,7 +202,7 @@ public class Profesor implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Profesor[ idProfesor=" + idProfesor + " ]";
+        return nombre+" "+apellidop;
     }
 
     public byte[] getHuella1() {
