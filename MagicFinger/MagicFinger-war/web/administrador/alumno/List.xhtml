@@ -84,19 +84,19 @@
                         </f:facet>
                         <p:column filterBy="#{item.nombre}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAlumnoTitle_nombre}"/>
+                                <h:outputText value="Nombre"/>
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
                         <p:column filterBy="#{item.apellidop}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAlumnoTitle_apellidop}"/>
+                                <h:outputText value="Apellido paterno"/>
                             </f:facet>
                             <h:outputText value="#{item.apellidop}"/>
                         </p:column>
                         <p:column filterBy="#{item.apellidom}" >
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListAlumnoTitle_apellidom}"/>
+                                <h:outputText value="Apellido materno"/>
                             </f:facet>
                             <h:outputText value="#{item.apellidom}"/>
                         </p:column>
@@ -110,15 +110,15 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones"/>
                             </f:facet>
-                            <h:commandLink action="#{alumnoController.prepareView(item)}" title="Ver">
-                                <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
+                            <h:commandLink action="#{alumnoController.prepareView(item)}">
+                                <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" title="Ver"/>
                             </h:commandLink>
-                            <h:commandLink action="#{alumnoController.prepareEdit(item)}" title="Editar">
-                                <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
+                            <h:commandLink action="#{alumnoController.prepareEdit(item)}">
+                                <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" title="Editar"/>
                             </h:commandLink>
 
                             <h:commandLink action="#{alumnoController.destroy(item)}" title="Eliminar">
-                                <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
+                                <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" title="Eliminar"/>
                                 
                             </h:commandLink>
                             
