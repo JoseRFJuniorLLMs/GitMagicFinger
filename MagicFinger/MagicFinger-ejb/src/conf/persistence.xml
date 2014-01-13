@@ -3,6 +3,7 @@
   <persistence-unit name="MagicFinger-ejbPU" transaction-type="JTA">
     <jta-data-source>MFingerDB</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
     </properties>
   </persistence-unit>

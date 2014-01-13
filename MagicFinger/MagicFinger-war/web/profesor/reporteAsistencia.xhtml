@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
+    </h:head>
+    <h:body>
+        <script>
+            
+        </script>
+        <div id="top" style="display: inline-block; ">
+            <div id="logo" style="display: inline-block;vertical-align: middle;">
+                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+            </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
+                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
+            </div>
+            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
+                <h:form>
+                <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
+                </h:form>
+            </div>    
+        </div>
+        
+        <div class="center_content">
+        
+            <h1 style="text-align: center;" > Reporte de asistencia por alumnos </h1>
+            <div id="header" style="margin-top: 40px" >
+                <h3> Asignatura: <h:outputText value="#{reporteAsisteciaMB.curso.asignatura.nombre}" /> - <h:outputText value="#{reporteAsisteciaMB.curso.tipoAsignatura.nombre}" /></h3> <!--AQUI PONER EL PROFESOR QUE VIENE DESDE LA VISTA PRINCIPAL DEL PROFE --><br /><br />
+                <h3> Profesor: <h:outputText value="#{reporteAsisteciaMB.profesor.nombre}" /> &nbsp; <h:outputText value="#{reporteAsisteciaMB.profesor.apellidop}" /> </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
+            </div>
+
+            <h:form id="formAsistencia" prependId="false" style="vertical-align: middle; display: inline">  
+                <p:growl id="growAsistencia" />
+    <!-- esto esta bueno http://www.primefaces.org/showcase/ui/dialogForm.jsf > -->
+                
+                <p:dataTable var="variable2" id="grow2Asistencia" value="#{reporteAsisteciaMB.curso.alumnosDelCursoList}">  
+                    <p:column headerText="Nombre del alumno" >  
+                        <h:outputText value="#{variable2.alumno.toString()}" />  
+                    </p:column>  
+                    <p:column headerText="Rut">  
+                        <h:outputText value="#{variable2.alumno.rut}" />  
+                    </p:column>
+
+                    <p:column headerText="Asistencia">  
+                        <h:outputText value="#{reporteAsisteciaMB.cuentaAsistencia(variable2.alumno)}" />  
+                    </p:column>
+                </p:dataTable> 
+            </h:form> 
+        </div>
+    </h:body>
+</html>
