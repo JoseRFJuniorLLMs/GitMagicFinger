@@ -24,6 +24,7 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
 import sessionBeans.AlumnosDelCursoFacadeLocal;
+import sessionBeans.GruposFacadeLocal;
 
 /**
  *
@@ -33,11 +34,10 @@ import sessionBeans.AlumnosDelCursoFacadeLocal;
 @RequestScoped
 public class GruposMB {
     @EJB
+    private GruposFacadeLocal gruposFacade;
+    @EJB
     private AlumnosDelCursoFacadeLocal alumnosDelCursoFacade;
 
-    /**
-     * Creates a new instance of GruposMB
-     */
     private gruposDataModel ListaGrupoData;
     private Grupos grupoSeleccionado;
     private Profesor profesor;
@@ -59,11 +59,15 @@ public class GruposMB {
         System.out.println("grupo selecionado actual" + grupoSeleccionado);
       //  grupoSeleccionado = profesorLogin.get;
         asignar = new DualListModel<>();
-        
+        ListGrupos = new ArrayList<>();
         profesor = profesorLogin.getProfesor();
         if (profesor != null) {
-            ListGrupos = profesorLogin.getCurso().getGruposList();
-            
+            List<Grupos> GruposAux = gruposFacade.findAll();
+            for (Grupos grupos : GruposAux) {
+                if(grupos.getCurso().equals(profesorLogin.getCurso())){
+                    ListGrupos.add(grupos);
+                }
+            }
             ListaGrupoData = new gruposDataModel(ListGrupos);
         }
         System.out.println("fin init");
