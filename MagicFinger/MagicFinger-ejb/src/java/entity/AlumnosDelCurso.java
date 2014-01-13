@@ -126,7 +126,7 @@ public class AlumnosDelCurso implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.AlumnosDelCurso[ alumnosDelCursoPK=" + alumnosDelCursoPK + " ]";
+        return alumno.getNombre()+" "+alumno.getApellidop();
     }
     
 }

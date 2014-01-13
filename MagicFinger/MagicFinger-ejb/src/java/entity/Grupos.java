@@ -117,7 +117,7 @@ public class Grupos implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Grupos[ idGrupo=" + idGrupo + " ]";
+        return nombre;
     }
     
 }

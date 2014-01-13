@@ -1,5 +1,6 @@
 package manageBeans.crud;
 
+import entity.AlumnosDelCurso;
 import entity.Grupos;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
@@ -7,6 +8,7 @@ import manageBeans.crud.util.PaginationHelper;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -19,6 +21,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import manageBeans.LoginSessionMB;
 import sessionBeans.GruposFacadeLocal;
 
 @Named("gruposController")
@@ -31,7 +35,8 @@ public class GruposController implements Serializable {
     private GruposFacadeLocal ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    @Inject
+    private LoginSessionMB session;
     public GruposController() {
     }
 
@@ -83,6 +88,8 @@ public class GruposController implements Serializable {
 
     public String create() {
         try {
+            current.setCurso(session.getCurso());
+            current.setAlumnosDelCursoList(new ArrayList<AlumnosDelCurso>());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos creado", "Se ha creado una Grupos correctamente"));

@@ -24,16 +24,26 @@
             <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
                 <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />
             </div>
-            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
-                <h:form>
-                <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="form" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.profesor.toString()}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
                 </h:form>
             </div>
      </div>
         <div  class="center_content">
-            <h1 style="margin-bottom: 50px">
-                <span>Menú Administrador </span> 
-                <span style="float: right; font-family: -webkit-pictograph;"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
+            <h1 style="margin-bottom: 50px;font-family: -webkit-pictograph">
+                <span>Menú administrador</span> 
+                <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
                     <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
                          [Cambiar]
                     </h:outputLink>
@@ -65,18 +75,25 @@
                      <h4>Gestión de Carreras</h4>
                  </h:outputLink>
              </div>
-             <div class="muyBuena">
-                 <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/facultad/List.xhtml">
-                     <img src="/MagicFinger-war/faces/img/fing.png" heigt="55" width="55" style="margin: 0 auto;display:block"/>
-                     <h4>Gestión de Facultades</h4>
-                 </h:outputLink>
-             </div>
             <div class="muyBuena">
                  <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/departamento/List.xhtml">
                      <img src="/MagicFinger-war/faces/img/depto.png" heigt="84" width="84" style="margin: 0 auto;display:block"/>
                      <h4>Gestión de Departamentos</h4>
                  </h:outputLink>
              </div>
+             <div class="muyBuena">
+                 <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/facultad/List.xhtml">
+                     <img src="/MagicFinger-war/faces/img/fing.png" heigt="55" width="55" style="margin: 0 auto;display:block"/>
+                     <h4>Gestión de Facultades</h4>
+                 </h:outputLink>
+             </div>
+             <div class="muyBuena">
+                 <h:outputLink value="http://localhost:8080/MagicFinger-war/faces/administrador/malla/List.xhtml">
+                     <img src="/MagicFinger-war/faces/img/malla.png" heigt="84" width="84" style="margin: 0 auto;display:block"/>
+                     <h4>Gestión de Mallas</h4>
+                 </h:outputLink>
+             </div>
+            
             </p:panel>
            
     </div>

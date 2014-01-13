@@ -41,7 +41,7 @@
         </div>      
         <div class="center_content">
             <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
-                <span>Gestión de alumnos</span> 
+                <span>Agregar alumno</span> 
                 <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
                     <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
                          [Cambiar]
@@ -109,8 +109,8 @@
                             <h4 style="display: inline-block;"><h:outputLabel id="variableHuella2TXT" value="Huella 2:" /></h4>
                             <h4 style="display: inline-block;"><p:outputLabel id="estado2" value="NO INGRESADA"/></h4>
                         
-                            <h:inputHidden value="#{alumnoController.huellaEnString1}" id="variableHuella1" />
-                            <h:inputHidden value="#{alumnoController.huellaEnString2}" id="variableHuella2" />
+                            <h:inputHidden value="#{alumnoController.huellaEnString1}" id="variableHuella1" required="true" requiredMessage="Debe ingresar una huella dactilar"/>
+                            <h:inputHidden value="#{alumnoController.huellaEnString2}" id="variableHuella2" required="true" requiredMessage="Debe repetir la huella dactilar"/>
                             
 
                         </h:panelGrid>
