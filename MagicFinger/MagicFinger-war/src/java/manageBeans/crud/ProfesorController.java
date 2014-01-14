@@ -138,7 +138,6 @@ public class ProfesorController implements Serializable {
                 prof.setDepartamento(departamentoFacade.find(Integer.parseInt(object)));
                 profesoresPorDepa.setCurrent(prof);
                 profesoresPorDepa.create();
-                System.out.println("Departamento: "+object);
             }
             User user2 = usercontroller.getFacade().findAll().get(usercontroller.getFacade().count()-1);
             profesor.setUseId(user2);
@@ -149,12 +148,14 @@ public class ProfesorController implements Serializable {
             return prepareList();
             
             }else{
-                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: El profesor ya existe en los registros",null ));
+                
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Profesor no creado", "Lo sentimos, los datos que ingresó ya existen"));
                 return null;
             }
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Profesor no creado", "Lo sentimos, intentelo mas tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Profesor no creado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }

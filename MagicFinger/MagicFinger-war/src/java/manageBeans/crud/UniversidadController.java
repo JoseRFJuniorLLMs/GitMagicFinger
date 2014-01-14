@@ -89,7 +89,7 @@ public class UniversidadController implements Serializable {
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Universidad no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Universidad no creada", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }

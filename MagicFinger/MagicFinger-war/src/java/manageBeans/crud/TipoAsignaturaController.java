@@ -95,7 +95,8 @@ public class TipoAsignaturaController implements Serializable {
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: TipoAsignatura no creado", "Lo sentimos, intentelo mas tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tipo de asignatura no creada", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
@@ -110,12 +111,11 @@ public class TipoAsignaturaController implements Serializable {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "TipoAsignatura actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo de asignatura actualizada", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: TipoAsignatura no actualizado", "Lo sentimos, intentelo mas tarde"));
-
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tipo de asignatura no actualizada", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }

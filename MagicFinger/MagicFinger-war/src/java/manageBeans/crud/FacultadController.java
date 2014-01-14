@@ -119,8 +119,7 @@ public class FacultadController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Facultad no actualizado", "Lo sentimos, intentelo mas tarde"));
-
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Facultad no actualizada", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }

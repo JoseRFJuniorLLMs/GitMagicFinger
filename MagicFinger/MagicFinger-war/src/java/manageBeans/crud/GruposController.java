@@ -117,12 +117,11 @@ public class GruposController implements Serializable {
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos creado", "Se ha creado una Grupos correctamente"));
-            System.out.println("antes envio");
             envioDatosGrupo();
-            System.out.println("despues de envio");
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Grupos no creado", "Lo sentimos, inténtelo más tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Grupo no creado", "Lo sentimos, los datos que ingresó ya existen"));
         }
     }
 
@@ -140,8 +139,8 @@ public class GruposController implements Serializable {
             envioDatosGrupo();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Grupos no actualizado", "Lo sentimos, intentelo mas tarde"));
-
+           
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Grupo no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
         }
     }
 
