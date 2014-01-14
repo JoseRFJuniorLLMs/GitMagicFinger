@@ -106,6 +106,16 @@
                             <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Atrasados después de (min):" for="termino" />
                             </h4>
                             <p:spinner id="termino" value="#{cursoController.selected.termino}" min="0" max="90" required="true" requiredMessage="Debe ingresar el tiempo de atrasados entre 0 y 90 min."/> 
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Alumnos" for="alumnos"  />
+                            </h4>
+                            <p:selectCheckboxMenu value="#{cursoController.listAlumnoSelecionados}" id="alumnos" label="Alumnos" filter="true" filterMatchMode="startsWith" panelStyle="width:220px">  
+                                <f:selectItems value="#{cursoController.listAlumno}"  var="alu" itemLabel="#{alu.nombre} #{alu.apellidop} #{alu.apellidom}" itemValue="#{alu.idAlumno}"/>  
+                            </p:selectCheckboxMenu>
+                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="Profesores" for="profesores"  />
+                            </h4>
+                            <p:selectCheckboxMenu value="#{cursoController.listProfesorSelecionados}" id="profesores" label="Profesores" filter="true" filterMatchMode="startsWith" panelStyle="width:220px">  
+                                <f:selectItems value="#{cursoController.listProfesor}"  var="pro" itemLabel="#{pro.nombre} #{pro.apellidop} #{pro.apellidom}" itemValue="#{pro.idProfesor}"/>  
+                            </p:selectCheckboxMenu>
                             
                            
                             
