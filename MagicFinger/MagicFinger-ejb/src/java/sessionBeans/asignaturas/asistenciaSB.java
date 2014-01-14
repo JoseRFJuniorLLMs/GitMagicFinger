@@ -46,6 +46,10 @@ public class asistenciaSB implements asistenciaSBLocal {
         return q.getResultList();
     }
 
+    public List<Asistencia> cuentaAsistenciaBloqueAndFecha(BloqueClase bloqueLista, Date date){
+        Query q = em.createNamedQuery("Asistencia.CountAsistenciaBloqueAndFecha").setParameter("Bloque", bloqueLista).setParameter("Fecha", date);
+        return q.getResultList();
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void persist(Object object) {

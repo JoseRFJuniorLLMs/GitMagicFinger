@@ -79,6 +79,11 @@
                             <p:inputText id="porcentajeAprobacion" value="#{cursoController.selected.porcentajeAprobacion}" />
                             <h4><p:outputLabel value="Atrasados después de (min):" for="termino" /></h4>
                             <p:inputText id="termino" value="#{cursoController.selected.termino}" />
+                            <h4><p:outputLabel value="#{bundle.EditCursoLabel_asignatura}" for="asignatura" /></h4>
+                            <h:inputHidden id="asignatura" value="#{cursoController.selected.asignatura}" />
+                               
+                            <h:inputHidden id="semestre" value="#{cursoController.selected.semestre}" />
+                            <h:inputHidden id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}" />
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{cursoController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

@@ -153,28 +153,26 @@ public class BloqueClase implements Serializable {
 
     @Override
     public String toString() {
-        System.out.println("bloq" + bloque);
         switch (this.bloque){
             case 1: 
-                return bloque + " (08:00-09:30)";
+                return diaSemana + " (08:00-09:30)";
             case 2: 
-                return bloque + " (09:40-11:10)";
+                return diaSemana + " (09:40-11:10)";
             case 3:
-                return bloque + " (11:20-12:50)";
+                return diaSemana + " (11:20-12:50)";
             case 4:
-                return bloque + " (13:50-15:20)";
+                return diaSemana + " (13:50-15:20)";
             case 5:
-                return bloque + " (15:30-17:00)";
+                return diaSemana + " (15:30-17:00)";
             case 6:
-                return bloque + " (17:10-18:40)";
+                return diaSemana + " (17:10-18:40)";
             case 7:
-                return bloque + " (19:00-20:10)";
+                return diaSemana + " (19:00-20:10)";
             case 8:
-                return bloque + " (20:20-22:00)";
+                return diaSemana + " (20:20-22:00)";
             case 9:
-                return bloque + " (22:00-23:00)";
+                return diaSemana + " (22:00-23:00)";
             default:
-                System.out.println("default");
                 return bloque+"";
         }
     }

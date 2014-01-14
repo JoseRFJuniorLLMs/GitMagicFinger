@@ -15,10 +15,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 
-/**
- *
- * @author chevo
- */
 @Named(value = "tomaAsistenciaConversation")
 @ConversationScoped
 public class TomaAsistenciaConversation extends AbstractConversation implements Serializable {

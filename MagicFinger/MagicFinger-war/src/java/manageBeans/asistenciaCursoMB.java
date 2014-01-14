@@ -233,26 +233,20 @@ public class asistenciaCursoMB {
     }
     public void cambio(AlumnosDelCurso alumno){
         if(valor5==0)return;
-        System.out.println("editando a " + alumno.getAlumno().toString());
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Asistencia asistencia= asistenciaSB.alumnoAsiste(alumno, bloqueClase, fecha);
-        System.out.println("buscando asistencia...");
         if(asistencia!=null){
-            System.out.println("asistencia encontrado");
             asistencia.setEstado(valor5);
             asistenciaFacade.edit(asistencia);
-            System.out.println("editando la asistencia a "+ valor5);
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asistencia cambiada", "Alumno" + alumno.getAlumno().toString()));
         }
         else{
-            System.out.println("asistencia no encontrada a crearla ...");
             Asistencia nueva = new Asistencia();
             nueva.setEstado(valor5);
             nueva.setBloIdBloque(bloqueClase);
             nueva.setFecha(fecha);
             nueva.setAlumnosDelCurso(alumno);    
             asistenciaFacade.create(nueva);
-            System.out.println("asistencia creada");
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asistencia cambiada", "Alumno" + alumno.getAlumno().toString()));
         }     
        valor=0;

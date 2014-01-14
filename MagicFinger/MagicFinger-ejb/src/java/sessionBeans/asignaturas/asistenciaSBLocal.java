@@ -21,4 +21,6 @@ public interface asistenciaSBLocal {
     List<Asistencia> cuentaAsistencia(Alumno alumno, Curso curso);
     
     List<Asistencia> cuentaAsistenciaSuspendida(Alumno alumno, Curso curso);
+
+    List<Asistencia> cuentaAsistenciaBloqueAndFecha(BloqueClase bloqueLista, Date date);
 }

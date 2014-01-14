@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Asistencia.findAsistencia", query = "SELECT a FROM Asistencia a WHERE a.alumnosDelCurso = :AlumnosDelCurso AND a.bloIdBloque.idBloque = :bloqueClaseId AND a.fecha = :fecha"),
     @NamedQuery(name = "Asistencia.CountAsistencia", query = "SELECT a FROM Asistencia a WHERE a.estado = 1 AND a.alumnosDelCurso.alumno = :Alumno AND a.bloIdBloque.curso = :Curso"),
     @NamedQuery(name = "Asistencia.CountAsistenciaNoValida", query = "SELECT a FROM Asistencia a WHERE (a.estado = 2 OR a.estado = 4) AND a.alumnosDelCurso.alumno = :Alumno AND a.bloIdBloque.curso = :Curso"),
+    @NamedQuery(name = "Asistencia.CountAsistenciaBloqueAndFecha", query = "SELECT a FROM Asistencia a WHERE (a.estado = 1 OR a.estado = 3) AND a.bloIdBloque = :Bloque AND a.fecha =:Fecha"),
     @NamedQuery(name = "Asistencia.findByEstado", query = "SELECT a FROM Asistencia a WHERE a.estado = :estado")})
 public class Asistencia implements Serializable {
     private static final long serialVersionUID = 1L;

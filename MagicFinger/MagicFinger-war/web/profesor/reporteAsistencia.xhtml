@@ -53,7 +53,32 @@
                     <p:column headerText="Asistencia">  
                         <h:outputText value="#{reporteAsisteciaMB.cuentaAsistencia(variable2.alumno)}" />  
                     </p:column>
+                    <p:column style="width:4%">  
+                        <p:commandButton id="selectButton" update=":formAsistencia:display1 :formAsistencia:tablaDetalleAsistencia" oncomplete="PF('curDialog').show()" icon="ui-icon-search" title="View">  
+                            <f:setPropertyActionListener value="#{variable2.alumno}" target="#{reporteAsisteciaMB.alumnoSeleccionado}" />  
+                        </p:commandButton>  
+                    </p:column> 
                 </p:dataTable> 
+    
+    
+                        <p:dialog header="Asistencia Otros Cursos" widgetVar="curDialog" resizable="false" id="carDlg"  
+                                  showEffect="fade" hideEffect="explode" modal="true">  
+                            <h:panelGrid id="display1" columns="2" cellpadding="4" style="margin:0 auto;">  
+                                <h:outputText value="Nombre Alumno:" />
+                                <h:outputText value="#{reporteAsisteciaMB.alumnoSeleccionado.toString()}" style="font-weight:bold"/>
+                                
+                                
+                            </h:panelGrid>    
+                            <p:dataTable var="varCurso" id="tablaDetalleAsistencia" value="#{reporteAsisteciaMB.listaProfesoresAlumnoSeleccionado}" >
+                                    <p:column headerText="Nombre Asignatura" >  
+                                        <h:outputText value="#{varCurso.toString()}" />  
+                                    </p:column>
+                                    <p:column headerText="Asistencia" >  
+                                        <h:outputText value="#{reporteAsisteciaMB.calculaAsistencia(varCurso)}" />  
+                                    </p:column>
+                            </p:dataTable>
+                        </p:dialog> 
+    
             </h:form> 
         </div>
     </h:body>
