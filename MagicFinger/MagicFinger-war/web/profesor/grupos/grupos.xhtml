@@ -20,7 +20,7 @@
                                      selectionMode="single"
                                      >  
                             <p:ajax event="rowSelect" listener="#{gruposMB.onRowSelect}"
-                                    update=":form:grow1 :form:integrantes :form:pickList" /> 
+                                    update=":form:grow1 :form:pickList :form:grupo"/> 
 
                             <p:column headerText="Nombre Grupos" style="width:24%" >  
                                 <h:outputText value="#{gru.toString()}" />  
@@ -29,23 +29,16 @@
                         </p:dataTable>
                         </div>
                         <div style="display: inline-block; vertical-align: middle">
-                        <h3>Integrantes del grupo</h3>
-                        <p:dataTable id="integrantes" 
-                                     style="width: 480px;margin-top:20px;" 
-                                     var="int" value="#{gruposMB.listaIntegrante}" 
-                                     >  
-            
-
-                            <p:column headerText="Nombre Integrante" style="width:24%" >  
-                                <h:outputText value="#{int.toString()}" />  
-                            </p:column>
-
-                        </p:dataTable>
+                        
                         </div>
                         <p:pickList id="pickList" value="#{gruposMB.asignar}" var="city"   
-                itemLabel="#{city}" itemValue="#{city}" />  
+                                    itemLabel="#{city}" itemValue="#{city.getAlumno().getIdAlumno()}" showCheckbox="true">
+                        <f:facet name="sourceCaption">Alumnos Disponibles</f:facet>  
+                        <f:facet name="targetCaption">Integrantes</f:facet>
+                        <p:ajax event="transfer" listener="#{gruposMB.onTransfer}" update=":form:grow1" /> 
+                        </p:pickList>
   
-    <p:commandButton id="citySubmit" value="Submit" style="margin-top:5px"/>  
+                        
         </h:form>
         </div>
     </h:body>

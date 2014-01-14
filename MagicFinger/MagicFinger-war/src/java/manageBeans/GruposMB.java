@@ -10,8 +10,10 @@ import entity.Grupos;
 import entity.Profesor;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -19,7 +21,10 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.TransferEvent;
 import org.primefaces.model.DualListModel;
+import sessionBeans.AlumnosDelCursoFacadeLocal;
+import sessionBeans.GruposFacadeLocal;
 
 /**
  *
@@ -28,70 +33,117 @@ import org.primefaces.model.DualListModel;
 @Named(value = "gruposMB")
 @RequestScoped
 public class GruposMB {
+    @EJB
+    private GruposFacadeLocal gruposFacade;
+    @EJB
+    private AlumnosDelCursoFacadeLocal alumnosDelCursoFacade;
 
-    /**
-     * Creates a new instance of GruposMB
-     */
     private gruposDataModel ListaGrupoData;
     private Grupos grupoSeleccionado;
     private Profesor profesor;
     private List<Grupos> ListGrupos;
     private List<AlumnosDelCurso> listaIntegrante;
      private DualListModel<AlumnosDelCurso> asignar;
+     private DualListModel<String> asignarString;
+     
     public GruposMB() {
       
     }
     @Inject
     LoginSessionMB profesorLogin;
+    @Inject
+    GrupoConversation conversation;
     @PostConstruct
     public void init() {
+        grupoSeleccionado = conversation.getGruposelecionado();
+        System.out.println("grupo selecionado actual" + grupoSeleccionado);
       //  grupoSeleccionado = profesorLogin.get;
         asignar = new DualListModel<>();
-        listaIntegrante = new ArrayList<>();
+        ListGrupos = new ArrayList<>();
         profesor = profesorLogin.getProfesor();
         if (profesor != null) {
-            ListGrupos = profesorLogin.getCurso().getGruposList();
-            
+            List<Grupos> GruposAux = gruposFacade.findAll();
+            for (Grupos grupos : GruposAux) {
+                if(grupos.getCurso().equals(profesorLogin.getCurso())){
+                    ListGrupos.add(grupos);
+                }
+            }
             ListaGrupoData = new gruposDataModel(ListGrupos);
         }
-    }
-    public void envioDatos(){
-        redireccionar("/faces/profesor/grupos/grupos.xhtml");
-        
+        System.out.println("fin init");
     }
     public void onRowSelect(SelectEvent event) {
         FacesMessage msg = new FacesMessage("Grupo Seleccionado", grupoSeleccionado.toString());
-        List<AlumnosDelCurso> aux = grupoSeleccionado.getCurso().getAlumnosDelCursoList();
+        
+        conversation.setGruposelecionado(grupoSeleccionado);
+        System.out.println("se ha seteado el grupo: " + grupoSeleccionado);
+        List<AlumnosDelCurso> aux = alumnosDelCursoFacade.BuscarPorIdUniversidad(profesorLogin.getIdUniversidad());
         List<AlumnosDelCurso> aux2 = new ArrayList<>();
+
         for (AlumnosDelCurso alumnosDelCurso : aux) {
+            if(alumnosDelCurso.getCurso().equals(profesorLogin.getCurso())){
+                aux2.add(alumnosDelCurso);
+            }
+        }
+        List<AlumnosDelCurso> aux3 = new ArrayList<>();
+        listaIntegrante = new ArrayList<>();
+        for (AlumnosDelCurso alumnosDelCurso : aux2) {
             System.out.println("alu: "+alumnosDelCurso.getGruIdGrupo());
             if(alumnosDelCurso.getGruIdGrupo()==null){
-                aux2.add(alumnosDelCurso);
+                aux3.add(alumnosDelCurso);
+            }else if(alumnosDelCurso.getGruIdGrupo().equals(grupoSeleccionado)){
+                listaIntegrante.add(alumnosDelCurso);
             }
            
         }
-        System.out.println("list integrante: "+grupoSeleccionado.getAlumnosDelCursoList());
-        //listaIntegrante = grupoSeleccionado.getAlumnosDelCursoList();
         if(!listaIntegrante.isEmpty()){
-            asignar = new DualListModel<>(aux2, listaIntegrante);
+            asignar = new DualListModel<>(aux3, listaIntegrante);
         }else{
-            asignar = new DualListModel<>(aux2, new ArrayList<AlumnosDelCurso>());
+            asignar = new DualListModel<>(aux3, new ArrayList<AlumnosDelCurso>());
         }
+        
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    public void redireccionar(String pagina){
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-       try {
-           externalContext.redirect(externalContext.getRequestContextPath() + pagina);
-       }
-       catch (IOException e) {
-           System.out.println(e.getMessage());
-       }
+    public void actualizar(){
+         
     }
-
-    public gruposDataModel getListaGrupoData() {
-        return ListaGrupoData;
-    }
+    public void onTransfer(TransferEvent event) {  
+         DualListModel<AlumnosDelCurso> aux = new DualListModel<>();
+        List<AlumnosDelCurso> targetAux = new ArrayList<>();
+        List<AlumnosDelCurso> sourceAux = new ArrayList<>();
+        for (Iterator<AlumnosDelCurso> it = asignar.getTarget().iterator(); it.hasNext();) {
+            
+            String alumno = it.next()+"";
+            System.out.println("Alumno Integrante: "+alumno);
+            AlumnosDelCurso Alumno = (AlumnosDelCurso) alumnosDelCursoFacade.BuscarPorIdAlumno(Integer.parseInt(alumno));
+            if(Alumno.getGruIdGrupo()==null){
+                Alumno.setGruIdGrupo(grupoSeleccionado);
+                alumnosDelCursoFacade.edit(Alumno);
+                System.out.println("GRupo: "+Alumno.getGruIdGrupo());
+            }
+            targetAux.add(Alumno);
+        }
+        for (Iterator<AlumnosDelCurso> it = asignar.getSource().iterator(); it.hasNext();) {
+           String alumno = it.next()+"";
+            System.out.println("Alumno Disponible: "+alumno);
+            AlumnosDelCurso Alumno = (AlumnosDelCurso) alumnosDelCursoFacade.BuscarPorIdAlumno(Integer.parseInt(alumno));
+            if(Alumno.getGruIdGrupo()!=null){
+                Alumno.setGruIdGrupo(null);
+                alumnosDelCursoFacade.edit(Alumno);
+                System.out.println("GRupo: "+Alumno.getGruIdGrupo());
+            }
+            sourceAux.add(Alumno);
+        }
+        aux.setSource(sourceAux);
+        aux.setTarget(targetAux);
+        asignar = aux;
+        FacesMessage msg = new FacesMessage();  
+        msg.setSeverity(FacesMessage.SEVERITY_INFO);  
+        msg.setSummary("Actualizado");  
+          
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }  
+    
 
     public void setListaGrupoData(gruposDataModel ListaGrupoData) {
         this.ListaGrupoData = ListaGrupoData;
@@ -143,6 +195,18 @@ public class GruposMB {
 
     public void setAsignar(DualListModel<AlumnosDelCurso> asignar) {
         this.asignar = asignar;
+    }
+
+    public DualListModel<String> getAsignarString() {
+        return asignarString;
+    }
+
+    public void setAsignarString(DualListModel<String> asignarString) {
+        this.asignarString = asignarString;
+    }
+
+    public gruposDataModel getListaGrupoData() {
+        return ListaGrupoData;
     }
 
 

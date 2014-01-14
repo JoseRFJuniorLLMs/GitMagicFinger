@@ -43,6 +43,9 @@ public class asignaturaMB {
 
     @Inject 
     private TomaAsistenciaConversation conversation;
+    
+    @Inject
+    private GrupoConversation conversationGrupo;
     @Inject
     LoginSessionMB profesorLogin;
     @PostConstruct
@@ -70,6 +73,12 @@ public class asignaturaMB {
            System.out.println(e.getMessage());
        }
     }
+
+    public void envioDatosGrupo(){
+        conversationGrupo.beginConversation();
+        redireccionar("/faces/profesor/grupos/grupos.xhtml?cid=".concat(this.conversationGrupo.getConversation().getId()));
+    }
+
     public void envioDatosEstadisticas(){
         redireccionar("/faces/profesor/reporteEstadisticas.xhtml");
     }
@@ -77,7 +86,7 @@ public class asignaturaMB {
     public void envioDatosReportes(){
         redireccionar("/faces/profesor/reporteAsistencia.xhtml");
     }
-    
+
     public void envioDatos(){
         conversation.beginConversation();
         System.out.println("El de asignatura imprime " + cursoSeleccionado.getTipoAsignatura().getNombre());
