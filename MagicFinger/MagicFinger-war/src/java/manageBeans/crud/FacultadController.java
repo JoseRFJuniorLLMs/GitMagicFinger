@@ -100,7 +100,8 @@ public class FacultadController implements Serializable {
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Facultad no creado", "Lo sentimos, intentelo mas tarde"));
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Facultad no creada", "Lo sentimos, los datos que ingresó ya existen"));
+        
             return null;
         }
     }
@@ -119,7 +120,8 @@ public class FacultadController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Facultad no actualizada", "Lo sentimos, los datos que ingresó ya existen"));
+                facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Facultad no actualizada", "Lo sentimos, los datos que ingresó ya existen"));
+        
             return null;
         }
     }
