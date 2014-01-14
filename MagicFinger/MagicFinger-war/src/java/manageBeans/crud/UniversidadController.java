@@ -89,7 +89,7 @@ public class UniversidadController implements Serializable {
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Universidad no creado", "Lo sentimos, intentelo mas tarde"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Universidad no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
@@ -108,8 +108,7 @@ public class UniversidadController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Universidad no actualizado", "Lo sentimos, intentelo mas tarde"));
-
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Universidad no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
