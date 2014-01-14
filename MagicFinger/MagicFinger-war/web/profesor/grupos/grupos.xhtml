@@ -21,7 +21,7 @@
             </div>
             <div style="display: inline-block;float: right;margin-top:10px">
                 <h:form id="forem" prependId="false">
-                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.usuario}"/></div>
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.profesor.toString()}"/></div>
                     
                     <div style="display: inline-block;width: 50px;vertical-align: middle">
                         <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
@@ -39,7 +39,7 @@
             <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
                 <span>Gestión de grupos</span> 
                 <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
-                    <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
+                    <h:outputLink value="/MagicFinger-war/faces/profesor/index.xhtml" >
                          [Cambiar]
                     </h:outputLink>
                     </span> 
@@ -47,33 +47,22 @@
             </h1>
             <h:form id="form" > <p:growl id="grow1" showDetail="true" />
                 <div style="text-align: center">
-                    <div style="text-align: left; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                        <p:menubar style="width: 70%;vertical-align: middle;display: inline-block">  
-                        <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:menuitem value="Profesores" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:submenu label="Cursos" icon="ui-icon-bullet">  
-                            <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
-                            <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
-                            <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
-                            <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
-                            <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />   
-                        </p:submenu>
-                        <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
-                        <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
-                        </p:menubar>
-                    </div>
+                    
                     <div id="agregar" style="display: inline-block;width: 100%;">
                         <img src="/MagicFinger-war/faces/img/advertencia.png" height="24" width="26" style="vertical-align: middle"/>
                         <p style="vertical-align: middle;display: inline-block;text-align: center">
                             Para agregar un grupo, debe completar los siguientes datos:
                         </p>
+                        
                         <h:commandLink action="#{gruposController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
-
-                        <h:outputLabel>Agregar Grupos</h:outputLabel>
-                    </h:commandLink>
+                            <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
+                            <h:outputLabel>Agregar Grupos</h:outputLabel>
+                        </h:commandLink>
+                        <h:commandLink action="/faces/profesor/index2.xhtml" style="display: inline-block;float: right;margin-right: 20px">
+                            <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="37" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel>Volver</h:outputLabel>
+                        </h:commandLink>
+                        
                     </div>
 
                         <div style="margin-bottom: 20px;display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px">
