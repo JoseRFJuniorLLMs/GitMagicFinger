@@ -31,6 +31,6 @@ public interface AlumnosDelCursoFacadeLocal {
     
     List BuscarPorIdUniversidad(int idUniversidad);
     
-    AlumnosDelCurso BuscarPorIdAlumno(int idAlumno);
+    List<AlumnosDelCurso> BuscarPorIdAlumno(int idAlumno);
     
 }

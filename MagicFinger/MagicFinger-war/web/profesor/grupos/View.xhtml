@@ -47,20 +47,17 @@
                     </div>
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
-                            <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_idGrupo}"/>
-                            </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.idGrupo}" title="#{bundle.ViewGruposTitle_idGrupo}"/>
-                            </h4>
+                            
                             <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_nombre}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.nombre}" title="#{bundle.ViewGruposTitle_nombre}"/>
                             </h4>
                             <h4 style="display: inline-block;"> <h:outputText value="#{bundle.ViewGruposLabel_curso}"/>
                             </h4>
-                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.curso}" title="#{bundle.ViewGruposTitle_curso}"/>
+                            <h4 style="display: inline-block;"> <h:outputText value="#{gruposController.selected.curso.toString()}" title="#{bundle.ViewGruposTitle_curso}"/>
                             </h4>
                         </h:panelGrid>
-                        <h:commandLink style="display: inline-block;" action="#{gruposController.prepareList}" immediate="true">
+                        <h:commandLink style="display: inline-block;" action="/faces/profesor/grupos/grupos.xhtml?cid=1" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <h:outputLabel>Volver </h:outputLabel>
                         </h:commandLink>

@@ -77,17 +77,13 @@
                             </h4>
                             <p:inputText style="vertical-align: center" id="nombre" value="#{gruposController.selected.nombre}"/>
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateGruposLabel_curso}" for="curso" />
-                            </h4>
-                            <p:selectOneMenu style="vertical-align: center" id="curso" value="#{gruposController.selected.curso}"  >
-                                <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
+                           
                         </h:panelGrid>
                         <p:commandLink style="display: inline-block; margin-right: 25px" action="#{gruposController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel> Guardar grupo</p:outputLabel>
                         </p:commandLink>
-                        <p:commandLink style="display: inline-block;" action="#{gruposController.prepareList}" immediate="true">
+                        <p:commandLink style="display: inline-block;" action="/faces/profesor/grupos/grupos.xhtml?cid=1" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Volver</p:outputLabel>
                         </p:commandLink>

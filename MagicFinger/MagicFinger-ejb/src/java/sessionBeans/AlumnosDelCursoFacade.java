@@ -35,10 +35,10 @@ public class AlumnosDelCursoFacade extends AbstractFacade<AlumnosDelCurso> imple
         return listado;
     }
     @Override
-    public AlumnosDelCurso BuscarPorIdAlumno(int idAlumno){
+    public List<AlumnosDelCurso> BuscarPorIdAlumno(int idAlumno){
         
         Query q = em.createNamedQuery("AlumnosDelCurso.findByAluIdAlumno").setParameter("aluIdAlumno", idAlumno);
-        AlumnosDelCurso listado = (AlumnosDelCurso) q.getResultList().get(0);
+        List<AlumnosDelCurso> listado = q.getResultList();
         return listado;
     }
     

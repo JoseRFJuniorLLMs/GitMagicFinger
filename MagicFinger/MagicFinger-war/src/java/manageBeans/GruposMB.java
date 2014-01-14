@@ -57,6 +57,7 @@ public class GruposMB {
     public void init() {
         grupoSeleccionado = conversation.getGruposelecionado();
         System.out.println("grupo selecionado actual" + grupoSeleccionado);
+        
       //  grupoSeleccionado = profesorLogin.get;
         asignar = new DualListModel<>();
         ListGrupos = new ArrayList<>();
@@ -70,12 +71,14 @@ public class GruposMB {
             }
             ListaGrupoData = new gruposDataModel(ListGrupos);
         }
-        System.out.println("fin init");
+        if(grupoSeleccionado!=null){
+            System.out.println("voy a recargar la volva");
+            listarIntegrantes();
+            }
     }
-    public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Grupo Seleccionado", grupoSeleccionado.toString());
-        
-        conversation.setGruposelecionado(grupoSeleccionado);
+    
+    public void listarIntegrantes(){
+    conversation.setGruposelecionado(grupoSeleccionado);
         System.out.println("se ha seteado el grupo: " + grupoSeleccionado);
         List<AlumnosDelCurso> aux = alumnosDelCursoFacade.BuscarPorIdUniversidad(profesorLogin.getIdUniversidad());
         List<AlumnosDelCurso> aux2 = new ArrayList<>();
@@ -88,7 +91,6 @@ public class GruposMB {
         List<AlumnosDelCurso> aux3 = new ArrayList<>();
         listaIntegrante = new ArrayList<>();
         for (AlumnosDelCurso alumnosDelCurso : aux2) {
-            System.out.println("alu: "+alumnosDelCurso.getGruIdGrupo());
             if(alumnosDelCurso.getGruIdGrupo()==null){
                 aux3.add(alumnosDelCurso);
             }else if(alumnosDelCurso.getGruIdGrupo().equals(grupoSeleccionado)){
@@ -102,41 +104,44 @@ public class GruposMB {
             asignar = new DualListModel<>(aux3, new ArrayList<AlumnosDelCurso>());
         }
         
+    }
+    public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("Grupo Seleccionado", grupoSeleccionado.toString());
+        listarIntegrantes();
+        
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
     public void actualizar(){
          
     }
     public void onTransfer(TransferEvent event) {  
-         DualListModel<AlumnosDelCurso> aux = new DualListModel<>();
-        List<AlumnosDelCurso> targetAux = new ArrayList<>();
-        List<AlumnosDelCurso> sourceAux = new ArrayList<>();
+
         for (Iterator<AlumnosDelCurso> it = asignar.getTarget().iterator(); it.hasNext();) {
             
             String alumno = it.next()+"";
             System.out.println("Alumno Integrante: "+alumno);
-            AlumnosDelCurso Alumno = (AlumnosDelCurso) alumnosDelCursoFacade.BuscarPorIdAlumno(Integer.parseInt(alumno));
-            if(Alumno.getGruIdGrupo()==null){
-                Alumno.setGruIdGrupo(grupoSeleccionado);
-                alumnosDelCursoFacade.edit(Alumno);
-                System.out.println("GRupo: "+Alumno.getGruIdGrupo());
+            List<AlumnosDelCurso> Alumno = alumnosDelCursoFacade.BuscarPorIdAlumno(Integer.parseInt(alumno));
+            for (AlumnosDelCurso alumnosDelCurso : Alumno) {
+                if(alumnosDelCurso.getGruIdGrupo()==null && alumnosDelCurso.getCurso().equals(profesorLogin.getCurso())){
+                alumnosDelCurso.setGruIdGrupo(grupoSeleccionado);
+                alumnosDelCursoFacade.edit(alumnosDelCurso);
+                System.out.println("GRupo: "+alumnosDelCurso.getGruIdGrupo());
             }
-            targetAux.add(Alumno);
+            }
+            
         }
         for (Iterator<AlumnosDelCurso> it = asignar.getSource().iterator(); it.hasNext();) {
            String alumno = it.next()+"";
             System.out.println("Alumno Disponible: "+alumno);
-            AlumnosDelCurso Alumno = (AlumnosDelCurso) alumnosDelCursoFacade.BuscarPorIdAlumno(Integer.parseInt(alumno));
-            if(Alumno.getGruIdGrupo()!=null){
-                Alumno.setGruIdGrupo(null);
-                alumnosDelCursoFacade.edit(Alumno);
-                System.out.println("GRupo: "+Alumno.getGruIdGrupo());
+           List<AlumnosDelCurso> Alumno = alumnosDelCursoFacade.BuscarPorIdAlumno(Integer.parseInt(alumno));
+            for (AlumnosDelCurso alumnosDelCurso : Alumno) {
+                if(alumnosDelCurso.getGruIdGrupo()!=null && alumnosDelCurso.getCurso().equals(profesorLogin.getCurso())){
+                alumnosDelCurso.setGruIdGrupo(null);
+                alumnosDelCursoFacade.edit(alumnosDelCurso);
+                System.out.println("GRupo: "+alumnosDelCurso.getGruIdGrupo());
             }
-            sourceAux.add(Alumno);
+            }
         }
-        aux.setSource(sourceAux);
-        aux.setTarget(targetAux);
-        asignar = aux;
         FacesMessage msg = new FacesMessage();  
         msg.setSeverity(FacesMessage.SEVERITY_INFO);  
         msg.setSummary("Actualizado");  

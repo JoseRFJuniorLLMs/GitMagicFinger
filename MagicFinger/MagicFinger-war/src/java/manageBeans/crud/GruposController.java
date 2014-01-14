@@ -2,6 +2,7 @@ package manageBeans.crud;
 
 import entity.AlumnosDelCurso;
 import entity.Grupos;
+import java.io.IOException;
 import manageBeans.crud.util.JsfUtil;
 import manageBeans.crud.util.PaginationHelper;
 
@@ -15,6 +16,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
@@ -22,6 +24,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
+import manageBeans.GrupoConversation;
 import manageBeans.LoginSessionMB;
 import sessionBeans.GruposFacadeLocal;
 
@@ -37,6 +40,8 @@ public class GruposController implements Serializable {
     private int selectedItemIndex;
     @Inject
     private LoginSessionMB session;
+    @Inject
+    private GrupoConversation conversationGrupo;
     public GruposController() {
     }
 
@@ -79,67 +84,86 @@ public class GruposController implements Serializable {
         //selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
-
+    public void redireccionar(String pagina){
+        System.out.println("intenta redireccionar");
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+       try {
+           System.out.println("va a redireccionar ctm");
+           externalContext.redirect(externalContext.getRequestContextPath() + pagina);
+           
+       }
+       catch (IOException e) {
+           System.out.println("error redirect");
+           System.out.println(e.getMessage());
+       }
+    }
+    public void envioDatosGrupo(){
+        System.out.println("antes convesation");
+        conversationGrupo.beginConversation();
+        System.out.println("despues conversation");
+        redireccionar("/faces/profesor/grupos/grupos.xhtml?cid=".concat(this.conversationGrupo.getConversation().getId()));
+        System.out.println("redirigir");
+    }
     public String prepareCreate() {
         current = new Grupos();
         selectedItemIndex = -1;
         return "Create";
     }
 
-    public String create() {
+    public void create() {
         try {
             current.setCurso(session.getCurso());
             current.setAlumnosDelCursoList(new ArrayList<AlumnosDelCurso>());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos creado", "Se ha creado una Grupos correctamente"));
-            return prepareList();
+            System.out.println("antes envio");
+            envioDatosGrupo();
+            System.out.println("despues de envio");
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Grupos no creado", "Lo sentimos, intentelo mas tarde"));
-            return null;
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Grupos no creado", "Lo sentimos, inténtelo más tarde"));
         }
     }
 
     public String prepareEdit(Grupos var) {
         current = var;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+       // selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
-    public String update() {
+    public void update() {
         try {
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Grupos actualizado", "Se ha actualizado correctamente"));
-            return "View";
+            envioDatosGrupo();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Grupos no actualizado", "Lo sentimos, intentelo mas tarde"));
 
-            return null;
         }
     }
 
-    public String destroy(Grupos valor) {
+    public void destroy(Grupos valor) {
         current = valor;
-        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+       // selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
         recreateModel();
-        return "List";
+        envioDatosGrupo();
     }
 
-    public String destroyAndView() {
+    public void destroyAndView() {
         performDestroy();
         recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
-            return "View";
+            envioDatosGrupo();
         } else {
             // all items were removed - go back to list
             recreateModel();
-            return "List";
+            envioDatosGrupo();
         }
     }
 
