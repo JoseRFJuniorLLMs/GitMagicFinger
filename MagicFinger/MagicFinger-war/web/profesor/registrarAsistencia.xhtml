@@ -49,30 +49,60 @@
         </script>
         <div id="top" style="display: inline-block; ">
             <div id="logo" style="display: inline-block;vertical-align: middle;">
-                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                <h:form>
+                 <h:commandLink action="/faces/profesor/index.xhtml">
+                            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                 </h:commandLink>
+                </h:form>
             </div>
             <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
                 <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
             </div>
-            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
-                <h:form>
-                <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="forem" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.profesor.toString()}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
                 </h:form>
-            </div>    
+            </div>   
         </div>
         
         <div class="center_content">
-        
-            <h1 style="text-align: center;" > Registro de asistencia de alumnos </h1>
-            <div id="header" style="margin-top: 40px" >
-                  <applet style="display:inline; float: right" archive="/MagicFinger-war/faces/Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/>                  
-                <h3> Asignatura: <h:outputText value="#{asistenciaCursoMB.curso.asignatura.nombre}" /> - <h:outputText value="#{asistenciaCursoMB.curso.tipoAsignatura.nombre}" /></h3> <!--AQUI PONER EL PROFESOR QUE VIENE DESDE LA VISTA PRINCIPAL DEL PROFE --><br /><br />
-                <h3> Profesor: <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" /> &nbsp;<h:outputText value="#{asistenciaCursoMB.profesor.apellidop}" /> </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
-            
+            <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
+                <span>Registro de asistencia de alumnos</span> 
+                <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
+                    <h:outputLink value="/MagicFinger-war/faces/profesor/index.xhtml" >
+                         [Cambiar]
+                    </h:outputLink>
+                    </span> 
+                </span> 
+            </h1>
+            <div id="header" style="margin-top: 40px;margin-bottom: 10px;" >
+               
+                <div style="display:inline-block; float: right;margin-top: 5px;"><applet archive="/MagicFinger-war/faces/Fingerprint_SDK_Applet_Sample.jar" code="com/griaule/fingerprintsdk/appletsample/JApplet.class" width="65" height="27"/></div>              
+                 <h:form style="display:inline-block; float: right"> 
+                     <h:commandLink action="/faces/profesor/index2.xhtml" style="display: inline-block;float: right;margin-right: 20px">
+                        <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="37" style="margin: 0 auto;display:block"/>
+                         <h:outputLabel>Volver</h:outputLabel>
+                     </h:commandLink>     
+                </h:form>
+                <div style="display: inline-block">
+                  <h3> Asignatura: <h:outputText value="#{asistenciaCursoMB.curso.asignatura.nombre}" /> - <h:outputText value="#{asistenciaCursoMB.curso.tipoAsignatura.nombre}" /></h3> <!--AQUI PONER EL PROFESOR QUE VIENE DESDE LA VISTA PRINCIPAL DEL PROFE --><br /><br />
+                  <h3> Profesor: <h:outputText value="#{asistenciaCursoMB.profesor.nombre}" /> &nbsp;<h:outputText value="#{asistenciaCursoMB.profesor.apellidop}" /> </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
+                </div>
                    
             </div>
 
             <h:form id="formAsistencia" prependId="false" style="vertical-align: middle; display: inline">  
+                
                 <div id="acciones" class="sinSalto" style="float: left; display: inline; margin-bottom: 25px">
                     <div id="fecha" style="vertical-align: middle;display: inline">
                         <h:outputLabel style="vertical-align: middle;display: inline; color: #036fab" value="Fecha: "/>

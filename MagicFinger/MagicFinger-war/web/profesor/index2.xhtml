@@ -46,22 +46,43 @@
         </script>
         <div id="top" style="display: inline-block; ">
             <div id="logo" style="display: inline-block;vertical-align: middle;">
-                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                <h:form>
+                 <h:commandLink action="/faces/profesor/index.xhtml">
+                            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                 </h:commandLink>
+                </h:form>
             </div>
             <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
                 <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />  
             </div>
-            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
-                <h:form>
-                <h:commandLink style="" action="#{loginMB.logout()}" value="Cerrar sesión" />
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="forem" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.profesor.toString()}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
                 </h:form>
-            </div>    
+            </div>     
         </div>
 
         <div id="content" class="center_content">
-            <h1 style="text-align: center;margin-bottom: 40px" > Bienvenido 
-                <h:outputText value="#{loginSessionMB.profesor.nombre}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidop}" />&nbsp;<h:outputText value="#{loginSessionMB.profesor.apellidom}" />
+             <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
+                <span>Administración del Curso</span> 
+                <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
+                    <h:outputLink value="/MagicFinger-war/faces/profesor/index.xhtml" >
+                         [Cambiar]
+                    </h:outputLink>
+                    </span> 
+                </span> 
             </h1>
+            
             <div> 
                 <div id="cursos" style="display:inline-block; vertical-align: middle">
                     <h:form id="form"> <p:growl id="grow1" showDetail="true" />
@@ -101,10 +122,10 @@
 
                             </h:panelGrid>
                         </p:dialog> 
-                        <p:commandButton style="float: right; margin-top: 10px;" action="#{asignaturaMB.envioDatosGrupo}" value="Gestionar Grupos" /> 
-                        <p:commandButton style="float: right; margin-top: 10px;" action="#{asignaturaMB.envioDatos}" value="Tomar asistencia" />  
-                        <p:commandButton style="float: right; margin-top: 10px;" action="#{asignaturaMB.envioDatosReportes()}" value="reportes " />  
-                        <p:commandButton style="float: right; margin-top: 10px;" action="#{asignaturaMB.envioDatosEstadisticas()}" value="graficos" />  
+                        <p:commandButton update="grow1" style="float: right; margin-top: 10px;" action="#{asignaturaMB.envioDatosGrupo}" value="Gestionar Grupos" /> 
+                        <p:commandButton update="grow1" style="float: right; margin-top: 10px;" action="#{asignaturaMB.envioDatos}" value="Tomar asistencia" />  
+                        <p:commandButton update="grow1" style="float: right; margin-top: 10px;" action="#{asignaturaMB.envioDatosReportes()}" value="Reportes " />  
+                        <p:commandButton update="grow1" style="float: right; margin-top: 10px;" action="#{asignaturaMB.envioDatosEstadisticas()}" value="Gráficos" />  
                     </h:form>
                 </div>
 

@@ -5,16 +5,74 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="/MagicFinger-war/faces/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="/MagicFinger-war/faces/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Grupos</title>
     </h:head>
     <h:body>
-        <div style="display: inline-block; width: 100%">
-        <h:form id="form" > <p:growl id="grow1" showDetail="true" />
+        <div id="top" style="display: inline-block; text-align: center">
+            
+            <div id="logo" style="display: inline-block; float:left">
+                <h:form>
+                 <h:commandLink action="/faces/profesor/index.xhtml">
+                            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                 </h:commandLink>
+                </h:form>
+            </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
+                <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
+            </div>
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="forem" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.profesor.toString()}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
+                </h:form>
+            </div>  
+        </div>
+        <div class="center_content">
+            <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
+                <span>Gestión de grupos</span> 
+                <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
+                    <h:outputLink value="/MagicFinger-war/faces/profesor/index.xhtml" >
+                         [Cambiar]
+                    </h:outputLink>
+                    </span> 
+                </span> 
+            </h1>
+            <h:form id="form" > <p:growl id="grow1" showDetail="true" />
+                <div style="text-align: center">
+                    
+                    <div id="agregar" style="display: inline-block;width: 100%;">
+                        <img src="/MagicFinger-war/faces/img/advertencia.png" height="24" width="26" style="vertical-align: middle"/>
+                        <p style="vertical-align: middle;display: inline-block;text-align: center">
+                            Para agregar un grupo, debe completar los siguientes datos:
+                        </p>
+                        
+                        <h:commandLink action="#{gruposController.prepareCreate}" style="display: inline-block;float: right">
+                            <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
+                            <h:outputLabel>Agregar Grupos</h:outputLabel>
+                        </h:commandLink>
+                        <h:commandLink action="/faces/profesor/index2.xhtml" style="display: inline-block;float: right;margin-right: 20px">
+                            <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="37" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel>Volver</h:outputLabel>
+                        </h:commandLink>
+                        
+                    </div>
 
-                        <h3>Grupos del Curso</h3>
-                        <div style="display: inline-block">
-                        <p:dataTable id="grupo" 
-                                     style="width: 480px;margin-top:20px;" 
+                        <div style="margin-bottom: 20px;display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px">
+                        <div style="display: inline-block; text-align: center">
+                            <p:dataTable id="grupo" 
+                                     style="width: 330px;margin-top:20px; display: inline-block;text-align: center;margin-bottom: 35px" 
                                      var="gru" value="#{gruposMB.listaGrupoData}" 
                                      selection ="#{gruposMB.grupoSeleccionado}"
                                      selectionMode="single"
@@ -22,24 +80,33 @@
                             <p:ajax event="rowSelect" listener="#{gruposMB.onRowSelect}"
                                     update=":form:grow1 :form:pickList :form:grupo"/> 
 
-                            <p:column headerText="Nombre Grupos" style="width:24%" >  
+                            <p:column headerText="Nombre Grupos" style="width:50%" >  
                                 <h:outputText value="#{gru.toString()}" />  
                             </p:column>
-
+                            <p:column style="text-align: center;">
+                            <f:facet name="header">
+                                <h:outputText value="Acciones"/>
+                            </f:facet>
+                            <h:commandLink action="#{gruposController.prepareView(gru)}">
+                                <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 10px" height="17" width="17" />
+                            </h:commandLink>
+                            <h:commandLink action="#{gruposController.prepareEdit(gru)}">
+                                <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 15px" height="17" width="17" />
+                            </h:commandLink>
+                            <h:commandLink action="#{gruposController.destroy(gru)}">
+                                <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 15px;margin-right: 10px" height="17" width="17" />
+                            </h:commandLink>
+                        </p:column>
                         </p:dataTable>
-                        </div>
-                        <div style="display: inline-block; vertical-align: middle">
-                        
-                        </div>
-                        <p:pickList id="pickList" value="#{gruposMB.asignar}" var="city"   
-                                    itemLabel="#{city}" itemValue="#{city.getAlumno().getIdAlumno()}" showCheckbox="true">
+                        <p:pickList style="width: 400px;margin: 0 auto; padding: 10px; text-align: left" id="pickList" value="#{gruposMB.asignar}" var="city" itemLabel="#{city}" itemValue="#{city.getAlumno().getIdAlumno()}" showCheckbox="true" showSourceFilter="true" showTargetFilter="true">  
                         <f:facet name="sourceCaption">Alumnos Disponibles</f:facet>  
                         <f:facet name="targetCaption">Integrantes</f:facet>
                         <p:ajax event="transfer" listener="#{gruposMB.onTransfer}" update=":form:grow1" /> 
                         </p:pickList>
-  
-                        
-        </h:form>
+                        </div>
+                        </div>
+                </div>
+           </h:form>
         </div>
     </h:body>
 </html>

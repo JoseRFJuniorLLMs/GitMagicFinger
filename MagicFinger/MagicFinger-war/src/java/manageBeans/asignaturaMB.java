@@ -75,24 +75,52 @@ public class asignaturaMB {
     }
 
     public void envioDatosGrupo(){
-        conversationGrupo.beginConversation();
-        redireccionar("/faces/profesor/grupos/grupos.xhtml?cid=".concat(this.conversationGrupo.getConversation().getId()));
+        try {
+            cursoSeleccionado.getTipoAsignatura().getNombre();
+            conversationGrupo.beginConversation();
+            redireccionar("/faces/profesor/grupos/grupos.xhtml?cid=".concat(this.conversationGrupo.getConversation().getId()));
+        } catch (Exception e) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error de Acceso", "Debe seleccionar un curso"));
+        }
+        
     }
 
     public void envioDatosEstadisticas(){
-        redireccionar("/faces/profesor/reporteEstadisticas.xhtml");
+        try {
+            cursoSeleccionado.getTipoAsignatura().getNombre();
+            redireccionar("/faces/profesor/reporteEstadisticas.xhtml");
+        } catch (Exception e) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error de Acceso", "Debe seleccionar un curso"));
+        }
+        
     }
     
     public void envioDatosReportes(){
-        redireccionar("/faces/profesor/reporteAsistencia.xhtml");
+        try {
+            cursoSeleccionado.getTipoAsignatura().getNombre();
+            redireccionar("/faces/profesor/reporteAsistencia.xhtml");
+        } catch (Exception e) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error de Acceso", "Debe seleccionar un curso"));
+        }
+        
     }
 
     public void envioDatos(){
-        conversation.beginConversation();
-        System.out.println("El de asignatura imprime " + cursoSeleccionado.getTipoAsignatura().getNombre());
-        conversation.setCurso(cursoSeleccionado);
-        conversation.setProfesor(profesor);
+        try {
+            
+            conversation.beginConversation();
+            cursoSeleccionado.getTipoAsignatura().getNombre();
+            conversation.setCurso(cursoSeleccionado);
+            conversation.setProfesor(profesor);
         redireccionar("/faces/profesor/registrarAsistencia.xhtml?cid=".concat(this.conversation.getConversation().getId()));
+        } catch (Exception e) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error de Acceso", "Debe seleccionar un curso"));
+        }
+        
         
     }
     public void onRowSelect(SelectEvent event) {

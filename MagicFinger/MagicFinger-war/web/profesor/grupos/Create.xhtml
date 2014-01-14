@@ -14,7 +14,11 @@
     <h:body>
         <div id="top" style="display: inline-block; text-align: center">
             <div id="logo" style="display: inline-block; float:left">
-                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                <h:form>
+                 <h:commandLink action="/faces/profesor/index.xhtml">
+                            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                 </h:commandLink>
+                </h:form>
             </div>
             <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
                 <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
@@ -77,17 +81,13 @@
                             </h4>
                             <p:inputText style="vertical-align: center" id="nombre" value="#{gruposController.selected.nombre}"/>
 
-                            <h4 style="display: inline-block;"> <p:outputLabel style="vertical-align: center" value="#{bundle.CreateGruposLabel_curso}" for="curso" />
-                            </h4>
-                            <p:selectOneMenu style="vertical-align: center" id="curso" value="#{gruposController.selected.curso}"  >
-                                <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
-                            </p:selectOneMenu>
+                           
                         </h:panelGrid>
                         <p:commandLink style="display: inline-block; margin-right: 25px" action="#{gruposController.create}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel> Guardar grupo</p:outputLabel>
                         </p:commandLink>
-                        <p:commandLink style="display: inline-block;" action="#{gruposController.prepareList}" immediate="true">
+                        <p:commandLink style="display: inline-block;" action="/faces/profesor/grupos/grupos.xhtml?cid=1" immediate="true">
                             <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="32" style="margin: 0 auto;display:block"/>
                             <p:outputLabel>Volver</p:outputLabel>
                         </p:commandLink>
