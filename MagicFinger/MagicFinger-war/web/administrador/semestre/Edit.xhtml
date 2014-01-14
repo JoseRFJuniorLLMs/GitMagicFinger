@@ -14,7 +14,9 @@
     <h:body>
         <div id="top" style="display: inline-block; text-align: center">
             <div id="logo" style="display: inline-block; float:left">
-                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
+                    <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                </h:outputLink>
             </div>
             <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
                 <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>

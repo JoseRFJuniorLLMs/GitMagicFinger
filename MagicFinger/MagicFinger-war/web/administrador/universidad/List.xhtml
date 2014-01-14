@@ -41,26 +41,26 @@
             <div class="center_content" style="padding-bottom: 40px;">
                 <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
                 <span>Gestión de universidades</span> 
-                <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
-                    <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
-                         [Menú Universidades]
-                    </h:outputLink>
+                  <span style="font: menu;float: right">
+                    
                         
                     </span> 
-                </span> 
+                  
                 </h1>
                 <p:growl id="grow1" showDetail="true" />
                 
                 <div style="text-align:center">
                     <div id="agregar" style="display: inline-block;width: 100%;">
                     <img src="/MagicFinger-war/faces/img/informacion.png" height="24" width="26" style="vertical-align: middle"/>
-                    <p style="vertical-align: middle;display: inline-block;text-align: center">
-                        Universidades
-                    </p>
+                    <p style="vertical-align: middle;display: inline-block;text-align: center">Universidades</p>
                     <h:commandLink action="#{alumnoController.prepareCreate}" style="display: inline-block; vertical-align: middle; float: right">
-                            <img src="/MagicFinger-war/faces/img/agregar.png" height="24" width="24" style="margin: 0 auto;display: block;"/>
+                            <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
                             <h:outputLabel>Agregar universidad</h:outputLabel>
                         </h:commandLink> 
+                    <h:commandLink action="/faces/administrador/index.xhtml" style="display: inline-block;float: right;margin-right: 20px">
+                            <img src="/MagicFinger-war/faces/img/atras.png" width="38" height="37" style="margin: 0 auto;display:block"/>
+                            <h:outputLabel>Volver</h:outputLabel>
+                        </h:commandLink>
                     </div>
                     <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{universidadController.items}" var="item" paginator="true" rows="10">
                         <f:facet name="header">
