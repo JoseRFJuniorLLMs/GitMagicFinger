@@ -80,7 +80,7 @@ public class asignaturaMB {
     
     public void envioDatos(){
         conversation.beginConversation();
-         System.out.println("El de asignatura imprime " + cursoSeleccionado.getTipoAsignatura().getNombre());
+        System.out.println("El de asignatura imprime " + cursoSeleccionado.getTipoAsignatura().getNombre());
         conversation.setCurso(cursoSeleccionado);
         conversation.setProfesor(profesor);
         redireccionar("/faces/profesor/registrarAsistencia.xhtml?cid=".concat(this.conversation.getConversation().getId()));

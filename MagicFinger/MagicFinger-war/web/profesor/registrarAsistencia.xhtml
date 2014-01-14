@@ -105,16 +105,26 @@
     <!-- esto esta bueno http://www.primefaces.org/showcase/ui/dialogForm.jsf > -->
                 <h:inputHidden id="variableHuella" value="#{asistenciaCursoMB.huellaEnString}"/>
 
-                <p:dataTable var="variable2" id="grow2Asistencia" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
+                <p:dataTable var="variable2" id="grow2Asistencia" editable="true" editMode="cell" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
                     <p:column headerText="Nombre del alumno" >  
                         <h:outputText value="#{variable2.alumno.toString()}" />  
                     </p:column>  
-                    <p:column headerText="Rut">  
-                        <h:outputText value="#{variable2.alumno.rut}" />  
+                    <p:column headerText="Rut"> 
+                         <h:outputText value="#{variable2.alumno.rut}" />  
                     </p:column>
 
-                    <p:column headerText="Asistencia">  
-                        <h:outputText value="#{asistenciaCursoMB.estadoAsistencia(variable2)}" />  
+                    <p:column headerText="Asistencia" style="width: 10%">  
+                        <p:cellEditor>  
+                            <f:facet name="output"><h:outputText value="#{asistenciaCursoMB.estadoAsistencia(variable2)}" /></f:facet>  
+                            <f:facet name="input">
+                              <p:selectOneMenu id="cambioAsis" value="#{asistenciaCursoMB.valor5}" style="width: 100%">  
+                                <f:selectItem itemLabel="Cambiar asistencia" itemValue="0" />
+                                <f:selectItem itemLabel="Presente" itemValue="1" />
+                                <f:selectItem itemLabel="Ausente" itemValue="5"/> 
+                                    <p:ajax update="grow2Asistencia" listener="#{asistenciaCursoMB.cambio(variable2)}" />
+                                </p:selectOneMenu>
+                            </f:facet>  
+                        </p:cellEditor> 
                     </p:column>
                 </p:dataTable> 
                 <p:commandButton id="buttons" value="Save" actionListener="#{asistenciaCursoMB.agregaPersona}" update="growAsistencia,grow2Asistencia" style="display:none">
