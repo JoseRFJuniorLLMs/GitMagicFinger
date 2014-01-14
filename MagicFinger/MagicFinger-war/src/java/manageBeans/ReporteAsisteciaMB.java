@@ -96,22 +96,13 @@ public class ReporteAsisteciaMB {
         }
     }
     public String calculaAsistencia (Curso curso){
-        System.out.println("calculando");
         List<BloqueClase> listaBloque = curso.getBloqueClaseList();
-        System.out.println("curso lista choke"+ listaBloque);
-        System.out.println("curso lista bloque"+ listaBloque.size());
-        
         if(curso.getBloqueClaseList().size()==0) return "SIN BLOQUES";
-        System.out.println("marca");
         List<Asistencia> asistenciaTemp = asistenciaSB.cuentaAsistencia(alumnoSeleccionado, curso);
-        System.out.println("marca");
         int cantidadBloquesReales = bloquesTotales(curso)-asistenciaSB.cuentaAsistenciaSuspendida(alumnoSeleccionado, curso).size();
-        System.out.println("marca");
         curso.getSemestre().getFechaInicio().getDay();
-        System.out.println("marca fin");
         return (asistenciaTemp.size()*100/cantidadBloquesReales) + " %";
-        
-    }
+   }
     public String cuentaAsistencia(Alumno alumno){
         if(cantidadBLoques==0)return "SIN BLOQUES";
         asistenciaCurso = asistenciaSB.cuentaAsistencia(alumno, curso);
