@@ -94,7 +94,8 @@ public class AsignaturaController implements Serializable {
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asignatura no creado", "Lo sentimos, intentelo mas tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Asignatura no creada", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }

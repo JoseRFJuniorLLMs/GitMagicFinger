@@ -93,7 +93,8 @@ public class ProfesoresPorDepartamentoController implements Serializable {
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: ProfesoresPorDepartamento no creado", "Lo sentimos, intentelo mas tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Profesor por departamento no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
@@ -110,12 +111,12 @@ public class ProfesoresPorDepartamentoController implements Serializable {
             current.getProfesoresPorDepartamentoPK().setDepIdDepartamento(current.getDepartamento().getIdDepartamento());
             getFacade().edit(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesoresPorDepartamento actualizado", "Se ha actualizado correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor por departamento actualizado", "Se ha actualizado correctamente"));
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: ProfesoresPorDepartamento no actualizado", "Lo sentimos, intentelo mas tarde"));
-
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Profesor por departamento no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
@@ -146,10 +147,11 @@ public class ProfesoresPorDepartamentoController implements Serializable {
         try {
             getFacade().remove(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "ProfesoresPorDepartamento eliminado", "Se ha eliminado una ProfesoresPorDepartamento"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesor por departamento eliminado", "Se ha eliminado una ProfesoresPorDepartamento"));
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: ProfesoresPorDepartamento no eliminado", "Lo sentimos, intentelo mas tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Profesor por departamento no eliminado", "Lo sentimos, intentelo más tarde"));
         }
     }
 

@@ -138,20 +138,19 @@ public class CursoController implements Serializable {
                 alumnosCurso.setAlumno(alumnoFacade.find(Integer.parseInt(object)));
                 alumnosdelcurso.setCurrent(alumnosCurso);
                 alumnosdelcurso.create();
-                System.out.println("Alumno: "+object);
             }
             for (String object : listProfesorSelecionados) {
                 profesorCurso.setProfesor(profesorFacade.find(Integer.parseInt(object)));
                 profesoresporcurso.setCurrent(profesorCurso);
                 profesoresporcurso.create();
-                System.out.println("Profesor: "+object);
             }
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado una Curso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Curso no creado", "Lo sentimos, intentelo mas tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Curso no creado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
@@ -173,8 +172,8 @@ public class CursoController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Curso no actualizado", "Lo sentimos, intentelo mas tarde"));
-
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Curso no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }

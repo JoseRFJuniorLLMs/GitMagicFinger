@@ -89,7 +89,8 @@ public class AsistenciaController implements Serializable {
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Asistencia no creado", "Lo sentimos, intentelo mas tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Asistencia no creado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
@@ -108,8 +109,8 @@ public class AsistenciaController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Asistencia no actualizado", "Lo sentimos, intentelo mas tarde"));
-
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Asistencia no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }

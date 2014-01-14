@@ -94,7 +94,8 @@ public class DepartamentoController implements Serializable {
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Departamento no creado", "Lo sentimos, intentelo mas tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Departamento no creado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
@@ -114,8 +115,8 @@ public class DepartamentoController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Departamento no actualizado", "Lo sentimos, intentelo mas tarde"));
-
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Departamento no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }

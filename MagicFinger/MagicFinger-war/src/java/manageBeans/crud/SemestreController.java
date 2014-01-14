@@ -94,7 +94,8 @@ public class SemestreController implements Serializable {
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR: Semestre no creado", "Lo sentimos, intentelo mas tarde"));
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Semestre no creado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
@@ -113,8 +114,8 @@ public class SemestreController implements Serializable {
             return "View";
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Semestre no actualizado", "Lo sentimos, intentelo mas tarde"));
-
+            
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Semestre no actualizado", "Lo sentimos, los datos que ingresó ya existen"));
             return null;
         }
     }
