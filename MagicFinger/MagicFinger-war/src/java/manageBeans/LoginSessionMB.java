@@ -74,9 +74,7 @@ public class LoginSessionMB implements Serializable {
                 request.login(user, password);
                 redireccionar(context.getExternalContext().getUserPrincipal().getName());
             } else {
-                FacesContext context1 = FacesContext.getCurrentInstance();
-                HttpSession session = (HttpSession) context1.getExternalContext().getSession(false);
-                session.invalidate();
+                request.logout();
                 request.login(user, password);
                 redireccionar(context.getExternalContext().getUserPrincipal().getName());
                 // System.out.println(request.getContextPath()+"------------------------------------"+context.getExternalContext().getUserPrincipal());
