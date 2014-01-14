@@ -75,12 +75,15 @@
                     <div style="display:inline-block;border-width: 1px ;border-radius: 10px ;border-style: dashed; border-color: gray; width: 600px;text-align: center;margin-top: 10px ">
                         <h:panelGrid columns="2" style="margin: 0 auto; padding: 10px;">
                            
-                            <h4 style="display: inline-block;"><p:outputLabel value="Porcentaje de aprobación:" for="porcentajeAprobacion" /></h4>
-                            <p:spinner id="porcentajeAprobacion" value="#{cursoController.selected.porcentajeAprobacion}" min="0" max="100" required="true" requiredMessage="Debe ingresar un porcentaje entre 0 y 100"/> 
-                            
-                            <h4 style="display: inline-block;"><p:outputLabel value="Atrasados después de (min):" for="termino" /></h4>
-                            <p:spinner id="termino" value="#{cursoController.selected.termino}" min="0" max="90" required="true" requiredMessage="Debe ingresar el tiempo de atrasados entre 0 y 90 min."/> 
-                            
+                            <h4><p:outputLabel value="Porcentaje de aprobación:" for="porcentajeAprobacion" /></h4>
+                            <p:inputText id="porcentajeAprobacion" value="#{cursoController.selected.porcentajeAprobacion}" />
+                            <h4><p:outputLabel value="Atrasados después de (min):" for="termino" /></h4>
+                            <p:inputText id="termino" value="#{cursoController.selected.termino}" />
+                            <h4><p:outputLabel value="#{bundle.EditCursoLabel_asignatura}" for="asignatura" /></h4>
+                            <h:inputHidden id="asignatura" value="#{cursoController.selected.asignatura}" />
+                               
+                            <h:inputHidden id="semestre" value="#{cursoController.selected.semestre}" />
+                            <h:inputHidden id="tipoAsignatura" value="#{cursoController.selected.tipoAsignatura}" />
                         </h:panelGrid>
                         <h:commandLink style="display: inline-block; margin-right: 25px" action="#{cursoController.update}">
                             <img src="/MagicFinger-war/faces/img/ok.png" width="38" height="32" style="margin: 0 auto;display:block"/>

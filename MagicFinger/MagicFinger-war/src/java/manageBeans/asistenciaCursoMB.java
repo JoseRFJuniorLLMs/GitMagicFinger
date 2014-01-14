@@ -54,12 +54,14 @@ public class asistenciaCursoMB {
     private BloqueClase bloqueClase;
     private int valor;
     private int valor2;
+    private int valor5;
     private Date fecha;
     private List<BloqueClase> bloqueClaseList;
     private List<BloqueClase> bloqueClasesAllList;
     
     @PostConstruct
     public void init() {
+        valor5 = -1;
         fecha = conversation.getFecha();
         profesor = conversation.getProfesor();
         curso = conversation.getCurso();
@@ -86,8 +88,7 @@ public class asistenciaCursoMB {
         List<Semestre> nuevo = semestreFacade.findAll();
         for (Semestre semestre : nuevo) {
             if(semestre.getFechaInicio().before(fecha) && semestre.getFechaTermino().after(fecha) ){
-                System.out.println("semestre::"+ semestre.toString());
-                return semestre;
+               return semestre;
             }
         }
        return null;
@@ -105,7 +106,6 @@ public class asistenciaCursoMB {
 
     public void agregaPersona(ActionEvent actionEvent) {
         BloqueClase bloqueClaseActual = bloqueDetectadoPorFechaYHora();
-        System.out.println("bloqueActuaaal" + bloqueClaseActual);
         Alumno encontrado = alumnos.CompareFingerPrint(HuellaEnString, curso);
         if (bloqueClaseActual == null) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "No se puede marcar asistencia, fuera del bloque de clases"));
@@ -153,8 +153,7 @@ public class asistenciaCursoMB {
                 return bloqueClase1;
             }
         }
-        System.out.println("bloque no encontrado...");
-        return null;
+       return null;
     }
     private List<BloqueClase> bloqueDetectadoPorFecha() {
         List<BloqueClase> bloqueDetectado = new LinkedList<>();
@@ -211,7 +210,6 @@ public class asistenciaCursoMB {
         SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
         conversation.setFecha((Date) event.getObject());
         fecha = (Date) event.getObject();
-        System.out.println("fecha seteada:"+fecha );
         bloqueClaseList = bloqueDetectadoPorFecha();
         conversation.setBloqueClaseList(bloqueClaseList);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Fecha seleccionada ", funcionesGenerales.getDiaFecha(fecha)+" "+ format.format(event.getObject())));
@@ -233,6 +231,26 @@ public class asistenciaCursoMB {
         facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Bloque", "Seleccione un bloque" ));
         bloqueClase = null;
     }
+    public void cambio(AlumnosDelCurso alumno){
+        if(valor5==0)return;
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Asistencia asistencia= asistenciaSB.alumnoAsiste(alumno, bloqueClase, fecha);
+        if(asistencia!=null){
+            asistencia.setEstado(valor5);
+            asistenciaFacade.edit(asistencia);
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asistencia cambiada", "Alumno" + alumno.getAlumno().toString()));
+        }
+        else{
+            Asistencia nueva = new Asistencia();
+            nueva.setEstado(valor5);
+            nueva.setBloIdBloque(bloqueClase);
+            nueva.setFecha(fecha);
+            nueva.setAlumnosDelCurso(alumno);    
+            asistenciaFacade.create(nueva);
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Asistencia cambiada", "Alumno" + alumno.getAlumno().toString()));
+        }     
+       valor=0;
+    }
     public void handleBloqueClaseChangeAsistencia(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         if( bloqueClase==null || fecha==null || valor2<1){
@@ -248,7 +266,6 @@ public class asistenciaCursoMB {
                     nuevo.setFecha(fecha);
                     nuevo.setEstado(valor2);
                     asistenciaFacade.create(nuevo);
-                    System.out.println("agregarlo");
                 }
                 else{
                    asistioCurso.setEstado(valor2);
@@ -331,6 +348,12 @@ public class asistenciaCursoMB {
     public void setValor2(int valor2) {
         this.valor2 = valor2;
     }
-    
-    
+
+    public int getValor5() {
+        return valor5;
+    }
+
+    public void setValor5(int valor5) {
+        this.valor5 = valor5;
+    }
 }
