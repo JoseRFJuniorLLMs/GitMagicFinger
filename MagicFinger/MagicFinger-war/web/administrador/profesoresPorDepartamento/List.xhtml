@@ -12,65 +12,95 @@
         <link rel="stylesheet" type="text/css" href="/MagicFinger-war/faces/jsfcrud.css" />
     </h:head>
     <h:body>
-        <div id="top" style="display: inline-block; ">
-            <div id="logo" style="display: inline-block;vertical-align: middle;">
-                <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
-            </div>
-            <div id="hora" style="display: inline-block;vertical-align: middle;padding-left: 33%;">
-                <p:clock pattern="dd.MM.yy - HH.mm" mode="server" />
-            </div>
-            <div style="display: inline-block;float: right;margin-top:18px;margin-right: 10px">
+        <div id="top" style="display: inline-block; text-align: center">
+            <div id="logo" style="display: inline-block; float:left">
                 <h:form>
-                    <h:commandLink style="" action="Expression loginMB is undefined on line 54, column 55 in unknown." value="Cerrar sesion" />
+                 <h:commandLink action="/faces/administrador/index.xhtml">
+                            <img src="/MagicFinger-war/faces/img/MagicFinger.png" style="padding: 5px" height="40" width="150" />
+                 </h:commandLink>
                 </h:form>
             </div>
-        </div>
-        <h:form >
-            <div class="center_content" style="padding-bottom: 40px;">
-                <p:growl id="grow1" showDetail="true" />
-                <h1 style="text-align: center;margin-bottom: 20px"> Gestion de ProfesoresPorDepartamento</h1>
-                <div style="text-align: center; display: inline-block;width: 100%; margin-bottom: 20px;" >
-                    <p:megaMenu style="display: inline-block;ext-align: center;">  
-                        <p:menuitem icon="ui-icon-bullet" value="Gestion de usuarios" url="/faces/administrador/user/List.xhtml"/>  
-                        <p:menuitem icon="ui-icon-bullet" value="Gestion de cursos" url="/faces/administrador/user/curso.xhtml"/>  
-                        <p:menuitem icon="ui-icon-bullet" value="Gestion de carreras" url="/faces/administrador/carrera/List.xhtml"/>  
-                        <p:menuitem icon="ui-icon-bullet" value="Gestion de facultades" url="/faces/administrador/facultad/List.xhtml"/>  
-                        <p:menuitem icon="ui-icon-bullet" value="Gestion de departamentos" url="/faces/administrador/departamento/List.xhtml"/>  
-                    </p:megaMenu>  
-                </div>
+            <div id="hora" style="display: inline-block;vertical-align: middle; margin-top: 17px">
+                <p:clock pattern="dd.MM.yy HH.mm" mode="server"/>
+            </div>
+            <div style="display: inline-block;float: right;margin-top:10px">
+                <h:form id="form" prependId="false">
+                    <div style="display: inline-block;vertical-align: middle"><p:outputLabel value="#{loginSessionMB.usuario}"/></div>
+                    
+                    <div style="display: inline-block;width: 50px;vertical-align: middle">
+                        <p:commandLink action="#{loginMB.logout()}" value="Cerrar sesión">
+                            <p:confirm header="Confirmación" message="¿Desea cerrar sesión?" icon="ui-icon-alert" />  
+                        </p:commandLink>
+                        <p:confirmDialog global="true" showEffect="explode" hideEffect="explode">  
+                            <p:commandButton style="margin-left:10%;" value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                        </p:confirmDialog>
+                    </div>
+                </h:form>
+            </div>  
+        </div>      
+        <div class="center_content">
+            <h1 style="margin-bottom: 20px;font-family: -webkit-pictograph;">
+                <span>Gestion de Profesores Por Departamento</span> 
+                <span style="float: right"> #{postLoginMB.nombreUniversidad} <span style="font: menu">
+                    <h:outputLink value="/MagicFinger-war/faces/administrador/index.xhtml" >
+                         [Cambiar]
+                    </h:outputLink>
+                    </span> 
+                </span> 
+                </h1>
+            <h:form><p:growl id="grow1" showDetail="true" />
+                <div style="text-align:center">
+                    
+                    <div style="text-align: left; display: inline-block;width: 100%; margin-bottom: 20px;" >
+                        <p:menubar style="width: 75%;vertical-align: middle;display: inline-block">  
+                    <p:menuitem value="Alumnos" url="/faces/administrador/alumno/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:submenu label="Profesores" icon="ui-icon-bullet" >
+                        <p:menuitem value="Gestión Profesores" url="/faces/administrador/profesor/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Profesores por Dpto." url="/faces/administrador/profesoresPorDepartamento/List.xhtml" icon="ui-icon-bullet" /> 
+                    </p:submenu>
+                    <p:submenu label="Cursos" icon="ui-icon-bullet">  
+                        <p:menuitem value="Gestión de cursos" url="/faces/administrador/curso/List.xhtml" icon="ui-icon-bullet" /> 
+                        <p:menuitem value="Asignaturas" url="/faces/administrador/asignatura/List.xhtml" icon="ui-icon-bullet" />   
+                        <p:menuitem value="Tipo de asignaturas" url="/faces/administrador/tipoAsignatura/List.xhtml" icon="ui-icon-bullet" />   
+                        <p:menuitem value="Bloques" url="/faces/administrador/bloqueClase/List.xhtml" icon="ui-icon-bullet" />   
+                        <p:menuitem value="Alumnos por curso" url="/faces/administrador/alumnosDelCurso/List.xhtml" icon="ui-icon-bullet" />
+                        <p:menuitem value="Profesores por curso" url="/faces/administrador/profesoresPorCurso/List.xhtml" icon="ui-icon-bullet" />
+                    </p:submenu>
+                    <p:menuitem value="Facultades" url="/faces/administrador/facultad/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:menuitem value="Departamentos" url="/faces/administrador/departamento/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:menuitem value="Planes de estudios" url="/faces/administrador/malla/List.xhtml" icon="ui-icon-bullet" /> 
+                    <p:menuitem value="Carreras" url="/faces/administrador/carrera/List.xhtml" icon="ui-icon-bullet" /> 
+               </p:menubar>
+                        <h:commandLink action="#{profesoresPorDepartamentoController.prepareCreate}" style="display: inline-block;float: right">
+                        <img src="/MagicFinger-war/faces/img/agregar.png" height="24" width="24" style="margin: 0 auto;display: block;"/>
+
+                        <h:outputLabel>Agregar ProfesoresPorDepartamento</h:outputLabel>
+                    </h:commandLink>
+                    </div>
                 <div id="agregar" style="display: inline-block;width: 100%;">
                     <img src="/MagicFinger-war/faces/img/informacion.png" height="32" width="36" style="vertical-align: middle; margin-left:20px"/>
                     <p style="vertical-align: middle;display: inline-block;text-align: left">
                         En esta vista usted puede gestionar las facultades inscritas en el sistema
                     </p>
-                    <h:commandLink action="#{profesoresPorDepartamentoController.prepareCreate}" style="display: inline-block;float: right">
-                        <img src="/MagicFinger-war/faces/img/agregar.png" style="margin: 0 auto;display: block;"/>
-
-                        <h:outputLabel>Agregar ProfesoresPorDepartamento</h:outputLabel>
-                    </h:commandLink>            
+                                
                 </div>
                 <div style="text-align:center">
                     <p:dataTable emptyMessage="No se encontraron resultados" paginatorPosition="bottom" style="display: inline-block;margin-top:20px" value="#{profesoresPorDepartamentoController.items}" var="item" paginator="true" rows="10">
                         <f:facet name="header">
                             <h3 style="color:white">XXX Registrados</h3>
                         </f:facet>
-                        <p:column filterBy="#{item.idProfDep}" >
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListProfesoresPorDepartamentoTitle_idProfDep}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idProfDep}"/>
-                        </p:column>
-                        <p:column filterBy="#{item.profesor}" >
+                        <p:column filterBy="#{item.profesor.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProfesoresPorDepartamentoTitle_profesor}"/>
                             </f:facet>
-                            <h:outputText value="#{item.profesor}"/>
+                            <h:outputText value="#{item.profesor.toString()}"/>
                         </p:column>
-                        <p:column filterBy="#{item.departamento}" >
+                        <p:column filterBy="#{item.departamento.nombre}" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListProfesoresPorDepartamentoTitle_departamento}"/>
                             </f:facet>
-                            <h:outputText value="#{item.departamento}"/>
+                            <h:outputText value="#{item.departamento.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -78,9 +108,6 @@
                             </f:facet>
                             <h:commandLink action="#{profesoresPorDepartamentoController.prepareView(item)}">
                                 <img src="/MagicFinger-war/faces/img/ojo.png" style="margin-left: 20px" height="17" width="17" />
-                            </h:commandLink>
-                            <h:commandLink action="#{profesoresPorDepartamentoController.prepareEdit(item)}">
-                                <img src="/MagicFinger-war/faces/img/editar.png" style="margin-left: 30px" height="17" width="17" />
                             </h:commandLink>
                             <h:commandLink action="#{profesoresPorDepartamentoController.destroy(item)}">
                                 <img src="/MagicFinger-war/faces/img/eliminar.png" style="margin-left: 30px;margin-right: 20px" height="17" width="17" />
@@ -90,5 +117,6 @@
                 </div>
             </div>
         </h:form>
+        </div>
     </h:body>
 </html>
