@@ -37,12 +37,13 @@
                 <h3> Asignatura: <h:outputText value="#{reporteAsisteciaMB.curso.asignatura.nombre}" /> - <h:outputText value="#{reporteAsisteciaMB.curso.tipoAsignatura.nombre}" /></h3> <!--AQUI PONER EL PROFESOR QUE VIENE DESDE LA VISTA PRINCIPAL DEL PROFE --><br /><br />
                 <h3> Profesor: <h:outputText value="#{reporteAsisteciaMB.profesor.nombre}" /> &nbsp; <h:outputText value="#{reporteAsisteciaMB.profesor.apellidop}" /> </h3> <!-- LO MISMO PARA LA ASIGNATURA  --><br /><br />
             </div>
+            <h:form>
+                <p:lineChart id="linear" value="#{reporteAsisteciaMB.linearModel}" legendPosition="e"  
+         title="Linear Chart" minY="0" maxY="10" style="height:300px"/>  
 
-            <p:lineChart id="linear" value="#{reporteAsisteciaMB.linearModel}" legendPosition="e"  
-     title="Linear Chart" minY="0" maxY="10" style="height:300px"/>  
-  
-            <p:lineChart id="category" value="#{reporteAsisteciaMB.categoryModel}" legendPosition="e"  
-             title="Category Chart" minY="0" maxY="200" style="height:300px;margin-top:20px"/>  
+                <p:lineChart id="category" value="#{reporteAsisteciaMB.categoryModel}" legendPosition="e"  
+                 title="Category Chart" minY="0" maxY="200" style="height:300px;margin-top:20px"/> 
+            </h:form> 
         </div>
     </h:body>
 </html>
