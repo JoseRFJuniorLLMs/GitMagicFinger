@@ -135,7 +135,7 @@
     <!-- esto esta bueno http://www.primefaces.org/showcase/ui/dialogForm.jsf > -->
                 <h:inputHidden id="variableHuella" value="#{asistenciaCursoMB.huellaEnString}"/>
 
-                <p:dataTable var="variable2" id="grow2Asistencia" editable="true" editMode="cell" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
+                <p:dataTable style="float: left;width: 100%" var="variable2" id="grow2Asistencia" editable="true" editMode="cell" value="#{asistenciaCursoMB.curso.alumnosDelCursoList}">  
                     <p:column headerText="Nombre del alumno" >  
                         <h:outputText value="#{variable2.alumno.toString()}" />  
                     </p:column>  
@@ -151,6 +151,7 @@
                                 <f:selectItem itemLabel="Cambiar asistencia" itemValue="0" />
                                 <f:selectItem itemLabel="Presente" itemValue="1" />
                                 <f:selectItem itemLabel="Ausente" itemValue="5"/> 
+                                <f:selectItem itemLabel="Suspendida" itemValue="4" /> 
                                     <p:ajax update="grow2Asistencia" listener="#{asistenciaCursoMB.cambio(variable2)}" />
                                 </p:selectOneMenu>
                             </f:facet>  
