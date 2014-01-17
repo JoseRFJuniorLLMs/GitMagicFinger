@@ -90,8 +90,8 @@ public class AlumnosDelCursoController implements Serializable {
             current.getAlumnosDelCursoPK().setAluIdAlumno(current.getAlumno().getIdAlumno());
             current.getAlumnosDelCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             getFacade().create(current);
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno del curso creado", "Se ha creado una AlumnosDelCurso correctamente"));
+          //  FacesContext facesContext = FacesContext.getCurrentInstance();
+           // facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Alumno del curso creado", "Se ha creado una AlumnosDelCurso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();

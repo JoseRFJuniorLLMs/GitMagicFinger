@@ -45,7 +45,7 @@ public class Prueba1 {
     driver.findElement(By.id("j_idt16")).click();
     driver.findElement(By.id("j_idt18")).click();
   }
-
+caca man
   @After
   public void tearDown() throws Exception {
     driver.quit();

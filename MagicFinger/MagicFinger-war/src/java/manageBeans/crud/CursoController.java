@@ -144,6 +144,7 @@ public class CursoController implements Serializable {
                 profesoresporcurso.setCurrent(profesorCurso);
                 profesoresporcurso.create();
             }
+            
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso creado", "Se ha creado una Curso correctamente"));
             return prepareList();

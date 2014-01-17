@@ -91,7 +91,7 @@ public class ProfesoresPorCursoController implements Serializable {
             current.getProfesoresPorCursoPK().setCurTipIdTipoAsignatura(current.getCurso().getCursoPK().getTipIdTipoAsignatura());
             getFacade().create(current);
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesores por curso creado", "Se ha creado una ProfesoresPorCurso correctamente"));
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Profesores por curso creado", "Se ha creado una Profesores por curso correctamente"));
             return prepareList();
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
